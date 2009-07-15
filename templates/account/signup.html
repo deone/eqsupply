@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block body %}
+	<div class="clearfix padtop">
+		<div id="basic-form">
+			<fieldset>
+				<legend>Sign Up</legend>
+
+				<form class="signupform" id="signup_form" method="post" action="">
+					<table width="300px">
+						{{ form.as_table }}
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Sign Up" class="button" /></td>
+						</tr>
+					</table>
+				</form>
+			</fieldset>
+		</div>
+	</div>
+{% endblock %}
