@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<p>It is now {{ current_date }}.</p>
+	<div class="clearfix padtop">
+		<div id="basic-form" class="left-form">
+			<fieldset>
+				<legend>Log In</legend>
+
+				{% if user.is_authenticated %}
+					<p><span class="warning">Note</span>:you are already logged in as {{ user }}.</p>
+				{% else %}
+					{% url account.views.signup as signup_url %}
+					<p>Don&rsquo;t have an account? 
+						<a href="{{ signup_url }}">Sign up</a>!
+					</p>
+				{% endif %}
+
+				<form class="login" method="POST" action="">
+					<table>
+						<tr>
+							<td colspan="2">{{ form.non_field_errors }}</td>
+						</tr>
+						{% for field in form %}	
+							{% if field.errors %}
+								<tr>
+									<td colspan="2">{{ field.errors }}</td>
+								</tr>
+							{% endif %}
+							<tr>
+								<td width="100px">{{ field.label_tag }}</td>
+								<td>{{ field }}</td>
+							</tr>
+							{% if field.help_text %}
+								<tr>
+									<td colspan="2"><span>{{ field.help_text }}</span></td>
+								</tr>	
+							{% endif %}
+						{% endfor %}
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Log In" class="button" /></td>
+						</tr>
+					</table>
+					{% url account.views.password_reset as pwd_reset_url %}
+					<a href="{{ pwd_reset_url }}">Forgot password?</a>
+				</form>
+			</fieldset>
+		</div>
+	</div>
+{% endblock %}
