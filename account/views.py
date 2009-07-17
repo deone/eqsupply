@@ -22,7 +22,7 @@ def signup(request):
 		form = SignupForm(request.POST)
 		if form.is_valid():
 			email = form.save()
-			send_mail("Subject here", "Here is the message", "from@example.com", [email], fail_silently=False)
+			send_mail("Registration", "This is your activation link", "no-reply@aerixnigeria.com", [email], fail_silently=False)
 			# Redirect and inform user of sucess
 	else:
 		form = SignupForm()
