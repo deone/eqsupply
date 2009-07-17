@@ -79,3 +79,8 @@ INSTALLED_APPS = (
 	'django.contrib.admin',
 	'eqsupply.account',
 )
+
+EMAIL_HOST = "localhost"
+EMAIL_PORT = ""
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""

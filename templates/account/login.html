@@ -3,12 +3,12 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-<p>It is now {{ current_date }}.</p>
 	<div class="clearfix padtop">
 		<div id="basic-form" class="left-form">
 			<fieldset>
 				<legend>Log In</legend>
 
+				<p>Don't have an account? <a href="{% url acct_signup %}">Sign Up</a>
 				<form class="login" method="POST" action="">
 					<table>
 						{{ form.as_table }}

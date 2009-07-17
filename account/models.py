@@ -16,17 +16,3 @@ class User(models.Model):
 
 	def __unicode__(self):
 		return self.username
-
-	def is_authenticated(self):
-		return True
-
-	def get_full_name(self):
-		full_name = u'%s %s' % (self.first_name, self.last_name)
-		return full_name.strip()
-
-	def set_password(self, raw_password):
-		import random
-		algo = 'sha1'
-		salt = get_hexdigest(algo, str(random.random()), str(random.random()))[:5]
-		hsh = get_hexdigest(algo, salt, raw_password)
-		self.password = '%s$%s$%s' % (algo, salt, hsh)
