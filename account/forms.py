@@ -3,6 +3,8 @@ from django import forms
 from account.models import User
 from django.contrib.auth.models import User as AuthUser
 
+import md5
+
 class LoginForm(forms.Form):
 	username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
 	password = forms.CharField(label="Password", widget= forms.PasswordInput(render_value=False))
@@ -25,7 +27,10 @@ class SignupForm(forms.Form):
 		email = self.cleaned_data['email']
 		phone = self.cleaned_data['phone']
 		username = self.cleaned_data['username']
-		password = self.cleaned_data['password1']
+		hashed = md5.new()
+		hashed.update(self.cleaned_data['password1'])
+		password = str(hashed)
+		print password
 		company = self.cleaned_data['company']
 		company_address = self.cleaned_data['company_address']
 
@@ -33,4 +38,4 @@ class SignupForm(forms.Form):
 							password=password, company=company, company_address=company_address)
 
 		new_user.save()
-		return email
+		return email, password

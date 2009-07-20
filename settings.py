@@ -101,3 +101,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 FLASH_STORAGE = "session"
+
+BASE_URL = "http://localhost:7700/"
