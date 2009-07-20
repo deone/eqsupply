@@ -58,9 +58,10 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    "django.middleware.common.CommonMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+	"djangoflash.middleware.FlashMiddleware",
 )
 
 ROOT_URLCONF = 'eqsupply.urls'
@@ -84,3 +85,19 @@ EMAIL_HOST = "essienitaessien.com"	# smtp.gmail.com
 EMAIL_PORT = 8045	# 587
 EMAIL_HOST_USER = "erecruit"
 EMAIL_HOST_PASSWORD = "3r3cru17"
+
+CACHE_BACKEND = "locmem:///"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+	"django.core.context_processors.auth",
+	"django.core.context_processors.debug",
+	"django.core.context_processors.i18n",
+	"django.core.context_processors.media",
+	"django.core.context_processors.request",
+	"djangoflash.context_processors.flash",
+)
+
+FLASH_STORAGE = "session"

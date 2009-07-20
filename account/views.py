@@ -1,6 +1,8 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
+from django.template import RequestContext
 
 from account.forms import SignupForm, LoginForm
 
@@ -24,9 +26,11 @@ def signup(request):
 			email = form.save()
 			send_mail("Registration", "This is your activation link", "no-reply@aerixnigeria.com", [email], fail_silently=False)
 			# Redirect and inform user of sucess
+			request.flash['feedback'] = "Registration successful, an activation email has been sent to %s." % email
+			return HttpResponseRedirect(reverse("acct_signup"))
 	else:
 		form = SignupForm()
 
 	return render_to_response("account/signup.html", {
 		"form": form,
-	})
+	}, context_instance=RequestContext(request))

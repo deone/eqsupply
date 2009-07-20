@@ -3,6 +3,11 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block body %}
+	<p>
+		{% if request.flash.feedback %}
+			{{ request.flash.feedback|escape }}
+		{% endif %}
+	</p>
 	<div class="clearfix padtop">
 		<div id="basic-form">
 			<fieldset>

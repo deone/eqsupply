@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
+import views
 
 urlpatterns = patterns('',
-	url(r'^$', 'account.views.login', name="acct_login"),
-	url(r'^signup/$', 'account.views.signup', name="acct_signup"),
+	url(r'^$', views.login, name="acct_login"),
+	url(r'^signup/$', views.signup, name="acct_signup"),
 )

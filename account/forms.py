@@ -1,6 +1,7 @@
 from django import forms
 
 from account.models import User
+from django.contrib.auth.models import User as AuthUser
 
 class LoginForm(forms.Form):
 	username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
