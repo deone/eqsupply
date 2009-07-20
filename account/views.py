@@ -46,13 +46,12 @@ def email_user(email, reg_id):
 	send_mail(subject, message, sender, email_list, fail_silently=False)
 
 def create_activation_link(reg_id):
-	url = settings.BASE_URL + "account/activate?regid=%s" % reg_id
+	url = settings.BASE_URL + "account/activate/?reg_id=%s" % reg_id
 	return url
 
 def activate(request):
-	"""
 	reg_id = request.GET['reg_id']
 	print reg_id
-	"""
+
 	return render_to_response("account/activate.html", {
 	}, context_instance=RequestContext(request))

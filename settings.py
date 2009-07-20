@@ -81,10 +81,10 @@ INSTALLED_APPS = (
 	'eqsupply.account',
 )
 
-EMAIL_HOST = "essienitaessien.com"	# smtp.gmail.com
-EMAIL_PORT = 8045	# 587
-EMAIL_HOST_USER = "erecruit"
-EMAIL_HOST_PASSWORD = "3r3cru17"
+EMAIL_HOST = "localhost"	# "essienitaessien.com', 'smtp.gmail.com'
+EMAIL_PORT = "" 			# 8045, 587
+EMAIL_HOST_USER = ""		# "erecruit"
+EMAIL_HOST_PASSWORD = ""	# "3r3cru17"
 
 CACHE_BACKEND = "locmem:///"
 
