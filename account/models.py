@@ -13,6 +13,7 @@ class User(models.Model):
 	company_address = models.CharField(max_length=255)
 	date_joined = models.DateTimeField(default=datetime.datetime.now)
 	last_login = models.DateTimeField(default= datetime.datetime.now)
+	reg_id = models.CharField(max_length=255)
 
 	def __unicode__(self):
 		return self.username

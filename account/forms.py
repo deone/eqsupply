@@ -4,6 +4,7 @@ from account.models import User
 from django.contrib.auth.models import User as AuthUser
 
 import md5
+import datetime
 
 class LoginForm(forms.Form):
 	username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
@@ -29,13 +30,15 @@ class SignupForm(forms.Form):
 		username = self.cleaned_data['username']
 		hashed = md5.new()
 		hashed.update(self.cleaned_data['password1'])
-		password = str(hashed)
-		print password
+		password = hashed.hexdigest()
 		company = self.cleaned_data['company']
 		company_address = self.cleaned_data['company_address']
+		hashed = md5.new()
+		hashed.update(email + ":" + password + ":" + str(datetime.datetime.now()))
+		reg_id = hashed.hexdigest()
 
 		new_user = User(first_name=first_name, last_name=last_name, email=email, phone=phone, username=username, \
-							password=password, company=company, company_address=company_address)
+							password=password, company=company, company_address=company_address, reg_id=reg_id)
 
 		new_user.save()
-		return email, password
+		return email, reg_id
