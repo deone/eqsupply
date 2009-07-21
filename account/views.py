@@ -39,9 +39,9 @@ def email_user(email, reg_id):
 	activation_link = create_activation_link(reg_id)
 	email_list = []
 	email_list.append(email)
-	subject = "Registration: AERIX EQUIPMENT SUPPLY"
-	message = "This is your activation link:\n\n%s" % activation_link
-	sender = "no-reply@aerixnigeria.com"
+	subject = settings.ACTIVATION_EMAIL_SUBJECT
+	message = settings.ACTIVATION_EMAIL_MESSAGE % activation_link
+	sender = settings.EMAIL_SENDER
 
 	send_mail(subject, message, sender, email_list, fail_silently=False)
 

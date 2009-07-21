@@ -103,3 +103,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 FLASH_STORAGE = "session"
 
 BASE_URL = "http://localhost:7700/"
+
+ACTIVATION_EMAIL_SUBJECT = "Your Registration: AERIX EQUIPMENT SUPPLY"
+
+EMAIL_SENDER = "no-reply@aerixnigeria.com"
+
+ACTIVATION_EMAIL_MESSAGE = "This is your activation link:\n\n%s" 

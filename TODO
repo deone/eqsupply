@@ -1,1 +1,5 @@
 Validate password1 and password2 on signup
+Finish Activation
+Include staff position in signup form
+Split company address to street address, city, state and country
+Test models: Find out how to use a test database
