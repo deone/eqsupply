@@ -3,6 +3,14 @@ from django.db import models
 import datetime
 
 class User(models.Model):
+	"""
+	# Create users
+	>>> deone = User.objects.create(first_name="Dayo", last_name="Osikoya", email="alwaysdeone@gmail.com", phone="08029299274", username="deone", password="deone", company="Aerix", company_address="9, Olosa Street", reg_id="deonedune369")
+	>>> assert deone.first_name == "Dayo"
+	>>> assert deone.last_name == "Osikoya"
+	>>> assert deone.company_address == "9, Olosa Street"
+	>>> assert deone.reg_id == "deonedune369"
+	"""
 	first_name = models.CharField(max_length=30)
 	last_name = models.CharField(max_length=30)
 	email = models.EmailField()
