@@ -3,4 +3,7 @@
 {% block title %}Activate Your Account{% endblock %}
 
 {% block body %}
+	{% if user %}
+		<p>{{ user.first_name }}&nbsp;{{ user.last_name }}, your activation was successful. <a href="{% url acct_login %}">Log In</a></p>
+	{% endif %}
 {% endblock %}

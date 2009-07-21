@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.conf import settings
 
 from account.forms import SignupForm, LoginForm
+from account.models import User
 
 def login(request):
 
@@ -51,7 +52,8 @@ def create_activation_link(reg_id):
 
 def activate(request):
 	reg_id = request.GET['reg_id']
-	print reg_id
+	activated_user = get_object_or_404(User, reg_id=reg_id)
 
 	return render_to_response("account/activate.html", {
-	}, context_instance=RequestContext(request))
+		"user": activated_user,
+	})
