@@ -3,3 +3,5 @@ Include staff position in signup form
 Split company address to street address, city, state and country
 Move the activation code in views into models. We need to test it.
 Use hashlib for hashing instead of md5
+To reduce form clutter, split the signup form into user details and company details
+Make country field optional
