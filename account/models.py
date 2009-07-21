@@ -10,6 +10,7 @@ class User(models.Model):
 	>>> assert deone.last_name == "Osikoya"
 	>>> assert deone.company_address == "9, Olosa Street"
 	>>> assert deone.reg_id == "deonedune369"
+	>>> assert deone.is_activated == 0
 	"""
 	first_name = models.CharField(max_length=30)
 	last_name = models.CharField(max_length=30)
@@ -19,9 +20,10 @@ class User(models.Model):
 	password = models.CharField(max_length=128)
 	company = models.CharField(max_length=100)
 	company_address = models.CharField(max_length=255)
-	date_joined = models.DateTimeField(default=datetime.datetime.now)
-	last_login = models.DateTimeField(default= datetime.datetime.now)
 	reg_id = models.CharField(max_length=255)
+	is_activated = models.BooleanField(default=0)
+	date_joined = models.DateTimeField(default=datetime.datetime.now)
+	last_login = models.DateTimeField(default=datetime.datetime.now)
 
 	def __unicode__(self):
 		return self.username
