@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo -n "Merging to master..."
+git checkout master || exit
+git merge $1
+echo "ok"
+
+echo -n "Pushing to origin..."
+git push origin master
+echo "ok"
+
+git checkout $1
