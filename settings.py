@@ -115,6 +115,7 @@ TEST_DATABASE_CHARSET = "latin1"
 TEST_DATABASE_COLLATION = "latin1_swedish_ci"
 
 AUTHENTICATION_BACKENDS = (
+	"django.contrib.auth.backends.ModelBackend",
 	"eqsupply.authbackends.UserAccountModelBackend",
 )
 

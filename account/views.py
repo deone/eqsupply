@@ -13,8 +13,9 @@ def login(request):
 	if request.method == "POST":
 		form = LoginForm(request.POST)
 		if form.is_valid():
-			if form.login(request):
-				request.flash['feedback'] = "Successfully logged in"
+			form.login(request)
+			request.flash['feedback'] = "Successfully logged in"
+
 			return HttpResponseRedirect(reverse("acct_login"))
 	else:
 		form = LoginForm()
