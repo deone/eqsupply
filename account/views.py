@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.conf import settings
 
 from account.forms import SignupForm, LoginForm
-from account.models import User
+from account.models import UserAccount
 
 def login(request):
 
@@ -52,10 +52,10 @@ def create_activation_link(reg_id):
 
 def activate(request):
 	reg_id = request.GET['reg_id']
-	activated_user = get_object_or_404(User, reg_id=reg_id)
-	activated_user.is_activated = 1
+	activated_user = get_object_or_404(UserAccount, reg_id=reg_id)
+	activated_user.is_active = 1
 	activated_user.save()
 
 	return render_to_response("account/activate.html", {
 		"user": activated_user,
-	})
+	}, context_instance=RequestContext(request))

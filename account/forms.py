@@ -1,7 +1,6 @@
 from django import forms
 
-from account.models import User
-from django.contrib.auth.models import User as AuthUser
+from account.models import UserAccount
 
 import md5
 import datetime
@@ -42,13 +41,14 @@ class SignupForm(forms.Form):
 		hashed = md5.new()
 		hashed.update(email + ":" + password + ":" + str(datetime.datetime.now()))
 		reg_id = hashed.hexdigest()
+		is_active = 0
 
-		new_user = User(first_name=first_name, last_name=last_name, \
-						email=email, phone=phone, username=username, \
-						password=password, company=company, \
-						position=position,\
+		new_user = UserAccount.objects.create(first_name=first_name, \
+						last_name=last_name, email=email, phone=phone, \
+						username=username, password=password, \
+						company=company, position=position,\
 						company_street_address=company_street_address, \
-						city=city, country=country, reg_id=reg_id)
+						city=city, country=country, reg_id=reg_id, \
+						is_active=is_active)
 
-		new_user.save()
 		return email, reg_id
