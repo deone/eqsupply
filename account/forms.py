@@ -2,8 +2,10 @@ from django import forms
 
 from account.models import UserAccount
 
-import md5
+import hashlib
 import datetime
+import string
+import random
 
 class LoginForm(forms.Form):
 	username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
@@ -30,17 +32,15 @@ class SignupForm(forms.Form):
 		email = self.cleaned_data['email']
 		phone = self.cleaned_data['phone']
 		username = self.cleaned_data['username']
-		hashed = md5.new()
-		hashed.update(self.cleaned_data['password1'])
-		password = hashed.hexdigest()
+		enc_type = "sha1"
+		salt = "".join(random.sample(string.letters+string.digits, 5))
+		password = enc_type + "$" + salt + "$" + hashlib.sha1(salt + self.cleaned_data['password1']).hexdigest()
 		company = self.cleaned_data['company']
 		position = self.cleaned_data['position']
 		company_street_address = self.cleaned_data['company_street_address']
 		city = self.cleaned_data['city']
 		country = self.cleaned_data['country']
-		hashed = md5.new()
-		hashed.update(email + ":" + password + ":" + str(datetime.datetime.now()))
-		reg_id = hashed.hexdigest()
+		reg_id = hashlib.sha1(email + ":" + password + ":"  + str(datetime.datetime.now())).hexdigest()
 		is_active = 0
 
 		new_user = UserAccount.objects.create(first_name=first_name, \
