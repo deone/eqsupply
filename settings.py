@@ -113,3 +113,5 @@ ACTIVATION_EMAIL_MESSAGE = "This is your activation link:\n\n%s"
 TEST_DATABASE_CHARSET = "latin1"
 
 TEST_DATABASE_COLLATION = "latin1_swedish_ci"
+
+AUTHPROFILE_MODULE = "account.UserAccount"
