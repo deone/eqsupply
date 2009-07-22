@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import authenticate, login
 
 from account.models import UserAccount
 
@@ -11,6 +12,23 @@ class LoginForm(forms.Form):
 	username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
 	password = forms.CharField(label="Password", widget= forms.PasswordInput(render_value=False))
 
+	user = None
+
+	def login(self, request):
+		username = self.cleaned_data["username"] 
+		password = self.cleaned_data["password"]
+
+		user = authenticate(username=username, password=password)
+		if user is not None:
+			if not user.is_active:
+				raise forms.ValidationError("You have not activated your account")
+			else:
+				self.user = user
+				login(request, self.user)
+				return True
+		else:
+			raise forms.ValidationError("The username and/or password you specified are incorrect")
+		return False
 
 class SignupForm(forms.Form):
 	first_name = forms.CharField(label="First Name", max_length=30, widget=forms.TextInput())

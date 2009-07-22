@@ -13,13 +13,15 @@ def login(request):
 	if request.method == "POST":
 		form = LoginForm(request.POST)
 		if form.is_valid():
-			return HttpResponseRedirect()
+			if form.login(request):
+				request.flash['feedback'] = "Successfully logged in"
+			return HttpResponseRedirect(reverse("acct_login"))
 	else:
 		form = LoginForm()
 
 	return render_to_response("account/login.html", {
 		"form": form,
-	})
+	}, context_instance=RequestContext(request))
 
 def signup(request):
 	if request.method == "POST":
