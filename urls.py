@@ -9,6 +9,7 @@ import os
 urlpatterns = patterns('',
 	(r'^$', include('account.urls')),
 	(r'^account/', include('account.urls')),
+	(r'^products/', include('quote_generator.urls')),
     (r'^admin/(.*)', admin.site.root),
 )
 
