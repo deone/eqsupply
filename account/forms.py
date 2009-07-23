@@ -14,21 +14,24 @@ class LoginForm(forms.Form):
 
 	user = None
 
-	def login(self, request):
+	def clean(self):
 		username = self.cleaned_data["username"] 
 		password = self.cleaned_data["password"]
 
 		user = authenticate(username=username, password=password)
+
 		if user is not None:
 			if not user.is_active:
 				raise forms.ValidationError("You have not activated your account")
 			else:
 				self.user = user
-				login(request, self.user)
-				return True
 		else:
 			raise forms.ValidationError("The username and/or password you specified are incorrect")
-		return False
+		return self.cleaned_data
+
+	def login(self, request):
+		login(request, self.user)
+		return True
 
 class SignupForm(forms.Form):
 	first_name = forms.CharField(label="First Name", max_length=30, widget=forms.TextInput())
@@ -43,6 +46,19 @@ class SignupForm(forms.Form):
 	company_street_address = forms.CharField(label="Company Street Address", widget=forms.TextInput())
 	city = forms.CharField(label="City", widget=forms.TextInput())
 	country = forms.CharField(label="Country", widget=forms.TextInput())
+
+	def clean(self):
+		if self._errors:
+			return
+		password1 = self.cleaned_data["password1"]
+		password2 = self.cleaned_data["password2"]
+
+		if password1 and password2:
+			if password1 != password2:
+				raise forms.ValidationError(
+					"Your password entries must be the same"
+				)
+		return self.cleaned_data
 
 	def save(self):
 		first_name = self.cleaned_data['first_name']
