@@ -1,8 +1,18 @@
 from django.http import HttpResponse
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
+from django.core.serializers import serialize
+
+from django.utils.functional import Promise
+from django.utils.encoding import force_unicode
 
 from traceback import print_exc
+
+class LazyEncoder(simplejson.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Promise):
+            return force_unicode(obj)
+        return super(LazyEncoder, self).default(obj)
 
 def json_response(func):#{{{
     def inner_func(request, *args, **kwargs):
@@ -41,5 +51,4 @@ def create_response(code, type=None, value=None):#{{{
                             }
                    }
 
-    return simplejson.dumps(response)#}}}
-
+    return simplejson.dumps(response, cls=LazyEncoder)#}}}

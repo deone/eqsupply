@@ -18,7 +18,16 @@ def login(request, **kwargs):
         if form.is_valid():
             return ("ok", "Login Successful")
 
-        return ("error", "Unable to Login")
+        errors = {}
+        keys = []
+        for k, v in form.errors.items():
+            errors[k] = v
+            keys.append(k)
+
+        if keys != ["__all__"]:
+            errors["keys"] = keys
+
+        return ("error", errors)
     else:
         form = LoginForm()
 

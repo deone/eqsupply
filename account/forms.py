@@ -9,29 +9,31 @@ import string
 import random
 
 class LoginForm(forms.Form):
-	username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
-	password = forms.CharField(label="Password", widget= forms.PasswordInput(render_value=False))
+    username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
+    password = forms.CharField(label="Password", widget= forms.PasswordInput(render_value=False))
 
-	user = None
+    user = None
 
-	def clean(self):
-		username = self.cleaned_data["username"] 
-		password = self.cleaned_data["password"]
+    def clean(self):
+        if self._errors:
+            return
+        username = self.cleaned_data["username"] 
+        password = self.cleaned_data["password"]
 
-		user = authenticate(username=username, password=password)
+        user = authenticate(username=username, password=password)
 
-		if user is not None:
-			if not user.is_active:
-				raise forms.ValidationError("You have not activated your account")
-			else:
-				self.user = user
-		else:
-			raise forms.ValidationError("The username and/or password you specified are incorrect")
-		return self.cleaned_data
+        if user is not None:
+            if not user.is_active:
+                raise forms.ValidationError("You have not activated your account")
+            else:
+                self.user = user
+        else:
+            raise forms.ValidationError("The username and/or password you specified are incorrect")
+        return self.cleaned_data
 
-	def login(self, request):
-		login(request, self.user)
-		return True
+    def login(self, request):
+        login(request, self.user)
+        return True
 
 class SignupForm(forms.Form):
 	first_name = forms.CharField(label="First Name", max_length=30, widget=forms.TextInput())
