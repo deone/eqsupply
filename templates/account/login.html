@@ -2,8 +2,11 @@
 
 {% block title %}Login{% endblock %}
 
+{% block custom_js %}
+    <script type="text/javascript" src="/site_media/js/auth.js"></script>
+{% endblock %}
+
 {% block body %}
-	<p>{{ request.flash.feedback }}</p>
 	<div class="clearfix padtop">
 		<div id="basic-form" class="left-form">
 			<fieldset>
@@ -15,7 +18,7 @@
 						{{ form.as_table }}
 						<tr>
 							<td></td>
-							<td><input type="submit" value="Log In" class="button" /></td>
+							<td><input type="button" value="Log In" onClick="login()" /></td>
 						</tr>
 					</table>
 					{% url account.views.password_reset as pwd_reset_url %}

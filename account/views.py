@@ -8,21 +8,23 @@ from django.conf import settings
 from account.forms import SignupForm, LoginForm
 from account.models import UserAccount
 
-def login(request):
+from eqsupply import helpers as h
 
-	if request.method == "POST":
-		form = LoginForm(request.POST)
-		if form.is_valid():
-			form.login(request)
-			request.flash['feedback'] = "Successfully logged in"
+@h.json_response
+def login(request, **kwargs):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
 
-			return HttpResponseRedirect(reverse("acct_login"))
-	else:
-		form = LoginForm()
+        if form.is_valid():
+            return ("ok", "Login Successful")
 
-	return render_to_response("account/login.html", {
-		"form": form,
-	}, context_instance=RequestContext(request))
+        return ("error", "Unable to Login")
+    else:
+        form = LoginForm()
+
+        return render_to_response("account/login.html", {
+            "form": form, 
+        }, context_instance=RequestContext(request))
 
 def signup(request):
 	if request.method == "POST":
