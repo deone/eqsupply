@@ -2,6 +2,7 @@ $(function()    {
 
 });
 
+// Include ajaxStart() and Stop() functionality
 function login()    {//{{{
     var username = $("#id_username").val();
     var password = $("#id_password").val()
@@ -16,7 +17,15 @@ function login()    {//{{{
         dataType: "json",
 
         success: function(response) {
-            alert(response.data.type);
+            if (response.code != 0) {
+                alert(response.data.body);
+            } else  {
+                if (response.data.type == "error")  {
+                    displayErrors(response.data.body);
+                } else  {
+                    document.location = "products/";
+                }
+            }
         },
 
         error: function(response)   {
