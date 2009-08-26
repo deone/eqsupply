@@ -1,14 +1,12 @@
 body {
     background-color: #FFF;
     margin: 0;
-}
-html, body {
-    height: 100%;
-}
-body {
     color: #333;
     font-family: "Helvetica Neue", Arial, sans-serif;
     font-size: 10pt;
+}
+html, body {
+    height: 100%;
 }
 a, a:visited {
     color: #13C;
@@ -35,7 +33,10 @@ td {
     margin: 0 auto;
     padding: 10px;
     width: 800px;
+    /*float: left;
+    display: inline;*/
 }
+
 #footer {
     color: #999; /* footer text colour */
     margin: 50px auto;
@@ -419,7 +420,11 @@ p.what_next {
 }
 
 /* Fieldsets */
-fieldset { padding: 20px; margin: 0 0 1.5em 0; border: 2px solid #ddd; }
+fieldset {
+    padding: 20px;
+    margin: 0 0 1.5em 0;
+    border: 2px solid #ddd;
+}
 legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 
 .left-form {

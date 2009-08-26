@@ -1,3 +1,7 @@
+$(function()    {
+    $("#ajax-loading").hide();
+});
+
 function displayErrors(errors)   {
     if (errors.keys)    {
         for (var i=0; i<errors.keys.length; i++) {
