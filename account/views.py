@@ -16,6 +16,7 @@ def login(request, **kwargs):
         form = LoginForm(request.POST)
 
         if form.is_valid():
+            form.login(request)
             return ("ok", "Login Successful")
 
         errors = {}

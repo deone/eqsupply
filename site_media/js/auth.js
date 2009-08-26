@@ -8,7 +8,7 @@ function login()    {//{{{
     var password = $("#id_password").val()
 
     var data = "username=" + username + "&password=" + password;
-    var url = "/account/login/";
+    var url = "/account/";
 
     $.ajax({
         url: url,
@@ -23,7 +23,7 @@ function login()    {//{{{
                 if (response.data.type == "error")  {
                     displayErrors(response.data.body);
                 } else  {
-                    document.location = "products/";
+                    document.location = "/products/";
                 }
             }
         },
