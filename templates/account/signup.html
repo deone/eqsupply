@@ -2,6 +2,10 @@
 
 {% block title %}Sign Up{% endblock %}
 
+{% block custom_js %}
+    <script type="text/javascript" src="/site_media/js/auth.js"></script>
+{% endblock %}
+
 {% block body %}
 	<p>
 		{% if request.flash.feedback %}
@@ -15,12 +19,15 @@
 
 				<p>Already have an account? <a href="{% url acct_login %}">Log In</a></p>
 
-				<form class="signupform" id="signup_form" method="post" action="{% url acct_signup %}">
+				<form class="signupform" id="signup_form">
 					<table width="300px">
+                        <tr>
+                            <td id="err" colspan="2"></td>
+                        </tr>
 						{{ form.as_table }}
 						<tr>
 							<td></td>
-							<td><input type="submit" value="Sign Up" class="button" /></td>
+							<td><input type="button" value="Sign Up" class="button" onClick="signup()" /></td>
 						</tr>
 					</table>
 				</form>

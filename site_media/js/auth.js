@@ -2,7 +2,7 @@ $(function()    {
 
 });
 
-function ajaxPost(url, data, dLocation)  {
+function ajaxPost(url, data, dLocation)  {//{{{
 
     $.ajax({
         url: url,
@@ -27,7 +27,7 @@ function ajaxPost(url, data, dLocation)  {
         }
     });
 
-}
+}//}}}
 
 // Include ajaxStart() and Stop() functionality
 function login()    {//{{{
@@ -36,12 +36,13 @@ function login()    {//{{{
 
     var data = "username=" + username + "&password=" + password;
     var url = "/account/";
+    var dLocation = "/products/";
 
-    ajaxPost(url, data, "/products/");
+    ajaxPost(url, data, dLocation);
 
 }//}}}
 
-function signup()   {
+function signup()   {//{{{
     var firstname = $("#id_first_name").val();
     var lastname = $("#id_last_name").val();
     var email = $("#id_email").val();
@@ -59,5 +60,9 @@ function signup()   {
                 "&username=" + username + "&password1=" + password1 + "&password2=" + password2 + "&company=" + company + 
                 "&position=" + position + "&company_street_address=" + companyStreetAddress + "&city=" + city + "&country=" + country;
 
-    alert(data);
-}
+    var url = "/account/signup/";
+    var dLocation = "/account/signup/";
+
+    ajaxPost(url, data, dLocation);
+
+}//}}}

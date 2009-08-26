@@ -57,9 +57,8 @@ class SignupForm(forms.Form):
 
 		if password1 and password2:
 			if password1 != password2:
-				raise forms.ValidationError(
-					"Your password entries must be the same"
-				)
+				raise forms.ValidationError("Your password entries must be the same")
+
 		return self.cleaned_data
 
 	def save(self):
