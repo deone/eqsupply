@@ -1,10 +1,12 @@
 $(function()    {
 
-    $("#ajax-loading").ajaxStart(function() {
+    /*$("#ajax-loading").ajaxStart(function() {
         $(this).show();
     }).ajaxStop(function()  {
         $(this).hide();
-    });
+    });*/
+
+    ajaxSignal({"show": "#ajax-loading"});
 
     $("#signup-btn").ajaxStart(function()   {
 	$(this).attr("value", "Please wait...");
@@ -14,6 +16,24 @@ $(function()    {
 
     
 });
+
+function ajaxSignal(signal)	{
+
+    var signalKeys = ["show"];
+
+    for (var i = 0; i < signalKeys.length; i++)	{
+
+	if (signalKeys[i] = "show") {
+	    $(signal[signalKeys[i]]).ajaxStart(function()	{
+		$(this).show();
+	    }).ajaxStop(function()   {
+		$(this).hide();
+	    });
+	}
+
+    }
+
+}
 
 function ajaxPost(url, data, dLocation)  {//{{{
 
