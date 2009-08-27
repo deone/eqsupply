@@ -365,26 +365,26 @@ p.what_next {
 
 /* ----------- basic-sm ----------- */
 
-.basic-form .underlineme {
+#basic-form .underlineme {
     border-bottom: 4px solid #DEDEDE;
     margin-top: 15px;
 }
-.basic-form hr {
+#basic-form hr {
     border-top:solid 4px #DEDEDE;
 }
-.basic-form p{
+#basic-form p{
     color:#666666;
     border-bottom:solid 1px #dedede;
     padding-bottom: 5px;
 }
-.basic-form label{
+#basic-form label{
     display:block;
     font-weight:bold;
 }
-.basic-form td {
+#basic-form td {
     padding: 2px;
 }
-.basic-form td.rightd {
+#basic-form td.rightd {
     padding-right: 70px;
 }
 #basic-form span{
@@ -392,18 +392,19 @@ p.what_next {
     font-style: italic;
     width:300px;
 }
-.basic-form input, #basic-form select{
-    float:left;
-    margin:2px 0 2px 10px;
-    font-size: 11px;
-}
-.basic-form textarea{
+#basic-form input, #basic-form select{
     float:left;
     margin:2px 0 2px 10px;
     font-size: 11px;
 }
 
-.basic-form .button{ 
+#basic-form textarea{
+    float:left;
+    margin:2px 0 2px 10px;
+    font-size: 11px;
+}
+
+#basic-form .button{ 
     clear:both;
     width:125px;
     height:31px;

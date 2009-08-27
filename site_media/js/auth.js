@@ -1,18 +1,29 @@
 $(function()    {
 
+    /*$("#ajax-loading").ajaxStart(function() {
+        $(this).show();
+    }).ajaxStop(function()  {
+        $(this).hide();
+    });*/
+
     ajaxSignal({"show": "#ajax-loading"});
 
-    ajaxSignal({"changeBtnVal": "#signup-btn"}, "Please Wait...", "Sign Up");
+    $("#signup-btn").ajaxStart(function()   {
+	$(this).attr("value", "Please wait...");
+    }).ajaxStop(function()  {
+	$(this).attr("value", "Sign Up");
+    });
 
+    
 });
 
-function ajaxSignal(signal, startVal, stopVal)	{//{{{
+function ajaxSignal(signal)	{
 
-    var signalKeys = ["show", "changeBtnVal"];
+    var signalKeys = ["show"];
 
     for (var i = 0; i < signalKeys.length; i++)	{
 
-	if (signalKeys[i] == "show") {
+	if (signalKeys[i] = "show") {
 	    $(signal[signalKeys[i]]).ajaxStart(function()	{
 		$(this).show();
 	    }).ajaxStop(function()   {
@@ -20,17 +31,9 @@ function ajaxSignal(signal, startVal, stopVal)	{//{{{
 	    });
 	}
 
-	if (signalKeys[i] == "changeBtnVal")	{
-	    $(signal[signalKeys[i]]).ajaxStart(function()   {
-		$(this).attr("value", startVal);
-	    }).ajaxStop(function()  {
-		$(this).attr("value", stopVal);
-	    });
-	}
-
     }
 
-}//}}}
+}
 
 function ajaxPost(url, data, dLocation)  {//{{{
 
