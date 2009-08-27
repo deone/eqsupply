@@ -3,3 +3,4 @@ We should use the login_required decorator to limit access to logged-in users on
 Read more @ file:///home/zedd/Documents/Frameworks/Django/docs.djangoproject.com/en/1.0_/topics/auth/index.html#topics-auth
 
 Signup - Make email field unique
+Position ajax loading image.

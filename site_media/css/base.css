@@ -424,6 +424,7 @@ fieldset {
     padding: 20px;
     margin: 0 0 1.5em 0;
     border: 2px solid #ddd;
+    float: left;
 }
 legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 
@@ -432,7 +433,6 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
     float: left;
     margin-right: 60px;
 }
-
 .right-form {
     width: 360px;
     float: right;
@@ -443,7 +443,15 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 .padtop {
     margin-top: 20px;
 }
-
 .signupform {
     float: left;
+    margin-right: 65px;
+}
+.clear-float    {
+    float: none;
+    clear: both;
+}
+#ajax-loading   {
+    float: left;
+    margin: 10px 0 0 10px;
 }
