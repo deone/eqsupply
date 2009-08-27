@@ -1,36 +1,18 @@
 $(function()    {
 
-    ajaxSignal({"show": "#ajax-loading"});
+    $("#ajax-loading").ajaxStart(function()	{
+	$(this).show();
+    }).ajaxStop(function()   {
+	$(this).hide();
+    });
 
-    ajaxSignal({"changeBtnVal": "#signup-btn"}, "Please Wait...", "Sign Up");
+    $("#signup-btn").ajaxStart(function()   {
+	$(this).attr("value", "Please Wait...");
+    }).ajaxStop(function()  {
+	$(this).attr("value", "Sign Up");
+    });
 
 });
-
-function ajaxSignal(signal, startVal, stopVal)	{//{{{
-
-    var signalKeys = ["show", "changeBtnVal"];
-
-    for (var i = 0; i < signalKeys.length; i++)	{
-
-	if (signalKeys[i] == "show") {
-	    $(signal[signalKeys[i]]).ajaxStart(function()	{
-		$(this).show();
-	    }).ajaxStop(function()   {
-		$(this).hide();
-	    });
-	}
-
-	if (signalKeys[i] == "changeBtnVal")	{
-	    $(signal[signalKeys[i]]).ajaxStart(function()   {
-		$(this).attr("value", startVal);
-	    }).ajaxStop(function()  {
-		$(this).attr("value", stopVal);
-	    });
-	}
-
-    }
-
-}//}}}
 
 function ajaxPost(url, data, dLocation)  {//{{{
 
@@ -59,7 +41,6 @@ function ajaxPost(url, data, dLocation)  {//{{{
 
 }//}}}
 
-// Include ajaxStart() and Stop() functionality
 function login()    {//{{{
     var username = $("#id_username").val();
     var password = $("#id_password").val()
