@@ -77,8 +77,9 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-	'django.contrib.admin',
-	'eqsupply.account',
+    'django.contrib.admin',
+    'eqsupply.account',
+    "eqsupply.quote_generator",
 )
 
 EMAIL_HOST = "essienitaessien.com"	# "essienitaessien.com', 'smtp.gmail.com'
