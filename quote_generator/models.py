@@ -5,7 +5,7 @@ class Manufacturer(models.Model):
     address = models.CharField(max_length=250)
     city = models.CharField(max_length=30)
     country = models.CharField(max_length=30)
-    telephone = models.CharField(max_length=30)
+    phone = models.IntegerField()
     email = models.EmailField()
     website = models.CharField(max_length=30)
 
@@ -14,13 +14,15 @@ class Manufacturer(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    short_description = models.TextField()
 
     def __unicode__(self):
 	return u"%s" % self.name
 
 class Product(models.Model):
-    name = models.CharField(max_length=100)
     code = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
+    short_description = models.TextField()
     manufacturer = models.ForeignKey(Manufacturer)
     categories = models.ManyToManyField(Category)
 

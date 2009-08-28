@@ -1,15 +1,18 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
+import quote_generator.views
+
 from django.contrib import admin
 admin.autodiscover()
 
 import os
 
 urlpatterns = patterns('',
-	(r'^$', include('account.urls')),
-	(r'^account/', include('account.urls')),
-	(r'^products/', include('quote_generator.urls')),
+    (r'^$', include('account.urls')),
+    (r'^account/', include('account.urls')),
+    (r'^products/', include('quote_generator.urls')),
+    (r'^manufacturers/', quote_generator.views.manufacturers),
     (r'^admin/(.*)', admin.site.root),
 )
 
