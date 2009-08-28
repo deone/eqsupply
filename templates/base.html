@@ -1,23 +1,35 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>Equipment Supply : {% block title %}{% endblock %}</title>
-	<link rel="stylesheet" href="/site_media/css/base.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Equipment Supply : {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/site_media/css/base.css" />
     <script type="text/javascript" src="/site_media/js/jquery.js"></script>
     <script type="text/javascript" src="/site_media/js/main.js"></script>
     {% block custom_js %}{% endblock %}
 </head>
 <body>
-	<div id="tabhead">&nbsp;</div>
-	<div id="subnav" class="clearfix">&nbsp;</div>
-	<div id="body">
-		{% block body %}{% endblock %}
+    <div id="tabhead">
+	<div class="login">
+	    {% if user.is_authenticated %}
+		<b>{{ user }}</b> | <a href="">Account</a> | 
+		{% if user.is_staff %}
+		    <a href="/admin/">Admin</a> | 
+		{% endif %}
+		<a href="">Logout</a>
+	    {% else %}
+		<a href="{% url acct_login %}">Login</a> or <a href="{% url acct_signup %}"><b>Sign up</b></a>
+	    {% endif %}
 	</div>
-	<div id="footer">
-		<div class="legal">
-			&copy; 2009 <a href="">About</a> | <a href="">Terms of Service</a> | <a href="">Privacy Policy</a>
-		</div>
+    </div>
+    <div id="subnav" class="clearfix">&nbsp;</div>
+    <div id="body">
+	{% block body %}{% endblock %}
+    </div>
+    <div id="footer">
+	<div class="legal">
+	    &copy; 2009 <a href="">About</a> | <a href="">Terms of Service</a> | <a href="">Privacy Policy</a>
 	</div>
+    </div>
 </body>
 </html>
