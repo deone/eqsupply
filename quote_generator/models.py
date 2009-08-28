@@ -1,9 +1,9 @@
 from django.db import models
 
 class Manufacturer(models.Model):
-    name = models.CharField(max_length=50)
-    street_address = models.CharField(max_length=100)
-    city = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=250)
+    city = models.CharField(max_length=30)
     country = models.CharField(max_length=30)
     telephone = models.CharField(max_length=30)
     email = models.EmailField()
@@ -13,10 +13,16 @@ class Manufacturer(models.Model):
 	return u"%s, %s" % (self.name, self.country)
 
 class Category(models.Model):
-    pass
+    name = models.CharField(max_length=50)
 
-class Products(models.Model):
-    pass
+    def __unicode__(self):
+	return u"%s" % self.name
 
-class Price(models.Model):
-    pass
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    code = models.CharField(max_length=30)
+    manufacturer = models.ForeignKey(Manufacturer)
+    categories = models.ManyToManyField(Category)
+
+    def __unicode__(self):
+	return u"%s %s" % (self.code, self.name)
