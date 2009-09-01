@@ -10,6 +10,10 @@ html, body {
 }
 a, a:visited {
     color: #13C;
+    text-decoration: none;
+}
+a:hover	{
+    text-decoration: underline;
 }
 img {
     border: 0;
@@ -453,4 +457,18 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 #ajax-loading   {
     float: left;
     margin: 10px 0 0 10px;
+}
+.container-in-tab ul	{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+.container-in-tab ul li	{
+    padding: 5px;
+    background: #f6f6f6; 
+    border-bottom: solid 1px #fff;
+}
+
+.container-in-tab ul li a   {
+    width: 100%;
 }

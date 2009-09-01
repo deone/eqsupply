@@ -13,6 +13,7 @@
 {% block body %}
     <h1>Products</h1>
 
+    <div class="clearfix padtop">
     {% if user.is_authenticated %}
 	<div id="tabs">
 	    <ul>
@@ -25,4 +26,5 @@
         {% url acct_login as login_url %}
         <p class="what_next">Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
     {% endif %}
+    </div>
 {% endblock %}
