@@ -14,7 +14,7 @@ class UserAccount(User):
 	>>> assert new_user.city == "Lagos"
 	>>> assert new_user.country == "Nigeria"
 	"""
-	phone = models.CharField(max_length=15)
+	phone = models.CharField(max_length=15, unique=True)
 	company = models.CharField(max_length=100)
 	position = models.CharField(max_length=100)
 	company_street_address = models.CharField(max_length=100)

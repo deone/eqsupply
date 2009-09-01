@@ -1,7 +1,7 @@
 from django.db import models
 
 class Manufacturer(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     address = models.CharField(max_length=250)
     city = models.CharField(max_length=30)
     country = models.CharField(max_length=30)
@@ -12,17 +12,21 @@ class Manufacturer(models.Model):
     def __unicode__(self):
 	return u"%s, %s" % (self.name, self.country)
 
-class Category(models.Model):
-    name = models.CharField(max_length=50)
+class CommonInfo(models.Model):
+    name = models.CharField(max_length=100)
     short_description = models.TextField()
+
+    class Meta:
+	abstract=True
+
+class Category(CommonInfo):
+    pass
 
     def __unicode__(self):
 	return u"%s" % self.name
 
-class Product(models.Model):
+class Product(CommonInfo):
     code = models.CharField(max_length=30)
-    name = models.CharField(max_length=100)
-    short_description = models.TextField()
     manufacturer = models.ForeignKey(Manufacturer)
     categories = models.ManyToManyField(Category)
 
