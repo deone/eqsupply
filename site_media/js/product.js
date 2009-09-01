@@ -26,7 +26,8 @@ function showManufacturers(data)	{
     var lst = "";
 
     for (var i = 0; i < data.length; i++)   {
-	lst += "<li><a href=''>" + data[i].fields.name + "</a></li>";
+	lst += "<dt><a href='http://" + data[i].fields.website + "'>" + data[i].fields.name + "</a></dt>" + 
+		"<dd>" + data[i].fields.city + ", " + data[i].fields.country + "</dd>";
     }
     $("#manuf_list").append(lst);
 }

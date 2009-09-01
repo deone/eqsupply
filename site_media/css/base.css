@@ -351,16 +351,7 @@ div.notice_settings h2 {
 /* end hide from ie5-mac */
 
 
-dl.what_next {
-    margin: 2em;
-}
-dl.what_next dt {
-    font-size: 120%;
-}
-dl.what_next dd {
-    margin: 0 0 1em 0;
-    font-style: italic;
-}
+
 p.what_next {
     font-size: 120%;
 }
@@ -458,17 +449,13 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
     float: left;
     margin: 10px 0 0 10px;
 }
-.container-in-tab ul	{
+.container-in-tab dl	{
     margin: 0px;
-    padding: 0px;
-    list-style: none;
 }
-.container-in-tab ul li	{
-    padding: 5px;
-    background: #f6f6f6; 
-    border-bottom: solid 1px #fff;
+.container-in-tab dl dt	{
+    font-size: 120%;
 }
-
-.container-in-tab ul li a   {
-    width: 100%;
+.container-in-tab dl dd	{
+    margin: 0 0 1em 0;
+    font-style: italic;
 }
