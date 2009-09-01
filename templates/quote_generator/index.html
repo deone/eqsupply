@@ -2,17 +2,24 @@
 
 {% block title %}Products{% endblock %}
 
+{% block custom_css %}
+    <link rel="stylesheet" href="/site_media/js/jquery/css/ui-lightness/jquery-ui.custom.css"/>
+{% endblock %}
+
+{% block custom_js %}
+    <script type="text/javascript" src="/site_media/js/product.js"></script>
+{% endblock %}
+
 {% block body %}
     <h1>Products</h1>
 
     {% if user.is_authenticated %}
-        <dl class="what_next">
-            <dt><a href="">View Products by Manufacturer</a></dt>
-            <dd>Our manufacturing partners include Elcometer, ...</dd>
-
-            <dt><a href="">View Products by Category</a></dt>
-            <dd>Categories include Abrasers, ...</dd>
-        </dl>
+	<div id="tabs">
+	    <ul>
+		<li><a href="{% url manufacturers %}">Manufacturers</a></li>
+		<li><a href="{% url categories %}">Categories</a></li>
+	    </ul>
+	</div>
     {% else %}
         {% url acct_signup as signup_url %}
         {% url acct_login as login_url %}
