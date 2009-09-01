@@ -12,7 +12,6 @@ urlpatterns = patterns('',
     (r'^$', include('account.urls')),
     (r'^account/', include('account.urls')),
     (r'^products/', include('quote_generator.urls')),
-    (r'^manufacturers/', quote_generator.views.manufacturers),
     (r'^admin/(.*)', admin.site.root),
 )
 
