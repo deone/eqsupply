@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
-from django.core.serializers import serialize
 
 from django.utils.functional import Promise
 from django.utils.encoding import force_unicode
