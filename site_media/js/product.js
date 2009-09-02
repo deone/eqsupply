@@ -31,7 +31,7 @@ function showManufacturers(data)	{
     var lst = "";
 
     for (var i = 0; i < data.length; i++)   {
-	lst += "<dt><a href=''>" + data[i].fields.name + "</a></dt>" + 
+	lst += "<dt><a href='/products/manufacturer/" + data[i].pk + "/'>" + data[i].fields.name + "</a></dt>" + 
 		"<dd>" + data[i].fields.city + ", " + data[i].fields.country + "</dd>";
     }
     $("#manuf_list").html(lst);
@@ -41,7 +41,7 @@ function showCategories(data)	{
     var lst = "";
 
     for (var i = 0; i < data.length; i++)   {
-	lst += "<li><a href=''>" + data[i].fields.name + "</a></li>";
+	lst += "<li><a href='/products/category/" + data[i].pk + "/'>" + data[i].fields.name + "</a></li>";
     }
     $("#category_list").html(lst);
 }
