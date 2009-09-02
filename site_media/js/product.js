@@ -41,8 +41,7 @@ function showCategories(data)	{
     var lst = "";
 
     for (var i = 0; i < data.length; i++)   {
-	lst += "<dt><a href=''>" + data[i].fields.name + "</a></dt>" + 
-		"<dd>" + data[i].fields.short_description + "</dd>";
+	lst += "<li><a href=''>" + data[i].fields.name + "</a></li>";
     }
     $("#category_list").html(lst);
 }

@@ -449,13 +449,18 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
     float: left;
     margin: 10px 0 0 10px;
 }
-.container-in-tab dl	{
+.container-in-tab dl, ul    {
     margin: 0px;
+    padding: 0px;
+    list-style: none;
 }
 .container-in-tab dl dt	{
-    font-size: 120%;
+    font-size: 103%;
 }
 .container-in-tab dl dd	{
-    margin: 0 0 1em 0;
+    margin: 0 0 .5em 0;
     font-style: italic;
+}
+.container-in-tab ul li	{
+    margin: .2em;
 }
