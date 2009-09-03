@@ -25,20 +25,20 @@
 	<table width=100%>
 	    <tbody>
 		<tr>
-		    <th width=65%><h3>Product</h3></th>
-		    {% if result.manufacturer %}
-			<th width=25%><h3>Category</h3></th>
+		    <th class="head_1"><h3>Product</h3></th>
+		{% if result.manufacturer %}
+		    <th class="head_2"><h3>Category</h3></th>
+		{% endif %}
+		{% if result.category %}
+		    <th><h3>Manufacturer</h3></th>
 		    {% endif %}
-		    {% if result.category %}
-			<th width=25%><h3>Manufacturer</h3></th>
-		    {% endif %}
-		    <th>&nbsp;</th>
+		    <th class="head_3">&nbsp;</th>
 		</tr>
 	    {% for p in result.products %}
 		<tr class="product-detail">
 		    <td>
 			<p><h4><a href="">{{ p.name }}</a></h4></p>
-			<p class="product-desc">{{ p.short_description }}</p>
+			<p>{{ p.short_description }}</p>
 		    </td>
 		    <td>
 		    {% if result.manufacturer %}
@@ -50,7 +50,13 @@
 			<p class="padtop">{{ p.manufacturer }}</p>
 		    {% endif %}
 		    </td>
-		    <td>&nbsp;</td>
+		    <td>
+			<form class="biller">
+			    <input type="text"/>
+			    <input type="hidden" value="{{ p.pk }}"/>
+			    <input type="button" value="Add"/>
+			</form>
+		    </td>
 		</tr>
 	    {% endfor %}
 	    </tbody>

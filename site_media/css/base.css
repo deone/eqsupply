@@ -459,9 +459,26 @@ td {
     font-size: 110%;
     margin-bottom: 5px;
 }
-p.padtop {
+p.padtop, form.biller {
     padding-top: 5px;
 }
-p.product-desc    {
+tr.product-detail:hover   {
+    background-color: #efefef;
+}
+#products .head_1   {
     width: 500px;
+}
+#products .head_2   {
+    width: 200px;
+}
+#products .head_3    {
+    width: 100px;
+}
+form.biller {
+    width: 70px;
+    padding-left: 30px;
+}
+form.biller input[type="text"]	{
+    width: 35px;
+    font-size: 10pt;
 }

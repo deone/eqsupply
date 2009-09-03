@@ -2,12 +2,14 @@ $(function()	{
 
     $("#tabs").tabs();
 
+    $(".biller").hide();
+
     $(".product-detail").hover(
 	function()  {
-	    $(this).addClass("over");
+	    $(this).find(".biller").show();
 	},
 	function()  {
-	    $(this).addClass("out");
+	    $(this).find(".biller").hide();
 	}
     );
 
