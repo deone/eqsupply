@@ -2,6 +2,15 @@ $(function()	{
 
     $("#tabs").tabs();
 
+    $(".product-detail").hover(
+	function()  {
+	    $(this).addClass("over");
+	},
+	function()  {
+	    $(this).addClass("out");
+	}
+    );
+
 });
 
 function ajaxGet(url)	{

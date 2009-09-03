@@ -9,6 +9,51 @@
     {% endif %}
 {% endblock %}
 
+{% block custom_js %}
+    <script type="text/javascript" src="/site_media/js/product.js"></script>
+{% endblock %}
+
 {% block body %}
-    {{ result.products }}
+    {% if result.manufacturer %}
+	<h1>Products by {{ result.manufacturer }}</h1>
+    {% endif %}
+    {% if result.category %}
+	<h1>{{ result.category }}</h1>
+    {% endif %}
+
+    <div id="products" class="clearfix padtop">
+	<table width=100%>
+	    <tbody>
+		<tr>
+		    <th width=65%><h3>Product</h3></th>
+		    {% if result.manufacturer %}
+			<th width=25%><h3>Category</h3></th>
+		    {% endif %}
+		    {% if result.category %}
+			<th width=25%><h3>Manufacturer</h3></th>
+		    {% endif %}
+		    <th>&nbsp;</th>
+		</tr>
+	    {% for p in result.products %}
+		<tr class="product-detail">
+		    <td>
+			<p><h4><a href="">{{ p.name }}</a></h4></p>
+			<p class="product-desc">{{ p.short_description }}</p>
+		    </td>
+		    <td>
+		    {% if result.manufacturer %}
+			{% for c in p.categories.values %}
+			    <p class="padtop">{{ c.name }}</p>
+			{% endfor %}
+		    {% endif %}
+		    {% if result.category %}
+			<p class="padtop">{{ p.manufacturer }}</p>
+		    {% endif %}
+		    </td>
+		    <td>&nbsp;</td>
+		</tr>
+	    {% endfor %}
+	    </tbody>
+	</table>
+    </div>
 {% endblock %}

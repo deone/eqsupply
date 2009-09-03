@@ -13,14 +13,12 @@
 {% block body %}
     <h1>Products</h1>
 
-    <div class="clearfix padtop">
+    <div id="tabs" class="clearfix padtop">
     {% if user.is_authenticated %}
-	<div id="tabs">
-	    <ul>
-		<li><a href="{% url manufacturers %}">Manufacturers</a></li>
-		<li><a href="{% url categories %}">Categories</a></li>
-	    </ul>
-	</div>
+	<ul>
+	    <li><a href="{% url manufacturers %}">Manufacturers</a></li>
+	    <li><a href="{% url categories %}">Categories</a></li>
+	</ul>
     {% else %}
         {% url acct_signup as signup_url %}
         {% url acct_login as login_url %}
