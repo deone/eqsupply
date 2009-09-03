@@ -37,8 +37,6 @@ td {
     margin: 0 auto;
     padding: 10px;
     width: 800px;
-    /*float: left;
-    display: inline;*/
 }
 
 #footer {
@@ -88,34 +86,25 @@ input[type="text"], input[type="password"], textarea {
 
 
 #tabhead {
-    background: #035 url('/site_media/img/heading.png') left top repeat-x;
-    border-bottom: 1px solid #000; /* tab border */
+    border-bottom: 1px solid #ddd;
     position: relative;
-	height: 80px;
+    height: 100px;
 }
 #tabhead .logo {
-    height: 80px;
-    padding-left: 5px;
+    height: 100px;
+    padding-left: 220px;
     padding-top: 0;
 }
 #tabhead .logo img {
-    width: 190px;
-    height: 79px;
+    width: 200px;
+    height: 100px;
 }
 #tabhead .login {
     position: absolute;
     top: 6px;
-    right: 15px;
-    color: #DEF; /* login bar text colour */
+    right: 235px;
+    color: #13C;
 }
-#tabhead .login a, #tabhead .login a:visited {
-    color: #DEF; /* login bar link colour */
-}
-#tabhead .login a:hover {
-    color: #FFF; /* login bar link hover colour */
-}
-
-
 
 ul.errorlist {
     margin: 0;
@@ -202,8 +191,7 @@ div.profile_info p {
 #subnav {
     margin: 0;
     padding: 0;
-    background: #DEF; /* tab colour */
-    border-bottom: 1px solid #9BC;
+    border-bottom: 1px solid #ddd;
 }
 
 #subnav ul {
