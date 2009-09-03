@@ -10,7 +10,7 @@ class Manufacturer(models.Model):
     website = models.CharField(max_length=30)
 
     def __unicode__(self):
-	return u"%s, %s" % (self.name, self.country)
+	return u"%s" % (self.name)
 
     class Meta:
 	verbose_name_plural = "manufacturers"

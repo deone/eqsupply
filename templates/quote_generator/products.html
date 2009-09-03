@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if result.manufacturer %}
+	Products by {{ result.manufacturer }}
+    {% endif %}
+    {% if result.category %}
+	Products in category: {{ result.category }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ result.products }}
+{% endblock %}
