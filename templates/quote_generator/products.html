@@ -26,12 +26,14 @@
 	    <tbody>
 		<tr>
 		    <th class="head_1"><h3>Product</h3></th>
-		{% if result.manufacturer %}
-		    <th class="head_2"><h3>Category</h3></th>
-		{% endif %}
-		{% if result.category %}
-		    <th><h3>Manufacturer</h3></th>
+		    <th class="head_2"><h3>
+		    {% if result.manufacturer %}
+			Category
 		    {% endif %}
+		    {% if result.category %}
+			Manufacturer
+		    {% endif %}
+		    </h3></th>
 		    <th class="head_3">&nbsp;</th>
 		</tr>
 	    {% for p in result.products %}
@@ -39,6 +41,7 @@
 		    <td>
 			<p><h4><a href="">{{ p.name }}</a></h4></p>
 			<p>{{ p.short_description }}</p>
+			<p><a href="">Specifications</a></p>
 		    </td>
 		    <td>
 		    {% if result.manufacturer %}
@@ -61,5 +64,7 @@
 	    {% endfor %}
 	    </tbody>
 	</table>
+	<a class="button" href="">Get quote</a>
+	<a id="continue" class="button" href="/products/">Continue</a>
     </div>
 {% endblock %}
