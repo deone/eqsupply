@@ -28,10 +28,10 @@ function ajaxPost(data, url)  {//{{{
             if (response.code != 0) {
                 alert(response.data.body);
             } else  {
-                //alert(response.data.body);
-		$("#msger").html("<p>" + response.data.body + "</p>");
-		$("#msger").slideDown(500);
-		$("#msger").slideUp(2000);
+		if (response.data.type != "ok")	{
+		} else	{
+		    showMessage(response.data.type, response.data.body);
+		}
             }
         },
 
@@ -85,12 +85,27 @@ function showCategories(data)	{//{{{
 }//}}}
 
 function setQuote() {
-    var userId = $("#user-id").val();    
-    var productId = $("#product-id").val();
-    var quantity = $("#bill" + productId + " " + "#quantity").val();
+    if ($("#quantity").val() == "")	{
+	showMessage("error", "Please tell us the quantity you need");
+    } else  {
+	var userId = $("#user-id").val();    
+	var productId = $("#product-id").val();
+	var quantity = $("#bill" + productId + " " + "#quantity").val();
 
-    var data = "user=" + userId + "&product=" + productId + "&quantity=" + quantity;
-    var url = "/products/setquote/";
+	var data = "user=" + userId + "&product=" + productId + "&quantity=" + quantity;
+	var url = "/products/setquote/";
 
-    ajaxPost(data, url);
+	ajaxPost(data, url);
+    }
+}
+
+function showMessage(msgType, msg)	{
+    if (msgType != "error") {
+	$("#msger").html("<p>" + msg + "</p>");
+	$("#msger").slideDown(500);
+	$("#msger").slideUp(2000);
+    } else  {
+	$("#msger").html("<p class='err'>" + msg + "</p>");
+	$("#msger").slideDown(500);
+    }
 }

@@ -47,4 +47,4 @@ def set_quote(request):
 
     Quote.objects.create(user=user, product=product, quantity=quantity)
 
-    return ("ok", "Quote Created");
+    return ("ok", "Product Added");

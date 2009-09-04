@@ -515,3 +515,6 @@ a#continue  {
     text-align: center;
     line-height: 2em;
 }
+.err	{
+    color: #f00;
+}
