@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     (r'^category_list/$', views.view_products_by, {"view": "category"}),
     (r'^manufacturer/(?P<manufacturer_id>\d+)/$', views.products),
     (r'^category/(?P<category_id>\d+)/$', views.products),
+    (r'^setquote/$', views.set_quote),
 )

@@ -15,7 +15,31 @@ $(function()	{
 
 });
 
-function ajaxGet(url)	{
+
+function ajaxPost(data, url)  {//{{{
+
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        dataType: "json",
+
+        success: function(response) {
+            if (response.code != 0) {
+                alert(response.data.body);
+            } else  {
+                alert(response.data.body);
+            }
+        },
+
+        error: function(response)   {
+            alert(response);
+        }
+    });
+
+}//}}}
+
+function ajaxGet(url)	{//{{{
 
     $.ajax({
 	url: url,
@@ -36,9 +60,9 @@ function ajaxGet(url)	{
 	}
     });
 
-}
+}//}}}
 
-function showManufacturers(data)	{
+function showManufacturers(data)	{//{{{
     var lst = "";
 
     for (var i = 0; i < data.length; i++)   {
@@ -46,13 +70,24 @@ function showManufacturers(data)	{
 		"<dd>" + data[i].fields.city + ", " + data[i].fields.country + "</dd>";
     }
     $("#manuf_list").html(lst);
-}
+}//}}}
 
-function showCategories(data)	{
+function showCategories(data)	{//{{{
     var lst = "";
 
     for (var i = 0; i < data.length; i++)   {
 	lst += "<li><a href='/products/category/" + data[i].pk + "/'>" + data[i].fields.name + "</a></li>";
     }
     $("#category_list").html(lst);
+}//}}}
+
+function setQuote() {
+    var userId = $("#user-id").val();    
+    var productId = $("#product-id").val();
+    var quantity = $("#bill" + productId + " " + "#quantity").val();
+
+    var data = "user=" + userId + "&product=" + productId + "&quantity=" + quantity;
+    var url = "/products/setquote/";
+
+    ajaxPost(data, url);
 }

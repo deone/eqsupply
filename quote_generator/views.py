@@ -4,8 +4,10 @@ from django.template import RequestContext
 from django.http import HttpResponse
 from django.conf import settings
 
+from django.contrib.auth.models import User
+
 from eqsupply import helpers as h
-from quote_generator.models import Manufacturer, Category, Product
+from quote_generator.models import *
 
 def view_products_by(request, view):
     list_model_map = {"manufacturer": Manufacturer, "category": Category}
@@ -33,3 +35,16 @@ def make_result_set(type_id, type, product_list, model):
 		"product_index": settings.ELCOMETER_PRODUCTS_INDEX,
 		"specs_index": settings.ELCOMETER_SPECS_INDEX
 	    }
+
+@h.json_response
+def set_quote(request):
+    user_id = request.POST.get("user").strip()
+    product_id = request.POST.get("product").strip()
+    quantity = request.POST.get("quantity").strip()
+
+    user = User.objects.get(pk=user_id)
+    product = Product.objects.get(pk=product_id)
+
+    Quote.objects.create(user=user, product=product, quantity=quantity)
+
+    return ("ok", "Quote Created");

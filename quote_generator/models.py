@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -43,3 +44,11 @@ class Product(CommonInfo):
 
     class Meta:
 	verbose_name_plural = "products"
+
+class Quote(models.Model):
+    user = models.ForeignKey(User)
+    product = models.ForeignKey(Product)
+    quantity = models.IntegerField()
+
+    def __unicode__(self):
+	return u"%s, %s" % (self.product, self.quantity)

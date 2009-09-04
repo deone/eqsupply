@@ -14,57 +14,64 @@
 {% endblock %}
 
 {% block body %}
-    {% if result.manufacturer %}
-	<h1>Products by {{ result.manufacturer }}</h1>
-    {% endif %}
-    {% if result.category %}
-	<h1>{{ result.category }}</h1>
-    {% endif %}
+    {% if user.is_authenticated %}
+	{% if result.manufacturer %}
+	    <h1>Products by {{ result.manufacturer }}</h1>
+	{% endif %}
+	{% if result.category %}
+	    <h1>Products In Category: {{ result.category }}</h1>
+	{% endif %}
 
-    <div id="products" class="clearfix padtop">
-	<table width=100%>
-	    <tbody>
-		<tr>
-		    <th class="head_1"><h3>Product</h3></th>
-		    <th class="head_2"><h3>
-		    {% if result.manufacturer %}
-			Categories
-		    {% endif %}
-		    {% if result.category %}
-			Manufacturer
-		    {% endif %}
-		    </h3></th>
-		    <th class="head_3">&nbsp;</th>
-		</tr>
-	    {% for p in result.products %}
-		<tr class="product-detail">
-		    <td>
-			<p><h4><a target="blank" href="{{ result.product_index }}{{ p.product_page }}">{{ p.name }}</a></h4></p>
-			<p>{{ p.short_description }}</p>
-			<p><a target="blank" href="{{ result.specs_index }}{{ p.specs_page }}">Specifications</a></p>
-		    </td>
-		    <td>
-		    {% if result.manufacturer %}
-			{% for c in p.categories.values %}
-			    <p class="padtop">{{ c.name }}</p>
-			{% endfor %}
-		    {% endif %}
-		    {% if result.category %}
-			<p class="padtop">{{ p.manufacturer }}</p>
-		    {% endif %}
-		    </td>
-		    <td>
-			<form class="biller">
-			    <input type="text"/>
-			    <input type="hidden" value="{{ p.pk }}"/>
-			    <input type="button" value="Add"/>
-			</form>
-		    </td>
-		</tr>
-	    {% endfor %}
-	    </tbody>
-	</table>
-	<a class="button" href="">Get quote</a>
-	<a id="continue" class="button" href="/products/">Continue</a>
-    </div>
+	<div id="products" class="clearfix padtop">
+	    <table width=100%>
+		<tbody>
+		    <tr>
+			<th class="head_1"><h3>Product</h3></th>
+			<th class="head_2"><h3>
+			{% if result.manufacturer %}
+			    Categories
+			{% endif %}
+			{% if result.category %}
+			    Manufacturer
+			{% endif %}
+			</h3></th>
+			<th class="head_3">&nbsp;</th>
+		    </tr>
+		{% for p in result.products %}
+		    <tr class="product-detail">
+			<td>
+			    <p><h4><a target="blank" href="{{ result.product_index }}{{ p.product_page }}">{{ p.name }}</a></h4></p>
+			    <p>{{ p.short_description }}</p>
+			    <p><a target="blank" href="{{ result.specs_index }}{{ p.specs_page }}">Specifications</a></p>
+			</td>
+			<td>
+			{% if result.manufacturer %}
+			    {% for c in p.categories.values %}
+				<p class="padtop">{{ c.name }}</p>
+			    {% endfor %}
+			{% endif %}
+			{% if result.category %}
+			    <p class="padtop">{{ p.manufacturer }}</p>
+			{% endif %}
+			</td>
+			<td>
+			    <form id="bill{{ p.pk }}" class="biller">
+				<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
+				<input id="product-id" name="product-id" type="hidden" value="{{ p.pk }}"/>
+				<input id="quantity" name="quantity" type="text"/>
+				<input type="button" value="Add" onclick="setQuote()"/>
+			    </form>
+			</td>
+		    </tr>
+		{% endfor %}
+		</tbody>
+	    </table>
+	    <a class="button" href="">Get quote</a>
+	    <a id="continue" class="button" href="/products/">Continue</a>
+	</div>
+    {% else %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
+        <p class="what_next">Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
+    {% endif %}
 {% endblock %}
