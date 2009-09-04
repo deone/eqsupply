@@ -121,3 +121,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 USER_ACCOUNT_MODEL = "account.UserAccount"
+
+ELCOMETER_PRODUCTS_INDEX = "http://www.elcometer.com/international index pages/international/product pages - English/product pages/main pages/"
+ELCOMETER_SPECS_INDEX = "http://www.elcometer.com/international index pages/international/product pages - English/product pages/technical specifications/"

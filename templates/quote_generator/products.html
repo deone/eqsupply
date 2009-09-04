@@ -28,7 +28,7 @@
 		    <th class="head_1"><h3>Product</h3></th>
 		    <th class="head_2"><h3>
 		    {% if result.manufacturer %}
-			Category
+			Categories
 		    {% endif %}
 		    {% if result.category %}
 			Manufacturer
@@ -39,9 +39,9 @@
 	    {% for p in result.products %}
 		<tr class="product-detail">
 		    <td>
-			<p><h4><a href="">{{ p.name }}</a></h4></p>
+			<p><h4><a target="blank" href="{{ result.product_index }}{{ p.product_page }}">{{ p.name }}</a></h4></p>
 			<p>{{ p.short_description }}</p>
-			<p><a href="">Specifications</a></p>
+			<p><a target="blank" href="{{ result.specs_index }}{{ p.specs_page }}">Specifications</a></p>
 		    </td>
 		    <td>
 		    {% if result.manufacturer %}

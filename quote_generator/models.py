@@ -16,7 +16,7 @@ class Manufacturer(models.Model):
 	verbose_name_plural = "manufacturers"
 
 class CommonInfo(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     short_description = models.TextField()
 
     class Meta:
@@ -35,6 +35,8 @@ class Product(CommonInfo):
     code = models.CharField(max_length=30)
     manufacturer = models.ForeignKey(Manufacturer)
     categories = models.ManyToManyField(Category)
+    product_page = models.CharField(max_length=30)
+    specs_page = models.CharField(max_length=30)
 
     def __unicode__(self):
 	return u"%s %s" % (self.code, self.name)

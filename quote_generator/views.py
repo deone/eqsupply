@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.core.serializers import serialize
 from django.template import RequestContext
 from django.http import HttpResponse
+from django.conf import settings
 
 from eqsupply import helpers as h
 from quote_generator.models import Manufacturer, Category, Product
@@ -28,5 +29,7 @@ def products(request, template="quote_generator/products.html", manufacturer_id=
 def make_result_set(type_id, type, product_list, model):
     return  {
 		type: model.objects.get(pk=type_id), 
-		"products": product_list
+		"products": product_list,
+		"product_index": settings.ELCOMETER_PRODUCTS_INDEX,
+		"specs_index": settings.ELCOMETER_SPECS_INDEX
 	    }
