@@ -28,7 +28,10 @@ function ajaxPost(data, url)  {//{{{
             if (response.code != 0) {
                 alert(response.data.body);
             } else  {
-                alert(response.data.body);
+                //alert(response.data.body);
+		$("#msger").html("<p>" + response.data.body + "</p>");
+		$("#msger").slideDown(500);
+		$("#msger").slideUp(2000);
             }
         },
 

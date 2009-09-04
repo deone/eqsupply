@@ -1,5 +1,6 @@
 $(function()    {
     $("#ajax-loading").hide();
+    $("#msger").hide();
 });
 
 function displayErrors(errors)   {
