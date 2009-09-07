@@ -78,6 +78,7 @@ input[type="text"], input[type="password"], textarea {
     border-bottom: 1px solid #ddd;
     position: relative;
     height: 100px;
+    padding: 25px 0px 0px 0px;
 }
 #tabhead .logo {
     height: 100px;
@@ -90,9 +91,10 @@ input[type="text"], input[type="password"], textarea {
 }
 #tabhead .login {
     position: absolute;
-    top: 6px;
+    top: 0px;
     right: 235px;
     color: #13C;
+    padding-top: 10px;
 }
 ul.errorlist {
     margin: 0;
@@ -505,14 +507,15 @@ a#continue  {
     position: absolute;
     top: 0px;
     left: 0px;
-    background: #f5f5f5;
+    background: #ffa;
     width: 100%;
+    text-align: left;
+    border-bottom: solid 2px #ddd;
 }
 #msger p    {
-    margin: 0px;
-    font-size: 150%;
+    margin: 0px 0px 0px 230px;
+    font-size: 110%;
     font-weight: bold;
-    text-align: center;
     line-height: 2em;
 }
 .err	{

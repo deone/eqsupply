@@ -98,14 +98,3 @@ function setQuote() {
 	ajaxPost(data, url);
     }
 }
-
-function showMessage(msgType, msg)	{
-    if (msgType != "error") {
-	$("#msger").html("<p>" + msg + "</p>");
-	$("#msger").slideDown(500);
-	$("#msger").slideUp(2000);
-    } else  {
-	$("#msger").html("<p class='err'>" + msg + "</p>");
-	$("#msger").slideDown(500);
-    }
-}
