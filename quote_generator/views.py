@@ -38,6 +38,7 @@ def make_result_set(type_id, type, product_list, model):
 
 @h.json_response
 def set_quote(request):
+    # We have to strip() 'cos we aint using django forms, we are processing our request manually
     user_id = request.POST.get("user").strip()
     product_id = request.POST.get("product").strip()
     quantity = request.POST.get("quantity").strip()
@@ -48,3 +49,15 @@ def set_quote(request):
     Quote.objects.create(user=user, product=product, quantity=quantity)
 
     return ("ok", "Product Added");
+
+@h.json_response
+def unset_quote(request):
+    user_id = request.POST.get("user").strip()
+    product_id = request.POST.get("product").strip()
+
+    user = User.objects.get(pk=user_id)
+    product = Product.objects.get(pk=product_id)
+
+    Quote.objects.filter(user=user, product=product).delete()
+
+    return ("ok", "Product Removed");

@@ -28,9 +28,16 @@ function ajaxPost(data, url, options)  {//{{{
             } else  {
 		if (response.data.type != "ok")	{
 		} else	{
-		    showMessage(response.data.type, response.data.body);
-		    $("#cell" + options["product_id"]).find(".add-quote").remove();
-		    $("#cell" + options["product_id"]).find(".remove-quote").show();
+		    if (url == "/products/setquote/")	{
+			showMessage(response.data.type, response.data.body);
+			// Ideally, this should be in a separate function
+			$("#cell" + options["product_id"]).find(".add-quote").remove();
+			$("#cell" + options["product_id"]).find(".remove-quote").show();
+		    } else  {
+			showMessage(response.data.type, response.data.body);
+			$("#cell" + options["product_id"]).find(".remove-quote").hide();
+			$("#cell" + options["product_id"]).find(".add-quote").show();
+		    }
 		}
             }
         },
@@ -101,12 +108,12 @@ function getQuoteData(form, productId)	{
     }
 }
 
+// These two functions are the same!!
 function setQuote() {
     var productId = $("#product-id").val();
 
     var data = getQuoteData(".add-quote", productId);
     var url = "/products/setquote/";
-
     var options = {"product_id": productId};
 
     ajaxPost(data, url, options);
@@ -116,6 +123,8 @@ function unsetQuote()	{
     var productId = $("#product-id").val();
 
     var data = getQuoteData(".remove-quote", productId);
-    alert(data);
     var url = "/products/unsetquote/";
+    var options = {"product_id": productId};
+
+    ajaxPost(data, url, options);
 }
