@@ -84,18 +84,38 @@ function showCategories(data)	{//{{{
     $("#category_list").html(lst);
 }//}}}
 
-function setQuote() {
-    if ($("#quantity").val() == "")	{
-	showMessage("error", "Please tell us the quantity you need");
+function getQuoteData(form, productId)	{
+
+    var userId = $("#user-id").val();
+
+    if (form == ".add-quote")	{
+	if ($("#quantity").val() != "")	{
+	    return "user=" + userId + "&product=" + productId + 
+		"&quantity=" + $("#cell" + productId + " " + "form" + " " + "#quantity").val();
+	} else	{
+	    showMessage("error", "Please tell us the quantity you need");
+	}
+
     } else  {
-	var userId = $("#user-id").val();    
-	var productId = $("#product-id").val();
-	var quantity = $("#cell" + productId + " " + "form" + " " + "#quantity").val();
-
-	var data = "user=" + userId + "&product=" + productId + "&quantity=" + quantity;
-	var url = "/products/setquote/";
-	var options = {"product_id": productId};
-
-	ajaxPost(data, url, options);
+	return "user=" + userId + "&product=" + productId;
     }
+}
+
+function setQuote() {
+    var productId = $("#product-id").val();
+
+    var data = getQuoteData(".add-quote", productId);
+    var url = "/products/setquote/";
+
+    var options = {"product_id": productId};
+
+    ajaxPost(data, url, options);
+}
+
+function unsetQuote()	{
+    var productId = $("#product-id").val();
+
+    var data = getQuoteData(".remove-quote", productId);
+    alert(data);
+    var url = "/products/unsetquote/";
 }
