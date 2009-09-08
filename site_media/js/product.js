@@ -2,14 +2,14 @@ $(function()	{
 
     $("#tabs").tabs();
 
-    $(".product-detail").hover(
+    /*$(".product-detail").hover(
 	function()  {
 	    $(this).find(".add-quote").show();
 	},
 	function()  {
 	    $(this).find(".add-quote").hide();
 	}
-    );
+    );*/
 
 });
 
@@ -30,13 +30,12 @@ function ajaxPost(data, url, options)  {//{{{
 		} else	{
 		    if (url == "/products/setquote/")	{
 			showMessage(response.data.type, response.data.body);
-			// Ideally, this should be in a separate function
-			$("#cell" + options["product_id"]).find(".add-quote").remove();
-			$("#cell" + options["product_id"]).find(".remove-quote").show();
+			$("#cell" + options["product"]).find(".add-quote").hide();
+			$("#cell" + options["product"]).find(".remove-quote").show();
 		    } else  {
 			showMessage(response.data.type, response.data.body);
-			$("#cell" + options["product_id"]).find(".remove-quote").hide();
-			$("#cell" + options["product_id"]).find(".add-quote").show();
+			$("#cell" + options["product"]).find(".remove-quote").hide();
+			$("#cell" + options["product"]).find(".add-quote").show();
 		    }
 		}
             }
@@ -91,40 +90,47 @@ function showCategories(data)	{//{{{
     $("#category_list").html(lst);
 }//}}}
 
-function getQuoteData(form, productId)	{
+function getQuoteData(form)	{
 
+    var productId = $("#product-id").val();
     var userId = $("#user-id").val();
 
     if (form == ".add-quote")	{
 	if ($("#quantity").val() != "")	{
-	    return "user=" + userId + "&product=" + productId + 
-		"&quantity=" + $("#cell" + productId + " " + "form" + " " + "#quantity").val();
+
+	    return  {
+		"user": userId, 
+		"product": productId, 
+		"quantity": $("#cell" + productId + " " + "form" + " " + "#quantity").val()
+	    };
+
 	} else	{
 	    showMessage("error", "Please tell us the quantity you need");
 	}
 
     } else  {
-	return "user=" + userId + "&product=" + productId;
+	return	{
+	    "user": userId, 
+	    "product": productId
+	}
     }
 }
 
 // These two functions are the same!!
 function setQuote() {
-    var productId = $("#product-id").val();
+    var params = getQuoteData(".add-quote");
 
-    var data = getQuoteData(".add-quote", productId);
+    var data = "user=" + params["user"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
     var url = "/products/setquote/";
-    var options = {"product_id": productId};
 
-    ajaxPost(data, url, options);
+    ajaxPost(data, url, params);
 }
 
 function unsetQuote()	{
-    var productId = $("#product-id").val();
+    var params = getQuoteData(".remove-quote");
 
-    var data = getQuoteData(".remove-quote", productId);
+    var data = "user=" + params["user"] + "&product=" + params["product"];
     var url = "/products/unsetquote/";
-    var options = {"product_id": productId};
 
-    ajaxPost(data, url, options);
+    ajaxPost(data, url, params);
 }

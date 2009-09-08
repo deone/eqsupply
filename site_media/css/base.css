@@ -531,6 +531,6 @@ a#continue  {
     margin: 0px 0px 0px 3px;
     padding-top: 3px;
 }
-tr.product-detail form	{
+tr.product-detail .remove-quote	{
     display: none;
 }
