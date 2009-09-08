@@ -15,8 +15,8 @@ $(function()	{
 
 });
 
-
-function ajaxPost(data, url)  {//{{{
+// We can construct a url->action(s) mapping because ajaxPost() would be handling all post requests in this module.
+function ajaxPost(data, url, options)  {//{{{
 
     $.ajax({
         url: url,
@@ -94,7 +94,8 @@ function setQuote() {
 
 	var data = "user=" + userId + "&product=" + productId + "&quantity=" + quantity;
 	var url = "/products/setquote/";
+	var options = {"quote_form": "#bill", "product_id": productId};
 
-	ajaxPost(data, url);
+	ajaxPost(data, url, options);
     }
 }

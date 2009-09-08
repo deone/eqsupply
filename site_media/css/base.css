@@ -470,6 +470,7 @@ tr.product-detail:hover   {
 }
 #products .head_1   {
     width: 500px;
+    line-height: 2.25em;
 }
 #products .head_2   {
     width: 200px;
@@ -520,4 +521,8 @@ a#continue  {
 }
 .err	{
     color: #f00;
+}
+#products #ajax-loading	{
+    margin: 0px 0px 0px 3px;
+    padding-top: 3px;
 }

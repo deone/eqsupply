@@ -1,6 +1,12 @@
 $(function()    {
     $("#ajax-loading").hide();
     $("#msger").hide();
+
+    $("#ajax-loading").ajaxStart(function()	{
+	$(this).show();
+    }).ajaxStop(function()   {
+	$(this).hide();
+    });
 });
 
 function displayErrors(errors)   {

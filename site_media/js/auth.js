@@ -1,11 +1,5 @@
 $(function()    {
 
-    $("#ajax-loading").ajaxStart(function()	{
-	$(this).show();
-    }).ajaxStop(function()   {
-	$(this).hide();
-    });
-
     $("#signup-btn").ajaxStart(function()   {
 	$(this).attr("value", "Please Wait...");
     }).ajaxStop(function()  {
