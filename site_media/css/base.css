@@ -462,7 +462,7 @@ td {
     font-size: 110%;
     margin-bottom: 5px;
 }
-p.padtop, form.biller {
+p.padtop, tr.product-detail form    {
     padding-top: 5px;
 }
 tr.product-detail:hover   {
@@ -478,17 +478,22 @@ tr.product-detail:hover   {
 #products .head_3    {
     width: 80px;
 }
-form.biller input[type="text"]	{
+form.add-quote input[type="text"]	{
     width: 20px;
     font-size: 8pt;
     background-color: #fff;;
     background-image: none;
 }
-form.biller input[type="button"]    {
-    font-size: 8pt;
+form.add-quote input[type="button"]    {
     width: 30px;
 }
-#products .button  {
+tr.product-detail form input[type="button"] {
+    font-size: 8pt;
+}
+form.remove-quote input[type="button"]    {
+    width: 57px;
+}
+#products .buttonlink  {
     float: right;
     margin-top: 20px;
     width: 100px;
@@ -525,4 +530,7 @@ a#continue  {
 #products #ajax-loading	{
     margin: 0px 0px 0px 3px;
     padding-top: 3px;
+}
+tr.product-detail form	{
+    display: none;
 }

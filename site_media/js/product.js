@@ -2,14 +2,12 @@ $(function()	{
 
     $("#tabs").tabs();
 
-    $(".biller").hide();
-
     $(".product-detail").hover(
 	function()  {
-	    $(this).find(".biller").show();
+	    $(this).find(".add-quote").show();
 	},
 	function()  {
-	    $(this).find(".biller").hide();
+	    $(this).find(".add-quote").hide();
 	}
     );
 
@@ -31,6 +29,8 @@ function ajaxPost(data, url, options)  {//{{{
 		if (response.data.type != "ok")	{
 		} else	{
 		    showMessage(response.data.type, response.data.body);
+		    $("#cell" + options["product_id"]).find(".add-quote").remove();
+		    $("#cell" + options["product_id"]).find(".remove-quote").show();
 		}
             }
         },
@@ -90,11 +90,11 @@ function setQuote() {
     } else  {
 	var userId = $("#user-id").val();    
 	var productId = $("#product-id").val();
-	var quantity = $("#bill" + productId + " " + "#quantity").val();
+	var quantity = $("#cell" + productId + " " + "form" + " " + "#quantity").val();
 
 	var data = "user=" + userId + "&product=" + productId + "&quantity=" + quantity;
 	var url = "/products/setquote/";
-	var options = {"quote_form": "#bill", "product_id": productId};
+	var options = {"product_id": productId};
 
 	ajaxPost(data, url, options);
     }

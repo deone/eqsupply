@@ -27,5 +27,5 @@ function showMessage(msgType, msg)	{
     }
     
     $("#msger").slideDown("fast");
-    setTimeout("$('#msger').slideUp('fast')", 5000);
+    setTimeout("$('#msger').slideUp('fast')", 7000);
 }

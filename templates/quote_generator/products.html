@@ -54,20 +54,25 @@
 			    <p class="padtop">{{ p.manufacturer }}</p>
 			{% endif %}
 			</td>
-			<td>
-			    <form id="bill{{ p.pk }}" class="biller">
+			<td id="cell{{ p.pk }}">
+			    <form class="add-quote">
 				<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
 				<input id="product-id" name="product-id" type="hidden" value="{{ p.pk }}"/>
 				<input id="quantity" name="quantity" type="text"/>
 				<input type="button" value="Add" onclick="setQuote()"/>
+			    </form>
+			    <form class="remove-quote">
+				<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
+				<input id="product-id" name="product-id" type="hidden" value="{{ p.pk }}"/>
+				<input type="button" value="Remove" onclick="unsetQuote()"/>
 			    </form>
 			</td>
 		    </tr>
 		{% endfor %}
 		</tbody>
 	    </table>
-	    <a class="button" href="">Get quote</a>
-	    <a id="continue" class="button" href="/products/">Continue</a>
+	    <a class="buttonlink" href="">Get quote</a>
+	    <a id="continue" class="buttonlink" href="/products/">Continue</a>
 	</div>
     {% else %}
         {% url acct_signup as signup_url %}
