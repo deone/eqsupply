@@ -24,6 +24,7 @@
 
 	<div id="products" class="clearfix padtop">
 	    <table width=100%>
+		<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
 		<tbody>
 		    <tr>
 			<th class="head_1"><h3>Product</h3></th>
@@ -56,15 +57,11 @@
 			</td>
 			<td id="cell{{ p.pk }}">
 			    <form class="add-quote">
-				<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
-				<input id="product-id" name="product-id" type="hidden" value="{{ p.pk }}"/>
-				<input id="quantity" name="quantity" type="text"/>
-				<input type="button" value="Add" onclick="setQuote()"/>
+				<input id="quantity{{ p.pk }}" name="quantity" type="text"/>
+				<input type="button" value="Add" id="{{ p.pk }}" onclick="setQuote(this.id)"/>
 			    </form>
 			    <form class="remove-quote">
-				<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
-				<input id="product-id" name="product-id" type="hidden" value="{{ p.pk }}"/>
-				<input type="button" value="Remove" onclick="unsetQuote()"/>
+				<input type="button" value="Remove" id="{{ p.pk }}" onclick="unsetQuote(this.id)"/>
 			    </form>
 			</td>
 		    </tr>

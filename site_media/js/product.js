@@ -2,14 +2,14 @@ $(function()	{
 
     $("#tabs").tabs();
 
-    /*$(".product-detail").hover(
+    $(".product-detail").hover(
 	function()  {
 	    $(this).find(".add-quote").show();
 	},
 	function()  {
 	    $(this).find(".add-quote").hide();
 	}
-    );*/
+    );
 
 });
 
@@ -29,13 +29,29 @@ function ajaxPost(data, url, options)  {//{{{
 		if (response.data.type != "ok")	{
 		} else	{
 		    if (url == "/products/setquote/")	{
-			showMessage(response.data.type, response.data.body);
+			showMessage(response.data.body);
 			$("#cell" + options["product"]).find(".add-quote").hide();
+			$("#cell" + options["product"]).parent().hover(
+			    function()	{
+				$(this).find(".add-quote").hide();
+			    },
+			    function()	{
+				$(this).find(".add-quote").hide();
+			    }
+			);
 			$("#cell" + options["product"]).find(".remove-quote").show();
 		    } else  {
-			showMessage(response.data.type, response.data.body);
+			showMessage(response.data.body);
 			$("#cell" + options["product"]).find(".remove-quote").hide();
 			$("#cell" + options["product"]).find(".add-quote").show();
+			$("#cell" + options["product"]).parent().hover(
+			    function()	{
+				$(this).find(".add-quote").show();
+			    },
+			    function()	{
+				$(this).find(".add-quote").hide();
+			    }
+			);
 		    }
 		}
             }
@@ -90,22 +106,22 @@ function showCategories(data)	{//{{{
     $("#category_list").html(lst);
 }//}}}
 
-function getQuoteData(form)	{
+function getQuoteData(form, productId)	{
 
-    var productId = $("#product-id").val();
     var userId = $("#user-id").val();
 
     if (form == ".add-quote")	{
-	if ($("#quantity").val() != "")	{
+	if ($("#quantity" + productId).val() != "")	{
 
 	    return  {
 		"user": userId, 
 		"product": productId, 
-		"quantity": $("#cell" + productId + " " + "form" + " " + "#quantity").val()
+		"quantity": $("#quantity" + productId).val()
 	    };
 
 	} else	{
-	    showMessage("error", "Please tell us the quantity you need");
+	    showMessage("Please tell us the quantity you need");
+	    return null;
 	}
 
     } else  {
@@ -117,17 +133,19 @@ function getQuoteData(form)	{
 }
 
 // These two functions are the same!!
-function setQuote() {
-    var params = getQuoteData(".add-quote");
+function setQuote(productId) {
+    var params = getQuoteData(".add-quote", productId);
 
-    var data = "user=" + params["user"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
-    var url = "/products/setquote/";
+    if (params)	{
+	var data = "user=" + params["user"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
+	var url = "/products/setquote/";
 
-    ajaxPost(data, url, params);
+	ajaxPost(data, url, params);
+    }
 }
 
-function unsetQuote()	{
-    var params = getQuoteData(".remove-quote");
+function unsetQuote(productId)	{
+    var params = getQuoteData(".remove-quote", productId);
 
     var data = "user=" + params["user"] + "&product=" + params["product"];
     var url = "/products/unsetquote/";

@@ -528,6 +528,6 @@ a#continue  {
     margin: 0px 0px 0px 3px;
     padding-top: 3px;
 }
-tr.product-detail .remove-quote	{
+tr.product-detail form	{
     display: none;
 }
