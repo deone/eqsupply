@@ -19,13 +19,8 @@ function displayErrors(errors)   {
     }
 }
 
-function showMessage(msgType, msg)	{
-    if (msgType != "error") {
-	$("#msger").html("<p>" + msg + "</p>");
-    } else  {
-	$("#msger").html("<p class='err'>" + msg + "</p>");
-    }
-    
+function showMessage(msg)	{
+    $("#msger").html("<p>" + msg + "</p>");
     $("#msger").slideDown("fast");
     setTimeout("$('#msger').slideUp('fast')", 7000);
 }

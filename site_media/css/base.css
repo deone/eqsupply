@@ -501,7 +501,7 @@ form.remove-quote input[type="button"]    {
     background: url('/site_media/img/button.png') no-repeat;
     padding-left: 25px;
 }
-a.button  {
+a.buttonlink  {
     color: #fff;
     font-weight: bold;
     line-height: 2em;
@@ -513,7 +513,7 @@ a#continue  {
     position: absolute;
     top: 0px;
     left: 0px;
-    background: #ffa;
+    background: #f5fffa;
     width: 100%;
     text-align: left;
     border-bottom: solid 2px #ddd;
@@ -523,9 +523,6 @@ a#continue  {
     font-size: 110%;
     font-weight: bold;
     line-height: 2em;
-}
-.err	{
-    color: #f00;
 }
 #products #ajax-loading	{
     margin: 0px 0px 0px 3px;
