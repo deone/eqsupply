@@ -1,6 +1,5 @@
 $(function()    {
     $("#ajax-loading").hide();
-    $("#msger").hide();
 
     $("#ajax-loading").ajaxStart(function()	{
 	$(this).show();
