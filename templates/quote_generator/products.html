@@ -58,10 +58,10 @@
 			<td id="cell{{ p.pk }}">
 			    <form class="add-quote">
 				<input id="quantity{{ p.pk }}" name="quantity" type="text"/>
-				<input type="button" value="Add" id="{{ p.pk }}" onclick="setQuote(this.id)"/>
+				<input type="button" value="Add" id="{{ p.pk }}" onclick="quote(this.value, this.id)"/>
 			    </form>
 			    <form class="remove-quote">
-				<input type="button" value="Remove" id="{{ p.pk }}" onclick="unsetQuote(this.id)"/>
+				<input type="button" value="Remove" id="{{ p.pk }}" onclick="quote(this.value, this.id)"/>
 			    </form>
 			</td>
 		    </tr>

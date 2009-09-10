@@ -13,7 +13,10 @@ $(function()	{
 
 });
 
-// We can construct a url->action(s) mapping because ajaxPost() would be handling all post requests in this module.
+/* We can construct a url->action(s) mapping 
+ * because ajaxPost() would be handling 
+ * all post requests in this module.*/
+
 function ajaxPost(data, url, options)  {//{{{
 
     $.ajax({
@@ -106,11 +109,11 @@ function showCategories(data)	{//{{{
     $("#category_list").html(lst);
 }//}}}
 
-function getQuoteData(form, productId)	{
+function getQuoteData(action, productId)	{
 
     var userId = $("#user-id").val();
 
-    if (form == ".add-quote")	{
+    if (action == "Add")    {
 	if ($("#quantity" + productId).val() != "")	{
 
 	    return  {
@@ -124,7 +127,9 @@ function getQuoteData(form, productId)	{
 	    return null;
 	}
 
-    } else  {
+    }
+
+    if (action == "Remove") {
 	return	{
 	    "user": userId, 
 	    "product": productId
@@ -132,23 +137,18 @@ function getQuoteData(form, productId)	{
     }
 }
 
-// These two functions are the same!!
-function setQuote(productId) {
-    var params = getQuoteData(".add-quote", productId);
+function quote(action, productId) {
+    var params = getQuoteData(action, productId);
 
     if (params)	{
-	var data = "user=" + params["user"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
-	var url = "/products/setquote/";
+	if (params["quantity"])	{
+	    var data = "user=" + params["user"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
+	    var url = "/products/setquote/";
+	} else	{
+	    var data = "user=" + params["user"] + "&product=" + params["product"];
+	    var url = "/products/unsetquote/";
+	}
 
 	ajaxPost(data, url, params);
     }
-}
-
-function unsetQuote(productId)	{
-    var params = getQuoteData(".remove-quote", productId);
-
-    var data = "user=" + params["user"] + "&product=" + params["product"];
-    var url = "/products/unsetquote/";
-
-    ajaxPost(data, url, params);
 }
