@@ -405,6 +405,7 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 #ajax-loading   {
     float: left;
     margin: 10px 0 0 10px;
+    display: none;
 }
 .container-in-tab dl, ul    {
     margin: 0px;
@@ -509,7 +510,7 @@ a.buttonlink  {
 a#continue  {
     margin-right: 10px;
 }
-#msger	{
+.msger	{
     position: fixed;
     top: 0px;
     background: #f5fffa;
@@ -518,7 +519,7 @@ a#continue  {
     border-bottom: solid 2px #ddd;
     display: none;
 }
-#msger p    {
+.msger p    {
     margin: 0px 0px 0px 230px;
     font-size: 110%;
     font-weight: bold;

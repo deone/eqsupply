@@ -1,5 +1,4 @@
 $(function()    {
-    $("#ajax-loading").hide();
 
     $("#ajax-loading").ajaxStart(function()	{
 	$(this).show();
@@ -19,7 +18,7 @@ function displayErrors(errors)   {
 }
 
 function showMessage(msg)	{
-    $("#msger").html("<p>" + msg + "</p>");
-    $("#msger").slideDown("fast");
-    setTimeout("$('#msger').slideUp('fast')", 7000);
+    $("#message").html("<p>" + msg + "</p>");
+    $("#message").slideDown("fast");
+    setTimeout("$('#message').slideUp('fast')", 7000);
 }
