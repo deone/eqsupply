@@ -4,6 +4,13 @@
 
 {% block custom_js %}
     <script type="text/javascript" src="/site_media/js/auth.js"></script>
+    <script type="text/javascript">
+	$(function()	{
+	    $("#msger").ajaxStart(function()	{
+		$(this).slideDown("fast");
+	    });
+	});
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -28,8 +35,6 @@
 		    <!--<a href="{{ pwd_reset_url }}">Forgot password?</a>-->
 		</form>
 	    </fieldset>
-	    <div id="ajax-loading"><img src="/site_media/img/loading.gif"/></div>
-	    <div class="clear-float"></div>
 	</div>
     </div>
 {% endblock %}

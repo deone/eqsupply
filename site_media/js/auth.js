@@ -21,7 +21,12 @@ function ajaxPost(url, data, dLocation)  {//{{{
                 alert(response.data.body);
             } else  {
                 if (response.data.type == "error")  {
-                    displayErrors(response.data.body);
+		    if (!response.data.body.keys)   {
+			showMessage(response.data.body["__all__"]);
+		    } else  {
+			highlightErrorFields(response.data.body);
+			showMessage("Please fill out required fields");
+		    }
                 } else  {
                     document.location = dLocation;
                 }

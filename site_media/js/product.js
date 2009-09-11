@@ -2,6 +2,10 @@ $(function()	{
 
     $("#tabs").tabs();
 
+    $("#msger").ajaxStart(function()	{
+	$(this).slideDown("fast");
+    })
+
     $(".product-detail").hover(
 	function()  {
 	    $(this).find(".add-quote").show();
