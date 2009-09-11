@@ -1,9 +1,9 @@
 $(function()    {
 
-    $("#ajax-loading").ajaxStart(function()	{
-	$(this).show();
+    $("#msger").ajaxStart(function()	{
+	$(this).slideDown("fast");
     }).ajaxStop(function()   {
-	$(this).hide();
+
     });
 });
 
@@ -18,7 +18,6 @@ function displayErrors(errors)   {
 }
 
 function showMessage(msg)	{
-    $("#message").html("<p>" + msg + "</p>");
-    $("#message").slideDown("fast");
-    setTimeout("$('#message').slideUp('fast')", 7000);
+    $("#msger").html("<p>" + msg + "</p>");
+    setTimeout("$('#msger').slideUp('fast')", 7000);
 }

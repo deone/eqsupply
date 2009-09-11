@@ -403,9 +403,7 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
     clear: both;
 }
 #ajax-loading   {
-    float: left;
-    margin: 10px 0 0 10px;
-    display: none;
+    margin: 5px 0 5px 230px;
 }
 .container-in-tab dl, ul    {
     margin: 0px;
@@ -510,7 +508,7 @@ a.buttonlink  {
 a#continue  {
     margin-right: 10px;
 }
-.msger	{
+#msger	{
     position: fixed;
     top: 0px;
     background: #f5fffa;
@@ -519,15 +517,11 @@ a#continue  {
     border-bottom: solid 2px #ddd;
     display: none;
 }
-.msger p    {
+#msger p    {
     margin: 0px 0px 0px 230px;
     font-size: 110%;
     font-weight: bold;
     line-height: 2em;
-}
-#products #ajax-loading	{
-    margin: 0px 0px 0px 3px;
-    padding-top: 3px;
 }
 tr.product-detail form	{
     display: none;
