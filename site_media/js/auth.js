@@ -46,7 +46,7 @@ function login()    {//{{{
 
     var data = "username=" + username + "&password=" + password;
     var url = "/account/";
-    var dLocation = "/products/";
+    var dLocation = "/quote/";
 
     ajaxPost(url, data, dLocation);
 

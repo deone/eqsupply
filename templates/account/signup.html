@@ -4,6 +4,15 @@
 
 {% block custom_js %}
     <script type="text/javascript" src="/site_media/js/auth.js"></script>
+    <script type="text/javascript">
+	$(function()	{
+	    $("#msger").ajaxStart(function()	{
+		$(this).slideDown("fast");
+	    }).ajaxStop(function()  {
+		$(this).slideUp("fast");
+	    });
+	});
+    </script>
 {% endblock %}
 
 {% block body %}

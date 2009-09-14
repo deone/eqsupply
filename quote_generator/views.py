@@ -9,12 +9,14 @@ from django.contrib.auth.models import User
 from eqsupply import helpers as h
 from quote_generator.models import *
 
-def index(request, template="quote_generator/index.html"):
+def quote_home(request, template="quote_generator/quote.html"):
     # user_id = request.POST.get("user").strip()
     # return user quotes to template (if any)
     return render_to_response(template, {
 	# quote_object_dict
     }, context_instance=RequestContext(request))
+
+# There should be a products home view which would give feedback of the items a user has added in an ongoing process and give options e.g delete item. It should 
 
 def view_products_by(request, view):
     list_model_map = {"manufacturer": Manufacturer, "category": Category}
