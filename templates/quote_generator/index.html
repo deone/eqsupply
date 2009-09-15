@@ -2,28 +2,11 @@
 
 {% block title %}Generate Quote{% endblock %}
 
-{% block custom_css %}
-    <link rel="stylesheet" href="/site_media/js/jquery/css/ui-lightness/jquery-ui.custom.css"/>
-{% endblock %}
-
-{% block custom_js %}
-    <script type="text/javascript" src="/site_media/js/product.js"></script>
-    <script type="text/javascript">
-	$(function()	{
-	    $("#msger").ajaxStart(function()	{
-		$(this).slideDown("fast");
-	    }).ajaxStop(function()  {
-		$(this).slideUp("fast");
-	    });
-	});
-    </script>
-{% endblock %}
-
 {% block body %}
 {% if user.is_authenticated %}
-    <h1>Welcome {{ user }}!</h1>
-
     <div class="clearfix padtop">
+	<h1>Welcome {{ user }}!</h1>
+
 	<p>To <a href="{% url create_edit_quote %}"><b>generate a quote</b></a>:</p>
 	<ol>
 	    <li>Create a quote,</li>

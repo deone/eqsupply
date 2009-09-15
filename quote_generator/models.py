@@ -46,12 +46,11 @@ class Product(CommonInfo):
 	verbose_name_plural = "products"
 
 class Quote(models.Model):
-    # Add status flag to know whether the quote has been completed and sent or not
-    # If it has been completed, it would not be displayed on the home page,
-    # Else, it would be displayed so that the user can add more items to it.
     user = models.ForeignKey(User)
-    description = models.TextField()
+    title = models.CharField(max_length=200, blank=True, null=True)
     quote_cost = models.IntegerField()
+    time_created = models.DateTimeField()
+    status = models.BooleanField(default=False)	# Remember to set this flag to True when the quote is sent to email
 
     def __unicode__(self):
 	return u"%s, %s" % (self.description, self.quote_cost)
