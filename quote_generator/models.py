@@ -53,8 +53,17 @@ class Quote(models.Model):
     status = models.BooleanField(default=False)	# Remember to set this flag to True when the quote is sent to email
 
     def __unicode__(self):
-	return u"%s, %s" % (self.description, self.quote_cost)
-    
+	return u"%s, %s" % (self.title, self.quote_cost)
+
+    def todict(self):
+	return {
+	    "id": int(self.id),
+	    "user_id": int(self.user.id),
+	    "title": self.title,
+	    "quote_cost": self.quote_cost,
+	    "time_created": str(self.time_created),
+	    "status": self.status
+	}
 
 class QuoteItem(models.Model):
     quote = models.ForeignKey(Quote)

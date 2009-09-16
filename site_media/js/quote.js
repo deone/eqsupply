@@ -21,7 +21,10 @@ function ajaxPost(data, url) {
 	dataType: "json",
 
 	success: function(response) {
-	    alert(response);
+	    if (response.data.type != "ok") {
+	    } else  {
+		alert(response.data.body["id"]);
+	    }
 	},
 
 	error: function(response)   {

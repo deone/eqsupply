@@ -27,9 +27,9 @@ def create_quote(request):
     user = User.objects.get(pk=user_id)
     time_created = datetime.datetime.now()
 
-    Quote.objects.create(user=user, title=title, quote_cost=0, time_created=time_created, status=False)
+    quote = Quote.objects.create(user=user, title=title, quote_cost=0, time_created=time_created, status=False)
 
-    return ("ok", "Quote Created")
+    return ("ok", quote.todict())
 
 def view_products_by(request, view):
     list_model_map = {"manufacturer": Manufacturer, "category": Category}
