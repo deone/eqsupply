@@ -379,16 +379,7 @@ fieldset {
 }
 legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 
-.left-form {
-    float: left;
-}
-.right-form {
-    width: 360px;
-    float: right;
-}
-.right-form p {
-    line-height: 21px;
-}
+
 .padtop {
     margin-top: 20px;
 }
@@ -513,7 +504,19 @@ a#continue  {
 tr.product-detail form	{
     display: none;
 }
+.left-div {
+    float: left;
+}
 .right-div  {
     float: right;
-    width: 450px;
+}
+.right-div p	{
+    line-height: 21px;
+}
+#sign-up .right-div {
+    width: 350px;
+    margin-left: 105px;
+}
+#quote .right-div  {
+    width: 300px;
 }

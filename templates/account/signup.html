@@ -22,25 +22,20 @@
 	{% endif %}
     </p>
     <div class="clearfix padtop">
-	<div class="basic-form">
+	<form id="sign-up" class="basic-form">
 	    <fieldset>
 		<legend>Sign Up</legend>
-		<p>Already have an account? <a href="{% url acct_login %}">Log In</a></p>
-
-		<form class="signupform" id="signup_form">
-		    <table width="300px">
-			<tr>
-			    <td id="err" colspan="2"></td>
-			</tr>
-			{{ form.as_table }}
-			<tr>
-			    <td></td>
-			    <td><input id="signup-btn" type="button" value="Sign Up" class="button" onClick="signup()" /></td>
-			</tr>
-		    </table>
-		</form>
-			
-		<div class="right-form">
+		<table width="300px" class="left-div">
+		    <tr>
+			<td colspan="2"><p>Already have an account? <a href="{% url acct_login %}">Log In</a></p></td>
+		    </tr>
+		    {{ form.as_table }}
+		    <tr>
+			<td></td>
+			<td><input id="signup-btn" type="button" value="Sign Up" class="button" onClick="signup()" /></td>
+		    </tr>
+		</table>
+		<div class="right-div">
 		    <p>
 			By clicking "Sign Up", you are indicating that you have read and agreed to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a>
 		    </p>
@@ -48,7 +43,8 @@
 			If you have any trouble creating your account, contact us at <a href="mailto:">support@aerixnigeria.com</a>
 		    </p>
 		</div>
+		<div class="clear-float"></div>
 	    </fieldset>
-	</div>
+	</form>
     </div>
 {% endblock %}
