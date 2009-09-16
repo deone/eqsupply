@@ -1,8 +1,15 @@
+$(function()	{
+
+});
+
 function createQuote()	{
     var data = "user=" + $("#user-id").val() + "&title=" + $("#title").val();
     var url = "/quote/create/";
 
     ajaxPost(data, url);
+}
+
+function ajaxGet()  {
 }
 
 function ajaxPost(data, url) {
@@ -22,4 +29,7 @@ function ajaxPost(data, url) {
 	}
     });
 
+}
+
+function get_pending_quote(url)	{
 }

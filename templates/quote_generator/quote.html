@@ -7,34 +7,33 @@
 {% endblock %}
 
 {% block body %}
-    <div class="clearfix padtop">
+    <div id="quote" class="clearfix padtop">
     {% if user.is_authenticated %}
-	<div class="basic-form left-form">
+	<form class="basic-form left-form">
 	    <fieldset>
 		<legend>Create Quote</legend>
 		<p>Create a blank quote here.</p>
-		<form>
-		    <table>
-			<tr>
-			    <th><label for="title">Title:</label></th>
-			    <td>
-				<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
-				<input id="title" type="text" name="title"/>
-			    </td>
-			</tr>
-			<tr>
-			    <td></td>
-			    <td><input type="button" value="Create Quote" class="button" onclick="createQuote()"/></td>
-			</tr>
-		    </table>
-		</form>
+		<table>
+		    <tr>
+			<th><label for="title">Title:</label></th>
+			<td>
+			    <input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
+			    <input id="title" type="text" name="title"/>
+			</td>
+		    </tr>
+		    <tr>
+			<td></td>
+			<td><input type="button" value="Create Quote" class="button" onclick="createQuote()"/></td>
+		    </tr>
+		</table>
 	    </fieldset>
-	</div>
-	<div class="right-form">
-	    <fieldset>
-		<legend>Your Pending Quote</legend>
-	    </fieldset>
-	</div>
+	</form>
+
+	<fieldset class="right-div">
+	    <legend>Your Pending Quote</legend>
+	    <p>Loading...</p>
+	</fieldset>
+	<div class="clear-float"></div>
     {% else %}
 	{% url acct_signup as signup_url %}
 	{% url acct_login as login_url %}

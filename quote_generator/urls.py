@@ -6,7 +6,7 @@ import views
 
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "quote_generator/index.html"}, name="quote_generator_index"),
-    url(r'^create_or_edit/$', views.quote_home, name="create_edit_quote"),
+    url(r'^home/$', direct_to_template, {"template": "quote_generator/quote.html"}, name="quote_home"),
     (r'^create/$', views.create_quote),
 
     # These url mappings've been rendered useless!
