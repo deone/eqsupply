@@ -4,6 +4,12 @@
 
 {% block custom_js %}
     <script type="text/javascript" src="/site_media/js/quote.js"></script>
+    <script type="text/javascript">
+	$(function()	{
+	    var url = "/account/" + {{ user.id }} + "/pending_quotes/";
+	    ajaxGet(url);
+	});
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -29,6 +35,11 @@
 	    </fieldset>
 	</form>
 
+	<fieldset id="new-quote" class="left-div">
+	    <legend>Quote Created</legend>
+	    <p>Add Item to quote</p>
+	</fieldset>
+
 	<fieldset class="right-div">
 	    <legend>Your Pending Quotes</legend>
 	    <p>Loading...</p>
@@ -41,5 +52,3 @@
     {% endif %}
     </div>
 {% endblock %}
-
-<!-- Edit existing quote -->

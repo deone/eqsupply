@@ -3,8 +3,11 @@ from django.core.mail import send_mail
 from django.template import RequestContext
 from django.conf import settings
 
+from django.contrib.auth.models import User
+
 from account.forms import SignupForm, LoginForm
 from account.models import UserAccount
+from quote_generator.models import Quote
 
 from eqsupply import helpers as h
 
@@ -84,3 +87,14 @@ def activate(request):#{{{
 	return render_to_response("account/activate.html", {
 		"user": activated_user,
 	}, context_instance=RequestContext(request))#}}}
+
+@h.json_response
+def get_pending_quotes(request, user_id):
+    user = User.objects.get(pk=user_id)
+    pending_quotes = Quote.objects.filter(user=user, status=0)
+    
+    p_quote_list = []
+    for pq in pending_quotes:
+	p_quote_list.append(pq.todict())
+
+    return ("ok", p_quote_list)

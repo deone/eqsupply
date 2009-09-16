@@ -12,13 +12,6 @@ from quote_generator.models import *
 
 import datetime
 
-def quote_home(request, template="quote_generator/quote.html"):
-    # return pending user quotes to template (if any)
-    return render_to_response(template, {}, context_instance=RequestContext(request))
-
-def get_pending_quote():
-    pass
-
 @h.json_response
 def create_quote(request):
     user_id = request.POST.get("user").strip()

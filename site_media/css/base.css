@@ -510,13 +510,18 @@ tr.product-detail form	{
 .right-div  {
     float: right;
 }
-.right-div p	{
-    line-height: 21px;
-}
 #sign-up .right-div {
     width: 350px;
     margin-left: 105px;
 }
 #quote .right-div  {
-    width: 300px;
+    width: 340px;
+}
+#quote .basic-form  {
+}
+#quote .left-div    {
+    width: 340px;
+}
+#new-quote  {
+    display: none;
 }

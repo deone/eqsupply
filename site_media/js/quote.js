@@ -9,7 +9,22 @@ function createQuote()	{
     ajaxPost(data, url);
 }
 
-function ajaxGet()  {
+function ajaxGet(url)	{
+
+    $.ajax({
+	url: url,
+	type: "GET",
+	dataType: "json",
+
+	success: function(response) {
+	    alert(response);
+	},
+
+	error: function(response)   {
+	    alert(response);
+	}
+    });
+
 }
 
 function ajaxPost(data, url) {
@@ -32,7 +47,4 @@ function ajaxPost(data, url) {
 	}
     });
 
-}
-
-function get_pending_quote(url)	{
 }

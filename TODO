@@ -1,6 +1,5 @@
-Validate password1 and password2 on signup
 We should use the login_required decorator to limit access to logged-in users only. e.g. if a user wants to access a products page without logging in, the application should redirect him to the login page and when he logs in, direct him to the page he was requesting, not the homepage.
 Read more @ file:///home/zedd/Documents/Frameworks/Django/docs.djangoproject.com/en/1.0_/topics/auth/index.html#topics-auth
 
 Signup - Make email field unique
-Message should just be displayed, don't attached .err class to errors
+We can use todict() to send the products in products.html
