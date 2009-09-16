@@ -10,12 +10,23 @@ from quote_generator.forms import QuoteForm
 from eqsupply import helpers as h
 from quote_generator.models import *
 
+import datetime
+
 def quote_home(request, template="quote_generator/quote.html"):
     # return pending user quotes to template (if any)
     return render_to_response(template, {}, context_instance=RequestContext(request))
 
+@h.json_response
 def create_quote(request):
-    pass
+    user_id = request.POST.get("user").strip()
+    title = request.POST.get("title").strip()
+
+    user = User.objects.get(pk=user_id)
+    time_created = datetime.datetime.now()
+
+    Quote.objects.create(user=user, title=title, quote_cost=0, time_created=time_created, status=False)
+
+    return ("ok", "Quote Created")
 
 def view_products_by(request, view):
     list_model_map = {"manufacturer": Manufacturer, "category": Category}

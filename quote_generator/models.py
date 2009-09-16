@@ -48,8 +48,8 @@ class Product(CommonInfo):
 class Quote(models.Model):
     user = models.ForeignKey(User)
     title = models.CharField(max_length=200, blank=True, null=True)
-    quote_cost = models.IntegerField()
-    time_created = models.DateTimeField()
+    quote_cost = models.IntegerField(default=0)	# Update this when the user previews the quote, just before sending it to email
+    time_created = models.DateTimeField()	# The time the blank quote was created
     status = models.BooleanField(default=False)	# Remember to set this flag to True when the quote is sent to email
 
     def __unicode__(self):
