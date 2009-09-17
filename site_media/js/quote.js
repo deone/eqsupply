@@ -38,7 +38,7 @@ function ajaxPost(data, url) {
 	success: function(response) {
 	    if (response.data.type != "ok") {
 	    } else  {
-		document.location = "/quote/" + response.data.body["id"] + "/view_categories/";
+		document.location = "/quote/" + response.data.body["id"] + "/add_item/";
 	    }
 	},
 

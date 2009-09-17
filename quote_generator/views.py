@@ -68,3 +68,10 @@ def quote(request, action):
     if action == "unset":
 	Quote.objects.filter(user=user, product=product).delete()
 	return ("ok", "Product Removed")
+
+def add_item(request, quote_id, template="quote_generator/product_home.html"):
+    quote = Quote.objects.get(pk=quote_id)
+    
+    return render_to_response(template, {
+	"quote": quote
+    }, context_instance=RequestContext(request))
