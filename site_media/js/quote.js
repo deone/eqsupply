@@ -17,7 +17,7 @@ function ajaxGet(url)	{
 	dataType: "json",
 
 	success: function(response) {
-	    alert(response);
+	    showQuotes(response.data.body);
 	},
 
 	error: function(response)   {
@@ -38,7 +38,7 @@ function ajaxPost(data, url) {
 	success: function(response) {
 	    if (response.data.type != "ok") {
 	    } else  {
-		alert(response.data.body["id"]);
+		document.location = "/quote/" + response.data.body["id"] + "/view_categories/";
 	    }
 	},
 
@@ -46,5 +46,18 @@ function ajaxPost(data, url) {
 	    alert(response);
 	}
     });
+
+}
+
+function showQuotes(data)   {
+    var quoteList = "<ul>";
+
+    for (var i=0; i<data.length; i++)	{
+	quoteList += "<li><a href='#'>" + data[i].id + " " + data[i].title + " " + data[i].time_created + "</a></li>";
+    }
+
+    quoteList += "</ul>";
+
+    $("#p-quotes").append(quoteList);
 
 }

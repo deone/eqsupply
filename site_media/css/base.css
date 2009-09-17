@@ -515,13 +515,5 @@ tr.product-detail form	{
     margin-left: 105px;
 }
 #quote .right-div  {
-    width: 340px;
-}
-#quote .basic-form  {
-}
-#quote .left-div    {
-    width: 340px;
-}
-#new-quote  {
-    display: none;
+    width: 450px;
 }

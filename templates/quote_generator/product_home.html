@@ -20,9 +20,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Products</h1>
-
     {% if user.is_authenticated %}
+    <h1>Add Items to Your Quote</h1>
+
+    <p>You may view products either by manufacturer or category.</p>
+
     <div id="tabs" class="clearfix padtop">
 	<ul>
 	    <li><a href="{% url manufacturers %}">Manufacturers</a></li>

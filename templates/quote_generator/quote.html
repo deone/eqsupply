@@ -4,18 +4,18 @@
 
 {% block custom_js %}
     <script type="text/javascript" src="/site_media/js/quote.js"></script>
-    <script type="text/javascript">
-	$(function()	{
-	    var url = "/account/" + {{ user.id }} + "/pending_quotes/";
-	    ajaxGet(url);
-	});
-    </script>
 {% endblock %}
 
 {% block body %}
     <div id="quote" class="clearfix padtop">
     {% if user.is_authenticated %}
-	<form class="basic-form left-div">
+	<script type="text/javascript">
+	$(function()	{
+	    var url = "/account/" + {{ user.id }} + "/pending_quotes/";
+	    ajaxGet(url);
+	});
+	</script>
+	<form id="create-quote" class="basic-form left-div">
 	    <fieldset>
 		<legend>Create Quote</legend>
 		<p>Create a blank quote here.</p>
@@ -35,14 +35,8 @@
 	    </fieldset>
 	</form>
 
-	<fieldset id="new-quote" class="left-div">
-	    <legend>Quote Created</legend>
-	    <p>Add Item to quote</p>
-	</fieldset>
-
-	<fieldset class="right-div">
+	<fieldset id="p-quotes" class="right-div">
 	    <legend>Your Pending Quotes</legend>
-	    <p>Loading...</p>
 	</fieldset>
 	<div class="clear-float"></div>
     {% else %}
