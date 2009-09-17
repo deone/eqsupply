@@ -17,7 +17,11 @@ function ajaxGet(url)	{
 	dataType: "json",
 
 	success: function(response) {
-	    showQuotes(response.data.body);
+	    if (response.data.body != "") {
+		showQuotes(response.data.body);
+	    } else  {
+		$("#p-quotes").append("<p>You have no pending quotes.</p>");
+	    }
 	},
 
 	error: function(response)   {
