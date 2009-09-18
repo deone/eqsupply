@@ -69,18 +69,19 @@ function ajaxPost(data, url, options)  {//{{{
 
 function getQuoteData(action, productId)    {
 
-    var userId = $("#user-id").val();
+    var quoteId = $("#quote-id").val();
 
     if (action == "Add")    {
 	if ($("#quantity" + productId).val() != "")	{
 
 	    return  {
-		"user": userId, 
+		"quote": quoteId, 
 		"product": productId, 
 		"quantity": $("#quantity" + productId).val()
 	    };
 
 	} else	{
+	    $("#msger").slideDown("fast");
 	    showMessage("Please tell us the quantity you need");
 	    return null;
 	}
@@ -89,7 +90,7 @@ function getQuoteData(action, productId)    {
 
     if (action == "Remove") {
 	return	{
-	    "user": userId, 
+	    "quote": quoteId, 
 	    "product": productId
 	}
     }
@@ -100,10 +101,10 @@ function quote(action, productId) {
 
     if (params)	{
 	if (params["quantity"])	{
-	    var data = "user=" + params["user"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
+	    var data = "quote=" + params["quote"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
 	    var url = "/quote/set_quote_item/";
 	} else	{
-	    var data = "user=" + params["user"] + "&product=" + params["product"];
+	    var data = "quote=" + params["quote"] + "&product=" + params["product"];
 	    var url = "/quote/unset_quote_item/";
 	}
 

@@ -1,8 +1,3 @@
-$(function()    {
-
-    
-});
-
 function highlightErrorFields(errors)   {
     if (errors.keys)    {
         for (var i=0; i<errors.keys.length; i++) {

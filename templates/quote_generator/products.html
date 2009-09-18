@@ -13,9 +13,11 @@
     <script type="text/javascript" src="/site_media/js/product.js"></script>
     <script type="text/javascript">
 	$(function()	{
+
 	    $("#msger").ajaxStart(function()	{
 		$(this).slideDown("fast");
 	    });
+
 	});
     </script>
 {% endblock %}
@@ -31,7 +33,7 @@
 
 	<div id="products" class="clearfix padtop">
 	    <table width=100%>
-		<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
+		<input id="quote-id" name="quote-id" type="hidden" value="{{ result.quote }}"/>
 		<tbody>
 		    <tr>
 			<th class="head_1"><h3>Product</h3></th>

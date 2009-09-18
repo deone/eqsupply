@@ -39,15 +39,16 @@ def product_list(request, quote_id, template="quote_generator/products.html"):
     if manufacturer_id == None:
 	category_id = request.GET.get("category_id")
 	products = Product.objects.filter(categories=category_id)
-	result_set = make_result_set(category_id, "category", products, Category)
+	result_set = make_result_set(quote_id, category_id, "category", products, Category)
     else:
 	products = Product.objects.filter(manufacturer=manufacturer_id)
-	result_set = make_result_set(manufacturer_id, "manufacturer", products, Manufacturer)
+	result_set = make_result_set(quote_id, manufacturer_id, "manufacturer", products, Manufacturer)
 
     return render_to_response(template, {"result": result_set}, context_instance=RequestContext(request))
 
-def make_result_set(type_id, type, product_list, model):
+def make_result_set(quote_id, type_id, type, product_list, model):
     return  {
+		"quote": quote_id,
 		type: model.objects.get(pk=type_id), 
 		"products": product_list,
 		"product_index": settings.ELCOMETER_PRODUCTS_INDEX,
@@ -56,20 +57,20 @@ def make_result_set(type_id, type, product_list, model):
 
 @h.json_response
 def quote_item(request, action):
-    user_id = request.POST.get("user").strip()
+    quote_id = request.POST.get("quote").strip()
     product_id = request.POST.get("product").strip()
     
-    user = User.objects.get(pk=user_id)
+    quote = Quote.objects.get(pk=quote_id)
     product = Product.objects.get(pk=product_id)
 
     if action == "set":
 	quantity = request.POST.get("quantity").strip()
-	Quote.objects.create(user=user, product=product, quantity=quantity)
+	QuoteItem.objects.create(quote=quote, product=product, quantity=quantity, quote_item_cost=0)
 
 	return ("ok", "Product Added")
 
     if action == "unset":
-	Quote.objects.filter(user=user, product=product).delete()
+	QuoteItem.objects.filter(quote=quote, product=product).delete()
 	return ("ok", "Product Removed")
 
 def product_groups(request, template="quote_generator/product_home.html"):
