@@ -31,7 +31,7 @@ function ajaxPost(data, url, options)  {//{{{
             } else  {
 		if (response.data.type != "ok")	{
 		} else	{
-		    if (url == "/products/setquote/")	{
+		    if (url == "/quote/set_quote_item/")	{
 			showMessage(response.data.body);
 			$("#cell" + options["product"]).find(".add-quote").hide();
 			$("#cell" + options["product"]).parent().hover(
