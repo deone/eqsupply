@@ -42,7 +42,7 @@ function ajaxPost(data, url) {
 	success: function(response) {
 	    if (response.data.type != "ok") {
 	    } else  {
-		document.location = "/quote/" + response.data.body["id"] + "/add_item/";
+		document.location = "/product_groups/?quote_id=" + response.data.body["id"];
 	    }
 	},
 

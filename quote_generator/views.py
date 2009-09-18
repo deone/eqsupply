@@ -52,7 +52,7 @@ def make_result_set(type_id, type, product_list, model):
 	    }
 
 @h.json_response
-def quote(request, action):
+def quote_item(request, action):
     user_id = request.POST.get("user").strip()
     product_id = request.POST.get("product").strip()
     
@@ -69,7 +69,8 @@ def quote(request, action):
 	Quote.objects.filter(user=user, product=product).delete()
 	return ("ok", "Product Removed")
 
-def add_item(request, quote_id, template="quote_generator/product_home.html"):
+def product_groups(request, template="quote_generator/product_home.html"):
+    quote_id = request.GET.get("quote_id").strip()
     quote = Quote.objects.get(pk=quote_id)
     
     return render_to_response(template, {

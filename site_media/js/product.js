@@ -94,7 +94,7 @@ function showManufacturers(data)	{//{{{
     var lst = "";
 
     for (var i = 0; i < data.length; i++)   {
-	lst += "<dt><a href='/products/manufacturer/" + data[i].pk + "/'>" + data[i].fields.name + "</a></dt>" + 
+	lst += "<dt><a href='/quote/manufacturer/" + data[i].pk + "/'>" + data[i].fields.name + "</a></dt>" + 
 		"<dd>" + data[i].fields.city + ", " + data[i].fields.country + "</dd>";
     }
     $("#manuf_list").html(lst);
@@ -104,7 +104,7 @@ function showCategories(data)	{//{{{
     var lst = "";
 
     for (var i = 0; i < data.length; i++)   {
-	lst += "<li><a href='/products/category/" + data[i].pk + "/'>" + data[i].fields.name + "</a></li>";
+	lst += "<li><a href='/quote/category/" + data[i].pk + "/'>" + data[i].fields.name + "</a></li>";
     }
     $("#category_list").html(lst);
 }//}}}
@@ -143,10 +143,10 @@ function quote(action, productId) {
     if (params)	{
 	if (params["quantity"])	{
 	    var data = "user=" + params["user"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
-	    var url = "/products/setquote/";
+	    var url = "/quote/set_quote_item/";
 	} else	{
 	    var data = "user=" + params["user"] + "&product=" + params["product"];
-	    var url = "/products/unsetquote/";
+	    var url = "/quote/unset_quote_item/";
 	}
 
 	ajaxPost(data, url, params);
