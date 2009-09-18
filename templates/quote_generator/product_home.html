@@ -37,7 +37,7 @@
 	    var lst = "";
 
 	    for (var i = 0; i < data.length; i++)   {
-		lst += "<li><a href='/quote/category/" + data[i].pk + "/'>" + data[i].fields.name + "</a></li>";
+		lst += "<li><a href='/quote/{{ quote.id }}/add_product/?category_id=" + data[i].pk + "'>" + data[i].fields.name + "</a></li>";
 	    }
 	    $("#category_list").html(lst);
 
@@ -47,7 +47,7 @@
 	    var lst = "";
 
 	    for (var i = 0; i < data.length; i++)   {
-		lst += "<dt><a href='/quote/manufacturer/" + data[i].pk + "/?quote_id={{ quote.id }}'>" + 
+		lst += "<dt><a href='/quote/{{ quote.id }}/add_product/?manufacturer_id=" + data[i].pk + "'>" + 
 			    data[i].fields.name + "</a>" + 
 			"</dt>" + 
 			"<dd>" + data[i].fields.city + ", " + data[i].fields.country + "</dd>";
