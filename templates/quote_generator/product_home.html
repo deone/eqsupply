@@ -9,12 +9,68 @@
 {% block custom_js %}
     <script type="text/javascript" src="/site_media/js/product.js"></script>
     <script type="text/javascript">
+	function ajaxGet(url)   {
+
+	    $.ajax({
+		url: url,
+		type: "GET",
+		dataType: "json",
+
+		success: function(response) {
+		    if (response[0]["model"] == "quote_generator.manufacturer") {
+			showManufacturers(response);
+		    }
+		    if (response[0]["model"] == "quote_generator.category") {
+			showCategories(response);
+		    }
+		},
+
+		error: function(response)   {
+		    alert(response);
+		}
+	    });
+
+	}
+
+	function showCategories(data)   {
+
+	    var lst = "";
+
+	    for (var i = 0; i < data.length; i++)   {
+		lst += "<li><a href='/quote/category/" + data[i].pk + "/'>" + data[i].fields.name + "</a></li>";
+	    }
+	    $("#category_list").html(lst);
+
+	}
+
+	function showManufacturers(data)	{
+	    var lst = "";
+
+	    for (var i = 0; i < data.length; i++)   {
+		lst += "<dt><a href='/quote/manufacturer/" + data[i].pk + "/?quote_id={{ quote.id }}'>" + 
+			    data[i].fields.name + "</a>" + 
+			"</dt>" + 
+			"<dd>" + data[i].fields.city + ", " + data[i].fields.country + "</dd>";
+	    }
+	    $("#manuf_list").html(lst);
+	}
+
 	$(function()	{
+
+	    
+
 	    $("#msger").ajaxStart(function()	{
 		$(this).slideDown("fast");
 	    }).ajaxStop(function()  {
 		$(this).slideUp("fast");
 	    });
+
+	    var url = "/manufacturer_list/";
+	    ajaxGet(url);
+
+	    var url = "/category_list/";
+	    ajaxGet(url);
+
 	});
     </script>
 {% endblock %}
@@ -27,9 +83,15 @@
 
 	<div id="tabs" class="clearfix padtop">
 	    <ul>
-		<li><a href="{% url manufacturers %}">Manufacturers</a></li>
-		<li><a href="{% url categories %}">Categories</a></li>
+		<li><a href="#manufacturers">Manufacturers</a></li>
+		<li><a href="#categories">Categories</a></li>
 	    </ul>
+	    <div id="manufacturers" class="container-in-tab">
+		<dl id="manuf_list"></dl>
+	    </div>
+	    <div id="categories" class="container-in-tab">
+		<dl id="category_list"></dl>
+	    </div>
 	</div>
     {% else %}
 	{% url acct_signup as signup_url %}
