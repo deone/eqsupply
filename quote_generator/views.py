@@ -11,6 +11,7 @@ from eqsupply import helpers as h
 from quote_generator.models import *
 
 import datetime
+from traceback import print_exc
 
 @h.json_response
 def create_quote(request):
@@ -32,14 +33,16 @@ def view_products_by(request, view):
 
     return HttpResponse(json, mimetype="application/json")
 
-def products(request, template="quote_generator/products.html", manufacturer_id=None, category_id=None):
-    if manufacturer_id:
-	products = Product.objects.filter(manufacturer=manufacturer_id)
-	result_set = make_result_set(manufacturer_id, "manufacturer", products, Manufacturer)
+def product_list(request, quote_id, template="quote_generator/products.html"):
+    manufacturer_id = request.GET.get("manufacturer_id")
 
-    if category_id:
+    if manufacturer_id == None:
+	category_id = request.GET.get("category_id")
 	products = Product.objects.filter(categories=category_id)
 	result_set = make_result_set(category_id, "category", products, Category)
+    else:
+	products = Product.objects.filter(manufacturer=manufacturer_id)
+	result_set = make_result_set(manufacturer_id, "manufacturer", products, Manufacturer)
 
     return render_to_response(template, {"result": result_set}, context_instance=RequestContext(request))
 
