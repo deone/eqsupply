@@ -32,12 +32,12 @@
 	{% endif %}
 
 	<div id="products" class="clearfix padtop">
-	    <table width=100%>
+	    <table width="100%" class="product-list">
 		<input id="quote-id" name="quote-id" type="hidden" value="{{ result.quote }}"/>
-		<tbody>
+		<thead>
 		    <tr>
-			<th class="head_1"><h3>Product</h3></th>
-			<th class="head_2"><h3>
+			<th id="header-1"><h3>Product</h3></th>
+			<th id="header-2"><h3>
 			{% if result.manufacturer %}
 			    Categories
 			{% endif %}
@@ -45,12 +45,14 @@
 			    Manufacturer
 			{% endif %}
 			</h3></th>
-			<th class="head_3">&nbsp;</th>
+			<th id="header-3">&nbsp;</th>
 		    </tr>
+		</thead>
+		<tbody>
 		{% for p in result.products %}
 		    <tr class="product-detail">
 			<td>
-			    <p><h4><a target="blank" href="{{ result.product_index }}{{ p.product_page }}">{{ p.name }}</a></h4></p>
+			    <h4><a target="blank" href="{{ result.product_index }}{{ p.product_page }}">{{ p.name }}</a></h4>
 			    <p>{{ p.short_description }}</p>
 			    <p><a target="blank" href="{{ result.specs_index }}{{ p.specs_page }}">Specifications</a></p>
 			</td>
@@ -75,10 +77,13 @@
 			</td>
 		    </tr>
 		{% endfor %}
+		    <tr>
+			<td></td>
+			<td><p><a href="/quote/{{ result.quote }}/preview/">Preview Quote</a></p></td>
+			<td><p><a href="">Continue</a></p></td>
+		    </tr>
 		</tbody>
 	    </table>
-	    <a class="buttonlink" href="">Get quote</a>
-	    <a id="continue" class="buttonlink" href="/products/">Continue</a>
 	</div>
     {% else %}
         {% url acct_signup as signup_url %}

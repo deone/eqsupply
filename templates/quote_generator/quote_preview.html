@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Preview Quote{% endblock %}
+
+{% block body %}
+    <div class="clearfix padtop">
+    {% if user.is_authenticated %}
+	<h1>{{ quote.title }}</h1>
+	<p>Created {{ quote.time_created }}</p>
+	<table width="100%" class="product-list">
+	    <thead>
+		<tr>
+		    <th id="header-1"><h3>Item</h3></th>
+		    <th><h3>Manufacturer</h3></th>
+		    <th><h3>Quantity<h3></th>
+		</tr>
+	    </thead>
+	    <tbody>
+	    {% for qi in quote.quoteitem_set.all %}
+		<tr>
+		    <td>
+			<h4>{{ qi.product.name }}</h4>
+		    </td>
+		    <td>
+			<p class="padtop">{{ qi.product.manufacturer }}</p>
+		    </td>
+		    <td>
+			<p class="padtop">{{ qi.quantity }}</p>
+		    </td>
+		</tr>
+	    {% endfor %}
+		<tr>
+		    <td id="quote-actions">
+			<p class="notices">Prices are not displayed on our web site. However, they would be displayed in the quote we'll send to your email.</p>
+		    </td>
+		    <td>
+			<p><a href="">Discard Quote</a></p>
+		    </td>
+		    <td>
+			<p><a href="/quote/{{ quote.id }}/email/">Send to email</a></p>
+		    </td>
+		</tr>
+	    </tbody>
+	</table>
+    {% else %}
+	{% url acct_signup as signup_url %}
+	{% url acct_login as login_url %}
+	<p class="what_next">Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
+    {% endif %}
+    </div>
+{% endblock %}

@@ -54,13 +54,16 @@ function ajaxPost(data, url) {
 }
 
 function showQuotes(data)   {
-    var quoteList = "<ul>";
+    var quoteList = "<table><thead></thead><tbody>";
 
     for (var i=0; i<data.length; i++)	{
-	quoteList += "<li><a href='#'>" + data[i].id + " " + data[i].title + " " + data[i].time_created + "</a></li>";
+	quoteList += "<tr>" + 
+			"<td><a href=''>" + data[i].title + "</a></td>" + 
+			"<td>" + data[i].time_created + "</td>" + 
+			"</tr>";
     }
 
-    quoteList += "</ul>";
+    quoteList += "</tbody></table>";
 
     $("#p-quotes").append(quoteList);
 

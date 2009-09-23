@@ -409,83 +409,15 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 .container-in-tab ul li	{
     margin: .2em;
 }
-#products table	{
-    border-spacing: 0;
-}
 .over	{
     background-color: #efefef;
 }
 .out	{
     background-color: #fff;
 }
-#products table th   {
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    text-align: left;
-    line-height: 2em;
-}
-#products table th, #products table td	{
-    padding-left: 10px;
-    margin: 0px;
-}
-#products table td  {
-    border-bottom: solid 1px #ddd;
-    vertical-align: top;
-}
-#products td p	{
-    margin: 0px 0px 5px 0px;
-}
-#products h4	{
-    font-size: 110%;
-    margin-bottom: 5px;
-}
-p.padtop, tr.product-detail form    {
-    padding-top: 5px;
-}
-tr.product-detail:hover   {
-    background-color: #f5f5f5;
-}
-#products .head_1   {
-    width: 500px;
-    line-height: 2.25em;
-}
-#products .head_2   {
-    width: 200px;
-}
-#products .head_3    {
-    width: 80px;
-}
-form.add-quote input[type="text"]	{
-    width: 20px;
-    font-size: 8pt;
-    background-color: #fff;;
-    background-image: none;
-}
-form.add-quote input[type="button"]    {
-    width: 30px;
-}
-tr.product-detail form input[type="button"] {
-    font-size: 8pt;
-}
-form.remove-quote input[type="button"]    {
-    width: 57px;
-}
-#products .buttonlink  {
-    float: right;
-    margin-top: 20px;
-    width: 100px;
-    height:31px;
-    background: url('/site_media/img/button.png') no-repeat;
-    padding-left: 25px;
-}
-a.buttonlink  {
-    color: #fff;
-    font-weight: bold;
-    line-height: 2em;
-}
-a#continue  {
-    margin-right: 10px;
-}
+
+
+
 #msger	{
     position: fixed;
     top: 0px;
@@ -501,9 +433,7 @@ a#continue  {
     font-weight: bold;
     line-height: 2em;
 }
-tr.product-detail form	{
-    display: none;
-}
+
 .left-div {
     float: left;
 }
@@ -516,4 +446,78 @@ tr.product-detail form	{
 }
 #quote .right-div  {
     width: 450px;
+}
+
+
+/* Generic product list styling */
+.product-list #header-1   {
+    width: 62.5%;
+    line-height: 2.25em;
+}
+.product-list #header-2   {
+    width: 25%;
+}
+.product-list #header-3    {
+    width: 10%;
+}
+.product-list  {
+    border-spacing: 0;
+}
+.product-list th	{
+    border-top: solid 1px #ddd;
+    border-bottom: solid 1px #ddd;
+    text-align: left;
+    line-height: 2em;
+}
+.product-list th, .product-list td	{
+    padding-left: 10px;
+    margin: 0px;
+}
+.product-list td	{
+    border-bottom: solid 1px #ddd;
+    vertical-align: top;
+}
+.product-list td p  {
+    margin: 0px 0px 5px 0px;
+}
+.product-list h4    {
+    font-size: 110%;
+    margin: 5px 0px 5px 0px;
+}
+
+
+/* Add and remove quote-item form */
+
+tr.product-detail:hover   {
+    background-color: #f5f5f5;
+}
+.add-quote input[type="text"]	{
+    width: 20px;
+    font-size: 8pt;
+    background-color: #fff;;
+    background-image: none;
+}
+.add-quote input[type="button"]    {
+    width: 30px;
+}
+.product-detail form input[type="button"] {
+    font-size: 8pt;
+}
+.remove-quote input[type="button"]    {
+    width: 57px;
+}
+.product-detail form	{
+    display: none;
+}
+.padtop p, .product-detail form    {
+    padding-top: 5px;
+}
+
+#quote-actions	{
+    padding: 10px;
+}
+.notices    {
+    border: solid 1px #ddd;
+    background-color: #f5f5f5;
+    padding: 5px;
 }

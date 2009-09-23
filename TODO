@@ -3,3 +3,5 @@ Read more @ file:///home/zedd/Documents/Frameworks/Django/docs.djangoproject.com
 
 Signup - Make email field unique
 We can use todict() to send the products in products.html
+
+Use the non-js lightbox to display products since our tabs now load content from the same page.

@@ -1,11 +1,11 @@
 from django.shortcuts import render_to_response
 from django.core.serializers import serialize
+from django.core.mail import EmailMultiAlternatives
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.conf import settings
 
 from django.contrib.auth.models import User
-from quote_generator.forms import QuoteForm
 
 from eqsupply import helpers as h
 from quote_generator.models import *
@@ -80,3 +80,63 @@ def product_groups(request, template="quote_generator/product_home.html"):
     return render_to_response(template, {
 	"quote": quote
     }, context_instance=RequestContext(request))
+
+def preview_quote(request, quote_id, template="quote_generator/quote_preview.html"):
+    quote = Quote.objects.get(pk=quote_id)
+
+    return render_to_response(template, {
+	"quote": quote
+    }, context_instance=RequestContext(request))
+
+def email(request, quote_id):
+    quote = Quote.objects.get(pk=quote_id)
+    subject, from_email, to = "hello", "noreply@aerix.com", "alwaysdeone@gmail.com"
+    text_content = ""
+    html_content = create_email(quote)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+
+def create_email(quote):
+    html = "<html>"
+    html += """
+	    <body style="background-color: #FFF; margin: 0; color: #333; font-family: Arial, sans-serif; font-size: 10pt;">
+	    """
+    html += "<h1 style='margin:0; font-size:160%'>" + quote.title + "</h1>"
+    html += "<p>Created " + str(quote.time_created) + "</p>"
+    html += """
+	    <table width="100%" style="border-spacing: 0">
+		<thead>
+		    <tr>
+			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left">
+			    Item
+			</th>
+
+			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left">
+			    Manufacturer
+			</th>
+
+			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left">
+			    Quantity
+			</th>
+		    </tr>
+		</thead>
+		<tbody>
+	    """
+    for qi in quote.quoteitem_set.all():
+	html += """<tr>
+		    <td style="padding-left: 10px; margin: 0px; border-bottom: solid 1px #ddd; vertical-align: top;">
+			<h4 style="margin: 0; font-size: 110%; margin: 5px 0px 5px 0px;">""" + qi.product.name + """</h4>
+		    </td>
+		    <td style="padding-left: 10px; margin: 0px; border-bottom: solid 1px #ddd; vertical-align: top;">
+			<p style="padding-top:5px; margin: 0px 0px 5px 0px;">""" + qi.product.manufacturer.name + """</p>
+		    </td>
+		    <td style="padding-left: 10px; margin: 0px; border-bottom: solid 1px #ddd; vertical-align: top;">
+			<p style="padding-top:5px; margin: 0px 0px 5px 0px;">""" + str(qi.quantity) + """</p>
+		    </td>
+		</tr>
+		"""
+    html += "</tbody></table>"
+    html += "</body></html>"
+
+    return html

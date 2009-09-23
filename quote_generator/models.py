@@ -65,11 +65,21 @@ class Quote(models.Model):
 	    "status": self.status
 	}
 
+class Price(models.Model):
+    # Let's plug you in later
+    product = models.ForeignKey(Product)
+    product_cost = models.IntegerField()
+    shipping_cost = models.IntegerField()
+
+    def __unicode__(self):
+	return u"%s" % self.product_cost
+
 class QuoteItem(models.Model):
     quote = models.ForeignKey(Quote)
     product = models.ForeignKey(Product)
     quantity = models.IntegerField()
     quote_item_cost = models.IntegerField()
+    #quote_item_cost = models.ForeignKey(Price)
 
     def __unicode__(self):
 	return u"%s, %s" % (self.product, self.quantity)
