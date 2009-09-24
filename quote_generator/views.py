@@ -88,14 +88,23 @@ def preview_quote(request, quote_id, template="quote_generator/quote_preview.htm
 	"quote": quote
     }, context_instance=RequestContext(request))
 
+@h.json_response
 def email(request, quote_id):
     quote = Quote.objects.get(pk=quote_id)
-    subject, from_email, to = "hello", "noreply@aerix.com", "alwaysdeone@gmail.com"
+    user_id = request.POST.get("user_id").strip()
+    email = User.objects.get(pk=user_id).email
+
+    subject, from_email, to = "hello", "noreply@aerix.com", email
     text_content = ""
     html_content = create_email(quote)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
     msg.attach_alternative(html_content, "text/html")
     msg.send()
+
+    quote.status = 1
+    quote.save()
+
+    return ("ok", "Email Sent")
 
 def create_email(quote):
     html = "<html>"

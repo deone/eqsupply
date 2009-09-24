@@ -43,7 +43,15 @@ function ajaxPost(data, url) {
 	success: function(response) {
 	    if (response.data.type != "ok") {
 	    } else  {
-		document.location = "/product_groups/?quote_id=" + response.data.body["id"];
+		var urlBits = url.split("/")
+
+		if (urlBits[urlBits.length - 2] == "create")	{
+		    document.location = "/product_groups/?quote_id=" + response.data.body["id"];
+		}
+
+		if (urlBits[urlBits.length - 2] == "email") {
+		    alert(response.data.body);
+		}
 	    }
 	},
 
@@ -70,6 +78,12 @@ function showQuotes(data)   {
 
 }
 
-function sendQuote()	{
-    alert("me");
+function emailQuote(quoteId, userId)	{
+    var url = "/quote/" + quoteId + "/email/";
+    var data = "user_id=" + userId;
+
+    ajaxPost(data, url);
+}
+
+function deleteQuote(quoteId)	{
 }

@@ -38,10 +38,10 @@
 			<p class="notices">Prices are not displayed on our web site. However, they would be displayed in the quote we'll send to your email.</p>
 		    </td>
 		    <td>
-			<p><a href="">Discard Quote</a></p>
+			<p><a href="javascript:deleteQuote({{ quote.id }})">Discard Quote</a></p>
 		    </td>
 		    <td>
-			<p><a href="javascript:sendQuote()">Send to email</a></p>
+			<p><a href="javascript:emailQuote({{ quote.id }}, {{ user.id }})">Send to email</a></p>
 		    </td>
 		</tr>
 	    </tbody>
