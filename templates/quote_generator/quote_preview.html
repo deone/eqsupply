@@ -2,6 +2,10 @@
 
 {% block title %}Preview Quote{% endblock %}
 
+{% block custom_js %}
+    <script type="text/javascript" src="/site_media/js/quote.js"></script>
+{% endblock %}
+
 {% block body %}
     <div class="clearfix padtop">
     {% if user.is_authenticated %}
@@ -37,7 +41,7 @@
 			<p><a href="">Discard Quote</a></p>
 		    </td>
 		    <td>
-			<p><a href="/quote/{{ quote.id }}/email/">Send to email</a></p>
+			<p><a href="javascript:sendQuote()">Send to email</a></p>
 		    </td>
 		</tr>
 	    </tbody>

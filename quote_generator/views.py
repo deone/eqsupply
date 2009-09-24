@@ -102,22 +102,22 @@ def create_email(quote):
     html += """
 	    <body style="background-color: #FFF; margin: 0; color: #333; font-family: Arial, sans-serif; font-size: 10pt;">
 	    """
-    html += "<h1 style='margin:0; font-size:160%'>" + quote.title + "</h1>"
+    html += "<h1 style='margin:0px; font-size:160%'>" + quote.title + "</h1>"
     html += "<p>Created " + str(quote.time_created) + "</p>"
     html += """
-	    <table width="100%" style="border-spacing: 0">
+	    <table width="100%" style="border-spacing: 0px">
 		<thead>
 		    <tr>
-			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left">
-			    Item
+			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left; width: 62.5%; line-height: 2em; text-align: left; padding-left: 10px; margin: 0px;>
+			    <h3 style="margin: 0">Item</h3>
 			</th>
 
-			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left">
-			    Manufacturer
+			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left; line-height: 2em; padding-left: 10px; margin: 0px;>
+			    <h3 style="margin: 0">Manufacturer</h3>
 			</th>
 
-			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left">
-			    Quantity
+			<th style="border-top: solid 1px #ddd; border-bottom: solid 1px #ddd; text-align: left; line-height: 2em; padding-left: 10px; margin: 0px;>
+			    <h3 style="margin: 0">Quantity</h3>
 			</th>
 		    </tr>
 		</thead>

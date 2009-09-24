@@ -452,7 +452,6 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 /* Generic product list styling */
 .product-list #header-1   {
     width: 62.5%;
-    line-height: 2.25em;
 }
 .product-list #header-2   {
     width: 25%;

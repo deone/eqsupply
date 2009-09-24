@@ -1,5 +1,6 @@
 $(function()	{
 
+
 });
 
 function createQuote()	{
@@ -67,4 +68,8 @@ function showQuotes(data)   {
 
     $("#p-quotes").append(quoteList);
 
+}
+
+function sendQuote()	{
+    alert("me");
 }
