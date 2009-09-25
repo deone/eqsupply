@@ -82,6 +82,7 @@ def product_groups(request, template="quote_generator/product_home.html"):
     }, context_instance=RequestContext(request))
 
 def preview_quote(request, quote_id, template="quote_generator/quote_preview.html"):
+    # Quote action links should be made dumb if status=1
     quote = Quote.objects.get(pk=quote_id)
 
     return render_to_response(template, {
@@ -94,7 +95,7 @@ def email(request, quote_id):
     user_id = request.POST.get("user_id").strip()
     email = User.objects.get(pk=user_id).email
 
-    subject, from_email, to = "hello", "noreply@aerix.com", email
+    subject, from_email, to = "YOUR QUOTE, %s" % quote.title, "noreply@aerixnigeria.com", email
     text_content = ""
     html_content = create_email(quote)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -104,7 +105,7 @@ def email(request, quote_id):
     quote.status = 1
     quote.save()
 
-    return ("ok", "Email Sent")
+    return ("ok", "Quote Sent")
 
 def create_email(quote):
     html = "<html>"

@@ -1,6 +1,5 @@
 $(function()	{
 
-
 });
 
 function createQuote()	{
@@ -50,7 +49,7 @@ function ajaxPost(data, url) {
 		}
 
 		if (urlBits[urlBits.length - 2] == "email") {
-		    alert(response.data.body);
+		    showMessage(response.data.body);
 		}
 	    }
 	},
