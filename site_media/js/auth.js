@@ -63,12 +63,13 @@ function signup()   {//{{{
     var company = $("#id_company").val();
     var position = $("#id_position").val();
     var companyStreetAddress = $("#id_company_street_address").val();
+    var state = $("#id_state").val();
     var city = $("#id_city").val();
     var country = $("#id_country").val();
 
     var data = "first_name=" + firstname + "&last_name=" + lastname + "&email=" + email + "&phone=" + phone + 
                 "&username=" + username + "&password1=" + password1 + "&password2=" + password2 + "&company=" + company + 
-                "&position=" + position + "&company_street_address=" + companyStreetAddress + "&city=" + city + "&country=" + country;
+                "&position=" + position + "&company_street_address=" + companyStreetAddress + "&city=" + city + "&state=" + state + "&country=" + country;
 
     var url = "/account/signup/";
     var dLocation = "/account/signup/";

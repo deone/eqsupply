@@ -47,17 +47,18 @@ class SignupForm(forms.Form):
     position = forms.CharField(label="Position", widget=forms.TextInput())
     company_street_address = forms.CharField(label="Company Street Address", widget=forms.TextInput())
     city = forms.CharField(label="City", widget=forms.TextInput())
+    state = forms.CharField(label="State", widget=forms.TextInput())
     country = forms.CharField(label="Country", widget=forms.TextInput())
 
     def clean(self):
 	if self._errors:
-		return
+	    return
 	password1 = self.cleaned_data["password1"]
 	password2 = self.cleaned_data["password2"]
 
 	if password1 and password2:
-		if password1 != password2:
-			raise forms.ValidationError("Your password entries must be the same")
+	    if password1 != password2:
+		raise forms.ValidationError("Your password entries must be the same")
 
 	return self.cleaned_data
 
@@ -74,13 +75,14 @@ class SignupForm(forms.Form):
 	position = self.cleaned_data['position']
 	company_street_address = self.cleaned_data['company_street_address']
 	city = self.cleaned_data['city']
+	state = self.cleaned_data['state']
 	country = self.cleaned_data['country']
 	reg_id = hashlib.sha1(email + ":" + password + ":"  + str(datetime.datetime.now())).hexdigest()
 	is_active = 0
 
 	new_user = UserAccount.objects.create(first_name=first_name, last_name=last_name, email=email, phone=phone, \
 					    username=username, password=password, company=company, position=position,\
-					    company_street_address=company_street_address, city=city, country=country, reg_id=reg_id, \
+					    company_street_address=company_street_address, city=city, state=state, country=country, reg_id=reg_id, \
 					    is_active=is_active)
 
 	return email, reg_id
