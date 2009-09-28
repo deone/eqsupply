@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.conf import settings
 
 from django.contrib.auth.models import User
+from account.models import UserAccount
 
 from eqsupply import helpers as h
 from quote_generator.models import *
@@ -14,12 +15,24 @@ import datetime
 from traceback import print_exc
 
 @h.json_response
+def quote_home(request, template="quote_generator/quote.html"):
+    user_id = request.GET.get("user_id").strip()
+    user_account = UserAccount.objects.get(pk=user_id)
+
+    return render_to_response(template, {
+	"user_account": user_account
+    }, context_instance=RequestContext(request))
+
+@h.json_response
 def create_quote(request):
     user_id = request.POST.get("user").strip()
-    title = request.POST.get("title").strip()
+    company = request.POST.get("company").strip()
 
     user = User.objects.get(pk=user_id)
+    user_account = UserAccount.objects.get(pk=user_id)
     time_created = datetime.datetime.now()
+    # Ideally, this should be a setting, it shouldn't be hardcoded.
+    title = "Equipment Quote for " + company.title() + " Generated on " + str(time_created)
 
     quote = Quote.objects.create(user=user, title=title, quote_cost=0, time_created=time_created, status=False)
 

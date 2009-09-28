@@ -3,7 +3,7 @@ $(function()	{
 });
 
 function createQuote()	{
-    var data = "user=" + $("#user-id").val() + "&title=" + $("#title").val();
+    var data = "user=" + $("#user-id").val() + "&company=" + $("#user-company").val();
     var url = "/quote/create/";
 
     ajaxPost(data, url);

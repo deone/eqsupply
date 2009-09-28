@@ -5,16 +5,16 @@
 {% block body %}
 {% if user.is_authenticated %}
     <div class="clearfix padtop">
-	<h1>Welcome {{ user }}!</h1>
+	<h1>Welcome {{ user.username }}!</h1>
 
-	<p>To <a href="{% url quote_home %}"><b>generate a quote</b></a>:</p>
+	<p>To <a href="/quote/home/?user_id={{ user.id }}"><b>generate a quote</b></a>:</p>
 	<ol>
 	    <li>Create a quote,</li>
 	    <li>Add items to your quote,</li>
 	    <li>Preview your quote, and;</li>
 	    <li>Send the quote to your email!</li>
 	</ol>
-	<p>You may also <a href="{% url quote_home %}"><b>complete an existing quote generation process</b></a> by adding or removing items, previewing and sending the quote to your email.</p>
+	<!--<p>You may also <a href=""><b>complete an existing quote generation process</b></a> by adding or removing items, previewing and sending the quote to your email.</p>-->
 
 {% else %}
         {% url acct_signup as signup_url %}

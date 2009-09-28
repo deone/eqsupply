@@ -11,8 +11,8 @@
     {% if user.is_authenticated %}
 	<script type="text/javascript">
 	$(function()	{
-	    var url = "/account/" + {{ user.id }} + "/pending_quotes/";
-	    ajaxGet(url);
+	    //var url = "/account/" + {{ user.id }} + "/pending_quotes/";
+	    //ajaxGet(url);
 	});
 	</script>
 	<form id="create-quote" class="basic-form left-div">
@@ -21,10 +21,9 @@
 		<p>Create a blank quote here.</p>
 		<table>
 		    <tr>
-			<th><label for="title">Title:</label></th>
 			<td>
 			    <input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
-			    <input id="title" type="text" name="title"/>
+			    <input id="user-company" name="user-company" type="hidden" value="{{ user_account.company }}"/>
 			</td>
 		    </tr>
 		    <tr>
@@ -35,9 +34,9 @@
 	    </fieldset>
 	</form>
 
-	<fieldset id="p-quotes" class="right-div">
+	<!--<fieldset id="p-quotes" class="right-div">
 	    <legend>Your Pending Quotes</legend>
-	</fieldset>
+	</fieldset>-->
 	<div class="clear-float"></div>
     {% else %}
 	{% url acct_signup as signup_url %}
