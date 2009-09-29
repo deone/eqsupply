@@ -18,19 +18,17 @@
 	<form id="create-quote" class="basic-form left-div">
 	    <fieldset>
 		<legend>Create Quote</legend>
-		<p>Create a blank quote here.</p>
-		<table>
-		    <tr>
-			<td>
-			    <input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
-			    <input id="user-company" name="user-company" type="hidden" value="{{ user_account.company }}"/>
-			</td>
-		    </tr>
-		    <tr>
-			<td></td>
+		<ul>
+		    <li>
+			<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
+		    </li>
+		    <li>
+			<input id="user-company" name="user-company" type="hidden" value="{{ user_account.company }}"/>
+		    </li>
+		    <li>
 			<td><input type="button" value="Create Quote" class="button" onclick="createQuote()"/></td>
-		    </tr>
-		</table>
+		    </li>
+		</ul>
 	    </fieldset>
 	</form>
 
