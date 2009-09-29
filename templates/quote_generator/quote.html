@@ -15,10 +15,9 @@
 	    //ajaxGet(url);
 	});
 	</script>
-	<form id="create-quote" class="basic-form left-div">
+	<form id="create-quote" class="padded left-div aliceblue">
 	    <fieldset>
-		<legend>Create Quote</legend>
-		<ul>
+		<ol>
 		    <li>
 			<input id="user-id" name="user-id" type="hidden" value="{{ user.id }}"/>
 			<input id="user-company" name="user-company" type="hidden" value="{{ user_account.company }}"/>
@@ -26,7 +25,7 @@
 		    <li>
 			<input type="button" value="Create Quote" onclick="createQuote()"/>
 		    </li>
-		</ul>
+		</ol>
 	    </fieldset>
 	</form>
 

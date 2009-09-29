@@ -33,4 +33,11 @@ textarea{
     margin:2px 0 2px 10px;
     font-size: 11px;
 }
-
+#create-quote input[type="button"]    {
+    margin-left: 0px;
+    font-size: 150%;
+    width: 200px;
+}
+#create-quote fieldset li   {
+    padding-bottom: 0px;
+}
