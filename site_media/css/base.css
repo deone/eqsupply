@@ -154,19 +154,22 @@ p.what_next {
 #ajax-loading   {
     margin: 5px 0 5px 230px;
 }
-.container-in-tab dl, ul    {
+#tabs	{
+    background-color: #fff;
+}
+.tab-content dl, ul    {
     margin: 0px;
     padding: 0px;
     list-style: none;
 }
-.container-in-tab dl dt	{
+.tab-content dl dt	{
     font-size: 103%;
 }
-.container-in-tab dl dd	{
+.tab-content dl dd	{
     margin: 0 0 .5em 0;
     font-style: italic;
 }
-.container-in-tab ul li	{
+.tab-content ul li	{
     margin: .2em;
 }
 .over	{

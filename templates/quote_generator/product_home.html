@@ -77,20 +77,20 @@
 
 {% block body %}
     {% if user.is_authenticated %}
-	<h1>{{ quote.title }}</h1>
-
-	<p>You may view products either by manufacturer or category.</p>
-
-	<div id="tabs" class="clearfix padtop">
-	    <ul>
-		<li><a href="#manufacturers">Manufacturers</a></li>
-		<li><a href="#categories">Categories</a></li>
-	    </ul>
-	    <div id="manufacturers" class="container-in-tab">
-		<dl id="manuf_list"></dl>
-	    </div>
-	    <div id="categories" class="container-in-tab">
-		<dl id="category_list"></dl>
+	<div class="padded aliceblue clearfix padtop">
+	    <h3>{{ quote.title }}</h3>
+	    <p style="background-color:#ff0">Add Items To Your Quote</p>
+	    <div id="tabs" class="padtop">
+		<ul>
+		    <li><a href="#manufacturers">Manufacturers</a></li>
+		    <li><a href="#categories">Categories</a></li>
+		</ul>
+		<div id="manufacturers" class="tab-content">
+		    <dl id="manuf_list"></dl>
+		</div>
+		<div id="categories" class="tab-content">
+		    <dl id="category_list"></dl>
+		</div>
 	    </div>
 	</div>
     {% else %}

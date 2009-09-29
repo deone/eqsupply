@@ -24,15 +24,16 @@
 
 {% block body %}
     {% if user.is_authenticated %}
-	{% if result.manufacturer %}
-	    <h1>Products by {{ result.manufacturer }}</h1>
-	{% endif %}
-	{% if result.category %}
-	    <h1>Products In Category: {{ result.category }}</h1>
-	{% endif %}
+	
 
 	<div id="products" class="clearfix padtop">
-	    <table width="100%" class="product-list">
+	    {% if result.manufacturer %}
+		<h3>Products by {{ result.manufacturer }}</h3>
+	    {% endif %}
+	    {% if result.category %}
+		<h3>Products In Category: {{ result.category }}</h3>
+	    {% endif %}
+	    <table width="100%" class="product-list padtop">
 		<input id="quote-id" name="quote-id" type="hidden" value="{{ result.quote }}"/>
 		<thead>
 		    <tr>
@@ -67,7 +68,7 @@
 			{% endif %}
 			</td>
 			<td id="cell{{ p.pk }}">
-			    <form class="add-quote">
+			    <form class="add-quote" style="border: solid 1px #000">
 				<input id="quantity{{ p.pk }}" name="quantity" type="text"/>
 				<input type="button" value="Add" id="{{ p.pk }}" onclick="quote(this.value, this.id)"/>
 			    </form>
