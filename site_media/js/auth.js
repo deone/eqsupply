@@ -1,11 +1,5 @@
 $(function()    {
 
-    $("#signup-btn").ajaxStart(function()   {
-	$(this).attr("value", "Please Wait...");
-    }).ajaxStop(function()  {
-	$(this).attr("value", "Sign Up");
-    });
-
 });
 
 function ajaxPost(url, data, dLocation)  {//{{{

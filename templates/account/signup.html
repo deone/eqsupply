@@ -16,35 +16,30 @@
 {% endblock %}
 
 {% block body %}
-    <p>
-	{% if request.flash.feedback %}
-	    {{ request.flash.feedback|escape }}
-	{% endif %}
-    </p>
+    {% if request.flash.feedback %}
+	<div class="padded aliceblue">{{ request.flash.feedback|escape }}</div>
+    {% endif %}
     <div class="clearfix padtop">
-	<form id="sign-up" class="basic-form">
+	<form id="signup" class="padded left-div aliceblue">
 	    <fieldset>
 		<legend>Sign Up</legend>
-		<table width="300px" class="left-div">
-		    <tr>
-			<td colspan="2"><p>Already have an account? <a href="{% url acct_login %}">Log In</a></p></td>
-		    </tr>
-		    {{ form.as_table }}
-		    <tr>
-			<td></td>
-			<td><input id="signup-btn" type="button" value="Sign Up" class="button" onClick="signup()" /></td>
-		    </tr>
-		</table>
-		<div class="right-div">
-		    <p>
-			By clicking "Sign Up", you are indicating that you have read and agreed to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a>
-		    </p>
-		    <p>
-			If you have any trouble creating your account, contact us at <a href="mailto:">support@aerixnigeria.com</a>
-		    </p>
-		</div>
-		<div class="clear-float"></div>
+		<p>Already have an account? <a href="{% url acct_login %}">Log In</a></p>
+		<ol>
+		    {% for field in form %}
+			<li>{{ field.label_tag }}{{ field }}</li>
+		    {% endfor %}
+		    <li><label></label><input type="button" value="Sign Up" onClick="signup()" /></li>
+		</ol>
 	    </fieldset>
 	</form>
+	<div id="signup-info" class="padded right-div aliceblue">
+	    <p>
+		By clicking "Sign Up", you are indicating that you have read and agreed to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a>
+	    </p>
+	    <p>
+		If you have any trouble creating your account, contact us at <a href="mailto:">support@aerixnigeria.com</a>
+	    </p>
+	</div>
+	<div class="clear-float"></div>
     </div>
 {% endblock %}
