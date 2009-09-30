@@ -249,20 +249,8 @@ p.what_next {
 tr.product-detail:hover   {
     background-color: #f5f5f5;
 }
-.add-quote input[type="text"]	{
-    width: 20px;
-    font-size: 8pt;
-    background-color: #fff;;
-    background-image: none;
-}
-.add-quote input[type="button"]    {
-    width: 30px;
-}
 .product-detail form input[type="button"] {
     font-size: 8pt;
-}
-.remove-quote input[type="button"]    {
-    width: 57px;
 }
 .product-detail form	{
     display: none;

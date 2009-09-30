@@ -24,9 +24,9 @@ input[type="text"], input[type="password"], textarea {
     border-bottom: solid 1px #E3E3E3;
     background: #F3F3F3 url('/site_media/img/form-shadow.png') left top repeat-x;
 }
-input[type="button"]	{
+/*input[type="button"]	{
     margin-left:9px;
-}
+}*/
 textarea{
     float:left;
     margin:2px 0 2px 10px;
@@ -39,4 +39,16 @@ textarea{
 }
 #create-quote fieldset li   {
     padding-bottom: 0px;
+}
+#add-quote-item input[type="text"]	{
+    width: 20px;
+    font-size: 8pt;
+    background-color: #fff;;
+    background-image: none;
+}
+#add-quote-item input[type="button"]    {
+    width: 30px;
+}
+.rem-quote-item input[type="button"]    {
+    width: 57px;
 }

@@ -4,10 +4,10 @@ $(function()	{
 
     $(".product-detail").hover(
 	function()  {
-	    $(this).find(".add-quote").show();
+	    $(this).find("#add-quote-item").show();
 	},
 	function()  {
-	    $(this).find(".add-quote").hide();
+	    $(this).find("#add-quote-item").hide();
 	}
     );
 
@@ -33,26 +33,26 @@ function ajaxPost(data, url, options)  {//{{{
 		} else	{
 		    if (url == "/quote/set_quote_item/")	{
 			showMessage(response.data.body);
-			$("#cell" + options["product"]).find(".add-quote").hide();
+			$("#cell" + options["product"]).find("#add-quote-item").hide();
 			$("#cell" + options["product"]).parent().hover(
 			    function()	{
-				$(this).find(".add-quote").hide();
+				$(this).find("#add-quote-item").hide();
 			    },
 			    function()	{
-				$(this).find(".add-quote").hide();
+				$(this).find("#add-quote-item").hide();
 			    }
 			);
-			$("#cell" + options["product"]).find(".remove-quote").show();
+			$("#cell" + options["product"]).find(".rem-quote-item").show();
 		    } else  {
 			showMessage(response.data.body);
-			$("#cell" + options["product"]).find(".remove-quote").hide();
-			$("#cell" + options["product"]).find(".add-quote").show();
+			$("#cell" + options["product"]).find(".rem-quote-item").hide();
+			$("#cell" + options["product"]).find("#add-quote-item").show();
 			$("#cell" + options["product"]).parent().hover(
 			    function()	{
-				$(this).find(".add-quote").show();
+				$(this).find("#add-quote-item").show();
 			    },
 			    function()	{
-				$(this).find(".add-quote").hide();
+				$(this).find("#add-quote-item").hide();
 			    }
 			);
 		    }
