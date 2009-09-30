@@ -1,4 +1,4 @@
-$(function()    {
+(function()    {
 
 });
 
@@ -12,7 +12,7 @@ function ajaxPost(url, data, dLocation)  {//{{{
 
         success: function(response) {
             if (response.code != 0) {
-                alert(response.data.body);
+		showMessage("Internal Server Error");
             } else  {
                 if (response.data.type == "error")  {
 		    if (!response.data.body.keys)   {
@@ -28,7 +28,7 @@ function ajaxPost(url, data, dLocation)  {//{{{
         },
 
         error: function(response)   {
-            alert(response);
+	    showMessage("Internal Server Error");
         }
     });
 
