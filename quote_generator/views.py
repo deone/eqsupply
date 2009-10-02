@@ -42,7 +42,6 @@ def view_products_by(request, view):
     list_model_map = {"manufacturer": Manufacturer, "category": Category}
 
     list = list_model_map[view].objects.all()
-    print list
     json = serialize("json", list)
 
     return HttpResponse(json, mimetype="application/json")

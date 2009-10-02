@@ -78,50 +78,6 @@ h1  {
     border-bottom: 1px solid #ddd;
     background-color: #f5f5f5;
 }
-#subnav ul {
-    float: right;
-    margin: 0 20px;
-    padding: 0;
-}
-#subnav ul li {
-    display: inline;
-    list-style-type: none;
-}
-#subnav ul a:link, #subnav ul a:visited {
-    float: left;
-    font-weight: bold;
-    text-decoration: none;
-    color: #444;
-    padding: 4px 20px;
-}
-#subnav ul a:hover {
-    color: #FFF;
-    background: #9BC;
-}
-
-/* pagination */
-.pagination {
-    margin: 10px 0;
-}
-.pagination .disabled {
-    padding: 3px;
-    color: #999;
-    border: 1px solid #CCC;
-}
-.pagination .current {
-    padding: 3px;
-    color: #FFF;
-    border: 1px solid #9BC;
-    background: #9BC;
-}
-.pagination a {
-    padding: 3px;
-    text-decoration: none;
-    border: 1px solid #9BC;
-    color: #444;
-    background: #DEF;
-}
-
 /* reference:
  *   http://www.positioniseverything.net/easyclearing.html
  *   http://www.zeldman.com/2006/10/27/ie7fixes1/
@@ -141,9 +97,6 @@ h1  {
 * html .clearfix { height: 1%; }
 /* end hide from ie5-mac */
 
-p.what_next {
-    font-size: 120%;
-}
 .padtop {
     margin-top: 20px;
 }
@@ -157,81 +110,7 @@ p.what_next {
 #tabs	{
     background-color: #fff;
 }
-.tab-content dl, ul    {
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-}
-.tab-content dl dt	{
-    font-size: 103%;
-}
-.tab-content dl dd	{
-    margin: 0 0 .5em 0;
-    font-style: italic;
-}
-.tab-content ul li	{
-    margin: .2em;
-}
-.over	{
-    background-color: #efefef;
-}
-.out	{
-    background-color: #fff;
-}
 
-
-
-/* Generic product list styling */
-.product-list #header-1   {
-    width: 62.5%;
-}
-.product-list #header-2   {
-    width: 25%;
-}
-.product-list #header-3    {
-    width: 10%;
-}
-.product-list  {
-    border-spacing: 0;
-    background-color: #fff;
-}
-.product-list th	{
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    text-align: left;
-    line-height: 2em;
-}
-.product-list th, .product-list td	{
-    padding-left: 10px;
-    margin: 0px;
-}
-.product-list td	{
-    border-bottom: solid 1px #ddd;
-    vertical-align: top;
-}
-.product-list td p  {
-    margin: 0px 0px 5px 0px;
-}
-.product-list h4    {
-    font-size: 110%;
-    margin: 5px 0px 5px 0px;
-}
-
-
-/* Add and remove quote-item form */
-
-tr.product-detail:hover   {
-    background-color: #f5f5f5;
-}
-.product-detail form input[type="button"] {
-    font-size: 8pt;
-}
-.product-detail form	{
-    display: none;
-}
-.padtop p, .product-detail form    {
-    padding-top: 5px;
-}
 
 #quote-actions	{
     padding: 10px;
@@ -263,17 +142,21 @@ tr.product-detail:hover   {
     text-align: left;
     border-bottom: solid 2px #ddd;
     display: none;
+    background-color: #f0f8ff;
 }
 #msger p    {
     margin: 0px 0px 0px 230px;
     line-height: 2em;
+    font-size: 125%;
 }
 #quote-info {
     margin-bottom: 20px;
     display: none;
 }
+.info	{
+    margin-bottom: 30px;
+}
 .info p	{
     font-size: 125%;
-    padding: 0px;
     line-height: 1.5em;
 }

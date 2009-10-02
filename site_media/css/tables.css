@@ -1,0 +1,50 @@
+.product-list #header-1   {
+    width: 62.5%;
+}
+.product-list #header-2   {
+    width: 25%;
+}
+.product-list #header-3    {
+    width: 10%;
+}
+.product-list  {
+    border-spacing: 0;
+    background-color: #fff;
+}
+.product-list th	{
+    border-top: solid 1px #ddd;
+    border-bottom: solid 1px #ddd;
+    text-align: left;
+    line-height: 2em;
+}
+.product-list th, .product-list td	{
+    padding-left: 10px;
+    margin: 0px;
+}
+.product-list td	{
+    border-bottom: solid 1px #ddd;
+    vertical-align: top;
+}
+.product-list td p  {
+    margin: 0px 0px 5px 0px;
+}
+.product-list h4    {
+    font-size: 110%;
+    margin: 5px 0px 5px 0px;
+}
+
+
+/* Add and remove quote-item form */
+
+tr.product-detail:hover   {
+    background-color: #f5f5f5;
+}
+.product-detail form input[type="button"] {
+    font-size: 8pt;
+}
+.product-detail form	{
+    display: none;
+}
+.padtop p, .product-detail form	{
+    padding-top: 5px;
+}
