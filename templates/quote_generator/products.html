@@ -31,7 +31,7 @@
 {% endblock %}
 
 {% block main %}
-    <div class="padded aliceblue">
+    <div class="widget">
     {% if user.is_authenticated %}
 	{% if result.manufacturer %}
 	    <h1>Products by {{ result.manufacturer }}</h1>
@@ -86,7 +86,7 @@
 	    {% endfor %}
 		<tr>
 		    <td></td>
-		    <td><p><a href="/product_groups/?quote_id={{ result.quote }}">Add More Products</a></p></td>
+		    <td><p><a href="/product_groups/?quote_id={{ result.quote }}">More Products</a></p></td>
 		    <td><p><a href="/quote/{{ result.quote }}/preview/">Preview Quote</a></p></td>
 		</tr>
 	    </tbody>

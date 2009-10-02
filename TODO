@@ -5,3 +5,4 @@ Refactor info divs on sign-up and product_groups template to use #msger. The dif
 Throw exception when user enters 0 as quantity in add_product.
 When the user receives info that he has added items to his quote, he should be able to click the message and the names and quantity of the items should be displayed.
 When adding quote_item, check if the product already exists for that quote in the quote_item table. If yes, increment by the new quantity. If no, add the entry. This should fix duplicates.
+You cannot preview an empty quote. "Preview quote" should work only if items have been added to the quote.

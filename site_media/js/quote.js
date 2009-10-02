@@ -22,7 +22,7 @@ function ajaxGet(url)	{
 		var count = response.data.body;
 		if (count != 0)	{
 		    if (count == 1)	{
-			$("#quote-info p").html("You have added " + response.data.body + " products to your quote.");
+			$("#quote-info p").html("You have added " + response.data.body + " product to your quote.");
 		    } else if (count > 1)	{
 			$("#quote-info p").html("You have added " + response.data.body + " products to your quote.");
 		    }

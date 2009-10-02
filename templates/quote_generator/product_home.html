@@ -62,11 +62,11 @@
 
 {% block main %}
     {% if user.is_authenticated %}
-	<div id="quote-info" class="padded aliceblue">
+	<div id="quote-info" class="info widget">
 	    <p></p>
 	</div>
 
-	<div class="padded aliceblue">
+	<div class="widget">
 	    <script type="text/javascript">
 		var url = "/manufacturer_list/";
 		ajaxGet(url);

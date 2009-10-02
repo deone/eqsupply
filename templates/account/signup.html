@@ -16,9 +16,9 @@
 
 {% block main %}
     {% if request.flash.feedback %}
-	<div class="padded aliceblue">{{ request.flash.feedback|escape }}</div>
+	<div class="info widget">{{ request.flash.feedback|escape }}</div>
     {% endif %}
-    <form id="signup" class="padded left-div aliceblue">
+    <form id="signup" class="left widget">
 	<fieldset>
 	    <legend>Sign Up</legend>
 	    <p>Already have an account? <a href="{% url acct_login %}">Log In</a></p>
@@ -33,7 +33,7 @@
 {% endblock %}
 
 {% block sidebar %}
-    <div id="signup-help" class="padded right-div aliceblue">
+    <div id="signup-help" class="right widget">
 	<p>
 	    By clicking "Sign Up", you are indicating that you have read and agreed to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a>.
 	</p>

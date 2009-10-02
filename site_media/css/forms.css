@@ -1,3 +1,8 @@
+form p	{
+    border-bottom:solid 1px #dedede;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
 fieldset {
     border: none;
 }

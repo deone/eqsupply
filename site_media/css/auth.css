@@ -1,0 +1,12 @@
+#signup-help	{
+    width: 370px;
+}
+#signup-help p	{
+    border-bottom:solid 1px #dedede;
+    padding-bottom: 5px;
+    line-height: 1.5em;
+}
+#sign-up .right-div {
+    width: 350px;
+    margin-left: 105px;
+}

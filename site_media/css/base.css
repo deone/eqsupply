@@ -178,33 +178,7 @@ p.what_next {
 .out	{
     background-color: #fff;
 }
-#msger	{
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    text-align: left;
-    border-bottom: solid 2px #ddd;
-    display: none;
-}
-#msger p    {
-    margin: 0px 0px 0px 230px;
-    line-height: 2em;
-    font-size: 125%;
-}
 
-.left-div {
-    float: left;
-}
-.right-div  {
-    float: right;
-}
-#sign-up .right-div {
-    width: 350px;
-    margin-left: 105px;
-}
-#quote .right-div  {
-    width: 450px;
-}
 
 
 /* Generic product list styling */
@@ -268,33 +242,38 @@ tr.product-detail:hover   {
     padding: 5px;
 }
 
-/* Combine .padded and .aliceblue into one class. follow the DRY principle. */
-.aliceblue  {
-    background-color: #f0f8ff;
+/* Generic widget */
+.left {
+    float: left;
 }
-.padded	{
+.right  {
+    float: right;
+}
+.widget	{
+    background-color: #f0f8ff;
     padding: 15px;
 }
-form p, #signup-help p	{
-    border-bottom:solid 1px #dedede;
-    padding-bottom: 5px;
-}
-form p	{
-    margin-bottom: 10px;
-}
+
+
 /* Create a central class for info divs. Preferably, they should have a slightly deeper color and hidable. Font-size should be greater.*/
-#signup-help	{
-    width: 370px;
+#msger	{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    text-align: left;
+    border-bottom: solid 2px #ddd;
+    display: none;
 }
-#signup-help p	{
-    line-height: 1.5em;
+#msger p    {
+    margin: 0px 0px 0px 230px;
+    line-height: 2em;
 }
 #quote-info {
     margin-bottom: 20px;
     display: none;
 }
-#quote-info p	{
-    line-height: 1.5em;
-    padding: 0px;
+.info p	{
     font-size: 125%;
+    padding: 0px;
+    line-height: 1.5em;
 }
