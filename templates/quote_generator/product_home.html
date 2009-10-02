@@ -12,37 +12,33 @@
 
 	    $("#tabs").tabs();
 
-	});
+	    var urlBits = document.referrer.split("/");
+	    
+	    var quoteId = urlBits[4];
+	    /* If urlBits[5] is 'add_product',
+	       call ajaxGet request to model to select the number of quote_items in the quote.
+	       Append to an hidden div
+	       Display the hidden div.*/
+	    if (urlBits[5] == "add_product")	{
+		ajaxGet("/quote/" + quoteId + "/count_items/");
+	    }
 
-	function ajaxGet(url)   {
-
-	    $.ajax({
-		url: url,
-		type: "GET",
-		dataType: "json",
-
-		success: function(response) {
-		    if (response[0]["model"] == "quote_generator.manufacturer") {
-			showManufacturers(response);
-		    }
-		    if (response[0]["model"] == "quote_generator.category") {
-			showCategories(response);
-		    }
-		},
-
-		error: function(response)   {
-		    alert(response);
-		}
+	    $("#msger").ajaxStart(function()	{
+		$(this).slideDown("fast");
+	    }).ajaxStop(function()  {
+		$(this).slideUp("fast");
 	    });
 
-	}
+	});
 
 	function showCategories(data)   {
 
 	    var lst = "";
 
 	    for (var i = 0; i < data.length; i++)   {
-		lst += "<li><a href='/quote/{{ quote.id }}/add_product/?category_id=" + data[i].pk + "'>" + data[i].fields.name + "</a></li>";
+		lst += "<li><a href='/quote/{{ quote.id }}/add_product/?category_id=" + data[i].pk + "'>" + 
+			    data[i].fields.name + 
+			"</a></li>";
 	    }
 	    $("#category_list").html(lst);
 
@@ -52,37 +48,32 @@
 	    var lst = "";
 
 	    for (var i = 0; i < data.length; i++)   {
-		lst += "<dt><a href='/quote/{{ quote.id }}/add_product/?manufacturer_id=" + data[i].pk + "'>" + 
-			    data[i].fields.name + "</a>" + 
+		lst += "<dt>" + 
+			    "<a href='/quote/{{ quote.id }}/add_product/?manufacturer_id=" + data[i].pk + "'>" + 
+				data[i].fields.name + "</a>" + 
 			"</dt>" + 
 			"<dd>" + data[i].fields.city + ", " + data[i].fields.country + "</dd>";
 	    }
 	    $("#manuf_list").html(lst);
 	}
 
-	$(function()	{
-
-	    
-
-	    $("#msger").ajaxStart(function()	{
-		$(this).slideDown("fast");
-	    }).ajaxStop(function()  {
-		$(this).slideUp("fast");
-	    });
-
-	    var url = "/manufacturer_list/";
-	    ajaxGet(url);
-
-	    var url = "/category_list/";
-	    ajaxGet(url);
-
-	});
     </script>
 {% endblock %}
 
 {% block main %}
     {% if user.is_authenticated %}
+	<div id="quote-info" class="padded aliceblue">
+	    <p>You have 4 items in your quote</p>
+	</div>
+
 	<div class="padded aliceblue">
+	    <script type="text/javascript">
+		var url = "/manufacturer_list/";
+		ajaxGet(url);
+
+		var url = "/category_list/";
+		ajaxGet(url);
+	    </script>
 	    <h1>Select Product Group</h1>
 	    <div id="tabs" class="padtop">
 		<ul>
@@ -100,6 +91,6 @@
     {% else %}
 	{% url acct_signup as signup_url %}
         {% url acct_login as login_url %}
-        <p class="what_next">Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
+        <p>Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
     {% endif %}
 {% endblock %}

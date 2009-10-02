@@ -42,6 +42,7 @@ def view_products_by(request, view):
     list_model_map = {"manufacturer": Manufacturer, "category": Category}
 
     list = list_model_map[view].objects.all()
+    print list
     json = serialize("json", list)
 
     return HttpResponse(json, mimetype="application/json")
@@ -101,6 +102,15 @@ def preview_quote(request, quote_id, template="quote_generator/quote_preview.htm
     return render_to_response(template, {
 	"quote": quote
     }, context_instance=RequestContext(request))
+
+@h.json_response
+def count_quote_items(request, quote_id):
+    quote = Quote.objects.get(pk=quote_id)
+    try:
+	quote_items = QuoteItem.objects.filter(quote=quote)
+	return ("ok", len(quote_items))
+    except QuoteItem.DoesNotExist:
+	return ("ok", 0)
 
 @h.json_response
 def email(request, quote_id):

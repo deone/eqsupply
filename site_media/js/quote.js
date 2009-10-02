@@ -6,10 +6,20 @@ function ajaxGet(url)	{
 	dataType: "json",
 
 	success: function(response) {
+	    /* Pending quotes code
 	    if (response.data.body != "") {
 		showQuotes(response.data.body);
 	    } else  {
 		$("#p-quotes").append("<p>You have no pending quotes.</p>");
+	    }*/
+	    if (url == "/manufacturer_list/")	{
+		showManufacturers(response);
+	    }
+	    if (url == "/category_list/")   {
+		showCategories(response);
+	    }
+	    if (url.split("/")[3] == "count_items") {
+		$("#quote-info p").html("You have added " + response.data.body + " items to your quote.");
 	    }
 	},
 
@@ -36,7 +46,7 @@ function ajaxPost(data, url, options)  {
 		} else	{
 		    var urlBits = url.split("/")
 		    
-		    if (urlBits[urlBits.length - 2] == "create")	{
+		    if (urlBits[urlBits.length - 2] == "create")    {
 			document.location = "/product_groups/?quote_id=" + response.data.body["id"];
 		    }
 
@@ -86,8 +96,6 @@ function createQuote()	{
 
     ajaxPost(data, url);
 }
-
-
 
 function emailQuote(quoteId, userId)	{
     var url = "/quote/" + quoteId + "/email/";

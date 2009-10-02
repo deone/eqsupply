@@ -270,6 +270,7 @@ tr.product-detail:hover   {
 #signup-info	{
     width: 370px;
 }
+/* Combine .padded and .aliceblue into one class. follow the DRY principle. */
 .aliceblue  {
     background-color: #f0f8ff;
 }
@@ -283,6 +284,13 @@ form p, #signup-info p	{
 form p	{
     margin-bottom: 10px;
 }
+/* Create a central class for info divs. Preferably, they should have a slightly deeper color and hidable. Font-size should be greater.*/
 #signup-info p	{
+    line-height: 1.5em;
+}
+#quote-info {
+    margin-bottom: 20px;
+}
+#quote-info p	{
     line-height: 1.5em;
 }
