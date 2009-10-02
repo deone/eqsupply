@@ -28,7 +28,7 @@ class LoginForm(forms.Form):
             else:
                 self.user = user
         else:
-            raise forms.ValidationError("Wrong username/password Combination")
+            raise forms.ValidationError("Wrong Username and Password Combination")
         return self.cleaned_data
 
     def login(self, request):

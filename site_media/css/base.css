@@ -188,9 +188,8 @@ p.what_next {
 }
 #msger p    {
     margin: 0px 0px 0px 230px;
-    font-size: 110%;
-    font-weight: bold;
     line-height: 2em;
+    font-size: 125%;
 }
 
 .left-div {
