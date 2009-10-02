@@ -15,7 +15,6 @@
 {% endblock %}
 
 {% block main %}
-    <!-- This should fit into #msger -->
     {% if request.flash.feedback %}
 	<div class="padded aliceblue">{{ request.flash.feedback|escape }}</div>
     {% endif %}

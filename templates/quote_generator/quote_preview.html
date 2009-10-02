@@ -1,9 +1,8 @@
-{% extends "base.html" %}
+{% extends "quote_generator/base.html" %}
 
-{% block title %}Preview Quote{% endblock %}
+{% block page_title %}Quote Preview{% endblock %}
 
-{% block custom_js %}
-    <script type="text/javascript" src="/site_media/js/quote.js"></script>
+{% block page_js %}
     <script type="text/javascript">
 	$(function()	{
 	    $("#msger").ajaxStart(function()	{
@@ -13,12 +12,11 @@
     </script>
 {% endblock %}
 
-{% block body %}
-    <div class="clearfix padtop">
+{% block main %}
+    <div class="padded aliceblue">
     {% if user.is_authenticated %}
 	<h1>{{ quote.title }}</h1>
-	<p>Created {{ quote.time_created }}</p>
-	<table width="100%" class="product-list">
+	<table width="100%" class="product-list padtop">
 	    <thead>
 		<tr>
 		    <th id="header-1"><h3>Item</h3></th>
@@ -56,7 +54,7 @@
     {% else %}
 	{% url acct_signup as signup_url %}
 	{% url acct_login as login_url %}
-	<p class="what_next">Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
+	<p>Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
     {% endif %}
     </div>
 {% endblock %}

@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "quote_generator/base.html" %}
 
-{% block title %}
+{% block page_title %}
     {% if result.manufacturer %}
 	Products by {{ result.manufacturer }}
     {% endif %}
@@ -9,10 +9,18 @@
     {% endif %}
 {% endblock %}
 
-{% block custom_js %}
-    <script type="text/javascript" src="/site_media/js/product.js"></script>
+{% block page_js %}
     <script type="text/javascript">
 	$(function()	{
+
+	    $(".product-detail").hover(
+		function()  {
+		    $(this).find("#add-quote-item").show();
+		},
+		function()  {
+		    $(this).find("#add-quote-item").hide();
+		}
+	    );
 
 	    $("#msger").ajaxStart(function()	{
 		$(this).slideDown("fast");
@@ -22,71 +30,71 @@
     </script>
 {% endblock %}
 
-{% block body %}
+{% block main %}
+    <div class="padded aliceblue">
     {% if user.is_authenticated %}
-	<div id="products" class="clearfix padtop">
-	    {% if result.manufacturer %}
-		<h3>Products by {{ result.manufacturer }}</h3>
-	    {% endif %}
-	    {% if result.category %}
-		<h3>Products In Category: {{ result.category }}</h3>
-	    {% endif %}
-	    <table width="100%" class="product-list padtop">
-		<input id="quote-id" name="quote-id" type="hidden" value="{{ result.quote }}"/>
-		<thead>
-		    <tr>
-			<th id="header-1"><h3>Product</h3></th>
-			<th id="header-2"><h3>
-			{% if result.manufacturer %}
-			    Categories
-			{% endif %}
-			{% if result.category %}
-			    Manufacturer
-			{% endif %}
-			</h3></th>
-			<th id="header-3">&nbsp;</th>
-		    </tr>
-		</thead>
-		<tbody>
-		{% for p in result.products %}
-		    <tr class="product-detail">
-			<td>
-			    <h4><a target="blank" href="{{ result.product_index }}{{ p.product_page }}">{{ p.name }}</a></h4>
-			    <p>{{ p.short_description }}</p>
-			    <p><a target="blank" href="{{ result.specs_index }}{{ p.specs_page }}">Specifications</a></p>
-			</td>
-			<td>
-			{% if result.manufacturer %}
-			    {% for c in p.categories.values %}
-				<p class="padtop">{{ c.name }}</p>
-			    {% endfor %}
-			{% endif %}
-			{% if result.category %}
-			    <p class="padtop">{{ p.manufacturer }}</p>
-			{% endif %}
-			</td>
-			<td id="cell{{ p.pk }}">
-			    <form id="add-quote-item">
-				<input id="quantity{{ p.pk }}" name="quantity" type="text"/>
-				<input type="button" value="Add" id="{{ p.pk }}" onclick="quote(this.value, this.id)"/>
-			    </form>
-			    <form class="rem-quote-item">
-				<input type="button" value="Remove" id="{{ p.pk }}" onclick="quote(this.value, this.id)"/>
-			    </form>
-			</td>
-		    </tr>
-		{% endfor %}
-		    <tr>
-			<td></td>
-			<td><p><a href="/quote/{{ result.quote }}/preview/">Preview Quote</a></p></td>
-			<td><p><a href="">Continue</a></p></td>
-		    </tr>
-		</tbody>
-	    </table>
-	</div>
+	{% if result.manufacturer %}
+	    <h1>Products by {{ result.manufacturer }}</h1>
+	{% endif %}
+	{% if result.category %}
+	    <h1>Products In Category: {{ result.category }}</h1>
+	{% endif %}
+	<table width="100%" class="product-list padtop">
+	    <input id="quote-id" name="quote-id" type="hidden" value="{{ result.quote }}"/>
+	    <thead>
+		<tr>
+		    <th id="header-1"><h3>Product</h3></th>
+		    <th id="header-2"><h3>
+		    {% if result.manufacturer %}
+			Categories
+		    {% endif %}
+		    {% if result.category %}
+			Manufacturer
+		    {% endif %}
+		    </h3></th>
+		    <th id="header-3">&nbsp;</th>
+		</tr>
+	    </thead>
+	    <tbody>
+	    {% for p in result.products %}
+		<tr class="product-detail">
+		    <td>
+			<h4><a target="blank" href="{{ result.product_index }}{{ p.product_page }}">{{ p.name }}</a></h4>
+			<p>{{ p.short_description }}</p>
+			<p><a target="blank" href="{{ result.specs_index }}{{ p.specs_page }}">Specifications</a></p>
+		    </td>
+		    <td>
+		    {% if result.manufacturer %}
+			{% for c in p.categories.values %}
+			    <p class="padtop">{{ c.name }}</p>
+			{% endfor %}
+		    {% endif %}
+		    {% if result.category %}
+			<p class="padtop">{{ p.manufacturer }}</p>
+		    {% endif %}
+		    </td>
+		    <td id="cell{{ p.pk }}">
+			<form id="add-quote-item">
+			    <input id="quantity{{ p.pk }}" name="quantity" type="text"/>
+			    <input type="button" value="Add" id="{{ p.pk }}" onclick="quote(this.value, this.id)"/>
+			</form>
+			<form class="rem-quote-item">
+			    <input type="button" value="Remove" id="{{ p.pk }}" onclick="quote(this.value, this.id)"/>
+			</form>
+		    </td>
+		</tr>
+	    {% endfor %}
+		<tr>
+		    <td></td>
+		    <td><p><a href="/quote/{{ result.quote }}/preview/">Preview Quote</a></p></td>
+		    <td><p><a href="">Continue</a></p></td>
+		</tr>
+	    </tbody>
+	</table>
     {% else %}
         {% url acct_signup as signup_url %}
         {% url acct_login as login_url %}
         <p class="what_next">Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
     {% endif %}
+    </div>
 {% endblock %}

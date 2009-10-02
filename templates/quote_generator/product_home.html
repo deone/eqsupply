@@ -1,14 +1,19 @@
-{% extends "base.html" %}
+{% extends "quote_generator/base.html" %}
 
-{% block title %}Add Items{% endblock %}
+{% block page_title %}Product Home{% endblock %}
 
-{% block custom_css %}
+{% block page_css %}
     <link rel="stylesheet" href="/site_media/js/jquery/css/ui-lightness/jquery-ui.custom.css"/>
 {% endblock %}
 
-{% block custom_js %}
-    <script type="text/javascript" src="/site_media/js/product.js"></script>
+{% block page_js %}
     <script type="text/javascript">
+	$(function()	{
+
+	    $("#tabs").tabs();
+
+	});
+
 	function ajaxGet(url)   {
 
 	    $.ajax({
@@ -75,10 +80,10 @@
     </script>
 {% endblock %}
 
-{% block body %}
+{% block main %}
     {% if user.is_authenticated %}
-	<div class="padded aliceblue clearfix padtop">
-	    <h3>Add Items To Your Quote</h3>
+	<div class="padded aliceblue">
+	    <h1>Select Product Group</h1>
 	    <div id="tabs" class="padtop">
 		<ul>
 		    <li><a href="#manufacturers">Manufacturers</a></li>

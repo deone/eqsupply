@@ -32,7 +32,7 @@ def create_quote(request):
     user_account = UserAccount.objects.get(pk=user_id)
     time_created = datetime.datetime.now()
     # Ideally, this should be a setting, it shouldn't be hardcoded.
-    title = "Equipment Quote for " + company.title() + " Generated on " + str(time_created)
+    title = company.title() + " Quote, " + str(time_created)
 
     quote = Quote.objects.create(user=user, title=title, quote_cost=0, time_created=time_created, status=False)
 

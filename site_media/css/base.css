@@ -219,6 +219,7 @@ p.what_next {
 }
 .product-list  {
     border-spacing: 0;
+    background-color: #fff;
 }
 .product-list th	{
     border-top: solid 1px #ddd;
