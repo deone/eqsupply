@@ -19,7 +19,15 @@ function ajaxGet(url)	{
 		showCategories(response);
 	    }
 	    if (url.split("/")[3] == "count_items") {
-		$("#quote-info p").html("You have added " + response.data.body + " items to your quote.");
+		var count = response.data.body;
+		if (count != 0)	{
+		    if (count == 1)	{
+			$("#quote-info p").html("You have added " + response.data.body + " products to your quote.");
+		    } else if (count > 1)	{
+			$("#quote-info p").html("You have added " + response.data.body + " products to your quote.");
+		    }
+		    $("#quote-info").show();
+		}
 	    }
 	},
 
