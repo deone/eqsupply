@@ -78,12 +78,18 @@ def quote_item(request, action):
 
     if action == "set":
 	quantity = request.POST.get("quantity").strip()
-	QuoteItem.objects.create(quote=quote, product=product, quantity=quantity, quote_item_cost=0)
+
+	try:
+	    product_exist = QuoteItem.objects.get(quote=quote, product=product)
+	    product_exist.quantity = int(product_exist.quantity) + int(quantity)
+	    product_exist.save()
+	except QuoteItem.DoesNotExist:
+	    QuoteItem.objects.create(quote=quote, product=product, quantity=quantity, quote_item_cost=0)
 
 	return ("ok", "Product Added")
 
     if action == "unset":
-	QuoteItem.objects.filter(quote=quote, product=product).delete()
+	QuoteItem.objects.get(quote=quote, product=product).delete()
 	return ("ok", "Product Removed")
 
 def product_groups(request, template="quote_generator/product_home.html"):
