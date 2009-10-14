@@ -79,6 +79,9 @@ def quote_item(request, action):
     if action == "set":
 	quantity = request.POST.get("quantity").strip()
 
+	if int(quantity) == 0:
+	    return ("error", "Quantity cannot be zero")
+
 	try:
 	    product_exist = get_object_or_404(QuoteItem, quote=quote, product=product)
 	    product_exist.quantity = int(product_exist.quantity) + int(quantity)

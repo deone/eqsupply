@@ -13,7 +13,11 @@ Product listing: products.html, quote_preview.html. Implement inheritance.
 Remember to always use todict() wherever necessary.
 Throw exception when user enters 0 as quantity in addquoteitem form.
 Write all tests. Models, views and javascript.
+Always raise Http404 meaningfully.
+It won't be a bad idea to have eqsupply's exceptions e.g CannotBeZero - in the case of specifying 0 as quantity when adding quoteitem.
+Would be on the lookout for more neccessities. For now, let's raise return an error json_response. We need to fail immediately, noisily and helplessly.
 
-use django shortcuts and generic views
+
+use generic views
 make rpm
-write deploy shell script
+write deploy shell script. Should take an argument either local or online

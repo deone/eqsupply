@@ -51,6 +51,7 @@ function ajaxPost(data, url, options)  {
                 alert(response.data.body);
             } else  {
 		if (response.data.type != "ok")	{
+		    showMessage(response.data.body);
 		} else	{
 		    var urlBits = url.split("/")
 		    
@@ -92,7 +93,7 @@ function ajaxPost(data, url, options)  {
         },
 
         error: function(response)   {
-            alert(response);
+	    alert(response);
         }
     });
 
