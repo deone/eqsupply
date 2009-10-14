@@ -12,5 +12,8 @@ Use login_required decorator. Check for other useful decorators.
 Product listing: products.html, quote_preview.html. Implement inheritance.
 Remember to always use todict() wherever necessary.
 Throw exception when user enters 0 as quantity in addquoteitem form.
-You cannot preview an empty quote. "Preview quote" should work only if items have been added to the quote.
 Write all tests. Models, views and javascript.
+
+use django shortcuts and generic views
+make rpm
+write deploy shell script

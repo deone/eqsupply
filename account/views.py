@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.core.mail import send_mail
 from django.template import RequestContext
 from django.conf import settings
@@ -91,7 +91,7 @@ def activate(request):#{{{
 @h.json_response
 def get_pending_quotes(request, user_id):
     user = User.objects.get(pk=user_id)
-    pending_quotes = Quote.objects.filter(user=user, status=0)
+    pending_quotes = get_list_or_404(Quote, user=user, status=0)
     
     p_quote_list = []
     for pq in pending_quotes:

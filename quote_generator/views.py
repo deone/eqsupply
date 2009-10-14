@@ -1,8 +1,9 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.core.serializers import serialize
 from django.core.mail import EmailMultiAlternatives
 from django.template import RequestContext
 from django.http import HttpResponse
+from django.http import Http404
 from django.conf import settings
 
 from django.contrib.auth.models import User
@@ -17,7 +18,7 @@ from traceback import print_exc
 @h.json_response
 def quote_home(request, template="quote_generator/quote.html"):
     user_id = request.GET.get("user_id").strip()
-    user_account = UserAccount.objects.get(pk=user_id)
+    user_account = get_object_or_404(UserAccount, pk=user_id)
 
     return render_to_response(template, {
 	"user_account": user_account
@@ -28,8 +29,7 @@ def create_quote(request):
     user_id = request.POST.get("user").strip()
     company = request.POST.get("company").strip()
 
-    user = User.objects.get(pk=user_id)
-    user_account = UserAccount.objects.get(pk=user_id)
+    user = get_object_or_404(User, pk=user_id)
     time_created = datetime.datetime.now()
     # Ideally, this should be a setting, it shouldn't be hardcoded.
     title = company.title() + " Quote, " + str(time_created)
@@ -51,10 +51,10 @@ def product_list(request, quote_id, template="quote_generator/products.html"):
 
     if manufacturer_id == None:
 	category_id = request.GET.get("category_id")
-	products = Product.objects.filter(categories=category_id)
+	products = get_list_or_404(Product, categories=category_id)
 	result_set = make_result_set(quote_id, category_id, "category", products, Category)
     else:
-	products = Product.objects.filter(manufacturer=manufacturer_id)
+	products = get_list_or_404(Product, manufacturer=manufacturer_id)
 	result_set = make_result_set(quote_id, manufacturer_id, "manufacturer", products, Manufacturer)
 
     return render_to_response(template, {"result": result_set}, context_instance=RequestContext(request))
@@ -80,29 +80,30 @@ def quote_item(request, action):
 	quantity = request.POST.get("quantity").strip()
 
 	try:
-	    product_exist = QuoteItem.objects.get(quote=quote, product=product)
+	    product_exist = get_object_or_404(QuoteItem, quote=quote, product=product)
 	    product_exist.quantity = int(product_exist.quantity) + int(quantity)
 	    product_exist.save()
-	except QuoteItem.DoesNotExist:
+	except Http404:
 	    QuoteItem.objects.create(quote=quote, product=product, quantity=quantity, quote_item_cost=0)
 
 	return ("ok", "Product Added")
 
     if action == "unset":
-	QuoteItem.objects.get(quote=quote, product=product).delete()
+	get_object_or_404(QuoteItem, quote=quote, product=product).delete()
 	return ("ok", "Product Removed")
 
 def product_groups(request, template="quote_generator/product_home.html"):
     quote_id = request.GET.get("quote_id").strip()
-    quote = Quote.objects.get(pk=quote_id)
+    quote = get_object_or_404(Quote, pk=quote_id)
     
     return render_to_response(template, {
 	"quote": quote
     }, context_instance=RequestContext(request))
 
 def preview_quote(request, quote_id, template="quote_generator/quote_preview.html"):
-    # Quote action links should be made dumb if status=1
-    quote = Quote.objects.get(pk=quote_id)
+    quote = get_object_or_404(Quote, pk=quote_id, status=0)
+    if not quote.quoteitem_set.all():
+	raise Http404
 
     return render_to_response(template, {
 	"quote": quote
@@ -110,18 +111,18 @@ def preview_quote(request, quote_id, template="quote_generator/quote_preview.htm
 
 @h.json_response
 def count_quote_items(request, quote_id):
-    quote = Quote.objects.get(pk=quote_id)
+    quote = get_object_or_404(Quote, pk=quote_id)
     try:
-	quote_items = QuoteItem.objects.filter(quote=quote)
+	quote_items = get_list_or_404(QuoteItem, quote=quote)
 	return ("ok", len(quote_items))
-    except QuoteItem.DoesNotExist:
+    except Http404:
 	return ("ok", 0)
 
 @h.json_response
 def email(request, quote_id):
     quote = Quote.objects.get(pk=quote_id)
     user_id = request.POST.get("user_id").strip()
-    email = User.objects.get(pk=user_id).email
+    email = get_object_or_404(User, pk=user_id).email
 
     subject, from_email, to = "YOUR QUOTE, %s" % quote.title, "noreply@aerixnigeria.com", email
     text_content = ""
