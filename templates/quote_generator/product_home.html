@@ -61,37 +61,31 @@
 {% endblock %}
 
 {% block main %}
-    {% if user.is_authenticated %}
-	<div id="quote-info" class="info widget">
-	    <p></p>
-	</div>
+    <div id="quote-info" class="info widget">
+	<p></p>
+    </div>
 
-	<div class="widget">
-	    <script type="text/javascript">
-		var url = "/manufacturer_list/";
-		ajaxGet(url);
+    <div class="widget">
+	<script type="text/javascript">
+	    var url = "/manufacturer_list/";
+	    ajaxGet(url);
 
-		var url = "/category_list/";
-		ajaxGet(url);
-	    </script>
-	    <h1>Select Product Group</h1>
-	    <p>You may choose products either by their manufacturer or the category they belong.</p>
-	    <div id="tabs" class="padtop">
-		<ul>
-		    <li><a href="#manufacturers">Manufacturers</a></li>
-		    <li><a href="#categories">Categories</a></li>
-		</ul>
-		<div id="manufacturers" class="tab-content">
-		    <dl id="manuf_list"></dl>
-		</div>
-		<div id="categories" class="tab-content">
-		    <dl id="category_list"></dl>
-		</div>
+	    var url = "/category_list/";
+	    ajaxGet(url);
+	</script>
+	<h1>Select Product Group</h1>
+	<p>You may choose products either by their manufacturer or the category they belong.</p>
+	<div id="tabs" class="padtop">
+	    <ul>
+		<li><a href="#manufacturers">Manufacturers</a></li>
+		<li><a href="#categories">Categories</a></li>
+	    </ul>
+	    <div id="manufacturers" class="tab-content">
+		<dl id="manuf_list"></dl>
+	    </div>
+	    <div id="categories" class="tab-content">
+		<dl id="category_list"></dl>
 	    </div>
 	</div>
-    {% else %}
-	{% url acct_signup as signup_url %}
-        {% url acct_login as login_url %}
-        <p>Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
-    {% endif %}
+    </div>
 {% endblock %}

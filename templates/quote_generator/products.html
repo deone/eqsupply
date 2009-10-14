@@ -32,7 +32,6 @@
 
 {% block main %}
     <div class="widget">
-    {% if user.is_authenticated %}
 	{% if result.manufacturer %}
 	    <h1>Products by {{ result.manufacturer }}</h1>
 	{% endif %}
@@ -91,10 +90,5 @@
 		</tr>
 	    </tbody>
 	</table>
-    {% else %}
-        {% url acct_signup as signup_url %}
-        {% url acct_login as login_url %}
-        <p>Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
-    {% endif %}
     </div>
 {% endblock %}

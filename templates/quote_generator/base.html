@@ -16,7 +16,15 @@
 
 {% block body %}
     <div class="clearfix padtop">
+    {% if user.is_authenticated %}
 	{% block main %}{% endblock %}
+    {% else %}
+	{% url acct_signup as signup_url %}
+	{% url acct_login as login_url %}
+	<div class="info widget">
+	    <p>Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
+	</div>
+    {% endif %}
 	{% block sidebar %}{% endblock %}
     </div>
 {% endblock %}

@@ -14,7 +14,6 @@
 
 {% block main %}
     <div class="widget">
-    {% if user.is_authenticated %}
 	<h1>{{ quote.title }}</h1>
 	<table width="100%" class="product-list padtop">
 	    <thead>
@@ -51,10 +50,5 @@
 		</tr>
 	    </tbody>
 	</table>
-    {% else %}
-	{% url acct_signup as signup_url %}
-	{% url acct_login as login_url %}
-	<p>Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
-    {% endif %}
     </div>
 {% endblock %}

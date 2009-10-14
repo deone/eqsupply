@@ -4,7 +4,6 @@
 
 {% block main %}
     <div class="widget">
-    {% if user.is_authenticated %}
 	<h1>Welcome {{ user.username }}!</h1>
 
 	<p>To <a href="/quote/home/?user_id={{ user.id }}"><b>generate a quote</b></a>:</p>
@@ -15,11 +14,5 @@
 	    <li>Send the quote to your email!</li>
 	</ol>
 	<p>You may also <a href=""><b>complete an existing quote generation process</b></a> by adding or removing items, previewing and sending the quote to your email.</p>
-    {% else %}
-	    {% url acct_signup as signup_url %}
-	    {% url acct_login as login_url %}
-	    <p>Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.</p>
-	</div>
-    {% endif %}
     </div>
 {% endblock %}
