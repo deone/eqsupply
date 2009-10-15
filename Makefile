@@ -18,6 +18,9 @@ build:
 install: build
 	@./install.sh $(DESTDIR)
 
+clean:
+	@rm -rf build
+
 dist: distclean
 	@mkdir -p $(NAME)-$(VERSION)
 	@cp -r bin $(NAME)-$(VERSION)/
@@ -27,9 +30,6 @@ dist: distclean
 	@cp authbackends.* helpers.* __init__.* manage.py settings* urls.* $(NAME)-$(VERSION)/
 	@cp -r sql $(NAME)-$(VERSION)/
 	@cp INSTALL MANIFEST.in Makefile README TODO $(NAME)-$(VERSION)
-
-clean:
-	@rm -rf build
 
 distclean: clean
 	@rm -rf $(NAME)-$(VERSION)*
