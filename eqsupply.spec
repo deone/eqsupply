@@ -7,16 +7,18 @@ License:	GPL
 Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-build
 
-Prereq:		mysql_server
+Prereq:		mysql-server
 Prereq:		mysql
 Prereq:		httpd
 Prereq:		python
 
+
 %description
 In the current use case, eqsupply is the web platform for an equipment supply business, primarily dealing in oil, gas and manufacturing. A little tweaking would make it generic.
 
+
 %prep
-%setup -q -n %{NAME}-%{VERSION}
+%setup -q
 
 
 %build
@@ -33,7 +35,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root)
+%defattr(-,root,root,-)
 %config /etc/httpd/conf.d/eqsupplymod_wsgi.conf
 /usr/local/www/
 /usr/bin/eqsupply-setup

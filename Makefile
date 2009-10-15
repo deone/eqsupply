@@ -1,6 +1,6 @@
 VERSION=0.1
 NAME=eqsupply
-TOPDIR=/usr/src/redhat
+TOPDIR=/home/zedd/rpmbuild
 
 all: build
 	@echo "All Done"
@@ -27,7 +27,9 @@ dist: distclean
 	@cp -r bin $(NAME)-$(VERSION)/
 	@cp -r conf $(NAME)-$(VERSION)/
 	@cp -r apache $(NAME)-$(VERSION)/
-	@cp -r account/ quote_generator/ site_media/ templates/ 
+	@cp -r account/ quote_generator/ $(NAME)-$(VERSION)/
+	@cp -r templates/ $(NAME)-$(VERSION)/
+	@cp -r site_media/ $(NAME)-$(VERSION)/
 	@cp authbackends.* helpers.* __init__.* manage.py settings* urls.* $(NAME)-$(VERSION)/
 	@cp -r sql $(NAME)-$(VERSION)/
 	@cp INSTALL MANIFEST.in Makefile README TODO $(NAME)-$(VERSION)/
@@ -40,9 +42,5 @@ distclean: clean
 	@rm -rf $(NAME)-$(VERSION)*
 
 rpm: dist
-	@rm -rf $(TOPDIR)/SOURCES/$(NAME)*
-	@rm -rf $(TOPDIR)/RPMS/i386/$(NAME)*
-	@mv $(NAME)-$(VERSION).tar.gz $(TOPDIR)/SOURCES/
-	@cp $(NAME).spec $(TOPDIR)/SPECS/
-	@rpmbuild -bb $(TOPDIR)/SPECS/$(NAME).spec
+	@rpmbuild -tb $(NAME)-$(VERSION).tar.gz
 	@mv $(TOPDIR)/RPMS/i386/$(NAME)*.rpm .
