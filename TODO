@@ -23,5 +23,7 @@ Pricing patch.
 
 DEPLOYMENT
 ==========
-make rpm
-write deploy shell script. Should take an argument either local or online.
+Write setup.py.
+Build eqsupply from source.
+Make rpm
+Write deploy shell script. Should take an argument either local or online.
