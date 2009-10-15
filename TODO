@@ -20,6 +20,8 @@ Remember to always use todict() wherever necessary.
 Write all tests. Models, views and javascript.
 Always raise Http404 meaningfully.
 Pricing patch.
+Email setup locally.
+
 
 DEPLOYMENT
 ==========
