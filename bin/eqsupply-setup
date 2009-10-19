@@ -1,3 +1,14 @@
 #!/bin/bash
 
 # Run SQL scripts
+echo -n "Creating database..."
+mysqladmin -u root -p drop eqsupply || exit
+mysql -u root -p < /var/lib/eqsupply/sql/create.sql || exit
+echo "ok"
+
+echo -n "Creating tables..."
+python ../manage.py syncdb || exit
+
+echo -n "Inserting test data"
+mysql -u root -p /var/lib/eqsupply/sql/data.sql || exit
+echo "Setup Complete!"
