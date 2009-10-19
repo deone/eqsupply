@@ -83,10 +83,10 @@ INSTALLED_APPS = (
     "eqsupply.quote_generator",
 )
 
-EMAIL_HOST = "localhost"  # "essienitaessien.com', 'smtp.gmail.com'
-EMAIL_PORT = 1025 		    # 8045, 587
-#EMAIL_HOST_USER = "erecruit"	    # "erecruit"
-#EMAIL_HOST_PASSWORD = "3r3cru17"    # "3r3cru17"
+EMAIL_HOST = "essienitaessien.com"
+EMAIL_PORT = 8045
+EMAIL_HOST_USER = "erecruit"
+EMAIL_HOST_PASSWORD = "3r3cru17"
 
 CACHE_BACKEND = "locmem:///"
 
