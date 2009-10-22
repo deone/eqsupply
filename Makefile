@@ -40,6 +40,7 @@ dist: distclean
 
 distclean: clean
 	@rm -rf $(NAME)-$(VERSION)*
+	@rm -rf $(NAME)-debuginfo*
 
 rpm: dist
 	@rpmbuild -tb $(NAME)-$(VERSION).tar.gz
