@@ -1,8 +1,4 @@
-(function()    {
-
-});
-
-function ajaxPost(url, data, dLocation)  {//{{{
+function ajaxPost(url, data, dLocation)  {
 
     $.ajax({
         url: url,
@@ -32,9 +28,9 @@ function ajaxPost(url, data, dLocation)  {//{{{
         }
     });
 
-}//}}}
+}
 
-function login()    {//{{{
+function login()    {
     var username = $("#id_username").val();
     var password = $("#id_password").val()
 
@@ -44,9 +40,9 @@ function login()    {//{{{
 
     ajaxPost(url, data, dLocation);
 
-}//}}}
+}
 
-function signup()   {//{{{
+function signup()   {
     var firstname = $("#id_first_name").val();
     var lastname = $("#id_last_name").val();
     var email = $("#id_email").val();
@@ -70,4 +66,4 @@ function signup()   {//{{{
 
     ajaxPost(url, data, dLocation);
 
-}//}}}
+}
