@@ -1,7 +1,7 @@
 Summary:	Web-based equipment quote generator.
 Name:		eqsupply
 Version:	0.1
-Release:	6
+Release:	9
 Group:		Business Solutions/Web-based
 License:	GPL
 Source0:	%{name}-%{version}.tar.gz
