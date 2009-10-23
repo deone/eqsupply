@@ -143,6 +143,9 @@ AFTERNOON = {
     24: 12,
 }
 
+def convert_date(date):
+    return DAYS_OF_WEEK[date.isoweekday()] + " " + MONTHS[date.month] + " " + str(date.day) + ", " + str(date.year)
+
 def convert_time(time):
     time_split = time.split(":")
     hour = int(time_split[0])
@@ -150,8 +153,7 @@ def convert_time(time):
     
     if hour > 12:
 	hour_12 = AFTERNOON[hour]
-	time = str(hour_12) + ":" + minutes + "pm"
-	return time
+	return str(hour_12) + ":" + minutes + "pm"
     else:
 	return str(hour) + ":" + minutes + "am"
 
@@ -160,8 +162,7 @@ def preview_quote(request, quote_id, template="quote_generator/quote_preview.htm
     if not quote.quoteitem_set.all():
 	raise Http404
 
-    readable_date = DAYS_OF_WEEK[quote.time_created.isoweekday()] + " "
-    readable_date += MONTHS[quote.time_created.month] + " " + str(quote.time_created.day) + ", " + str(quote.time_created.year)
+    readable_date = convert_date(quote.time_created)
 
     time = str(quote.time_created.time())
     readable_time = convert_time(time)
@@ -187,7 +188,7 @@ def email(request, quote_id):
     user_id = request.POST.get("user_id").strip()
     email = get_object_or_404(User, pk=user_id).email
 
-    subject, from_email, to = "YOUR QUOTE, %s" % quote.title, "noreply@aerixnigeria.com", email
+    subject, from_email, to = quote.title, "noreply@aerixnigeria.com", email
     text_content = ""
     html_content = create_email(quote)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
