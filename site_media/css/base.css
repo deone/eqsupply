@@ -140,14 +140,15 @@ h1  {
     top: 0px;
     width: 100%;
     text-align: left;
-    border-bottom: solid 2px #ddd;
+    border-bottom: solid 2px #8b8878;
     display: none;
-    background-color: #f0f8ff;
+    background-color: #fbec5d;
 }
 #msger p    {
     margin: 0px 0px 0px 230px;
     line-height: 2em;
     font-size: 125%;
+    color: #000;
 }
 #quote-info {
     margin-bottom: 20px;
