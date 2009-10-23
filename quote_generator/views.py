@@ -32,7 +32,7 @@ def create_quote(request):
     user = get_object_or_404(User, pk=user_id)
     time_created = datetime.datetime.now()
     # Ideally, this should be a setting, it shouldn't be hardcoded.
-    title = company.title() + " Quote, " + str(time_created)
+    title = "Equipment Quote For " + company.title()
 
     quote = Quote.objects.create(user=user, title=title, quote_cost=0, time_created=time_created, status=False)
 
@@ -103,10 +103,70 @@ def product_groups(request, template="quote_generator/product_home.html"):
 	"quote": quote
     }, context_instance=RequestContext(request))
 
+DAYS_OF_WEEK = {
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
+    7: "Sunday",
+}
+
+MONTHS = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December",
+}
+
+AFTERNOON = {
+    13: 1,
+    14: 2,
+    15: 3,
+    16: 4,
+    17: 5,
+    18: 6,
+    19: 7,
+    20: 8,
+    21: 9,
+    22: 10,
+    23: 11,
+    24: 12,
+}
+
+def convert_time(time):
+    time_split = time.split(":")
+    hour = int(time_split[0])
+    minutes = time_split[1]
+    
+    if hour > 12:
+	hour_12 = AFTERNOON[hour]
+	time = str(hour_12) + ":" + minutes + "pm"
+	return time
+    else:
+	return str(hour) + ":" + minutes + "am"
+
 def preview_quote(request, quote_id, template="quote_generator/quote_preview.html"):
     quote = get_object_or_404(Quote, pk=quote_id, status=0)
     if not quote.quoteitem_set.all():
 	raise Http404
+
+    readable_date = DAYS_OF_WEEK[quote.time_created.isoweekday()] + " "
+    readable_date += MONTHS[quote.time_created.month] + " " + str(quote.time_created.day) + ", " + str(quote.time_created.year)
+
+    time = str(quote.time_created.time())
+    readable_time = convert_time(time)
+
+    quote.time_created = readable_date + " at " + readable_time
 
     return render_to_response(template, {
 	"quote": quote
