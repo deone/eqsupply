@@ -75,7 +75,9 @@ function ajaxPost(data, url, options)  {
 			    }
 			);
 			$("#cell" + options["product"]).find(".rem-quote-item").show();
-		    } else  {
+		    }
+
+		    if (url == "/quote/unset_quote_item/")    {
 			showMessage(response.data.body);
 			$("#cell" + options["product"]).find(".rem-quote-item").hide();
 			$("#cell" + options["product"]).find("#add-quote-item").show();
@@ -95,6 +97,7 @@ function ajaxPost(data, url, options)  {
         error: function(response)   {
 	    alert(response);
         }
+
     });
 
 }
