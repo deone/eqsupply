@@ -62,7 +62,7 @@ function signup()   {
                 "&position=" + position + "&company_street_address=" + companyStreetAddress + "&city=" + city + "&state=" + state + "&country=" + country;
 
     var url = "/account/signup/";
-    var dLocation = "/account/signup/";
+    var dLocation = "/account/";
 
     ajaxPost(url, data, dLocation);
 

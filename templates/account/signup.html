@@ -15,9 +15,7 @@
 {% endblock %}
 
 {% block main %}
-    {% if request.flash.feedback %}
-	<div class="info widget"><p>{{ request.flash.feedback|escape }}</p></div>
-    {% endif %}
+    
     <form id="signup" class="left widget">
 	<fieldset>
 	    <legend>Sign Up</legend>
