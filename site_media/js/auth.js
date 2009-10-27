@@ -1,44 +1,41 @@
-function ajaxPost(url, data, dLocation)  {
+var options = {
+    url: null,
+    type: "POST",
+    data: null,
+    dataType: "json",
+    success: null,
+    error: function(response)   {
+	showMessage("Internal Server Error");
+    }
+}
 
-    $.ajax({
-        url: url,
-        type: "POST",
-        data: data,
-        dataType: "json",
+function authCallback(response, dLocation)    {
 
-        success: function(response) {
-            if (response.code != 0) {
-		showMessage("Internal Server Error");
-            } else  {
-                if (response.data.type == "error")  {
-		    if (!response.data.body.keys)   {
-			showMessage(response.data.body["__all__"]);
-		    } else  {
-			highlightErrorFields(response.data.body);
-			showMessage("Please fill out required fields");
-		    }
-                } else  {
-                    document.location = dLocation;
-                }
-            }
-        },
-
-        error: function(response)   {
-	    showMessage("Internal Server Error");
-        }
-    });
+    if (response.data.type == "error")  {
+	if (!response.data.body.keys)   {
+	    showMessage(response.data.body["__all__"]);
+	} else  {
+	    highlightErrorFields(response.data.body);
+	    showMessage("Please fill out required fields");
+	}
+    } else  {
+	document.location = dLocation;
+    }
 
 }
 
 function login()    {
+
     var username = $("#id_username").val();
     var password = $("#id_password").val()
 
-    var data = "username=" + username + "&password=" + password;
-    var url = "/account/";
-    var dLocation = "/quote/";
+    options["url"] = "/account/";
+    options["data"] = "username=" + username + "&password=" + password;
+    options["success"] = function(response) {
+	authCallback(response, "/quote/");
+    }
 
-    ajaxPost(url, data, dLocation);
+    $.ajax(options);
 
 }
 
@@ -57,13 +54,14 @@ function signup()   {
     var city = $("#id_city").val();
     var country = $("#id_country").val();
 
-    var data = "first_name=" + firstname + "&last_name=" + lastname + "&email=" + email + "&phone=" + phone + 
+    options["url"] = "/account/signup/";
+    options["data"] = "first_name=" + firstname + "&last_name=" + lastname + "&email=" + email + "&phone=" + phone + 
                 "&username=" + username + "&password1=" + password1 + "&password2=" + password2 + "&company=" + company + 
                 "&position=" + position + "&company_street_address=" + companyStreetAddress + "&city=" + city + "&state=" + state + "&country=" + country;
+    options["success"] = function(response) {
+	authCallback(response, "/account/");
+    }
 
-    var url = "/account/signup/";
-    var dLocation = "/account/";
-
-    ajaxPost(url, data, dLocation);
+    $.ajax(options);
 
 }
