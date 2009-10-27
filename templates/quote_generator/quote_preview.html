@@ -13,6 +13,10 @@
 {% endblock %}
 
 {% block main %}
+    {% if request.flash.feedback %}
+	<div class="info widget"><p>{{ request.flash.feedback|escape }}</p></div>
+    {% endif %}
+
     <div class="widget">
 	<h1>{{ quote.title }}</h1>
 	<p>Created On {{ quote.time_created }}</p>
@@ -40,13 +44,13 @@
 	    {% endfor %}
 		<tr>
 		    <td id="quote-actions">
-			<p class="notices">Prices are not displayed on our web site. However, they would be displayed in the quote we'll send to your email.</p>
+			<!--<p class="notices">Prices are not displayed on our web site. However, they would be displayed in the quote we'll send to your email.</p>-->
 		    </td>
 		    <td>
 			<p><a href="javascript:deleteQuote({{ quote.id }})">Discard Quote</a></p>
 		    </td>
 		    <td>
-			<p><a href="javascript:emailQuote({{ quote.id }}, {{ user.id }})">Send to email</a></p>
+			<p><a href="javascript:emailQuote({{ quote.id }}, {{ user.id }})">Process Quote</a></p>
 		    </td>
 		</tr>
 	    </tbody>
