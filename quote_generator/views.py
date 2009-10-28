@@ -7,22 +7,12 @@ from django.http import Http404
 from django.conf import settings
 
 from django.contrib.auth.models import User
-from account.models import UserAccount
 
 from eqsupply import helpers as h
 from quote_generator.models import *
 
 import datetime
 from traceback import print_exc
-
-@h.json_response
-def quote_home(request, template="quote_generator/quote.html"):
-    user_id = request.GET.get("user_id").strip()
-    user_account = get_object_or_404(UserAccount, pk=user_id)
-
-    return render_to_response(template, {
-	"user_account": user_account
-    }, context_instance=RequestContext(request))
 
 @h.json_response
 def create_quote(request):

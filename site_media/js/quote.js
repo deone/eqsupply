@@ -29,6 +29,9 @@ function ajaxGet(url)	{
 		    $("#quote-info").show();
 		}
 	    }
+	    if (url.split("/")[3] == "company")	{
+		$("#user-company").attr("value", response.data.body);
+	    }
 	},
 
 	error: function(response)   {
@@ -175,4 +178,10 @@ function quote(action, productId) {
 
 	ajaxPost(data, url, params);
     }
+}
+
+function getUserCompany(id) {
+    var url = "/account/" + id + "/company/";
+
+    ajaxGet(url);
 }

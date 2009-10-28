@@ -11,7 +11,7 @@ from quote_generator.models import Quote
 
 from eqsupply import helpers as h
 
-def dict_error(errors):#{{{
+def dict_error(errors):
     error_dict = {}
     keys = []
 
@@ -22,10 +22,17 @@ def dict_error(errors):#{{{
     if keys != ["__all__"]:
         error_dict["keys"] = keys
 
-    return error_dict#}}}
+    return error_dict
 
 @h.json_response
-def login(request, form_class=LoginForm, template="account/login.html", **kwargs):#{{{
+def get_user_company(request, user_id):
+    user_account = get_object_or_404(UserAccount, pk=user_id)
+    user_company = user_account.company
+
+    return ("ok", user_company)
+
+@h.json_response
+def login(request, form_class=LoginForm, template="account/login.html", **kwargs):
     if request.method == "POST":
         form = form_class(request.POST)
 
@@ -41,10 +48,10 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
 
         return render_to_response(template, {
             "form": form, 
-        }, context_instance=RequestContext(request))#}}}
+        }, context_instance=RequestContext(request))
 
 @h.json_response
-def signup(request, form_class=SignupForm, template="account/signup.html", **kwargs):#{{{
+def signup(request, form_class=SignupForm, template="account/signup.html", **kwargs):
     if request.method == "POST":
         form = SignupForm(request.POST)
 
@@ -62,9 +69,9 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 
         return render_to_response(template, {
             "form": form,
-        }, context_instance=RequestContext(request))#}}}
+        }, context_instance=RequestContext(request))
 
-def email_user(email, reg_id):#{{{
+def email_user(email, reg_id):
 	activation_link = create_activation_link(reg_id)
 	email_list = []
 	email_list.append(email)
@@ -72,13 +79,13 @@ def email_user(email, reg_id):#{{{
 	message = settings.ACTIVATION_EMAIL_MESSAGE % activation_link
 	sender = settings.EMAIL_SENDER
 
-	send_mail(subject, message, sender, email_list, fail_silently=False)#}}}
+	send_mail(subject, message, sender, email_list, fail_silently=False)
 
 def create_activation_link(reg_id):
 	url = settings.BASE_URL + "account/activate/?reg_id=%s" % reg_id
 	return url
 
-def activate(request):#{{{
+def activate(request):
 	reg_id = request.GET['reg_id']
 	activated_user = get_object_or_404(UserAccount, reg_id=reg_id)
 	activated_user.is_active = 1
@@ -86,7 +93,7 @@ def activate(request):#{{{
 
 	return render_to_response("account/activate.html", {
 		"user": activated_user,
-	}, context_instance=RequestContext(request))#}}}
+	}, context_instance=RequestContext(request))
 
 @h.json_response
 def get_pending_quotes(request, user_id):

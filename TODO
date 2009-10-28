@@ -23,7 +23,7 @@ Pricing patch.
 
 #msger always redisplays the previous msg if it needs to display another. We should always clear each message after displaying.
 e.g if I try to perform an action and I get "Internal Server Error" this time, the next time I try it and perform it correctly, instead of displaying default message "Loading", it displays "Internal Server Error" on ajaxStart().
-
+Move all funny looking routes into their proper place, we need to create a products app.
 
 DEPLOYMENT
 ==========

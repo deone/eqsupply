@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     (r'^$', include('account.urls')),
     (r'^account/', include('account.urls')),
     (r'^quote/', include('quote_generator.urls')),
-    (r'^product_groups/', quote_generator.views.product_groups),
+    (r'^product_groups/', quote_generator.views.product_groups),    # should we have a products app to handle all product-related requests?
     (r'^manufacturer_list/$', quote_generator.views.view_products_by, {"view": "manufacturer"}),
     (r'^category_list/$', quote_generator.views.view_products_by, {"view": "category"}),
     (r'^admin/(.*)', admin.site.root),

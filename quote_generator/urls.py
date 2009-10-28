@@ -9,7 +9,6 @@ urlpatterns = patterns('',
     url(r'^manufacturers/$', direct_to_template, {"template": "quote_generator/manufacturers.html"}, name="manufacturers"),
     url(r'^categories/$', direct_to_template, {"template": "quote_generator/categories.html"}, name="categories"),
 
-    url(r'^home/', views.quote_home),
     (r'^(?P<quote_id>\d+)/preview/$', views.preview_quote),
     (r'^(?P<quote_id>\d+)/email/$', views.email),
     (r'^create/$', views.create_quote),
