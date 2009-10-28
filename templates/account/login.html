@@ -8,6 +8,12 @@
 	    $("#msger").ajaxStart(function()	{
 		$(this).slideDown("fast");
 	    });
+
+	    $("#login input").bind("keydown", function(e)   {
+		if (e.keyCode == 13)	{
+		    login();
+		}
+	    });
 	});
     </script>
 {% endblock %}
@@ -25,7 +31,7 @@
 		{% for field in form %}
 		    <li>{{ field.label_tag }}{{ field }}</li>
 		{% endfor %}
-		<li><label></label><input type="button" value="Log In" onClick="login()" /></li>
+		<li><label></label><input type="button" value="Log In"/></li>
 	    </ol>
 	    {% url account.views.password_reset as pwd_reset_url %}
 	    <!--<a href="{{ pwd_reset_url }}">Forgot password?</a>-->
