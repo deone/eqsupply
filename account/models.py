@@ -15,12 +15,12 @@ class UserAccount(User):
     >>> assert new_user.state == "Lagos"
     >>> assert new_user.country == "Nigeria"
     """
-    phone = models.CharField(max_length=15, unique=True)
-    company = models.CharField(max_length=100)
-    position = models.CharField(max_length=100)
-    company_street_address = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15, unique=True, null=True)
+    company = models.CharField(max_length=100, null=True)
+    position = models.CharField(max_length=100, null=True)
+    company_street_address = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=100, null=True)
+    state = models.CharField(max_length=100, null=True)
     country = models.CharField(max_length=100, null=True)
     reg_id = models.CharField(max_length=255)
 

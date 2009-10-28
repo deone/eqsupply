@@ -21,13 +21,10 @@ Write all tests. Models, views and javascript.
 Always raise Http404 meaningfully.
 Pricing patch.
 
-#msger always redisplays the previous msg if it needs to display another. We should always clear each message after displaying.
+-#msger always redisplays the previous msg if it needs to display another. We should always clear each message after displaying.
 e.g if I try to perform an action and I get "Internal Server Error" this time, the next time I try it and perform it correctly, instead of displaying default message "Loading", it displays "Internal Server Error" on ajaxStart().
-Move all funny looking routes into their proper place, we need to create a products app.
-
-DEPLOYMENT
-==========
-Write setup.py.
-Build eqsupply from source.
-Make rpm
-Write deploy shell script. Should take an argument either local or online.
+-Move all funny looking routes into their proper place, we need to create a products app.
+-When a user signs up, normally, the insertion happens before activation email is sent. Then the user retries and there's a duplicate entry error because the record has been inserted once, how can we handle this situation?
+-Why don't we display the activation message as a flash object on the login page? Just like "Create quote", activation is too small an operation to occupy one page.
+-#msger is messed up, some serious check is needed on the login page.
+-Don't forget to eliminate ajaxPost and ajaxGet in quote.js too. We really need a products app
