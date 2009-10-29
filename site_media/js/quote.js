@@ -159,9 +159,9 @@ function displayQtyFeedback(referrer)	{
 	    var count = response.data.body;
 	    if (count != 0)	{
 		if (count == 1)	{
-		    $("#quote-info p").html("You have added " + response.data.body + " product to your quote.");
+		    $("#quote-info p").html("You have added " + response.data.body + " product to your quote. <a href='#'>Preview</a>");
 		} else if (count > 1)	{
-		    $("#quote-info p").html("You have added " + response.data.body + " products to your quote.");
+		    $("#quote-info p").html("You have added " + response.data.body + " products to your quote. <a href='#'>Preview</a>");
 		}
 		$("#quote-info").show();
 	    }

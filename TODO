@@ -22,13 +22,11 @@ Always raise Http404 meaningfully.
 Pricing patch.
 
 -Move all funny looking routes into their proper place, we need to create a products app.
--When a user signs up, normally, the insertion happens before activation email is sent. Then the user retries and there's a duplicate entry error because the record has been inserted once, how can we handle this situation?
--Why don't we display the activation message as a flash object on the login page? Just like "Create quote", activation is too small an operation to occupy one page.
--#msger is messed up, some serious check is needed on the login page.
--Lightbox effect to enter remaining fields before user's initial quote processing. For subsequent ones, no prompting for details.
--Lightbox effect for Quote Preview. Use escape key to close, don't forget pagination in the case of long quotes.
--Don't forget to eliminate ajaxPost and ajaxGet in quote.js too. We really need a products app.
-
--Right now, fix activation flash message and the email user-friendly time format. Logout message should also redirect to login page.
+-When a user signs up, normally, the insertion happens before activation email is sent. Then the user retries and there's a duplicate entry error because the record has been inserted once, how can we handle this situation? Maybe #msger should not slideUp if there's such an error. We can just give an info to the user to check his internet connection and retry(this would be a link to send just the email).
+-Why don't we display the activation feedback as a django flash object on the login page? Just like "Create quote", activation is too small an operation to occupy one page. Same with logout, it should be redirected to the login page with a django flash message.
 -Solution to incorrect messages in login and signup: After each error message is displayed, msger should be html'ed with <p>Loading...</p>
 -We might also want to make #msger display page-customized messages.e.g When a user click "Process Quote", #msger should display "Processing Quote, Please Wait..." instead of "Loading...".
+
+Next to dos: 
+-Lightbox effect for Quote Preview. Use escape key to close, don't forget pagination in the case of long quotes.
+-Lightbox effect to enter remaining fields before user's initial quote processing. For subsequent ones, no prompting for details.

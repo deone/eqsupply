@@ -196,7 +196,7 @@ def create_email(quote):
 	    <body style="background-color: #FFF; margin: 0; color: #333; font-family: Arial, sans-serif; font-size: 10pt;">
 	    """
     html += "<h1 style='margin:0px; font-size:160%'>" + quote.title + "</h1>"
-    html += "<p>Created " + str(quote.time_created) + "</p>"
+    html += "<p>Created " + convert_date(quote.time_created) + " at " + convert_time(str(quote.time_created.time())) + "</p>"
     html += """
 	    <table width="100%" style="border-spacing: 0px">
 		<thead>
