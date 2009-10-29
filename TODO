@@ -21,8 +21,6 @@ Write all tests. Models, views and javascript.
 Always raise Http404 meaningfully.
 Pricing patch.
 
--#msger always redisplays the previous msg if it needs to display another. We should always clear each message after displaying.
-e.g if I try to perform an action and I get "Internal Server Error" this time, the next time I try it and perform it correctly, instead of displaying default message "Loading", it displays "Internal Server Error" on ajaxStart().
 -Move all funny looking routes into their proper place, we need to create a products app.
 -When a user signs up, normally, the insertion happens before activation email is sent. Then the user retries and there's a duplicate entry error because the record has been inserted once, how can we handle this situation?
 -Why don't we display the activation message as a flash object on the login page? Just like "Create quote", activation is too small an operation to occupy one page.
@@ -30,3 +28,6 @@ e.g if I try to perform an action and I get "Internal Server Error" this time, t
 -Lightbox effect to enter remaining fields before user's initial quote processing. For subsequent ones, no prompting for details.
 -Lightbox effect for Quote Preview. Use escape key to close, don't forget pagination in the case of long quotes.
 -Don't forget to eliminate ajaxPost and ajaxGet in quote.js too. We really need a products app.
+
+-Right now, fix activation flash message and the email user-friendly time format.
+-Solution to incorrect messages in login and signup: After each error message is displayed, msger should be html'ed with <p>Loading...</p>

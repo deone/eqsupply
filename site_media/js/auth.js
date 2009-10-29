@@ -9,34 +9,34 @@ var options = {
     }
 }
 
-function authCallback(response, dLocation)    {
-
-    if (response.data.type == "error")  {
-	if (!response.data.body.keys)   {
-	    showMessage(response.data.body["__all__"]);
-	} else  {
-	    highlightErrorFields(response.data.body);
-	    showMessage("Please fill out required fields");
-	}
+function displayErrors(errorObj)    {
+    if (!errorObj.keys)   {
+	showMessage(errorObj["__all__"]);
     } else  {
-	document.location = dLocation;
+	highlightErrorFields(errorObj);
+	showMessage("Please fill out required fields");
     }
-
 }
 
 function logIn()    {
-
     var username = $("#id_username").val();
     var password = $("#id_password").val()
 
     options["url"] = "/account/";
     options["data"] = "username=" + username + "&password=" + password;
     options["success"] = function(response) {
-	authCallback(response, "/quote/");
+	displayErrorsOrRedirect(response, "/quote/");
     }
 
     $.ajax(options);
+}
 
+function displayErrorsOrRedirect(respObj, dLocation)	{
+    if (respObj.data.type != "ok")  {
+	displayErrors(respObj.data.body);
+    } else  {
+	document.location = dLocation;
+    }
 }
 
 function signUp()   {
@@ -55,9 +55,8 @@ function signUp()   {
 			"&password1=" + password1 + 
 			"&password2=" + password2;
     options["success"] = function(response) {
-	authCallback(response, "/account/");
+	displayErrorsOrRedirect(response, "/account/");
     }
 
     $.ajax(options);
-
 }
