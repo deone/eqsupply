@@ -178,7 +178,7 @@ def email(request, quote_id):
     user_id = request.POST.get("user_id").strip()
     email = get_object_or_404(User, pk=user_id).email
 
-    subject, from_email, to = quote.title, "noreply@aerixnigeria.com", email
+    subject, from_email, to = quote.title, settings.EMAIL_SENDER, email
     text_content = ""
     html_content = create_email(quote)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

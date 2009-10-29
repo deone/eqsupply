@@ -90,9 +90,10 @@ def activate(request):
 	activated_user = get_object_or_404(UserAccount, reg_id=reg_id)
 	activated_user.is_active = 1
 	activated_user.save()
+        #request.flash['feedback'] = "Registration successful. An activation email has been sent to %s." % email
 
 	return render_to_response("account/activate.html", {
-		"user": activated_user,
+	    "user": activated_user,
 	}, context_instance=RequestContext(request))
 
 @h.json_response

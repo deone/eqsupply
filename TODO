@@ -29,5 +29,6 @@ Pricing patch.
 -Lightbox effect for Quote Preview. Use escape key to close, don't forget pagination in the case of long quotes.
 -Don't forget to eliminate ajaxPost and ajaxGet in quote.js too. We really need a products app.
 
--Right now, fix activation flash message and the email user-friendly time format.
+-Right now, fix activation flash message and the email user-friendly time format. Logout message should also redirect to login page.
 -Solution to incorrect messages in login and signup: After each error message is displayed, msger should be html'ed with <p>Loading...</p>
+-We might also want to make #msger display page-customized messages.e.g When a user click "Process Quote", #msger should display "Processing Quote, Please Wait..." instead of "Loading...".
