@@ -1,3 +1,14 @@
+var options = {
+    url: null,
+    type: "POST",
+    data: null,
+    dataType: "json",
+    success: null,
+    error: function(response)   {
+	showMessage("Internal Server Error");
+    }
+}
+
 function ajaxGet(url)	{
 
     $.ajax({
@@ -6,12 +17,6 @@ function ajaxGet(url)	{
 	dataType: "json",
 
 	success: function(response) {
-	    /* Pending quotes code
-	    if (response.data.body != "") {
-		showQuotes(response.data.body);
-	    } else  {
-		$("#p-quotes").append("<p>You have no pending quotes.</p>");
-	    }*/
 	    if (url == "/manufacturer_list/")	{
 		showManufacturers(response);
 	    }
@@ -29,9 +34,6 @@ function ajaxGet(url)	{
 		    $("#quote-info").show();
 		}
 	    }
-	    if (url.split("/")[3] == "company")	{
-		$("#user-company").attr("value", response.data.body);
-	    }
 	},
 
 	error: function(response)   {
@@ -41,98 +43,24 @@ function ajaxGet(url)	{
 
 }
 
-function ajaxPost(data, url, options)  {
-
-    $.ajax({
-        url: url,
-        type: "POST",
-        data: data,
-        dataType: "json",
-
-        success: function(response) {
-            if (response.code != 0) {
-                alert(response.data.body);
-            } else  {
-		if (response.data.type != "ok")	{
-		    showMessage(response.data.body);
-		} else	{
-		    var urlBits = url.split("/")
-		    
-		    if (urlBits[urlBits.length - 2] == "create")    {
-			document.location = "/product_groups/?quote_id=" + response.data.body["id"];
-		    }
-
-		    if (urlBits[urlBits.length - 2] == "email") {
-			showMessage(response.data.body);
-		    }
-
-		    if (url == "/quote/set_quote_item/")	{
-			showMessage(response.data.body);
-			$("#cell" + options["product"]).find("#add-quote-item").hide();
-			$("#cell" + options["product"]).parent().hover(
-			    function()	{
-				$(this).find("#add-quote-item").hide();
-			    },
-			    function()	{
-				$(this).find("#add-quote-item").hide();
-			    }
-			);
-			$("#cell" + options["product"]).find(".rem-quote-item").show();
-		    }
-
-		    if (url == "/quote/unset_quote_item/")    {
-			showMessage(response.data.body);
-			$("#cell" + options["product"]).find(".rem-quote-item").hide();
-			$("#cell" + options["product"]).find("#add-quote-item").show();
-			$("#cell" + options["product"]).parent().hover(
-			    function()	{
-				$(this).find("#add-quote-item").show();
-			    },
-			    function()	{
-				$(this).find("#add-quote-item").hide();
-			    }
-			);
-		    }
-		}
-            }
-        },
-
-        error: function(response)   {
-	    alert(response);
-        }
-
-    });
-
-}
-
 function createQuote()	{
-    var data = "user=" + $("#user-id").val() + "&company=" + $("#user-company").val();
-    var url = "/quote/create/";
+    options["data"] = "user=" + $("#user-id").val() + "&company=" + $("#user-company").val();
+    options["url"] = "/quote/create/";
+    options["success"] = function(response) {
+	document.location = "/product_groups/?quote_id=" + response.data.body["id"];
+    }
 
-    ajaxPost(data, url);
+    $.ajax(options);
 }
 
 function emailQuote(quoteId, userId)	{
-    var url = "/quote/" + quoteId + "/email/";
-    var data = "user_id=" + userId;
-
-    ajaxPost(data, url);
-}
-
-function showQuotes(data)   {
-    var quoteList = "<table><thead></thead><tbody>";
-
-    for (var i=0; i<data.length; i++)	{
-	quoteList += "<tr>" + 
-			"<td><a href=''>" + data[i].title + "</a></td>" + 
-			"<td>" + data[i].time_created + "</td>" + 
-			"</tr>";
+    options["url"] = "/quote/" + quoteId + "/email/";
+    options["data"] = "user_id=" + userId;
+    options["success"] = function(response) {
+	showMessage(response.data.body);
     }
 
-    quoteList += "</tbody></table>";
-
-    $("#p-quotes").append(quoteList);
-
+    $.ajax(options);
 }
 
 function getQuoteData(action, productId)    {
@@ -164,24 +92,69 @@ function getQuoteData(action, productId)    {
     }
 }
 
+function showAddQuoteForm(params) {
+    $("#cell" + params["product"]).find(".rem-quote-item").hide();
+    $("#cell" + params["product"]).find("#add-quote-item").show();
+    $("#cell" + params["product"]).parent().hover(
+	function()	{
+	    $(this).find("#add-quote-item").show();
+	},
+	function()	{
+	    $(this).find("#add-quote-item").hide();
+	}
+    );
+}
+
+function showRemoveQuoteForm(params)	{
+    $("#cell" + params["product"]).find("#add-quote-item").hide();
+    $("#cell" + params["product"]).parent().hover(
+	function()	{
+	    $(this).find("#add-quote-item").hide();
+	},
+	function()	{
+	    $(this).find("#add-quote-item").hide();
+	}
+    );
+    $("#cell" + params["product"]).find(".rem-quote-item").show();
+}
+
+function displayErrorsOrDoAction(msg, url, params)	{
+    showMessage(msg);
+    
+    if (url == "/quote/set_quote_item/")    {
+	showRemoveQuoteForm(params);
+    }
+    if (url == "/quote/unset_quote_item/")  {
+	showAddQuoteForm(params);
+    }
+}
+
 function quote(action, productId) {
     var params = getQuoteData(action, productId);
 
     if (params)	{
 	if (params["quantity"])	{
-	    var data = "quote=" + params["quote"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
-	    var url = "/quote/set_quote_item/";
+	    options["data"] = "quote=" + params["quote"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
+	    options["url"] = "/quote/set_quote_item/";
+	    options["success"] = function(response)  {
+		displayErrorsOrDoAction(response.data.body, options["url"], params);
+	    }
 	} else	{
-	    var data = "quote=" + params["quote"] + "&product=" + params["product"];
-	    var url = "/quote/unset_quote_item/";
+	    options["data"] = "quote=" + params["quote"] + "&product=" + params["product"];
+	    options["url"] = "/quote/unset_quote_item/";
+	    options["success"] = function(response) {
+		displayErrorsOrDoAction(response.data.body, options["url"], params);
+	    }
 	}
-
-	ajaxPost(data, url, params);
     }
+
+    $.ajax(options);
 }
 
 function getUserCompany(id) {
-    var url = "/account/" + id + "/company/";
-
-    ajaxGet(url);
+    options["url"] = "/account/" + id + "/company/";
+    options["success"] = function(response) {
+	$("#user-company").attr("value", response.data.body);
+    }
+    $.ajax(options);
 }
