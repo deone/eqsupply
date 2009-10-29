@@ -1,7 +1,7 @@
 Summary:	Web-based equipment quote generator.
 Name:		eqsupply
 Version:	0.1
-Release:	14
+Release:	15
 Group:		Business Solutions/Web-based
 License:	GPL
 Source0:	%{name}-%{version}.tar.gz
@@ -43,4 +43,4 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %post
-echo -n "Success! To complete the installation, please run 'eqsupply-setup' on the command line"
+echo "Success! To complete the installation, please run 'eqsupply-setup' on the command line"

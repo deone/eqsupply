@@ -12,23 +12,15 @@
 
 	    $("#tabs").tabs();
 
-	    var urlBits = document.referrer.split("/");
-	    
-	    var quoteId = urlBits[4];
-	    /* If urlBits[5] is 'add_product',
-	       call ajaxGet request to model to select the number of quote_items in the quote.
-	       Append to an hidden div
-	       Display the hidden div.*/
-	    if (urlBits[5] == "add_product")	{
-		ajaxGet("/quote/" + quoteId + "/count_items/");
-	    }
-
 	    $("#msger").ajaxStart(function()	{
 		$(this).slideDown("fast");
 	    }).ajaxStop(function()  {
 		$(this).slideUp("fast");
 	    });
 
+	    var urlBits = document.referrer.split("/");
+	    displayQtyFeedback(urlBits);
+	    
 	});
 
 	function showCategories(data)   {
@@ -67,11 +59,8 @@
 
     <div class="widget">
 	<script type="text/javascript">
-	    var url = "/manufacturer_list/";
-	    ajaxGet(url);
-
-	    var url = "/category_list/";
-	    ajaxGet(url);
+	    displayLst("/manufacturer_list/");
+	    displayLst("/category_list/");
 	</script>
 	<h1>Select Product Group</h1>
 	<p>You may choose products either by their manufacturer or the category they belong.</p>

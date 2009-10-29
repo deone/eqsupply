@@ -9,37 +9,27 @@ var options = {
     }
 }
 
-function ajaxGet(url)	{
+function displayLst(url)	{
 
-    $.ajax({
-	url: url,
-	type: "GET",
-	dataType: "json",
+    // A special case: we have to re-initialize the options variable, will take a closer look sometime.
+    var options = {};
 
-	success: function(response) {
-	    if (url == "/manufacturer_list/")	{
-		showManufacturers(response);
-	    }
-	    if (url == "/category_list/")   {
-		showCategories(response);
-	    }
-	    if (url.split("/")[3] == "count_items") {
-		var count = response.data.body;
-		if (count != 0)	{
-		    if (count == 1)	{
-			$("#quote-info p").html("You have added " + response.data.body + " product to your quote.");
-		    } else if (count > 1)	{
-			$("#quote-info p").html("You have added " + response.data.body + " products to your quote.");
-		    }
-		    $("#quote-info").show();
-		}
-	    }
-	},
-
-	error: function(response)   {
-	    alert(response);
+    options["url"] = url;
+    options["type"] = "GET";
+    options["dataType"] = "json";
+    options["success"] = function(response) {
+	if (url == "/manufacturer_list/")   {
+	    showManufacturers(response);
 	}
-    });
+	if (url == "/category_list/")   {
+	    showCategories(response);
+	}
+    }
+    options["error"] = function(response)   {
+	showMessage("Internal Server Error");
+    }
+
+    $.ajax(options);
 
 }
 
@@ -157,4 +147,26 @@ function getUserCompany(id) {
 	$("#user-company").attr("value", response.data.body);
     }
     $.ajax(options);
+}
+
+function displayQtyFeedback(referrer)	{
+    var quoteId = referrer[4];
+
+    if (referrer[5] == "add_product")	{
+	options["type"] = "GET";
+	options["url"] = "/quote/" + quoteId + "/count_items/";
+	options["success"] = function(response)	{
+	    var count = response.data.body;
+	    if (count != 0)	{
+		if (count == 1)	{
+		    $("#quote-info p").html("You have added " + response.data.body + " product to your quote.");
+		} else if (count > 1)	{
+		    $("#quote-info p").html("You have added " + response.data.body + " products to your quote.");
+		}
+		$("#quote-info").show();
+	    }
+	}
+
+	$.ajax(options);
+    }
 }
