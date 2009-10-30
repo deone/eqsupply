@@ -27,6 +27,6 @@ Pricing patch.
 -Solution to incorrect messages in login and signup: After each error message is displayed, msger should be html'ed with <p>Loading...</p>
 -We might also want to make #msger display page-customized messages.e.g When a user click "Process Quote", #msger should display "Processing Quote, Please Wait..." instead of "Loading...".
 
-Next to dos: 
+Next to-dos: 
 -Lightbox effect for Quote Preview. Use escape key to close, don't forget pagination in the case of long quotes.
 -Lightbox effect to enter remaining fields before user's initial quote processing. For subsequent ones, no prompting for details.

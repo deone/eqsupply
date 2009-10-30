@@ -26,8 +26,31 @@
 		$(this).slideDown("fast");
 	    });
 
+	    $("#preview").lightBox();
+	    $('#gallery a').lightBox();
+
 	});
     </script>
+    <style type="text/css">
+	/* jQuery lightBox plugin - Gallery style */
+	#gallery {
+		background-color: #444;
+		padding: 10px;
+		width: 520px;
+	}
+	#gallery ul { list-style: none; }
+	#gallery ul li { display: inline; }
+	#gallery ul img {
+		border: 5px solid #3e3e3e;
+		border-width: 5px 5px 20px;
+	}
+	#gallery ul a:hover img {
+		border: 5px solid #fff;
+		border-width: 5px 5px 20px;
+		color: #fff;
+	}
+	#gallery ul a:hover { color: #fff; }
+    </style>
 {% endblock %}
 
 {% block main %}
@@ -87,9 +110,40 @@
 		<tr>
 		    <td></td>
 		    <td><p><a href="/product_groups/?quote_id={{ result.quote }}">More Products</a></p></td>
-		    <td><p><a href="/quote/{{ result.quote }}/preview/">Preview Quote</a></p></td>
+		    <!--<td><p><a href="/quote/{{ result.quote }}/preview/">Preview Quote</a></p></td>-->
+		    <td><p><a id="preview" href="#test">Preview Quote</a></p></td>
 		</tr>
 	    </tbody>
 	</table>
+    </div>
+    <div id="test"><p>This is a test</p></div>
+    <div id="gallery">
+	<ul>
+	    <li>
+		<a href="/site_media/js/jquery/lightbox/photos/image1.jpg" title="jQuery lightbox">
+		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image1.jpg" width="72" height="72" alt="" />
+		</a>
+	    </li>
+	    <li>
+		<a href="/site_media/js/jquery/lightbox/photos/image2.jpg" title="jQuery lightbox">
+		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image2.jpg" width="72" height="72" alt="" />
+		</a>
+	    </li>
+	    <li>
+		<a href="/site_media/js/jquery/lightbox/photos/image3.jpg" title="jQuery lightbox">
+		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image3.jpg" width="72" height="72" alt="" />
+		</a>
+	    </li>
+	    <li>
+		<a href="/site_media/js/jquery/lightbox/photos/image4.jpg" title="jQuery lightbox">
+		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image4.jpg" width="72" height="72" alt="" />
+		</a>
+	    </li>
+	    <li>
+		<a href="/site_media/js/jquery/lightbox/photos/image5.jpg" title="jQuery lightbox">
+		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image5.jpg" width="72" height="72" alt="" />
+		</a>
+	    </li>
+	</ul>
     </div>
 {% endblock %}
