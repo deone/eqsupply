@@ -140,7 +140,7 @@ function quote(action, productId) {
 
     $.ajax(options);
 }
-
+    
 function getUserCompany(id) {
     options["url"] = "/account/" + id + "/company/";
     options["success"] = function(response) {
