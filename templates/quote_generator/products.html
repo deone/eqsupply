@@ -11,15 +11,6 @@
 
 {% block page_css %}
     <link rel="stylesheet" href="/site_media/js/jquery/dialog/css/jquery-ui.custom.css"/>
-    <style type="text/css">
-	/*demo page css*/
-	.demoHeaders { margin-top: 2em; }
-	#dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
-	#dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
-	ul#icons {margin: 0; padding: 0;}
-	ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
-	ul#icons span.ui-icon {float: left; margin: 0 4px;}
-    </style>
 {% endblock %}
 
 {% block page_js %}
@@ -42,9 +33,8 @@
 
 	    $(function(){
 		// Dialog			
-		$('#form').dialog({
+		$('#user-details').dialog({
 		    autoOpen: false,
-		    width: 600,
 		    buttons: {
 			"Ok": function() { 
 				$(this).dialog("close"); 
@@ -53,21 +43,16 @@
 				$(this).dialog("close"); 
 			} 
 		    },
+		    width: 600,
 		    modal: true
 		});
 		    
 		// Dialog Link
 		$('#dialog_link').click(function(){
-		    $('#form').dialog('open');
+		    $('#user-details').dialog('open');
 		    return false;
 		});
 		
-		//hover states on the static widgets
-		$('#dialog_link, ul#icons li').hover(
-		    function() { $(this).addClass('ui-state-hover'); }, 
-		    function() { $(this).removeClass('ui-state-hover'); }
-		);
-		    
 	    });
 
 	});
@@ -134,18 +119,44 @@
 		    <td></td>
 		    <td><p><a href="/product_groups/?quote_id={{ result.quote }}">More Products</a></p></td>
 		    <!--<td><p><a href="/quote/{{ result.quote }}/preview/">Preview Quote</a></p></td>-->
-		    <td><p><a id="preview" href="#test">Preview Quote</a></p></td>
+		    <td><p><a id="dialog_link" href="#">Preview Quote</a></p></td>
 		</tr>
 	    </tbody>
 	</table>
     </div>
-    <p><a href="#" id="dialog_link" class="ui-state-default ui-corner-all">
-	    <span class="ui-icon ui-icon-newwin"></span>Open Dialog</a>
-	</p>
-    <div id="form" title="Dialog Title">
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
-	dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-	ea commodo consequat.</p>
-	<input type="text"/>
-    </div>
+    <form id="user-details" title="Dialog Title">
+	<fieldset>
+	    <legend>Please provide some more details about you.</legend>
+	    <ol>
+		<li>
+		    <label for="phone">Phone:</label>
+		    <input type="text" id="phone"/>
+		</li>
+		<li>
+		    <label for="phone">Company:</label>
+		    <input type="text" id="company"/>
+		</li>
+		<li>
+		    <label for="position">Position:</label>
+		    <input type="text" id="position"/>
+		</li>
+		<li>
+		    <label for="company_address">Company Address:</label>
+		    <input type="text" id="company_address"/>
+		</li>
+		<li>
+		    <label for="city">City:</label>
+		    <input type="text" id="city"/>
+		</li> 
+		<li>
+		    <label for="phone">State:</label>
+		    <input type="text" id="state"/>
+		</li>
+		<li>
+		    <label for="country">Country:</label>
+		    <input type="text" id="country"/>
+		</li>
+	    </ol>
+	</fieldset>
+    </form>
 {% endblock %}
