@@ -9,7 +9,21 @@
     {% endif %}
 {% endblock %}
 
+{% block page_css %}
+    <link rel="stylesheet" href="/site_media/js/jquery/dialog/css/jquery-ui.custom.css"/>
+    <style type="text/css">
+	/*demo page css*/
+	.demoHeaders { margin-top: 2em; }
+	#dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+	#dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+	ul#icons {margin: 0; padding: 0;}
+	ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
+	ul#icons span.ui-icon {float: left; margin: 0 4px;}
+    </style>
+{% endblock %}
+
 {% block page_js %}
+    <script type="text/javascript" src="/site_media/js/jquery/dialog/jquery-dialog.js"></script>
     <script type="text/javascript">
 	$(function()	{
 
@@ -26,31 +40,38 @@
 		$(this).slideDown("fast");
 	    });
 
-	    $("#preview").lightBox();
-	    $('#gallery a').lightBox();
+	    $(function(){
+		// Dialog			
+		$('#form').dialog({
+		    autoOpen: false,
+		    width: 600,
+		    buttons: {
+			"Ok": function() { 
+				$(this).dialog("close"); 
+			}, 
+			"Cancel": function() { 
+				$(this).dialog("close"); 
+			} 
+		    },
+		    modal: true
+		});
+		    
+		// Dialog Link
+		$('#dialog_link').click(function(){
+		    $('#form').dialog('open');
+		    return false;
+		});
+		
+		//hover states on the static widgets
+		$('#dialog_link, ul#icons li').hover(
+		    function() { $(this).addClass('ui-state-hover'); }, 
+		    function() { $(this).removeClass('ui-state-hover'); }
+		);
+		    
+	    });
 
 	});
     </script>
-    <style type="text/css">
-	/* jQuery lightBox plugin - Gallery style */
-	#gallery {
-		background-color: #444;
-		padding: 10px;
-		width: 520px;
-	}
-	#gallery ul { list-style: none; }
-	#gallery ul li { display: inline; }
-	#gallery ul img {
-		border: 5px solid #3e3e3e;
-		border-width: 5px 5px 20px;
-	}
-	#gallery ul a:hover img {
-		border: 5px solid #fff;
-		border-width: 5px 5px 20px;
-		color: #fff;
-	}
-	#gallery ul a:hover { color: #fff; }
-    </style>
 {% endblock %}
 
 {% block main %}
@@ -67,14 +88,16 @@
 	    <thead>
 		<tr>
 		    <th id="header-1"><h3>Product</h3></th>
-		    <th id="header-2"><h3>
-		    {% if result.manufacturer %}
-			Categories
-		    {% endif %}
-		    {% if result.category %}
-			Manufacturer
-		    {% endif %}
-		    </h3></th>
+		    <th id="header-2">
+			<h3>
+			{% if result.manufacturer %}
+			    Categories
+			{% endif %}
+			{% if result.category %}
+			    Manufacturer
+			{% endif %}
+			</h3>
+		    </th>
 		    <th id="header-3">&nbsp;</th>
 		</tr>
 	    </thead>
@@ -116,34 +139,13 @@
 	    </tbody>
 	</table>
     </div>
-    <div id="test"><p>This is a test</p></div>
-    <div id="gallery">
-	<ul>
-	    <li>
-		<a href="/site_media/js/jquery/lightbox/photos/image1.jpg" title="jQuery lightbox">
-		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image1.jpg" width="72" height="72" alt="" />
-		</a>
-	    </li>
-	    <li>
-		<a href="/site_media/js/jquery/lightbox/photos/image2.jpg" title="jQuery lightbox">
-		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image2.jpg" width="72" height="72" alt="" />
-		</a>
-	    </li>
-	    <li>
-		<a href="/site_media/js/jquery/lightbox/photos/image3.jpg" title="jQuery lightbox">
-		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image3.jpg" width="72" height="72" alt="" />
-		</a>
-	    </li>
-	    <li>
-		<a href="/site_media/js/jquery/lightbox/photos/image4.jpg" title="jQuery lightbox">
-		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image4.jpg" width="72" height="72" alt="" />
-		</a>
-	    </li>
-	    <li>
-		<a href="/site_media/js/jquery/lightbox/photos/image5.jpg" title="jQuery lightbox">
-		    <img src="/site_media/js/jquery/lightbox/photos/thumb_image5.jpg" width="72" height="72" alt="" />
-		</a>
-	    </li>
-	</ul>
+    <p><a href="#" id="dialog_link" class="ui-state-default ui-corner-all">
+	    <span class="ui-icon ui-icon-newwin"></span>Open Dialog</a>
+	</p>
+    <div id="form" title="Dialog Title">
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
+	dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+	ea commodo consequat.</p>
+	<input type="text"/>
     </div>
 {% endblock %}
