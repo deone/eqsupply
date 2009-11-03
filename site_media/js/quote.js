@@ -1,6 +1,6 @@
-var options = {
+var getOptions = {
     url: null,
-    type: "POST",
+    type: "GET",
     data: null,
     dataType: "json",
     success: null,
@@ -9,6 +9,17 @@ var options = {
     }
 }
 
+var postOptions = {
+    url: null,
+    type: "POST",
+    data: null,
+    dataType: "json",
+    success: null,
+    error: function(response)   {
+	showMessage("Internal Server Error");
+    }
+};
+
 function displayLst(url)	{
 
     // A special case: we have to re-initialize the options variable, will take a closer look sometime.
@@ -16,7 +27,6 @@ function displayLst(url)	{
 
     options["url"] = url;
     options["type"] = "GET";
-    options["dataType"] = "json";
     options["success"] = function(response) {
 	if (url == "/manufacturer_list/")   {
 	    showManufacturers(response);
@@ -34,23 +44,23 @@ function displayLst(url)	{
 }
 
 function createQuote()	{
-    options["data"] = "user=" + $("#user-id").val() + "&company=" + $("#user-company").val();
-    options["url"] = "/quote/create/";
-    options["success"] = function(response) {
+    postOptions["data"] = "user=" + $("#user-id").val() + "&company=" + $("#user-company").val();
+    postOptions["url"] = "/quote/create/";
+    postOptions["success"] = function(response) {
 	document.location = "/product_groups/?quote_id=" + response.data.body["id"];
     }
 
-    $.ajax(options);
+    $.ajax(postOptions);
 }
 
 function emailQuote(quoteId, userId)	{
-    options["url"] = "/quote/" + quoteId + "/email/";
-    options["data"] = "user_id=" + userId;
-    options["success"] = function(response) {
+    postOptions["url"] = "/quote/" + quoteId + "/email/";
+    postOptions["data"] = "user_id=" + userId;
+    postOptions["success"] = function(response) {
 	showMessage(response.data.body);
     }
 
-    $.ajax(options);
+    $.ajax(postOptions);
 }
 
 function getQuoteData(action, productId)    {
@@ -124,38 +134,37 @@ function quote(action, productId) {
 
     if (params)	{
 	if (params["quantity"])	{
-	    options["data"] = "quote=" + params["quote"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
-	    options["url"] = "/quote/set_quote_item/";
-	    options["success"] = function(response)  {
-		displayErrorsOrDoAction(response.data.body, options["url"], params);
+	    postOptions["data"] = "quote=" + params["quote"] + "&product=" + params["product"] + "&quantity=" + params["quantity"];
+	    postOptions["url"] = "/quote/set_quote_item/";
+	    postOptions["success"] = function(response)  {
+		displayErrorsOrDoAction(response.data.body, postOptions["url"], params);
 	    }
 	} else	{
-	    options["data"] = "quote=" + params["quote"] + "&product=" + params["product"];
-	    options["url"] = "/quote/unset_quote_item/";
-	    options["success"] = function(response) {
-		displayErrorsOrDoAction(response.data.body, options["url"], params);
+	    postOptions["data"] = "quote=" + params["quote"] + "&product=" + params["product"];
+	    postOptions["url"] = "/quote/unset_quote_item/";
+	    postOptions["success"] = function(response) {
+		displayErrorsOrDoAction(response.data.body, postOptions["url"], params);
 	    }
 	}
     }
 
-    $.ajax(options);
+    $.ajax(postOptions);
 }
     
 function getUserCompany(id) {
-    options["url"] = "/account/" + id + "/company/";
-    options["success"] = function(response) {
+    getOptions["url"] = "/account/" + id + "/company/";
+    getOptions["success"] = function(response) {
 	$("#user-company").attr("value", response.data.body);
     }
-    $.ajax(options);
+    $.ajax(getOptions);
 }
 
 function displayQtyFeedback(referrer)	{
     var quoteId = referrer[4];
 
     if (referrer[5] == "add_product")	{
-	options["type"] = "GET";
-	options["url"] = "/quote/" + quoteId + "/count_items/";
-	options["success"] = function(response)	{
+	getOptions["url"] = "/quote/" + quoteId + "/count_items/";
+	getOptions["success"] = function(response)	{
 	    var count = response.data.body;
 	    if (count != 0)	{
 		if (count == 1)	{
@@ -167,7 +176,7 @@ function displayQtyFeedback(referrer)	{
 	    }
 	}
 
-	$.ajax(options);
+	$.ajax(getOptions);
     }
 }
 
@@ -180,13 +189,43 @@ function submitMoreDetails(userId, quoteId)	{
     var state = $("#state").val();
     var country = $("#country").val();
 
-    options["url"] = "/account/" + userId + "/add_details/";
-    options["data"] = "phone=" + phone + "&company=" + company + "&position=" + position + "&company_address=" + company_address + 
+    postOptions["url"] = "/account/" + userId + "/add_details/";
+    postOptions["data"] = "phone=" + phone + "&company=" + company + "&position=" + position + "&company_address=" + company_address + 
 		"&city=" + city + "&state=" + state + "&country=" + country;
 
-    options["success"] = function(response) {
+    postOptions["success"] = function(response) {
 	document.location = "/quote/" + quoteId + "/preview/";
     }
 
     $.ajax(options);
+}
+
+function previewQuote(quoteId, userId)	{
+    quoteHasItem(quoteId);
+	/*if (userHasDetails(userId))   {
+	    document.location = "/quote/" + quoteId + "/preview/";
+	} else	{
+	    $("#user-details").dialog('open');
+	    return false;
+	}*/
+}
+
+function quoteHasItem(quoteId)	{
+    getOptions["url"] = "/quote/" + quoteId + "/check/";
+    getOptions["success"] = function(response) {
+	if (response.data.type != "ok")	{
+	    showMessage("Please add at least 1 item to your quote");
+	} else	{
+	    alert("yes");
+	}
+    }
+    $.ajax(getOptions);
+}
+
+function userHasDetails(userId)	{
+    /* If not true,
+     *	showDetailForm();
+     * else,
+     *	previewQuote();
+     */
 }
