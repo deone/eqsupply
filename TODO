@@ -28,5 +28,6 @@ Pricing patch.
 -We might also want to make #msger display page-customized messages.e.g When a user click "Process Quote", #msger should display "Processing Quote, Please Wait..." instead of "Loading...".
 
 Next to-dos: 
--Lightbox effect for Quote Preview. Use escape key to close, don't forget pagination in the case of long quotes.
--Lightbox effect to enter remaining fields before user's initial quote processing. For subsequent ones, no prompting for details.
+- Preview button should check the following in this order:
+* Whether the quote is empty - if empty, prompt user to add item, else show the user-detail lightbox.
+* Whether the user has filled out his extra details before - if yes, redirect to quote preview, else show the user-detail lightbox.

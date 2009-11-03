@@ -171,7 +171,7 @@ function displayQtyFeedback(referrer)	{
     }
 }
 
-function submitMoreDetails(userId)	{
+function submitMoreDetails(userId, quoteId)	{
     var phone = $("#phone").val();
     var company = $("#company").val();
     var position = $("#position").val();
@@ -185,7 +185,7 @@ function submitMoreDetails(userId)	{
 		"&city=" + city + "&state=" + state + "&country=" + country;
 
     options["success"] = function(response) {
-	alert(response.data.body);
+	document.location = "/quote/" + quoteId + "/preview/";
     }
 
     $.ajax(options);
