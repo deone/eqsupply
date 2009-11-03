@@ -147,11 +147,17 @@ def convert_time(time):
     else:
 	return str(hour) + ":" + minutes + "am"
 
+@h.json_response
+def check_quote(request, quote_id):
+    quote = get_object_or_404(Quote, pk=quote_id, status=0)
+    
+    if not quote.quoteitem_set.all():
+	return ("error", "No items in Quote")
+    else:
+	return ("ok", "Items in Quote")
+
 def preview_quote(request, quote_id, template="quote_generator/quote_preview.html"):
     quote = get_object_or_404(Quote, pk=quote_id, status=0)
-    if not quote.quoteitem_set.all():
-	raise Http404
-
     readable_date = convert_date(quote.time_created)
 
     time = str(quote.time_created.time())

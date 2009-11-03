@@ -29,5 +29,9 @@ Pricing patch.
 
 Next to-dos: 
 - Preview button should check the following in this order:
-* Whether the quote is empty - if empty, prompt user to add item, else show the user-detail lightbox.
-* Whether the user has filled out his extra details before - if yes, redirect to quote preview, else show the user-detail lightbox.
+* Whether the quote is empty - if empty, prompt user to add item, else:
+* Check for user details - if yes, redirect to quote preview, else show the user-detail lightbox.
+
+Since quote_preview already checks if quote is empty,
+* Let's attempt a preview,
+* If we get an error

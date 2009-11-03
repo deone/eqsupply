@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     (r'^set_quote_item/$', views.quote_item, {"action": "set"}),
     (r'^unset_quote_item/$', views.quote_item, {"action": "unset"}),
     (r'^(?P<quote_id>\d+)/count_items/$', views.count_quote_items),
+    (r'^(?P<quote_id>\d+)/check/$', views.check_quote),
 )

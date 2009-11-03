@@ -98,8 +98,6 @@ def activate(request):
 def add_details(request, user_id, **kwargs):
     user = get_object_or_404(UserAccount, pk=user_id)
 
-    print request.POST.get("company_address")
-
     user.phone = request.POST.get("phone").strip()
     user.company = request.POST.get("company").strip()
     user.position = request.POST.get("position").strip()
@@ -110,3 +108,11 @@ def add_details(request, user_id, **kwargs):
     user.save()
 
     return ("ok", "Details Added")
+
+@h.json_response
+def has_details(request, user_id, **kwargs):
+    user = get_object_or_404(UserAccount, pk=user_id)
+    if not user.company:
+	return ("error", "No details")
+    else:
+	return ("ok", "Details Available")

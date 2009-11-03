@@ -27,6 +27,7 @@ function displayLst(url)	{
 
     options["url"] = url;
     options["type"] = "GET";
+    options["dataType"] = "json";
     options["success"] = function(response) {
 	if (url == "/manufacturer_list/")   {
 	    showManufacturers(response);
@@ -197,35 +198,30 @@ function submitMoreDetails(userId, quoteId)	{
 	document.location = "/quote/" + quoteId + "/preview/";
     }
 
-    $.ajax(options);
+    $.ajax(postOptions);
 }
 
-function previewQuote(quoteId, userId)	{
-    quoteHasItem(quoteId);
-	/*if (userHasDetails(userId))   {
-	    document.location = "/quote/" + quoteId + "/preview/";
-	} else	{
-	    $("#user-details").dialog('open');
-	    return false;
-	}*/
-}
-
-function quoteHasItem(quoteId)	{
+function quoteHasItem(quoteId, userId)	{
     getOptions["url"] = "/quote/" + quoteId + "/check/";
     getOptions["success"] = function(response) {
 	if (response.data.type != "ok")	{
 	    showMessage("Please add at least 1 item to your quote");
 	} else	{
-	    alert("yes");
+	    userHasDetails(quoteId, userId);
 	}
     }
     $.ajax(getOptions);
 }
 
-function userHasDetails(userId)	{
-    /* If not true,
-     *	showDetailForm();
-     * else,
-     *	previewQuote();
-     */
+function userHasDetails(quoteId, userId)	{
+    getOptions["url"] = "/account/" + userId + "/has_details/";
+    getOptions["success"] = function(response)	{
+	if (response.data.type != "ok")	{
+	    $("#user-details").dialog('open');
+	    return false;
+	} else	{
+	    submitMoreDetails(userId, quoteId);
+	}
+    }
+    $.ajax(getOptions);
 }

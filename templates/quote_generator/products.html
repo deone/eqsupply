@@ -31,30 +31,12 @@
 		$(this).slideDown("fast");
 	    });
 
-	    $(function(){
-		// Dialog			
-		$('#user-details').dialog({
-		    autoOpen: false,
-		    /*buttons: {
-			"Ok": function() { 
-				$(this).dialog("close"); 
-			}, 
-			"Cancel": function() { 
-				$(this).dialog("close"); 
-			} 
-		    },*/
-		    width: 600,
-		    modal: true
-		});
-		    
-		// Dialog Link
-		$('#dialog_link').click(function(){
-		    $('#user-details').dialog('open');
-		    return false;
-		});
-		
+	    $('#user-details').dialog({
+		autoOpen: false,
+		width: 600,
+		modal: true
 	    });
-
+		
 	});
     </script>
 {% endblock %}
@@ -118,8 +100,7 @@
 		<tr>
 		    <td></td>
 		    <td><p><a href="/product_groups/?quote_id={{ result.quote }}">More Products</a></p></td>
-		    <!--<td><p><a href="/quote/{{ result.quote }}/preview/">Preview Quote</a></p></td>-->
-		    <td><p><a id="dialog_link" href="#">Preview Quote</a></p></td>
+		    <td><p><a href="#" onclick="quoteHasItem({{ result.quote }}, {{ user.id }})">Preview Quote</a></p></td>
 		</tr>
 	    </tbody>
 	</table>
