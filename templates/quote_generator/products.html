@@ -35,14 +35,14 @@
 		// Dialog			
 		$('#user-details').dialog({
 		    autoOpen: false,
-		    buttons: {
+		    /*buttons: {
 			"Ok": function() { 
 				$(this).dialog("close"); 
 			}, 
 			"Cancel": function() { 
 				$(this).dialog("close"); 
 			} 
-		    },
+		    },*/
 		    width: 600,
 		    modal: true
 		});
@@ -133,7 +133,7 @@
 		    <input type="text" id="phone"/>
 		</li>
 		<li>
-		    <label for="phone">Company:</label>
+		    <label for="company">Company:</label>
 		    <input type="text" id="company"/>
 		</li>
 		<li>
@@ -149,13 +149,14 @@
 		    <input type="text" id="city"/>
 		</li> 
 		<li>
-		    <label for="phone">State:</label>
+		    <label for="state">State:</label>
 		    <input type="text" id="state"/>
 		</li>
 		<li>
 		    <label for="country">Country:</label>
 		    <input type="text" id="country"/>
 		</li>
+		<li><label></label><input type="button" value="Submit" onclick="submitMoreDetails({{ user.id }})"/></li>
 	    </ol>
 	</fieldset>
     </form>

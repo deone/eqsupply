@@ -80,7 +80,7 @@ class SignupForm(forms.Form):
 	reg_id = hashlib.sha1(email + ":" + password + ":"  + str(datetime.datetime.now())).hexdigest()
 	is_active = 0
 
-	new_user = UserAccount.objects.create(
-			first_name=first_name, last_name=last_name, email=email, username=username, password=password, reg_id=reg_id, is_active=is_active)
+	new_user = UserAccount.objects.create(first_name=first_name, last_name=last_name, email=email, \
+				username=username, password=password, reg_id=reg_id, is_active=is_active)
 
 	return email, reg_id

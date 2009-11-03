@@ -170,3 +170,23 @@ function displayQtyFeedback(referrer)	{
 	$.ajax(options);
     }
 }
+
+function submitMoreDetails(userId)	{
+    var phone = $("#phone").val();
+    var company = $("#company").val();
+    var position = $("#position").val();
+    var company_address = $("#company_address").val();
+    var city = $("#city").val();
+    var state = $("#state").val();
+    var country = $("#country").val();
+
+    options["url"] = "/account/" + userId + "/add_details/";
+    options["data"] = "phone=" + phone + "&company=" + company + "&position=" + position + "&company_address=" + company_address + 
+		"&city=" + city + "&state=" + state + "&country=" + country;
+
+    options["success"] = function(response) {
+	alert(response.data.body);
+    }
+
+    $.ajax(options);
+}

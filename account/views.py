@@ -3,8 +3,6 @@ from django.core.mail import send_mail
 from django.template import RequestContext
 from django.conf import settings
 
-from django.contrib.auth.models import User
-
 from account.forms import SignupForm, LoginForm
 from account.models import UserAccount
 from quote_generator.models import Quote
@@ -25,7 +23,7 @@ def dict_error(errors):
     return error_dict
 
 @h.json_response
-def get_user_company(request, user_id):
+def get_company(request, user_id, **kwargs):
     user_account = get_object_or_404(UserAccount, pk=user_id)
     user_company = user_account.company
 
@@ -72,37 +70,43 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
         }, context_instance=RequestContext(request))
 
 def email_user(email, reg_id):
-	activation_link = create_activation_link(reg_id)
-	email_list = []
-	email_list.append(email)
-	subject = settings.ACTIVATION_EMAIL_SUBJECT
-	message = settings.ACTIVATION_EMAIL_MESSAGE % activation_link
-	sender = settings.EMAIL_SENDER
+    activation_link = create_activation_link(reg_id)
+    email_list = []
+    email_list.append(email)
+    subject = settings.ACTIVATION_EMAIL_SUBJECT
+    message = settings.ACTIVATION_EMAIL_MESSAGE % activation_link
+    sender = settings.EMAIL_SENDER
 
-	send_mail(subject, message, sender, email_list, fail_silently=False)
+    send_mail(subject, message, sender, email_list, fail_silently=False)
 
 def create_activation_link(reg_id):
-	url = settings.BASE_URL + "account/activate/?reg_id=%s" % reg_id
-	return url
+    url = settings.BASE_URL + "account/activate/?reg_id=%s" % reg_id
+    return url
 
 def activate(request):
-	reg_id = request.GET['reg_id']
-	activated_user = get_object_or_404(UserAccount, reg_id=reg_id)
-	activated_user.is_active = 1
-	activated_user.save()
-        #request.flash['feedback'] = "Registration successful. An activation email has been sent to %s." % email
+    reg_id = request.GET['reg_id']
+    activated_user = get_object_or_404(UserAccount, reg_id=reg_id)
+    activated_user.is_active = 1
+    activated_user.save()
+    #request.flash['feedback'] = "Registration successful. An activation email has been sent to %s." % email
 
-	return render_to_response("account/activate.html", {
-	    "user": activated_user,
-	}, context_instance=RequestContext(request))
+    return render_to_response("account/activate.html", {
+	"user": activated_user,
+    }, context_instance=RequestContext(request))
 
 @h.json_response
-def get_pending_quotes(request, user_id):
-    user = User.objects.get(pk=user_id)
-    pending_quotes = get_list_or_404(Quote, user=user, status=0)
-    
-    p_quote_list = []
-    for pq in pending_quotes:
-	p_quote_list.append(pq.todict())
+def add_details(request, user_id, **kwargs):
+    user = get_object_or_404(UserAccount, pk=user_id)
 
-    return ("ok", p_quote_list)
+    print request.POST.get("company_address")
+
+    user.phone = request.POST.get("phone").strip()
+    user.company = request.POST.get("company").strip()
+    user.position = request.POST.get("position").strip()
+    user.company_street_address = request.POST.get("company_address").strip()
+    user.city = request.POST.get("city").strip()
+    user.state = request.POST.get("state").strip()
+    user.country = request.POST.get("country").strip()
+    user.save()
+
+    return ("ok", "Details Added")

@@ -7,6 +7,6 @@ urlpatterns = patterns('',
     url(r'^signup/$', views.signup, name="acct_signup"),
     url(r'^activate/', views.activate, name="acct_activate"),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {"template_name": "account/logout.html"}, name="acct_logout"),
-    (r'^(?P<user_id>\d+)/pending_quotes/$', views.get_pending_quotes),
-    (r'^(?P<user_id>\d+)/company/$', views.get_user_company),
+    (r'^(?P<user_id>\d+)/company/$', views.get_company),
+    (r'^(?P<user_id>\d+)/add_details/$', views.add_details),
 )
