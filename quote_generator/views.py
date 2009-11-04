@@ -119,6 +119,7 @@ MONTHS = {
 }
 
 AFTERNOON = {
+    12: 12,
     13: 1,
     14: 2,
     15: 3,
@@ -141,7 +142,7 @@ def convert_time(time):
     hour = int(time_split[0])
     minutes = time_split[1]
     
-    if hour > 12:
+    if hour > 11:
 	hour_12 = AFTERNOON[hour]
 	return str(hour_12) + ":" + minutes + "pm"
     else:
