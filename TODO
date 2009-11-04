@@ -26,12 +26,8 @@ Pricing patch.
 -Why don't we display the activation feedback as a django flash object on the login page? Just like "Create quote", activation is too small an operation to occupy one page. Same with logout, it should be redirected to the login page with a django flash message.
 -Solution to incorrect messages in login and signup: After each error message is displayed, msger should be html'ed with <p>Loading...</p>
 -We might also want to make #msger display page-customized messages.e.g When a user click "Process Quote", #msger should display "Processing Quote, Please Wait..." instead of "Loading...".
+-User should not be logged on when activating.
+-Look for a way to call ajaxStart per request, not page-wide call.
 
 Next to-dos: 
-- Preview button should check the following in this order:
-* Whether the quote is empty - if empty, prompt user to add item, else:
-* Check for user details - if yes, redirect to quote preview, else show the user-detail lightbox.
-
-Since quote_preview already checks if quote is empty,
-* Let's attempt a preview,
-* If we get an error
+* Style user-details dialog.

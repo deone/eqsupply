@@ -36,6 +36,12 @@
 		width: 600,
 		modal: true
 	    });
+
+	    $("#user-details input").bind("keydown", function(e)   {
+		if (e.keyCode == 13)	{
+		    submitMoreDetails({{ user.id }}, {{ result.quote }});
+		}
+	    });
 		
 	});
     </script>
@@ -105,9 +111,9 @@
 	    </tbody>
 	</table>
     </div>
-    <form id="user-details" title="Dialog Title">
+    <form id="user-details" title="Contact Details">
 	<fieldset>
-	    <legend>Please provide some more details about you. You would have to do this only once.</legend>
+	    <p>Please provide your contact details. You would have to do this only once.</p>
 	    <ol>
 		<li>
 		    <label for="phone">Phone:</label>
