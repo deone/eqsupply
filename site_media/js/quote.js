@@ -182,6 +182,7 @@ function displayQtyFeedback(referrer)	{
 }
 
 function submitMoreDetails(userId, quoteId)	{
+    var quote = $("#quote-id").val();
     var phone = $("#phone").val();
     var company = $("#company").val();
     var position = $("#position").val();
@@ -191,8 +192,9 @@ function submitMoreDetails(userId, quoteId)	{
     var country = $("#country").val();
 
     postOptions["url"] = "/account/" + userId + "/add_details/";
-    postOptions["data"] = "phone=" + phone + "&company=" + company + "&position=" + position + "&company_address=" + company_address + 
-		"&city=" + city + "&state=" + state + "&country=" + country;
+    postOptions["data"] = "quote_id=" + quote + "&phone=" + phone + "&company=" + company + 
+			    "&position=" + position + "&company_address=" + company_address + 
+			    "&city=" + city + "&state=" + state + "&country=" + country;
 
     postOptions["success"] = function(response) {
 	document.location = "/quote/" + quoteId + "/preview/";
@@ -220,7 +222,7 @@ function userHasDetails(quoteId, userId)	{
 	    $("#user-details").dialog('open');
 	    return false;
 	} else	{
-	    submitMoreDetails(userId, quoteId);
+	    document.location = "/quote/" + quoteId + "/preview/";
 	}
     }
     $.ajax(getOptions);

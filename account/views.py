@@ -107,6 +107,11 @@ def add_details(request, user_id, **kwargs):
     user.country = request.POST.get("country").strip()
     user.save()
 
+    quote_id = request.POST.get("quote_id").strip()
+    quote = get_object_or_404(Quote, pk=quote_id)
+    quote.title = quote.title + user.company
+    quote.save()
+
     return ("ok", "Details Added")
 
 @h.json_response
