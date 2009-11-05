@@ -31,6 +31,7 @@ Pricing patch.
 Next to-dos: 
 * Fix all ajax feedback related bugs.
  - Remove "Product Added" and "Product Removed" message from #msger.
-* Make all should-be-button links buttons and disable them on ajaxStart()
+* Make all should-be-button links buttons
+* Don't accept 0 as quantity in add-quote-item form
 * On click of "Process Quote", check if the quote status has been set. If its set, don't send again and give user a message that quote has been sent. Else, send.
 * Menu.

@@ -120,8 +120,6 @@ function showRemoveQuoteForm(params)	{
 }
 
 function displayErrorsOrDoAction(msg, url, params)	{
-    showMessage(msg);
-    
     if (url == "/quote/set_quote_item/")    {
 	showRemoveQuoteForm(params);
     }
