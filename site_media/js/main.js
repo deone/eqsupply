@@ -12,3 +12,7 @@ function showMessage(msg)	{
     $("#msger").html("<p>" + msg + "</p>");
     setTimeout("$('#msger').slideUp('fast')", 7000);
 }
+
+function resetFeedback()    {
+    $("#msger").html("<p>Loading...</p>");
+}

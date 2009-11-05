@@ -6,6 +6,7 @@
     <script type="text/javascript">
 	$(function()	{
 	    $("#msger").ajaxStart(function()	{
+		resetFeedback();
 		$(this).slideDown("fast");
 	    });
 
