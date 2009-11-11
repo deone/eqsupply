@@ -5,10 +5,6 @@
 {% block page_js %}
     <script type="text/javascript">
 	$(function()	{
-	    $("#msger").ajaxStart(function()	{
-		resetFeedback();
-		$(this).slideDown("fast");
-	    });
 
 	    $("#signup input").bind("keydown", function(e)   {
 		if (e.keyCode == 13)	{

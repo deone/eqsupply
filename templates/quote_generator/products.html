@@ -27,18 +27,6 @@
 		}
 	    );
 
-	    // This should apply to only when quote item is been set.
-	    $("#msger").ajaxStart(
-		function()  {
-		    resetFeedback();
-		    $(this).slideDown("fast");
-		}
-	    ).ajaxStop(
-		function()  {
-		    $(this).slideUp("fast");
-		}
-	    );
-
 	    $('#user-details').dialog({
 		autoOpen: false,
 		width: 600,

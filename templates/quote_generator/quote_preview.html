@@ -2,15 +2,7 @@
 
 {% block page_title %}Quote Preview{% endblock %}
 
-{% block page_js %}
-    <script type="text/javascript">
-	$(function()	{
-	    $("#msger").ajaxStart(function()	{
-		$(this).slideDown("fast");
-	    });
-	});
-    </script>
-{% endblock %}
+{% block page_js %}{% endblock %}
 
 {% block main %}
     {% if request.flash.feedback %}
@@ -47,10 +39,10 @@
 			<!--<p class="notices">Prices are not displayed on our web site. However, they would be displayed in the quote we'll send to your email.</p>-->
 		    </td>
 		    <td>
-			<p><a href="javascript:deleteQuote({{ quote.id }})">Discard Quote</a></p>
+			<p><a href="#" onclick="deleteQuote({{ quote.id }})">Discard Quote</a></p>
 		    </td>
 		    <td>
-			<p><a href="javascript:emailQuote({{ quote.id }}, {{ user.id }})">Process Quote</a></p>
+			<p><a href="#" onclick="emailQuote({{ quote.id }}, {{ user.id }})">Process Quote</a></p>
 		    </td>
 		</tr>
 	    </tbody>

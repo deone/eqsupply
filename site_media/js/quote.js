@@ -210,6 +210,7 @@ function quoteHasItem(quoteId, userId)	{
 	    userHasDetails(quoteId, userId);
 	}
     }
+
     $.ajax(getOptions);
 }
 
