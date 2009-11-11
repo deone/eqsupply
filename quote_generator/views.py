@@ -182,20 +182,24 @@ def count_quote_items(request, quote_id):
 @h.json_response
 def email(request, quote_id):
     quote = Quote.objects.get(pk=quote_id)
-    user_id = request.POST.get("user_id").strip()
-    email = get_object_or_404(User, pk=user_id).email
 
-    subject, from_email, to = quote.title, settings.EMAIL_SENDER, email
-    text_content = ""
-    html_content = create_email(quote)
-    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+    if quote.status != 1:
+	user_id = request.POST.get("user_id").strip()
+	email = get_object_or_404(User, pk=user_id).email
 
-    quote.status = 1
-    quote.save()
+	subject, from_email, to = quote.title, settings.EMAIL_SENDER, email
+	text_content = ""
+	html_content = create_email(quote)
+	msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+	msg.attach_alternative(html_content, "text/html")
+	msg.send()
 
-    return ("ok", "Quote Sent")
+	quote.status = 1
+	quote.save()
+
+	return ("ok", "Quote Processed And Sent to Email")
+
+    return ("error", "Quote Already Processed")
 
 def create_email(quote):
     html = "<html>"
