@@ -11,20 +11,23 @@ Product listing: products.html, quote_preview.html. Implement inheritance.
 Refactoring json_response: Will there ever be a time when we would need to use 500, Internal Server Error, It's needed for server exceptions e.g server issues, code error et al.
 
 
+PENDING
+=======
+Pricing.
+Quote formatting and sending as PDF document.
 
 
-FINISHINGS
-==========
+BEST PRACTICES
+==============
 Use login_required decorator. Check for other useful decorators.
 Remember to always use todict() wherever necessary.
 Write all tests. Models, views and javascript.
 Always raise Http404 meaningfully.
-Pricing patch.
+Use assertive programming wherever required.
 
 -Move all funny looking routes into their proper place, we need to create a products app.
--When a user signs up, normally, the insertion happens before activation email is sent. Then the user retries and there's a duplicate entry error because the record has been inserted once, how can we handle this situation? Maybe #msger should not slideUp if there's such an error. We can just give an info to the user to check his internet connection and retry(this would be a link to send just the email).
+-Once we have an issue with email sending due to internet connection issues, we can either retry or give the user info to check his connection and a link to send the activation email only. This should not repeat the insertion process. We should also do a teardown. i.e if the user does not send the email, or if he clicks the link and its still unsuccessful, delete his record.
 -Why don't we display the activation feedback as a django flash object on the login page? Just like "Create quote", activation is too small an operation to occupy one page. Same with logout, it should be redirected to the login page with a django flash message.
--Solution to incorrect messages in login and signup: After each error message is displayed, msger should be html'ed with <p>Loading...</p>
 -We might also want to customize #msger's messages based on request.e.g When a user click "Process Quote", #msger should display "Processing Quote, Please Wait..." instead of "Loading...".
 -User should not be logged on when activating.
 
@@ -32,6 +35,6 @@ Next to-dos:
 * Fix all ajax feedback related bugs.
  - Remove "Product Added" and "Product Removed" message from #msger.
 * Make all should-be-button links buttons
-* Don't accept 0 as quantity in add-quote-item form
+* Don't accept 0 as quantity in add-quote-item form. This should be a form validation thing.
 * On click of "Process Quote", check if the quote status has been set. If its set, don't send again and give user a message that quote has been sent. Else, send.
 * Menu.
