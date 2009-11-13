@@ -5,6 +5,12 @@
 {% block page_js %}
     <script type="text/javascript">
 	$(function()	{
+
+	    $(".ajax").ajaxStart(function() {
+		$(this).show();
+	    }).ajaxStop(function()  {
+		$(this).hide();
+	    });
 	    
 	    $("#login input").bind("keydown", function(e)   {
 		if (e.keyCode == 13)	{
@@ -23,7 +29,10 @@
 
     <form id="login" class="left widget">
 	<fieldset>
-	    <legend>Log In</legend>
+	    <legend>
+		<span>Log In</span>
+		<span class="ajax"><img src="/site_media/img/loading2.gif"/></span>
+	    </legend>
 	    <p>Don't have an account? <a href="{% url acct_signup %}">Sign Up</a></p>
 	    <ol>
 		{% for field in form %}

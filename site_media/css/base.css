@@ -161,3 +161,6 @@ h1  {
     font-size: 125%;
     line-height: 1.5em;
 }
+.ajax	{
+    display: none;
+}
