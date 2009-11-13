@@ -17,10 +17,12 @@
 {% endblock %}
 
 {% block main %}
-    
     <form id="signup" class="left widget">
 	<fieldset>
-	    <legend>Sign Up</legend>
+	    <legend>
+		<span>Sign Up</span>
+		<span class="ajax"><img src="/site_media/img/loading2.gif"/></span>
+	    </legend>
 	    <p>Already have an account? <a href="{% url acct_login %}">Log In</a></p>
 	    <ol>
 		{% for field in form %}

@@ -33,8 +33,8 @@ Use assertive programming wherever required.
 
 Next to-dos: 
 * Fix all ajax feedback related bugs.
- - Remove "Product Added" and "Product Removed" message from #msger.
 * Make all should-be-button links buttons
 * Don't accept 0 as quantity in add-quote-item form. This should be a form validation thing.
-* On click of "Process Quote", check if the quote status has been set. If its set, don't send again and give user a message that quote has been sent. Else, send.
+* Extensive form validation.
 * Menu.
+* UI: Remove scrollbar from signup.html
