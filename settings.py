@@ -108,7 +108,7 @@ BASE_URL = "http://localhost:7700/"
 
 ACTIVATION_EMAIL_SUBJECT = "Your Registration: AERIX EQUIPMENT SUPPLY"
 
-EMAIL_SENDER = "dayo@aerixnigeria.com"
+EMAIL_SENDER = "eqsupply@aerixnigeria.com"
 
 ACTIVATION_EMAIL_MESSAGE = "This is your activation link:\n\n%s" 
 
