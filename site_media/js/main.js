@@ -1,3 +1,13 @@
+$(function()	{
+
+    $(".ajax").ajaxStart(function() {
+	$(this).show();
+    }).ajaxStop(function()  {
+	$(this).hide();
+    });
+
+});
+
 function highlightErrorFields(errors)   {
     if (errors.keys)    {
         for (var i=0; i<errors.keys.length; i++) {

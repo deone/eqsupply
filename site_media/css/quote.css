@@ -19,3 +19,9 @@
 .out	{
     background-color: #fff;
 }
+#product_list .ajax {
+    margin-left: 507px;
+}
+#quote_preview .ajax	{
+    margin-left: 274px;
+}

@@ -1,13 +1,3 @@
-$(function()	{
-
-    $(".ajax").ajaxStart(function() {
-	$(this).show();
-    }).ajaxStop(function()  {
-	$(this).hide();
-    });
-
-});
-
 var options = {
     url: null,
     type: "POST",

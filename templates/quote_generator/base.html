@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="clearfix padtop">
+    <div id="quote_generator" class="clearfix padtop">
     {% if user.is_authenticated %}
 	{% block main %}{% endblock %}
     {% else %}

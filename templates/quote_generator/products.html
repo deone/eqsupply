@@ -44,13 +44,18 @@
 {% endblock %}
 
 {% block main %}
-    <div class="widget">
-	{% if result.manufacturer %}
-	    <h1>Products by {{ result.manufacturer }}</h1>
-	{% endif %}
-	{% if result.category %}
-	    <h1>Products In Category: {{ result.category }}</h1>
-	{% endif %}
+    <div id="product_list" class="widget">
+	<h1>
+	    <span class="page_title">
+	    {% if result.manufacturer %}
+		Products by {{ result.manufacturer }}
+	    {% endif %}
+	    {% if result.category %}
+		Products In Category: {{ result.category }}
+	    {% endif %}
+	    </span>
+	    <span class="ajax"><img src="/site_media/img/loading2.gif"/></span>
+	</h1>
 	<p>Hover over products to add.</p>
 	<table width="100%" class="product-list padtop">
 	    <input id="quote-id" name="quote-id" type="hidden" value="{{ result.quote }}"/>

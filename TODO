@@ -38,4 +38,4 @@ Next to-dos:
 * Extensive form validation.
 * Menu.
 * UI: Remove scrollbar from signup.html
-* UI: Let's clear fields in login and signup before we redirect.
+* UI: Let's clear form fields as soon as request is successful.

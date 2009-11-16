@@ -9,8 +9,11 @@
 	<div class="info widget"><p>{{ request.flash.feedback|escape }}</p></div>
     {% endif %}
 
-    <div class="widget">
-	<h1>{{ quote.title }}</h1>
+    <div id="quote_preview" class="widget">
+	<h1>
+	    <span id="page_title">{{ quote.title }}</span>
+	    <span class="ajax"><img src="/site_media/img/loading2.gif"/></span>
+	</h1>
 	<p>Created On {{ quote.time_created }}</p>
 	<table width="100%" class="product-list padtop">
 	    <thead>
