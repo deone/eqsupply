@@ -2,45 +2,12 @@
 
 {% block page_title %}Login{% endblock %}
 
-{% block page_js %}
-    <script type="text/javascript">
-
-	$(function()	{
-
-	    /*$("#login input").bind("keypress", function(e)   {
-		checkEnter(e);
-	    });*/
-
-	});
-
-	function checkEnter(e)	{
-	    var characterCode;
-
-	    if (e && e.which)	{
-		e = e;
-		characterCode = e.which;
-	    } else  {
-		e = event;
-		characterCode = e.keyCode;
-	    }
-
-	    if (characterCode == 13)	{
-		document.forms[0].submit();
-		return false;
-	    }
-
-	    return true;
-	}
-
-    </script>
-{% endblock %}
-
 {% block main %}
     {% if request.flash.feedback %}
 	<div class="info widget"><p>{{ request.flash.feedback|escape }}</p></div>
     {% endif %}
 
-    <form id="login" class="left widget" action="javascript:logIn();" method="post">
+    <form id="login" class="left widget" action="javascript:logIn();">
 	<fieldset>
 	    <legend>
 		<span>Log In</span>

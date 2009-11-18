@@ -2,22 +2,8 @@
 
 {% block page_title %}Sign Up{% endblock %}
 
-{% block page_js %}
-    <script type="text/javascript">
-	$(function()	{
-
-	    $("#signup input").bind("keydown", function(e)   {
-		if (e.keyCode == 13)	{
-		    signUp();
-		}
-	    });
-
-	});
-    </script>
-{% endblock %}
-
 {% block main %}
-    <form id="signup" class="left widget">
+    <form id="signup" class="left widget" action="javascript:signUp();">
 	<fieldset>
 	    <legend>
 		<span>Sign Up</span>
@@ -28,7 +14,7 @@
 		{% for field in form %}
 		    <li>{{ field.label_tag }}{{ field }}</li>
 		{% endfor %}
-		<li><label></label><input type="button" value="Sign Up" onClick="signUp()" /></li>
+		<li><label></label><input type="submit" value="Sign Up"/></li>
 	    </ol>
 	</fieldset>
     </form>
