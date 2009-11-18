@@ -4,15 +4,34 @@
 
 {% block page_js %}
     <script type="text/javascript">
+
 	$(function()	{
 
-	    $("#login input").bind("keydown", function(e)   {
-		if (e.keyCode == 13)	{
-		    logIn();
-		}
-	    });
+	    /*$("#login input").bind("keypress", function(e)   {
+		checkEnter(e);
+	    });*/
 
 	});
+
+	function checkEnter(e)	{
+	    var characterCode;
+
+	    if (e && e.which)	{
+		e = e;
+		characterCode = e.which;
+	    } else  {
+		e = event;
+		characterCode = e.keyCode;
+	    }
+
+	    if (characterCode == 13)	{
+		document.forms[0].submit();
+		return false;
+	    }
+
+	    return true;
+	}
+
     </script>
 {% endblock %}
 
@@ -21,7 +40,7 @@
 	<div class="info widget"><p>{{ request.flash.feedback|escape }}</p></div>
     {% endif %}
 
-    <form id="login" class="left widget">
+    <form id="login" class="left widget" action="javascript:logIn();" method="post">
 	<fieldset>
 	    <legend>
 		<span>Log In</span>
@@ -32,7 +51,7 @@
 		{% for field in form %}
 		    <li>{{ field.label_tag }}{{ field }}</li>
 		{% endfor %}
-		<li><label></label><input type="button" value="Log In" onclick="logIn()"/></li>
+		<li><label></label><input type="submit" value="Log In"/></li>
 	    </ol>
 	    {% url account.views.password_reset as pwd_reset_url %}
 	    <!--<a href="{{ pwd_reset_url }}">Forgot password?</a>-->
