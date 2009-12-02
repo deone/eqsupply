@@ -39,3 +39,7 @@ Next to-dos:
 * Menu.
 * UI: Remove scrollbar from signup.html
 * UI: Let's clear form fields as soon as request is successful.
+
+Products App
+============
+The products app handles product listing and related functionalities.
