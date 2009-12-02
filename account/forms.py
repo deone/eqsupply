@@ -42,13 +42,6 @@ class SignupForm(forms.Form):
     username = forms.CharField(label="Username:", max_length=30, widget=forms.TextInput())
     password1 = forms.CharField(label="Password:", widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label="Confirm Password:", widget=forms.PasswordInput(render_value=False))
-    """phone = forms.CharField(label="Phone Number:", max_length=15, widget=forms.TextInput())
-    company = forms.CharField(label="Company:", widget=forms.TextInput())
-    position = forms.CharField(label="Position:", widget=forms.TextInput())
-    company_street_address = forms.CharField(label="Company Address:", widget=forms.TextInput())
-    city = forms.CharField(label="City:", widget=forms.TextInput())
-    state = forms.CharField(label="State:", widget=forms.TextInput())
-    country = forms.CharField(label="Country:", widget=forms.TextInput())"""
 
     def clean(self):
 	if self._errors:
@@ -70,13 +63,6 @@ class SignupForm(forms.Form):
 	enc_type = "sha1"
 	salt = "".join(random.sample(string.letters+string.digits, 5))
 	password = enc_type + "$" + salt + "$" + hashlib.sha1(salt + self.cleaned_data['password1']).hexdigest()
-	"""phone = self.cleaned_data['phone']
-	company = self.cleaned_data['company']
-	position = self.cleaned_data['position']
-	company_street_address = self.cleaned_data['company_street_address']
-	city = self.cleaned_data['city']
-	state = self.cleaned_data['state']
-	country = self.cleaned_data['country']"""
 	reg_id = hashlib.sha1(email + ":" + password + ":"  + str(datetime.datetime.now())).hexdigest()
 	is_active = 0
 

@@ -85,14 +85,6 @@ def quote_item(request, action):
 	get_object_or_404(QuoteItem, quote=quote, product=product).delete()
 	return ("ok", "Product Removed")
 
-def product_groups(request, template="quote_generator/product_home.html"):
-    quote_id = request.GET.get("quote_id").strip()
-    quote = get_object_or_404(Quote, pk=quote_id)
-    
-    return render_to_response(template, {
-	"quote": quote
-    }, context_instance=RequestContext(request))
-
 DAYS_OF_WEEK = {
     1: "Monday",
     2: "Tuesday",

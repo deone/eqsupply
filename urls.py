@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     (r'^products/', include('product.urls')),
 
 
-    (r'^product_groups/', quote_generator.views.product_groups),
     (r'^manufacturer_list/$', quote_generator.views.view_products_by, {"view": "manufacturer"}),
     (r'^category_list/$', quote_generator.views.view_products_by, {"view": "category"}),
 
