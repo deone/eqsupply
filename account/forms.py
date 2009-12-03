@@ -67,5 +67,6 @@ class SignupForm(forms.Form):
 
 	new_user = User.objects.create_user(username, email, password)
 	new_user.is_active = False
+	new_user.save()
 
-	return email, password
+	return new_user

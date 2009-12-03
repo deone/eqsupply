@@ -1,3 +1,5 @@
+from traceback import print_exc
+
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.core.mail import send_mail
 from django.template import RequestContext
@@ -53,11 +55,13 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
         form = SignupForm(request.POST)
 
         if form.is_valid():
-            username, password = form.save()
-            #email_user(email, reg_id)
-            #request.flash['feedback'] = "Registration successful. An activation email has been sent to %s." % email
-            #return ("ok", "Signup Successful")
-	    print "ok"
+            user = form.save()
+	    try:
+		user.email_user("Ur link", "Thanks for registering", "dayo@aerixnigeria.com")
+		request.flash['feedback'] = "Registration successful. An activation email has been sent to your email."
+		return ("ok", "Signup Successful")
+	    except Exception, e:
+		print_exc()
 
         errors = dict_error(form.errors.items())
 
