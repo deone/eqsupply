@@ -116,11 +116,5 @@ TEST_DATABASE_CHARSET = "latin1"
 
 TEST_DATABASE_COLLATION = "latin1_swedish_ci"
 
-AUTHENTICATION_BACKENDS = (
-    "eqsupply.authbackends.UserAccountModelBackend",
-)
-
-USER_ACCOUNT_MODEL = "account.UserAccount"
-
 ELCOMETER_PRODUCTS_INDEX = "http://www.elcometer.com/international index pages/international/product pages - English/product pages/main pages/"
 ELCOMETER_SPECS_INDEX = "http://www.elcometer.com/international index pages/international/product pages - English/product pages/technical specifications/"

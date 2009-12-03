@@ -4,7 +4,6 @@ from django.template import RequestContext
 from django.conf import settings
 
 from account.forms import SignupForm, LoginForm
-from account.models import UserAccount
 from quote_generator.models import Quote
 
 from eqsupply import helpers as h
@@ -54,10 +53,11 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
         form = SignupForm(request.POST)
 
         if form.is_valid():
-            email, reg_id = form.save()
-            email_user(email, reg_id)
-            request.flash['feedback'] = "Registration successful. An activation email has been sent to %s." % email
-            return ("ok", "Signup Successful")
+            username, password = form.save()
+            #email_user(email, reg_id)
+            #request.flash['feedback'] = "Registration successful. An activation email has been sent to %s." % email
+            #return ("ok", "Signup Successful")
+	    print "ok"
 
         errors = dict_error(form.errors.items())
 
