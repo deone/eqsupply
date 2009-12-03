@@ -66,6 +66,8 @@ class SignupForm(forms.Form):
 	password = self.cleaned_data["password1"]
 
 	new_user = User.objects.create_user(username, email, password)
+	hash = hashlib.md5(new_user.email + ":" + password + str(datetime.datetime.now()))
+	new_user.account_set.create(reg_id=hash)
 	new_user.is_active = False
 	new_user.save()
 

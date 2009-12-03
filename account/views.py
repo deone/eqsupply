@@ -56,8 +56,9 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 
         if form.is_valid():
             user = form.save()
+	    reg_id = user.account_set.get(user=user.id).reg_id
 	    try:
-		user.email_user("Ur link", "Thanks for registering", "dayo@aerixnigeria.com")
+		user.email_user("Ur link", "Thanks for registering. Your reg. id is %s" % reg_id, "dayo@aerixnigeria.com")
 		request.flash['feedback'] = "Registration successful. An activation email has been sent to your email."
 		return ("ok", "Signup Successful")
 	    except Exception, e:
