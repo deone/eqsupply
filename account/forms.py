@@ -40,8 +40,8 @@ class LoginForm(forms.Form):
         return True
 
 class SignupForm(forms.Form):
-    firstname = forms.CharField(label=_("First Name:"), max_length=30, widget=forms.TextInput())
-    lastname = forms.CharField(label=_("Last Name:"), max_length=30, widget=forms.TextInput())
+    first_name = forms.CharField(label=_("First Name:"), max_length=30, widget=forms.TextInput())
+    last_name = forms.CharField(label=_("Last Name:"), max_length=30, widget=forms.TextInput())
     username = forms.CharField(label=_("Username:"), max_length=30, widget=forms.TextInput())
     password1 = forms.CharField(label=_("Password:"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("Password (again):"), widget=forms.PasswordInput(render_value=False))
@@ -63,6 +63,8 @@ class SignupForm(forms.Form):
 	return self.cleaned_data
 
     def save(self):
+	firstname = self.cleaned_data['first_name']
+	lastname = self.cleaned_data['last_name']
 	username = self.cleaned_data['username']
 	email = self.cleaned_data['email']
 	password = self.cleaned_data["password1"]
@@ -70,6 +72,8 @@ class SignupForm(forms.Form):
 	new_user = User.objects.create_user(username, email, password)
 	hash = hashlib.md5(new_user.email + ":" + password + str(datetime.datetime.now()))
 	new_user.account_set.create(reg_id=hash)
+	new_user.first_name = firstname
+	new_user.last_name = lastname
 	new_user.is_active = False
 	new_user.save()
 

@@ -52,7 +52,7 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
 @h.json_response
 def signup(request, form_class=SignupForm, template="account/signup.html", **kwargs):
     if request.method == "POST":
-        form = SignupForm(request.POST)
+        form = form_class(request.POST)
 
         if form.is_valid():
             user = form.save()
@@ -62,6 +62,9 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 		request.flash['feedback'] = "Registration successful. An activation email has been sent to your email."
 		return ("ok", "Signup Successful")
 	    except Exception, e:
+		#delete record
+		#give message
+		#request.flash['feedback'] = "Unable to reach eqsupply. Check your internet connection and try again."
 		print_exc()
 
         errors = dict_error(form.errors.items())

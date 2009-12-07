@@ -42,10 +42,10 @@ function displayErrorsOrRedirect(respObj, dLocation)	{
 function signUp()   {
     var firstname = $("#id_first_name").val();
     var lastname = $("#id_last_name").val();
-    var email = $("#id_email").val();
     var username = $("#id_username").val();
     var password1 = $("#id_password1").val();
     var password2 = $("#id_password2").val();
+    var email = $("#id_email").val();
 
     options["url"] = "/account/signup/";
     options["data"] = "first_name=" + firstname + 
@@ -54,6 +54,7 @@ function signUp()   {
 			"&username=" + username + 
 			"&password1=" + password1 + 
 			"&password2=" + password2;
+
     options["success"] = function(response) {
 	displayErrorsOrRedirect(response, "/account/");
     }
