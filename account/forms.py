@@ -40,6 +40,8 @@ class LoginForm(forms.Form):
         return True
 
 class SignupForm(forms.Form):
+    firstname = forms.CharField(label=_("First Name:"), max_length=30, widget=forms.TextInput())
+    lastname = forms.CharField(label=_("Last Name:"), max_length=30, widget=forms.TextInput())
     username = forms.CharField(label=_("Username:"), max_length=30, widget=forms.TextInput())
     password1 = forms.CharField(label=_("Password:"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("Password (again):"), widget=forms.PasswordInput(render_value=False))
