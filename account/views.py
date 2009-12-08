@@ -62,10 +62,9 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 		request.flash['feedback'] = "Registration successful. An activation email has been sent to your email."
 		return ("ok", "Signup Successful")
 	    except Exception, e:
-		#delete record
-		#give message
-		#request.flash['feedback'] = "Unable to reach eqsupply. Check your internet connection and try again."
+		user.delete()
 		print_exc()
+		return ("error", "Unable to reach eqsupply. Check your internet connection and try again.")
 
         errors = dict_error(form.errors.items())
 

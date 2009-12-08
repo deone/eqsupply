@@ -10,6 +10,7 @@
 		<span class="ajax"><img src="/site_media/img/loading2.gif"/></span>
 	    </legend>
 	    <p>Already have an account? <a href="{% url acct_login %}">Log In</a></p>
+	    <span>All fields are required.</span><br/><br/>
 	    <ol>
 		{% for field in form %}
 		    <li>{{ field.label_tag }}{{ field }}</li>
