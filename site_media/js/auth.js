@@ -10,12 +10,22 @@ var options = {
 }
 
 function displayErrors(errorObj)    {
-    if (!errorObj.keys)   {
-	showMessage(errorObj["__all__"]);
+    /* Classes of Errors
+     * Validation errors: display them with the sliding div, normal duration
+     * Connection error: also in sliding div, but longer than usual. We should pass milliseconds into showMessage()
+     * so that we would be able to make some display longer than others.
+     */
+    if (errorObj.data.type == "conn_error") {
+	showMessage(errorObj.data.body);
     } else  {
-	highlightErrorFields(errorObj);
-	showMessage("Please fill out required fields");
+	if (!errorObj.data.body.keys)   {
+	    showMessage(errorObj.data.body["__all__"]);
+	} else  {
+	    highlightErrorFields(errorObj.data.body);
+	    showMessage("Please fill out required fields");
+	}
     }
+
 }
 
 function logIn()    {
@@ -33,7 +43,7 @@ function logIn()    {
 
 function displayErrorsOrRedirect(respObj, dLocation)	{
     if (respObj.data.type != "ok")  {
-	displayErrors(respObj.data.body);
+	displayErrors(respObj);
     } else  {
 	document.location = dLocation;
     }
