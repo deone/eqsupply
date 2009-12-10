@@ -11,20 +11,13 @@ var options = {
 
 function displayErrors(errorObj)    {
     /* Classes of Errors
-     * Validation errors: display them with the sliding div, normal duration
-     * Connection error: also in sliding div, but longer than usual. We should pass milliseconds into showMessage()
+     * * Connection error: also in sliding div, but longer than usual. We should pass milliseconds into showMessage()
      * so that we would be able to make some display longer than others.
+     * * Validation errors: display them with the sliding div, normal duration.
+     * * Username-taken errors.
+     * * Field omission errors.
      */
-    if (errorObj.data.type == "conn_error") {
-	showMessage(errorObj.data.body);
-    } else  {
-	if (!errorObj.data.body.keys)   {
-	    showMessage(errorObj.data.body["__all__"]);
-	} else  {
-	    highlightErrorFields(errorObj.data.body);
-	    showMessage("Please fill out required fields");
-	}
-    }
+    highlightErrorFields(errorObj.data.body);
 
 }
 

@@ -15,13 +15,13 @@ def dict_error(errors):
     keys = []
 
     for k, v in errors:
-        error_dict[k] = v
-        keys.append(k)
+	error_string = str(v).split("<li>")[1].split("</li></ul>")[0]
+	error_dict[k] = error_string
+	keys.append(k)
 
-    if keys != ["__all__"]:
-        error_dict["keys"] = keys
+    error_dict["keys"] = keys
 
-    return error_dict
+    return ("error", error_dict)
 
 @h.json_response
 def get_company(request, user_id, **kwargs):
@@ -66,9 +66,8 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 		print_exc()
 		return ("conn_error", "Unable to reach eqsupply. Check your internet connection and try again.")
 
-        errors = dict_error(form.errors.items())
+        return dict_error(form.errors.items())
 
-        return ("error", errors)
     else:
         form = SignupForm()
 
