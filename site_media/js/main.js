@@ -9,12 +9,12 @@ $(function()	{
 });
 
 function highlightErrorFields(errors)   {
-    if (errors.keys)    {
-        for (var i=0; i<errors.keys.length; i++) {
+    for (var i=0; i<errors.keys.length; i++) {
+	if (errors.keys[i] == "__all__")    {
+	    showMessage(errors.__all__);
+	} else	{
 	    document.getElementById("id_" + errors.keys[i]).style.background = "#ffa";
-        }
-    } else  {
-        $("#err").html("<ul class='errorlist'><li>" + errors["__all__"] + "</li></ul>");
+	}
     }
 }
 
