@@ -6,12 +6,21 @@ form p	{
 fieldset {
     border: none;
 }
-fieldset ol	{
+fieldset ol, fieldset ul    {
     list-style: none;
     margin: 0px;
     padding: 0px;
 }
-fieldset li	{
+ul.errorlist {
+    width: 210px;
+    margin-left: 118px;
+}
+ul.errorlist li	{
+    text-align: left;
+    font-size: 7pt;
+    color: #f00;
+}
+fieldset ol li	{
     padding-bottom: 0.5em;
 }
 label  {

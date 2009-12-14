@@ -15,8 +15,7 @@ def dict_error(errors):
     keys = []
 
     for k, v in errors:
-	error_string = str(v).split("<li>")[1].split("</li></ul>")[0]
-	error_dict[k] = error_string
+	error_dict[k] = str(v)
 	keys.append(k)
 
     error_dict["keys"] = keys

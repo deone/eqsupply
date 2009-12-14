@@ -9,15 +9,20 @@ $(function()	{
 });
 
 function highlightErrorFields(errors)   {
-    $('.error').remove();
+    $('.errorlist').remove();
 
-    for (var i=0; i<errors.keys.length; i++) {
-	if (errors.keys[i] == "__all__")    {
-	    showMessage(errors.__all__);
-	} else	{
-	    var error_html = "<li class='error'>" + errors[errors.keys[i]] + "</li>";
-	    $("#id_" + errors.keys[i]).before(error_html);
-	    document.getElementById("id_" + errors.keys[i]).style.background = "#ffa";
+    if (!errors.keys)	{
+	showMessage(errors);
+    } else  {
+	for (var i=0; i<errors.keys.length; i++) {
+	    if (errors.keys[i] == "__all__")    {
+		msg = errors.__all__.split("<li>")[1];
+		errMsg = msg.split(".")[0];
+		showMessage(errMsg);
+	    } else  {
+		var error_html = errors[errors.keys[i]];
+		$("#id_" + errors.keys[i]).parent().before(error_html);
+	    }
 	}
     }
 }
