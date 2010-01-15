@@ -436,9 +436,9 @@ input.search.button {
     background-color: #fbec5d;
 }
 #msger p    {
-    margin: 0px 0px 0px 230px;
+    margin: 0px 0px 0px 50px;
     line-height: 2em;
-    font-size: 125%;
+    font-size: 150%;
     color: #000;
 }
 
