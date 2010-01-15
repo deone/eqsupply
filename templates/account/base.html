@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 
-{% block title %}
-    Account - {% block page_title %}{% endblock %}
-{% endblock %}
-
 {% block custom_css %}
     <link rel="stylesheet" href="/site_media/css/auth.css"/>
 {% endblock %}
@@ -14,7 +10,7 @@
 {% endblock %}
 
 {% block body %}
-    <div id="account" class="clearfix padtop">
+    <div id="account">
 	{% block main %}{% endblock %}
 	{% block sidebar %}{% endblock %}
     </div>

@@ -1,15 +1,19 @@
-form p	{
-    border-bottom:solid 1px #dedede;
+form .instruction   {
     margin-bottom: 10px;
     padding-bottom: 5px;
+    border-bottom: solid 1px #dedede;
 }
 fieldset {
     border: none;
 }
 fieldset ol, fieldset ul    {
     list-style: none;
-    margin: 0px;
-    padding: 0px;
+    margin-left: -20px;
+    margin-bottom: 0px;
+}
+fieldset li p	{
+    font-style: italic;
+    margin-left: 120px;
 }
 ul.errorlist {
     width: 210px;

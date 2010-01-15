@@ -1,34 +1,28 @@
 {% extends "account/base.html" %}
 
-{% block page_title %}Sign Up{% endblock %}
-
 {% block main %}
-    <form id="signup" class="left widget" action="javascript:signUp();">
-	<fieldset>
-	    <legend>
-		<span>Sign Up</span>
-		<span class="ajax"><img src="/site_media/img/loading2.gif"/></span>
-	    </legend>
-	    <p>Already have an account? <a href="{% url acct_login %}">Log In</a></p>
-	    <span>All fields are required.</span><br/><br/>
-	    <ol>
-		{% for field in form %}
-		    <li>{{ field.label_tag }}{{ field }}<br/>{{ field.help_text }}</li>
-		{% endfor %}
-		<li><label></label><input type="submit" value="Sign Up"/></li>
-	    </ol>
-	</fieldset>
-    </form>
+    <div class="grid_11">&nbsp;</div>
+    <div class="grid_5">
+	<div class="block">
+	    <form id="signup" action="javascript:signUp();">
+		<fieldset class="login">
+		    <legend>Sign Up<span class="ajax"><img src="/site_media/img/loading2.gif"/></span></legend>
+		    <p class="instruction">All fields are required. Already have an account? <a href="{% url acct_login %}">Log In</a></p>
+		    {{ form.as_p }}
+		    <input class="confirm button" type="submit" value="Sign Up"/>
+		</fieldset>
+	    </form>
+	</div>
+    </div>
+    <div class="clear"></div>
+    
 {% endblock %}
 
-{% block sidebar %}
-    <div id="signup-help" class="right widget">
+    <!--<div id="signup-help" class="right widget">
 	<p>
 	    By clicking "Sign Up", you are indicating that you have read and agreed to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a>.
 	</p>
 	<p>
 	    If you have any trouble creating your account, contact us at <a href="mailto:">support@aerixnigeria.com</a>
 	</p>
-    </div>
-{% endblock %}
-<div class="clear-float"></div>
+    </div>-->
