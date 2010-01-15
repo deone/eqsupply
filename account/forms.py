@@ -42,7 +42,7 @@ class LoginForm(forms.Form):
 class SignupForm(forms.Form):
     first_name = forms.CharField(label=_("First Name:"), max_length=30, widget=forms.TextInput())
     last_name = forms.CharField(label=_("Last Name:"), max_length=30, widget=forms.TextInput())
-    username = forms.CharField(label=_("Username:"), max_length=30, widget=forms.TextInput(), help_text=_("Must be 6 characters or more"))
+    username = forms.CharField(label=_("Username:"), max_length=30, widget=forms.TextInput())
     password1 = forms.CharField(label=_("Password:"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("Password (again):"), widget=forms.PasswordInput(render_value=False))
     email = forms.EmailField(label=_("Email:"), widget=forms.TextInput())
@@ -50,6 +50,8 @@ class SignupForm(forms.Form):
     def clean_username(self):
 	if not alnum_re.search(self.cleaned_data["username"]):
 	    raise forms.ValidationError(_("Usernames can only contain letters, numbers and underscores."))
+	if len(self.cleaned_data["username"]) < 6:
+	    raise forms.ValidationError(_("Username must be at least 6 characters long."))
 	try:
 	    user = User.objects.get(username__iexact=self.cleaned_data["username"])
 	except User.DoesNotExist:
