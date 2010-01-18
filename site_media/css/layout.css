@@ -434,6 +434,7 @@ input.search.button {
     border-bottom: solid 2px #8b8878;
     display: none;
     background-color: #fbec5d;
+    z-index: 1000;
 }
 #msger p    {
     margin: 0px 0px 0px 50px;
@@ -455,6 +456,9 @@ input.search.button {
 
 /* Footer 
 ----------------------------------------------- */
+#footer	{
+    margin-top: 50px;
+}
 #footer .box {
 	color:#ccc;
 	background:#666;
