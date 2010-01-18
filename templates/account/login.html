@@ -1,27 +1,23 @@
 {% extends "account/base.html" %}
 
-{% block page_title %}Login{% endblock %}
-
 {% block main %}
     {% if request.flash.feedback %}
-	<div class="info widget"><p>{{ request.flash.feedback|escape }}</p></div>
+	<div><p>{{ request.flash.feedback|escape }}</p></div>
     {% endif %}
 
-    <form id="login" class="left widget" action="javascript:logIn();">
-	<fieldset>
-	    <legend>
-		<span>Log In</span>
-		<span class="ajax"><img src="/site_media/img/loading2.gif"/></span>
-	    </legend>
-	    <p>Don't have an account? <a href="{% url acct_signup %}">Sign Up</a></p>
-	    <ol>
-		{% for field in form %}
-		    <li>{{ field.label_tag }}{{ field }}</li>
-		{% endfor %}
-		<li><label></label><input type="submit" value="Log In"/></li>
-	    </ol>
-	    {% url account.views.password_reset as pwd_reset_url %}
-	    <!--<a href="{{ pwd_reset_url }}">Forgot password?</a>-->
-	</fieldset>
-    </form>
+    <div class="grid_11">&nbsp;</div>
+    <div class="grid_5">
+	<div class="block">
+	    <form id="login" action="javascript:logIn();">
+		<fieldset class="login">
+		    <legend>Log In<span class="ajax"><img src="/site_media/img/loading2.gif"/></span></legend>
+		    <p>Don't have an account? <a href="{% url acct_signup %}">Sign Up</a></p>
+		    {{ form.as_p }}
+		    <input class="confirm button" type="submit" value="Log In"/>
+		    <p><a href="#">Forgot password?</a>
+		</fieldset>
+	    </form>
+	</div>
+    </div>
+    <div class="clear"></div>
 {% endblock %}
