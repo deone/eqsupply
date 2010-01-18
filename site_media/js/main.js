@@ -8,7 +8,7 @@ $(function()	{
 
 });
 
-function highlightErrorFields(errors)   {
+function showErrors(errors)   {
     $('.errorlist').remove();
 
     if (!errors.keys)	{

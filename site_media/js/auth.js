@@ -9,26 +9,14 @@ var options = {
     }
 }
 
-function displayErrors(errorObj)    {
-    /* Classes of Errors
-     * * Connection error: also in sliding div, but longer than usual. We should pass milliseconds into showMessage()
-     * so that we would be able to make some display longer than others.
-     * * Validation errors: display them with the sliding div, normal duration.
-     * * Username-taken errors.
-     * * Field omission errors.
-     */
-    highlightErrorFields(errorObj.data.body);
-
-}
-
 function logIn()    {
     var username = $("#id_username").val();
     var password = $("#id_password").val()
 
-    options["url"] = "/account/";
+    options["url"] = "/";
     options["data"] = "username=" + username + "&password=" + password;
     options["success"] = function(response) {
-	displayErrorsOrRedirect(response, "/products/");
+	displayErrorsOrRedirect(response, "/");
     }
 
     $.ajax(options);
@@ -36,7 +24,7 @@ function logIn()    {
 
 function displayErrorsOrRedirect(respObj, dLocation)	{
     if (respObj.data.type != "ok")  {
-	displayErrors(respObj);
+	showErrors(respObj.data.body);
     } else  {
 	document.location = dLocation;
     }
@@ -50,7 +38,7 @@ function signUp()   {
     var password2 = $("#id_password2").val();
     var email = $("#id_email").val();
 
-    options["url"] = "/account/signup/";
+    options["url"] = "/signup";
     options["data"] = "first_name=" + firstname + 
 			"&last_name=" + lastname + 
 			"&email=" + email + 
@@ -59,7 +47,7 @@ function signUp()   {
 			"&password2=" + password2;
 
     options["success"] = function(response) {
-	displayErrorsOrRedirect(response, "/account/");
+	displayErrorsOrRedirect(response, "/");
     }
 
     $.ajax(options);
