@@ -40,7 +40,7 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
 
         errors = dict_error(form.errors.items())
 
-        return ("error", errors)
+        return dict_error(form.errors.items())
     else:
         form = form_class()
 
