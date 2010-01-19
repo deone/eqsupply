@@ -23,11 +23,30 @@ def dict_error(errors):
     return ("error", error_dict)
 
 @h.json_response
-def get_company(request, user_id, **kwargs):
-    user_account = get_object_or_404(UserAccount, pk=user_id)
-    user_company = user_account.company
+def signup(request, form_class=SignupForm, template="account/signup.html", **kwargs):
+    if request.method == "POST":
+        form = form_class(request.POST)
 
-    return ("ok", user_company)
+        if form.is_valid():
+            user = form.save()
+	    reg_id = user.account_set.get(user=user.id).reg_id
+	    try:
+		user.email_user("Eqsupply Account Activation", "Your reg. id is %s" % reg_id, settings.EMAIL_SENDER)
+		request.flash['feedback'] = "Thank you for registering. An activation link has been sent to your email."
+		return ("ok", "Signup Successful")
+	    except Exception, e:
+		user.delete()
+		print_exc()
+		return ("conn_error", "Unable to reach eqsupply. Check your internet connection and try again.")
+
+        return dict_error(form.errors.items())
+
+    else:
+        form = SignupForm()
+
+        return render_to_response(template, {
+            "form": form,
+        }, context_instance=RequestContext(request))
 
 @h.json_response
 def login(request, form_class=LoginForm, template="account/login.html", **kwargs):
@@ -46,32 +65,6 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
 
         return render_to_response(template, {
             "form": form, 
-        }, context_instance=RequestContext(request))
-
-@h.json_response
-def signup(request, form_class=SignupForm, template="account/signup.html", **kwargs):
-    if request.method == "POST":
-        form = form_class(request.POST)
-
-        if form.is_valid():
-            user = form.save()
-	    reg_id = user.account_set.get(user=user.id).reg_id
-	    try:
-		user.email_user("Ur link", "Thanks for registering. Your reg. id is %s" % reg_id, settings.EMAIL_SENDER)
-		request.flash['feedback'] = "Registration successful. An activation email has been sent to your email."
-		return ("ok", "Signup Successful")
-	    except Exception, e:
-		user.delete()
-		print_exc()
-		return ("conn_error", "Unable to reach eqsupply. Check your internet connection and try again.")
-
-        return dict_error(form.errors.items())
-
-    else:
-        form = SignupForm()
-
-        return render_to_response(template, {
-            "form": form,
         }, context_instance=RequestContext(request))
 
 def email_user(email, reg_id):
@@ -126,3 +119,10 @@ def has_details(request, user_id, **kwargs):
 	return ("error", "No details")
     else:
 	return ("ok", "Details Available")
+
+@h.json_response
+def get_company(request, user_id, **kwargs):
+    user_account = get_object_or_404(UserAccount, pk=user_id)
+    user_company = user_account.company
+
+    return ("ok", user_company)

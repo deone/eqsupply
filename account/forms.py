@@ -72,7 +72,7 @@ class SignupForm(forms.Form):
 	password = self.cleaned_data["password1"]
 
 	new_user = User.objects.create_user(username, email, password)
-	hash = hashlib.md5(new_user.email + ":" + password + str(datetime.datetime.now()))
+	hash = hashlib.md5(new_user.email + ":" + password + str(datetime.datetime.now())).hexdigest()
 	new_user.account_set.create(reg_id=hash)
 	new_user.first_name = firstname
 	new_user.last_name = lastname
