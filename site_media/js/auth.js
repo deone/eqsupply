@@ -22,14 +22,6 @@ function logIn()    {
     $.ajax(options);
 }
 
-function displayErrorsOrRedirect(respObj, dLocation)	{
-    if (respObj.data.type != "ok")  {
-	showErrors(respObj.data.body);
-    } else  {
-	document.location = dLocation;
-    }
-}
-
 function signUp()   {
     var firstname = $("#id_first_name").val();
     var lastname = $("#id_last_name").val();
@@ -47,8 +39,16 @@ function signUp()   {
 			"&password2=" + password2;
 
     options["success"] = function(response) {
-	displayErrorsOrRedirect(response, "/");
+	displayErrorsOrRedirect(response, "/signup");
     }
 
     $.ajax(options);
+}
+
+function displayErrorsOrRedirect(respObj, dLocation)	{
+    if (respObj.data.type != "ok")  {
+	showErrors(respObj.data.body);	/* main.js */
+    } else  {
+	document.location = dLocation;
+    }
 }
