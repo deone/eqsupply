@@ -1,12 +1,11 @@
 {% extends "account/base.html" %}
 
 {% block main %}
-    {% if request.flash.feedback %}
-	<div><p>{{ request.flash.feedback|escape }}</p></div>
-    {% endif %}
-
     <div class="grid_11">&nbsp;</div>
     <div class="grid_5">
+	{% if request.flash.feedback %}
+	    <p>{{ request.flash.feedback|escape }}</p>
+	{% endif %}
 	<div class="block">
 	    <form id="login" action="javascript:logIn();">
 		<fieldset class="login">

@@ -3,6 +3,9 @@
 {% block main %}
     <div class="grid_11">&nbsp;</div>
     <div class="grid_5">
+	{% if request.flash.feedback %}
+	    <p class="flashmsg">{{ request.flash.feedback|escape }}</p>
+	{% endif %}
 	<div class="block">
 	    <form id="signup" action="javascript:signUp();">
 		<fieldset class="login">
