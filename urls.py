@@ -17,13 +17,6 @@ urlpatterns = patterns('',
     url(r'^activate', account.views.activate, name="acct_activate"),
     url(r'^logout$', 'django.contrib.auth.views.logout', {"template_name": "account/login.html"}, name="acct_logout"),
 
-    #(r'^quote/', include('quote_generator.urls')),
-    #(r'^products/', include('product.urls')),
-
-
-    #(r'^manufacturer_list/$', quote_generator.views.view_products_by, {"view": "manufacturer"}),
-    #(r'^category_list/$', quote_generator.views.view_products_by, {"view": "category"}),
-
     (r'^admin/(.*)', admin.site.root),
 )
 

@@ -4,7 +4,7 @@
     <div class="grid_11">&nbsp;</div>
     <div class="grid_5">
 	{% if request.flash.feedback %}
-	    <p>{{ request.flash.feedback|escape }}</p>
+	    <p class="flashmsg">{{ request.flash.feedback|escape }}</p>
 	{% endif %}
 	<div class="block">
 	    <form id="login" action="javascript:logIn();">

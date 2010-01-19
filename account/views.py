@@ -8,6 +8,8 @@ from django.conf import settings
 from account.forms import SignupForm, LoginForm
 from quote_generator.models import Quote
 
+from account.models import Account
+
 from eqsupply import helpers as h
 
 def dict_error(errors):
@@ -31,7 +33,7 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
             user = form.save()
 	    reg_id = user.account_set.get(user=user.id).reg_id
 	    try:
-		user.email_user("Eqsupply Account Activation", "Your reg. id is %s" % reg_id, settings.EMAIL_SENDER)
+		user.email_user("Eqsupply Account Activation", "Click this link to activate your account: %s" % create_activation_link(reg_id), settings.EMAIL_SENDER)
 		request.flash['feedback'] = "Thank you for registering. An activation link has been sent to your email."
 		return ("ok", "Signup Successful")
 	    except Exception, e:
@@ -67,34 +69,27 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
             "form": form, 
         }, context_instance=RequestContext(request))
 
-def email_user(email, reg_id):
-    activation_link = create_activation_link(reg_id)
-    email_list = []
-    email_list.append(email)
-    subject = settings.ACTIVATION_EMAIL_SUBJECT
-    message = settings.ACTIVATION_EMAIL_MESSAGE % activation_link
-    sender = settings.EMAIL_SENDER
-
-    send_mail(subject, message, sender, email_list, fail_silently=False)
-
 def create_activation_link(reg_id):
-    url = settings.BASE_URL + "account/activate/?reg_id=%s" % reg_id
+    url = settings.BASE_URL + "activate?reg_id=%s" % reg_id
     return url
 
-def activate(request):
+def activate(request, form_class=LoginForm, template="account/login.html", **kwargs):
     reg_id = request.GET['reg_id']
-    activated_user = get_object_or_404(UserAccount, reg_id=reg_id)
+    activated_user = get_object_or_404(Account, reg_id=reg_id)
     activated_user.is_active = 1
     activated_user.save()
-    #request.flash['feedback'] = "Registration successful. An activation email has been sent to %s." % email
+    request.flash['feedback'] = "Your account is now active. Please log in to proceed."
 
-    return render_to_response("account/activate.html", {
+    form = form_class()
+
+    return render_to_response(template, {
 	"user": activated_user,
+	"form": form,
     }, context_instance=RequestContext(request))
 
 @h.json_response
 def add_details(request, user_id, **kwargs):
-    user = get_object_or_404(UserAccount, pk=user_id)
+    user = get_object_or_404(Account, pk=user_id)
 
     user.phone = request.POST.get("phone").strip()
     user.company = request.POST.get("company").strip()
@@ -114,7 +109,7 @@ def add_details(request, user_id, **kwargs):
 
 @h.json_response
 def has_details(request, user_id, **kwargs):
-    user = get_object_or_404(UserAccount, pk=user_id)
+    user = get_object_or_404(Account, pk=user_id)
     if not user.company:
 	return ("error", "No details")
     else:
@@ -122,7 +117,7 @@ def has_details(request, user_id, **kwargs):
 
 @h.json_response
 def get_company(request, user_id, **kwargs):
-    user_account = get_object_or_404(UserAccount, pk=user_id)
+    user_account = get_object_or_404(Account, pk=user_id)
     user_company = user_account.company
 
     return ("ok", user_company)
