@@ -1,5 +1,6 @@
 from traceback import print_exc
 
+from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.core.mail import send_mail
 from django.template import RequestContext
@@ -33,7 +34,7 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
             user = form.save()
 	    reg_id = user.account_set.get(user=user.id).reg_id
 	    try:
-		user.email_user("Eqsupply Account Activation", "Click this link to activate your account: %s" % create_activation_link(reg_id), settings.EMAIL_SENDER)
+		user.email_user("Aerix Equipment Supply Account Activation", "Click this link to activate your account: %s" % create_activation_link(reg_id), settings.EMAIL_SENDER)
 		request.flash['feedback'] = "Thank you for registering. An activation link has been sent to your email."
 		return ("ok", "Signup Successful")
 	    except Exception, e:
@@ -75,15 +76,15 @@ def create_activation_link(reg_id):
 
 def activate(request, form_class=LoginForm, template="account/login.html", **kwargs):
     reg_id = request.GET['reg_id']
-    activated_user = get_object_or_404(Account, reg_id=reg_id)
-    activated_user.is_active = 1
-    activated_user.save()
+    user_id = get_object_or_404(Account, reg_id=reg_id).user_id
+    user = get_object_or_404(User, id=user_id)
+    user.is_active = 1
+    user.save()
     request.flash['feedback'] = "Your account is now active. Please log in to proceed."
 
     form = form_class()
 
     return render_to_response(template, {
-	"user": activated_user,
 	"form": form,
     }, context_instance=RequestContext(request))
 
