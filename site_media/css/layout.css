@@ -73,7 +73,9 @@ h1 a {
 
 /* content
 ----------------------------------------------- */
-
+#search-results .box, #ads .box	{
+    height: 350px;
+}
 
 /* page heading
 ----------------------------------------------- */
@@ -472,7 +474,7 @@ input.search.button {
 
 /* Footer 
 ----------------------------------------------- */
-#footer	{
+#account #footer	{
     margin-top: 50px;
 }
 #footer .box {
