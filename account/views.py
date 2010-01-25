@@ -1,6 +1,7 @@
 from traceback import print_exc
 
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.core.mail import send_mail
 from django.template import RequestContext
@@ -70,11 +71,22 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
             "form": form, 
         }, context_instance=RequestContext(request))
 
+def logout(request, form_class=LoginForm, template="account/login.html"):
+    request.session.flush()
+    request.flash['feedback'] = "You were logged out."
+    
+
+    form = form_class()
+
+    return render_to_response(template, {
+	"form": form,
+    }, context_instance=RequestContext(request))
+
 def create_activation_link(reg_id):
     url = settings.BASE_URL + "activate?reg_id=%s" % reg_id
     return url
 
-def activate(request, form_class=LoginForm, template="account/login.html", **kwargs):
+def activate(request, form_class=LoginForm, template="account/login.html"):
     reg_id = request.GET['reg_id']
     user_id = get_object_or_404(Account, reg_id=reg_id).user_id
     user = get_object_or_404(User, id=user_id)
