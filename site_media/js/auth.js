@@ -16,7 +16,7 @@ function logIn()    {
     options["url"] = "/";
     options["data"] = "username=" + username + "&password=" + password;
     options["success"] = function(response) {
-	displayErrorsOrRedirect(response, "/");
+	displayErrorsOrRedirect(response, "/products");
     }
 
     $.ajax(options);
