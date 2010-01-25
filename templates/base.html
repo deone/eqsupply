@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="/site_media/js/main.js"></script>
 	{% block custom_js %}{% endblock %}
     </head>
-    <body>
+    {% block body_id %}<body>{% endblock %}
 	<div class="container_16">
 	    <div id="msger" class="container_16"><p>Loading...</p></div>
 	    <div id="header">
@@ -47,23 +47,6 @@
 	    </div>
 	</div>
 
-	<!--<div id="tabhead">
-	    <div class="logo"><a href="http://www.aerixnigeria.com" target="blank"><img src="/site_media/img/aerix_logo.jpg"/></a></div>
-	    <div class="login">
-		{% if user.is_authenticated %}
-		    <b>{{ user }}</b> | <a href="">Account</a> | 
-		    {% if user.is_staff %}
-			<a href="/admin/">Admin</a> | 
-		    {% endif %}
-		    <a href="{% url acct_logout %}">Logout</a>
-		{% else %}
-		    <a href="{% url acct_login %}">Login</a> or <a href="{% url acct_signup %}"><b>Sign up</b></a>
-		{% endif %}
-	    </div>
-	</div>
-	<div id="msger"><p>Loading...</p></div>
-	<div id="subnav" class="clearfix">&nbsp;</div>-->
-	
 	<script type="text/javascript">
 	    /*var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
 	    document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))*/
