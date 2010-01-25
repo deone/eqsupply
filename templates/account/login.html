@@ -1,7 +1,6 @@
 {% extends "account/base.html" %}
 
-{% block main %}
-    <div class="grid_11">&nbsp;</div>
+{% block form %}
     <div class="grid_5">
 	{% if request.flash.feedback %}
 	    <p class="flashmsg">{{ request.flash.feedback|escape }}</p>
