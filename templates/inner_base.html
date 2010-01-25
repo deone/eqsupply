@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block right-corner %}
+    <div class="grid_5" id="right-head-corner">
+	<div id="user-links">
+	    {% if user.is_authenticated %}
+		<b>{{ user }}</b> | <a href="#">Account</a> | 
+		{% if user.is_staff %}
+		    <a href="/admin/">Admin</a> | 
+		{% endif %}
+		<a href="{% url acct_logout %}">Logout</a>
+	    {% else %}
+		<a href="{% url acct_login %}">Login</a> or <a href="{% url acct_signup %}"><b>Sign up</b></a>
+	    {% endif %}
+	</div>
+	<div id="search">
+	    <form class="search">
+		<p>
+		    <input class="search text" name="value" type="text"/>
+		    <input class="search button" value="Search" type="submit"/>
+		</p>
+	    </form>
+	</div>
+    </div>
+{% endblock %}
