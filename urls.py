@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     url(r'^activate', account.views.activate, name="acct_activate"),
     url(r'^logout$', 'django.contrib.auth.views.logout', {"template_name": "account/login.html"}, name="acct_logout"),
 
+    (r'products$', include('product.urls')),
+
     (r'^admin/(.*)', admin.site.root),
 )
 
