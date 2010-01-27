@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^activate', account.views.activate, name="acct_activate"),
     url(r'^logout$', account.views.logout, name="acct_logout"),
 
-    (r'products$', include('product.urls')),
+    (r'products$', include('products.urls')),
 
     (r'^admin/(.*)', admin.site.root),
 )

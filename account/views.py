@@ -7,10 +7,8 @@ from django.core.mail import send_mail
 from django.template import RequestContext
 from django.conf import settings
 
-from account.forms import SignupForm, LoginForm
-from quote_generator.models import Quote
-
 from account.models import Account
+from account.forms import SignupForm, LoginForm
 
 from eqsupply import helpers as h
 

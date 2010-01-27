@@ -80,7 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'eqsupply.account',
-    "eqsupply.quote_generator",
+    'eqsupply.products',
 )
 
 EMAIL_HOST = "localhost"
