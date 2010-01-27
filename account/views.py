@@ -73,7 +73,7 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
 
 def logout(request, form_class=LoginForm, template="account/login.html"):
     request.session.flush()
-    request.flash['feedback'] = "You were logged out."
+    request.flash['feedback'] = "You are now logged out."
     
 
     form = form_class()
