@@ -12,6 +12,14 @@
 	<script type="text/javascript" src="/site_media/js/jquery.js"></script>
 	<script type="text/javascript" src="/site_media/js/jquery.form.js"></script>
 	<script type="text/javascript" src="/site_media/js/main.js"></script>
+	<script type="text/javascript">
+	    $(function()    {
+		$("#search-results a").click(function()  {
+		    $(this).next().toggle('fast');
+		    return false;
+		}).next().hide();
+	    });
+	</script>
 	{% block custom_js %}{% endblock %}
     </head>
     {% block body_id %}<body>{% endblock %}

@@ -77,15 +77,22 @@ h1 a {
     height: 77.5%;
     padding-top: 0.5%;
 }
-#search-results .box, #ads .box	{
+#search-results a   {
+    font-weight: normal;
+    display: block;
 }
-#search-results .block ul   {
+#search-results .block	{
+    padding-top: .5em;
+    padding-left: 10px;
     overflow: auto;
-    height: 315px;
-    width: 105%;
+    height: 92%;
+    margin-bottom: 0;
 }
-#search-results .block ul li, #ads .block ul li	{
+#subcat	{
     margin: 0;
+}
+#subcat li  {
+    margin-left: 10px;
 }
 
 
@@ -102,8 +109,8 @@ h2#page-heading {
 /* boxes
 ----------------------------------------------- */
 .box {
-	margin-bottom:20px;
-	padding:10px 10px 1px 10px;
+    padding:10px 0px 1px 0px;
+    margin-bottom: 0;
 }
 .box h2 {
 	font-size:1em;
@@ -111,7 +118,7 @@ h2#page-heading {
 	text-transform:uppercase;
 	color:#333;
 	border-bottom: solid 1px #333;
-	margin:-10px -10px 0 -10px;
+	margin:-10px 0px 0 0px;
 	padding:6px 12px;
 }
 .box h2 a,
