@@ -28,21 +28,15 @@
     <div id="menu" class="grid_3">
 	<div class="box">
 	    <h2>Choose a Category</h2> 
-	    <div class="block">
-		<a class="cat" href="#">Inspection Equipment</a>
+	    <div class="viewport">
+	    {% for c in categories %}
+		<a class="cat" href="#">{{ c.name }}</a>
 		<ul id="subcat">
-		    <li><a href="#">Chloride Test</a></li>
-		    <li><a href="#">Balances</a></li>
-		    <li><a href="#">Black and White Charts</a></li>
-		    <li><a href="#">Chloride Test</a></li>
+		{% for s in c.subcategory_set.all %}
+		    <li><a href="#">{{ s.name }}</a></li>
+		{% endfor %}
 		</ul>
-		<a class="cat" href="#">Pressure Measurement</a>
-		<ul id="subcat">
-		    <li><a href="#">Chloride Test</a></li>
-		    <li><a href="#">Balances</a></li>
-		    <li><a href="#">Black and White Charts</a></li>
-		    <li><a href="#">Chloride Test</a></li>
-		</ul>
+	    {% endfor %}
 	    </div>
 	</div>
     </div>
@@ -50,11 +44,6 @@
     <div id="ads" class="grid_3">
 	<div class="box">
 	    <h2>Our Partners</h2>
-	    <!--<div class="block">
-		<ul>
-		    <li><img src="/site_media/img/fike.jpg"/></li>
-		</ul>
-	    </div>-->
 	</div>
     </div>
 {% endblock %}

@@ -82,30 +82,30 @@ h1 a {
     display: block;
     font-size: 110%;
 }
+#menu a:hover, #menu a.cat:hover  {
+    background-color: #eee;
+}
 #menu a.cat {
     padding-left: 1.3em;
     background: 0 3px url("/site_media/img/switch_minus.gif") no-repeat;
-}
-#menu a.cat:hover   {
-    background-color: #eee;
 }
 #menu a.visible	{
     background: 0 3px url("/site_media/img/switch_plus.gif") no-repeat;
     font-weight: bold;
     font-size: 108%;
 }
-#menu .block	{
+.viewport   {
     padding-top: .5em;
     padding-left: 1em;
     overflow: auto;
     height: 92%;
     margin-bottom: 0;
 }
-#subcat	{
-    margin: 0;
-}
 #menu a.cat, #subcat	{
     margin-bottom: .5em;
+}
+#subcat	{
+    margin: 0;
 }
 #subcat li  {
     margin-left: 2em;
