@@ -45,6 +45,11 @@ h1 a {
 	font-weight:normal;
 }
 
+h5  {
+    border-bottom: solid 1px #ccc;
+    margin-bottom: 10px;
+}
+
 
 /* header and its elements: logo, nav & search
  * For nav details, see nav.css
@@ -113,13 +118,16 @@ h1 a {
     font-weight: normal;
     display: block;
     width: 75px;
+    color: #666;
+}
+#module ul.products li a:hover	{
+    color: #000;
 }
 #module ul.products li a:hover span {
     border: solid 1px #ccc;
 }
 #module ul.products li span {
     border: solid 1px #eee;
-    background-image: url('/site_media/img/tool.jpg');
     width: 60px;
     height: 60px;
     display: block;

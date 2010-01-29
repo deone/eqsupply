@@ -5,21 +5,15 @@
 	<div class="box">
 	    <h2>All Categories</h2>
 	    <div class="viewport">
-		<h5>Abrasion</h5>
+	    {% for c in categories %}
+		<h5>{{ c.name }}</h5>
 		<ul class="products">
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
-		    <li><a href="#"><span></span>Car Wash Simulator</a></li>
+		{% for p in c.product_set.all %}
+		    <li><a href="#"><span style="background-image: url('{{ p.image }}')"></span>{{ p.name }}</a></li>
+		{% endfor %}
+		    <div class="clear"></div>
 		</ul>
+	    {% endfor %}
 	    </div>
 	</div>
     </div>
