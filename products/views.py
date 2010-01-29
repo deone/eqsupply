@@ -7,7 +7,9 @@ from eqsupply import helpers as h
 
 def index(request, template="products/index.html"):
     divisions = Division.objects.all()
+    categories = Category.objects.all()
     
     return render_to_response(template, {
-	"divisions": divisions 
+	"divisions": divisions, 
+	"categories": categories
     }, context_instance=RequestContext(request))

@@ -22,7 +22,7 @@ class Category(CommonInfo):
 
 class Product(CommonInfo):
     code = models.CharField(max_length=50, unique=True)
-    image = models.ImageField(upload_to="/tmp")
+    image = models.ImageField(upload_to="site_media/products")
     category = models.ForeignKey(Category)
 
     def __unicode__(self):
