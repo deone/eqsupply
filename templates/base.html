@@ -16,7 +16,7 @@
 	    $(function()    {
 		$("#menu a.cat").click(function()  {
 		    $(this).toggleClass("visible");
-		    $(this).next().toggle("fast");
+		    $(this).next().toggle();
 		    return false;
 		}).next().hide();
 	    });

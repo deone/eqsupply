@@ -87,12 +87,42 @@ h1 a {
 }
 #menu a.cat {
     padding-left: 1.3em;
-    background: 0 3px url("/site_media/img/switch_minus.gif") no-repeat;
+    background: 0 3px url("/site_media/img/switch_plus.gif") no-repeat;
 }
 #menu a.visible	{
-    background: 0 3px url("/site_media/img/switch_plus.gif") no-repeat;
+    background: 0 3px url("/site_media/img/switch_minus.gif") no-repeat;
     font-weight: bold;
     font-size: 108%;
+}
+#subcat	{
+    margin: 0;
+}
+#subcat li  {
+    margin-left: 2em;
+}
+#module ul.products {
+    padding: 0;
+    width: 100%;
+}
+#module ul.products li	{
+    display: inline;
+    float: left;
+    margin: 0;
+}
+#module ul.products li a    {
+    font-weight: normal;
+    display: block;
+    width: 75px;
+}
+#module ul.products li a:hover span {
+    border: solid 1px #ccc;
+}
+#module ul.products li span {
+    border: solid 1px #eee;
+    background-image: url('/site_media/img/tool.jpg');
+    width: 60px;
+    height: 60px;
+    display: block;
 }
 .viewport   {
     padding-top: .5em;
@@ -101,16 +131,6 @@ h1 a {
     height: 92%;
     margin-bottom: 0;
 }
-#menu a.cat, #subcat	{
-    margin-bottom: .5em;
-}
-#subcat	{
-    margin: 0;
-}
-#subcat li  {
-    margin-left: 2em;
-}
-
 
 /* page heading
 ----------------------------------------------- */
