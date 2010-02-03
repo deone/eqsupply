@@ -22,9 +22,20 @@ class Category(CommonInfo):
 	verbose_name_plural = "categories"
 
 class Product(CommonInfo):
-    code = models.CharField(max_length=50, unique=True)
-    image = models.ImageField(upload_to="site_media/products")
     category = models.ForeignKey(Category)
+    code = models.CharField(max_length=50, unique=True)
+    small_image = models.ImageField(upload_to="site_media/products/small")
+    large_image = models.ImageField(upload_to="site_media/products/large")
+    product_page = models.CharField(max_length=255)
+
+    def __unicode__(self):
+	return u"%s" % self.name
+
+class Accessories(CommonInfo):
+    product = models.ForeignKey(Product)
+    code = models.CharField(max_length=50, unique=True)
+    image = models.ImageField(upload_to="site_media/products/accessories")
+    product_page = models.CharField(max_length=255)
 
     def __unicode__(self):
 	return u"%s" % self.name
