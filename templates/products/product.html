@@ -1,20 +1,40 @@
 {% extends "products/base.html" %}
 
 {% block module %}
-    <div id="module" class="grid_10">
+    <div class="module grid_10">
 	<div class="box">
 	    <h2>{{ product.category }}</h2>
-	    <div class="viewport">
-		<div class="grid_4 alpha omega">
-		    <img class="product-image" src="/{{ product.large_image }}"/>
+	    <div id="product" class="viewport">
+		<div id="image" class="grid_4 alpha omega">
+		    <img src="/{{ product.large_image }}"/>
 		</div>
-		<div class="grid_12">
+		<div id="detail" class="grid_12">
 		    <h5>{{ product.name }}</h5>
 		    <p>{{ product.description }}</p>
-		    <a style="border: solid 1px #ccc;" target="blank" href="{{ product.product_page }}">View Product Description</a>
+		    <div class="actions">
+			<a target="blank" href="{{ product.product_page }}">View Technical Specifications</a>
+			<a id="quote-btn" href="#"> + Quote It!</a>
+			<form>
+			    <input type="text" id="quantity" value="Qty"/>
+			    <input type="submit" value="OK"/>
+			</form>
+		    </div>
+		    {% if product.accessory_set.all %}
+			<h5>Accessories</h5>
+			<table>
+			{% for a in product.accessory_set.all %}
+			    <tr>
+				<td>{{ a.part_number }}</td>
+				<td>{{ a.description }}</td>
+				<td><a href="#"> + Quote It!</a></td>
+			    </tr>
+			{% endfor %}
+			</table>
+		    {% endif %}
 		</div>
 		<div class="clear"></div>
 	    </div>
+	    <div id="quote">dfhdf</div>
 	</div>
     </div>
 {% endblock %}

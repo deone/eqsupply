@@ -1,10 +1,10 @@
 {% extends "products/base.html" %}
 
 {% block module %}
-    <div id="module" class="grid_10">
+    <div class="module grid_10">
 	<div class="box">
 	    <h2>All Categories</h2>
-	    <div class="viewport">
+	    <div id="product_list" class="viewport">
 	    {% for c in categories %}
 		<h5>{{ c.name }}</h5>
 		<ul class="products">
