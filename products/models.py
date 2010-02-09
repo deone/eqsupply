@@ -31,11 +31,15 @@ class Product(CommonInfo):
     def __unicode__(self):
 	return u"%s" % self.name
 
-class Accessories(CommonInfo):
+class Accessory(models.Model):
     product = models.ForeignKey(Product)
-    code = models.CharField(max_length=50, unique=True)
-    image = models.ImageField(upload_to="site_media/products/accessories")
-    product_page = models.CharField(max_length=255)
+    part_number = models.CharField(max_length=50, unique=True)
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to="site_media/products/accessories", blank=True)
+    product_page = models.CharField(max_length=255, blank=True)
 
     def __unicode__(self):
-	return u"%s" % self.name
+	return u"%s" % self.description
+
+    class Meta:
+	verbose_name_plural = "accessories"
