@@ -5,11 +5,20 @@ from products.models import *
 
 from eqsupply import helpers as h
 
+APP_MENU = Division.objects.all()
+
 def index(request, template="products/index.html"):
-    divisions = Division.objects.all()
     categories = Category.objects.all()
     
     return render_to_response(template, {
-	"divisions": divisions, 
-	"categories": categories
+	"menu": APP_MENU,
+	"categories": categories,
+    }, context_instance=RequestContext(request))
+
+def display_product(request, product_id, template="products/product.html"):
+    product = get_object_or_404(Product, pk=product_id)
+
+    return render_to_response(template, {
+	"menu": APP_MENU,
+	"product": product
     }, context_instance=RequestContext(request))

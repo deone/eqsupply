@@ -10,7 +10,6 @@ admin.autodiscover()
 
 import account.views
 
-
 urlpatterns = patterns('',
     url(r'^$', account.views.login, name="acct_login"),
     url(r'^signup$', account.views.signup, name="acct_signup"),
@@ -18,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^logout$', account.views.logout, name="acct_logout"),
 
     (r'products$', include('products.urls')),
+    (r'products/', include('products.urls')),
 
     (r'^admin/(.*)', admin.site.root),
 )
