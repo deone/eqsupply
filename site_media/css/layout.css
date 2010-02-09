@@ -105,28 +105,28 @@ h5  {
 #subcat li  {
     margin-left: 2em;
 }
-#module ul.products {
+.module ul.products {
     padding: 0;
     width: 100%;
 }
-#module ul.products li	{
+.module ul.products li	{
     display: inline;
     float: left;
     margin: 0;
 }
-#module ul.products li a    {
+.module ul.products li a    {
     font-weight: normal;
     display: block;
     width: 75px;
     color: #666;
 }
-#module ul.products li a:hover	{
+.module ul.products li a:hover	{
     color: #000;
 }
-#module ul.products li a:hover span {
+.module ul.products li a:hover span {
     border: solid 1px #ccc;
 }
-#module ul.products li span {
+.module ul.products li span {
     border: solid 1px #eee;
     width: 60px;
     height: 60px;
@@ -139,9 +139,29 @@ h5  {
     height: 92%;
     margin-bottom: 0;
 }
-.product-image	{
+#product #image img {
     border: solid 1px #ccc;
     padding: 5px;
+}
+#product #detail p, #product .actions  {
+    margin-bottom: 2em;
+}
+.actions a  {
+    border: solid 1px #ccc;
+    padding: 0.2em;
+}
+.actions #quote-form	{
+    display: inline;
+}
+.actions form	{
+    display: none;
+}
+.actions input	{
+    width: 4em;
+    font-size: 0.8em;
+}
+#quote	{
+    background-color: #ff0;
 }
 
 /* page heading

@@ -1,3 +1,24 @@
+$(function()	{
+    $("#quote-btn").click(function()	{
+	$(this).hide();
+	$(this).next().attr("style", "display: inline");
+    })
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var getOptions = {
     url: null,
     type: "GET",
