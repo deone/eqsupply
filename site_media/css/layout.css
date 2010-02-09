@@ -133,11 +133,15 @@ h5  {
     display: block;
 }
 .viewport   {
-    padding-top: .5em;
+    padding-top: 1em;
     padding-left: 1em;
     overflow: auto;
     height: 92%;
     margin-bottom: 0;
+}
+.product-image	{
+    border: solid 1px #ccc;
+    padding: 5px;
 }
 
 /* page heading

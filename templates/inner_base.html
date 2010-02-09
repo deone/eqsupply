@@ -29,10 +29,10 @@
 	<div class="box">
 	    <h2>Choose a Category</h2> 
 	    <div class="viewport">
-	    {% for d in divisions %}
-		<a class="cat" href="#">{{ d.name }}</a>
+	    {% for m in menu %}
+		<a class="cat" href="#">{{ m.name }}</a>
 		<ul id="subcat">
-		{% for c in d.category_set.all %}
+		{% for c in m.category_set.all %}
 		    <li><a href="#">{{ c.name }}</a></li>
 		{% endfor %}
 		</ul>

@@ -1,0 +1,20 @@
+{% extends "products/base.html" %}
+
+{% block module %}
+    <div id="module" class="grid_10">
+	<div class="box">
+	    <h2>{{ product.category }}</h2>
+	    <div class="viewport">
+		<div class="grid_4 alpha omega">
+		    <img class="product-image" src="/{{ product.large_image }}"/>
+		</div>
+		<div class="grid_12">
+		    <h5>{{ product.name }}</h5>
+		    <p>{{ product.description }}</p>
+		    <a style="border: solid 1px #ccc;" target="blank" href="{{ product.product_page }}">View Product Description</a>
+		</div>
+		<div class="clear"></div>
+	    </div>
+	</div>
+    </div>
+{% endblock %}
