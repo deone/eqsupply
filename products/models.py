@@ -43,3 +43,13 @@ class Accessory(models.Model):
 
     class Meta:
 	verbose_name_plural = "accessories"
+
+class ProductVariation(models.Model):
+    """Holds all part numbers and description of products. Many-to-one relationship with Product"""
+    product = models.ForeignKey(Product)
+    part_number = models.CharField(max_length=50, unique=True)
+    description = models.TextField()
+    cost = models.CharField(max_length=10)
+
+    def __unicode__(self):
+	return u"%s - %s" % (self.product, self.part_number)
