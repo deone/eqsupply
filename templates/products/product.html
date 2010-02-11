@@ -13,12 +13,24 @@
 		    <p>{{ product.description }}</p>
 		    <div class="actions">
 			<a target="blank" href="{{ product.product_page }}">View Technical Specifications</a>
-			<a id="quote-btn" href="#"> + Quote It!</a>
+			<!--<a id="quote-btn" href="#"> + Quote It!</a>
 			<form>
 			    <input type="text" id="quantity" value="Qty"/>
 			    <input type="submit" value="OK"/>
-			</form>
+			</form>-->
 		    </div>
+		    {% if product.productvariation_set.all %}
+			<h5>Variations</h5>
+			<table>
+			{% for pv in product.productvariation_set.all %}
+			    <tr>
+				<td>{{ pv.part_number }}</td>
+				<td>{{ pv.description }}</td>
+				<td><a href="#"> + Quote</a></td>
+			    </tr>
+			{% endfor %}
+			</table>
+		    {% endif %}
 		    {% if product.accessory_set.all %}
 			<h5>Accessories</h5>
 			<table>
@@ -26,7 +38,7 @@
 			    <tr>
 				<td>{{ a.part_number }}</td>
 				<td>{{ a.description }}</td>
-				<td><a href="#"> + Quote It!</a></td>
+				<td><a href="#"> + Quote</a></td>
 			    </tr>
 			{% endfor %}
 			</table>
@@ -34,7 +46,6 @@
 		</div>
 		<div class="clear"></div>
 	    </div>
-	    <div id="quote">dfhdf</div>
 	</div>
     </div>
 {% endblock %}
