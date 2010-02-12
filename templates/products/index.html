@@ -1,20 +1,16 @@
 {% extends "products/base.html" %}
 
 {% block module %}
-    <div class="module grid_10">
-	<div class="box">
-	    <h2>All Categories</h2>
-	    <div id="product_list" class="viewport">
-	    {% for c in categories %}
-		<h5>{{ c.name }}</h5>
-		<ul class="products">
-		{% for p in c.product_set.all %}
-		    <li><a href="products/{{ p.id }}"><span style="background-image: url('{{ p.small_image }}')"></span>{{ p.name }}</a></li>
-		{% endfor %}
-		    <div class="clear"></div>
-		</ul>
-	    {% endfor %}
-	    </div>
-	</div>
+    <h2>All Categories</h2>
+    <div id="product_list" class="viewport">
+    {% for c in categories %}
+	<h5>{{ c.name }}</h5>
+	<ul class="products">
+	{% for p in c.product_set.all %}
+	    <li><a href="products/{{ p.id }}"><span style="background-image: url('{{ p.small_image }}')"></span>{{ p.name }}</a></li>
+	{% endfor %}
+	    <div class="clear"></div>
+	</ul>
+    {% endfor %}
     </div>
 {% endblock %}

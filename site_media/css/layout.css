@@ -150,19 +150,14 @@ h5  {
     border: solid 1px #ccc;
     padding: 0.2em;
 }
-.actions #quote-form	{
-    display: inline;
-}
-.actions form	{
+#quote_form {
     display: none;
 }
-.actions input	{
+#quote_form input	{
     width: 4em;
     font-size: 0.8em;
 }
-#quote	{
-    background-color: #ff0;
-}
+
 
 /* page heading
 ----------------------------------------------- */
@@ -358,8 +353,11 @@ col.colC {
 	width:8em;
 }
 th, td {
-	padding:.2em 1em;
+	padding:.5em 1em;
 	text-align:left;
+}
+td.activity {
+    width: 20%;
 }
 thead th {
 	border-bottom:2px solid #888;

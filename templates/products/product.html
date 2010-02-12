@@ -1,51 +1,48 @@
 {% extends "products/base.html" %}
 
 {% block module %}
-    <div class="module grid_10">
-	<div class="box">
-	    <h2>{{ product.category }}</h2>
-	    <div id="product" class="viewport">
-		<div id="image" class="grid_4 alpha omega">
-		    <img src="/{{ product.large_image }}"/>
-		</div>
-		<div id="detail" class="grid_12">
-		    <h5>{{ product.name }}</h5>
-		    <p>{{ product.description }}</p>
-		    <div class="actions">
-			<a target="blank" href="{{ product.product_page }}">View Technical Specifications</a>
-			<!--<a id="quote-btn" href="#"> + Quote It!</a>
-			<form>
-			    <input type="text" id="quantity" value="Qty"/>
-			    <input type="submit" value="OK"/>
-			</form>-->
-		    </div>
-		    {% if product.productvariation_set.all %}
-			<h5>Variations</h5>
-			<table>
-			{% for pv in product.productvariation_set.all %}
-			    <tr>
-				<td>{{ pv.part_number }}</td>
-				<td>{{ pv.description }}</td>
-				<td><a href="#"> + Quote</a></td>
-			    </tr>
-			{% endfor %}
-			</table>
-		    {% endif %}
-		    {% if product.accessory_set.all %}
-			<h5>Accessories</h5>
-			<table>
-			{% for a in product.accessory_set.all %}
-			    <tr>
-				<td>{{ a.part_number }}</td>
-				<td>{{ a.description }}</td>
-				<td><a href="#"> + Quote</a></td>
-			    </tr>
-			{% endfor %}
-			</table>
-		    {% endif %}
-		</div>
-		<div class="clear"></div>
-	    </div>
+    <h2>{{ product.category }}</h2>
+    <div id="product" class="viewport">
+	<div id="image" class="grid_4 alpha omega">
+	    <img src="/{{ product.large_image }}"/>
 	</div>
+	<div id="detail" class="grid_12">
+	    <h5>{{ product.name }}</h5>
+	    <p>{{ product.description }}</p>
+	    <div class="actions">
+		<a target="blank" href="{{ product.product_page }}">View Technical Specifications</a>
+	    </div>
+	    {% if product.productvariation_set.all %}
+		<h5>Variations</h5>
+		<table border=1>
+		{% for pv in product.productvariation_set.all %}
+		    <tr>
+			<td>{{ pv.part_number }}</td>
+			<td>{{ pv.description }}</td>
+			<td id="cell{{ pv.pk }}" class="activity">
+			    <a id="quote_btn" href="javascript:showQuoteForm('{{ pv.pk }}')"> + Quote</a>
+			    <form id="quote_form">
+				<input type="text" id="qty{{ pv.pk }}"/>
+				<input type="submit" id="{{ pv.pk }}" value="OK" onclick="quote(this.id)"/>
+			    </form>
+			</td>
+		    </tr>
+		{% endfor %}
+		</table>
+	    {% endif %}
+	    {% if product.accessory_set.all %}
+		<h5>Accessories</h5>
+		<table>
+		{% for a in product.accessory_set.all %}
+		    <tr>
+			<td>{{ a.part_number }}</td>
+			<td>{{ a.description }}</td>
+			<td><a href="#"> + Quote</a></td>
+		    </tr>
+		{% endfor %}
+		</table>
+	    {% endif %}
+	</div>
+	<div class="clear"></div>
     </div>
 {% endblock %}
