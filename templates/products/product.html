@@ -10,7 +10,7 @@
 	    <h5>{{ product.name }}</h5>
 	    <p>{{ product.description }}</p>
 	    <div class="actions">
-		<a target="blank" href="{{ product.product_page }}">View Technical Specifications</a>
+		<a target="blank" href="{{ product.product_page }}">View Product Page</a>
 	    </div>
 	    {% if product.productvariation_set.all %}
 		<h5>Variations</h5>
@@ -32,12 +32,12 @@
 	    {% endif %}
 	    {% if product.accessory_set.all %}
 		<h5>Accessories</h5>
-		<table>
+		<table border=1>
 		{% for a in product.accessory_set.all %}
 		    <tr>
 			<td>{{ a.part_number }}</td>
 			<td>{{ a.description }}</td>
-			<td><a href="#"> + Quote</a></td>
+			<td class="activity"><a href="#"> + Quote</a></td>
 		    </tr>
 		{% endfor %}
 		</table>
