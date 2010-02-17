@@ -4,5 +4,5 @@ from quote.models import *
 
 from eqsupply import helpers as h
 
-def add_item(request):
+def add_line_item(request):
     pass
