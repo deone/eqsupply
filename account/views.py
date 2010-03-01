@@ -52,6 +52,7 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 
 @h.json_response
 def login(request, form_class=LoginForm, template="account/login.html", **kwargs):
+    print request.is_ajax()
     if request.method == "POST":
         form = form_class(request.POST)
 
@@ -97,38 +98,3 @@ def activate(request, form_class=LoginForm, template="account/login.html"):
     return render_to_response(template, {
 	"form": form,
     }, context_instance=RequestContext(request))
-
-@h.json_response
-def add_details(request, user_id, **kwargs):
-    user = get_object_or_404(Account, pk=user_id)
-
-    user.phone = request.POST.get("phone").strip()
-    user.company = request.POST.get("company").strip()
-    user.position = request.POST.get("position").strip()
-    user.company_street_address = request.POST.get("company_address").strip()
-    user.city = request.POST.get("city").strip()
-    user.state = request.POST.get("state").strip()
-    user.country = request.POST.get("country").strip()
-    user.save()
-
-    quote_id = request.POST.get("quote_id").strip()
-    quote = get_object_or_404(Quote, pk=quote_id)
-    quote.title = quote.title + user.company
-    quote.save()
-
-    return ("ok", "Details Added")
-
-@h.json_response
-def has_details(request, user_id, **kwargs):
-    user = get_object_or_404(Account, pk=user_id)
-    if not user.company:
-	return ("error", "No details")
-    else:
-	return ("ok", "Details Available")
-
-@h.json_response
-def get_company(request, user_id, **kwargs):
-    user_account = get_object_or_404(Account, pk=user_id)
-    user_company = user_account.company
-
-    return ("ok", user_company)
