@@ -9,6 +9,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 import account.views
+import quote.views
 
 urlpatterns = patterns('',
     url(r'^$', account.views.login, name="acct_login"),
@@ -19,7 +20,7 @@ urlpatterns = patterns('',
     (r'^products$', include('products.urls')),
     (r'^products/', include('products.urls')),
 
-    (r'^quote/', include('quote.urls')),
+    (r'^quote$', quote.views.add_line_item),
 
     (r'^admin/(.*)', admin.site.root),
 )
