@@ -13,7 +13,7 @@
 		<a target="blank" href="{{ product.product_page }}">View Product Page</a>
 	    </div>
 	    {% if product.productvariation_set.all %}
-		<h5>Variations</h5>
+		<h5>Variants</h5>
 		<table border=1>
 		{% for pv in product.productvariation_set.all %}
 		    <tr>
@@ -21,9 +21,10 @@
 			<td>{{ pv.description }}</td>
 			<td id="cell{{ pv.pk }}" class="activity">
 			    <a id="quote_btn" href="javascript:showQuoteForm('{{ pv.pk }}')"> + Quote</a>
-			    <form id="quote_form">
+			    <form id="quote_form" action="javascript:quote('{{ pv.pk }}')">
+				<input type="hidden" id="user" value="{{ request.user.id }}"/>
 				<input type="text" id="qty{{ pv.pk }}"/>
-				<input type="submit" id="{{ pv.pk }}" value="OK" onclick="quote(this.id)"/>
+				<input type="submit" value="Add"/>
 			    </form>
 			</td>
 		    </tr>
