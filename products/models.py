@@ -50,7 +50,7 @@ class ProductVariation(models.Model):
     product = models.ForeignKey(Product)
     part_number = models.CharField(max_length=50, unique=True)
     description = models.TextField()
-    cost = models.CharField(max_length=10)
+    cost = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __unicode__(self):
 	return u"%s - %s" % (self.product, self.part_number)

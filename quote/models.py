@@ -6,8 +6,8 @@ class Quotation(models.Model):
     user = models.ForeignKey(User)
     time_created = models.DateTimeField()
     quotation_no = models.CharField(max_length=20)
-    cost = models.IntegerField(default=0)
-    status = models.BooleanField(default=False)
+    cost = models.DecimalField(max_digits=20, decimal_places=2)
+    status = models.BooleanField(default=False)	# Remember to set this flag to True when the quote is sent to email
 
     def __unicode__(self):
 	return u"%s, %s" % (self.quotation_no, self.cost)
@@ -16,10 +16,10 @@ class LineItem(models.Model):
     quotation = models.ForeignKey(Quotation)
     product = models.ForeignKey(ProductVariation)
     quantity = models.IntegerField()
-    cost = models.IntegerField(default=0)
+    cost = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __unicode__(self):
-	return u"%s, %s, %s" %s (self.product.part_number, self.quantity, self.cost)
+	return u"%s, %s, %s" % (self.product.part_number, self.quantity, self.cost)
 
 class Cost(models.Model):
     """Includes, courier charges, custom charges (int'l & local) and insurance costs (if any)

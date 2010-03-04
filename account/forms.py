@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, login
-from django.utils.translation import ugettext_lazy as _, ugettext
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
 import hashlib

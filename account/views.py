@@ -52,7 +52,6 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 
 @h.json_response
 def login(request, form_class=LoginForm, template="account/login.html", **kwargs):
-    print request.is_ajax()
     if request.method == "POST":
         form = form_class(request.POST)
 
