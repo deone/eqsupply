@@ -12,18 +12,6 @@ from account.forms import SignupForm, LoginForm
 
 from eqsupply import helpers as h
 
-def dict_error(errors):
-    error_dict = {}
-    keys = []
-
-    for k, v in errors:
-	error_dict[k] = str(v)
-	keys.append(k)
-
-    error_dict["keys"] = keys
-
-    return ("error", error_dict)
-
 @h.json_response
 def signup(request, form_class=SignupForm, template="account/signup.html", **kwargs):
     if request.method == "POST":
@@ -41,10 +29,10 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 		print_exc()
 		return ("conn_error", "Unable to reach eqsupply. Check your internet connection and try again.")
 
-        return dict_error(form.errors.items())
+        return h.dict_error(form.errors.items())
 
     else:
-        form = SignupForm()
+        form = form_class()
 
         return render_to_response(template, {
             "form": form,

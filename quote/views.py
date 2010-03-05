@@ -2,8 +2,10 @@ from django.shortcuts import render_to_response, get_object_or_404, get_list_or_
 from django.http import Http404
 from django.template import RequestContext
 from django.contrib.auth.models import User
-from products.models import ProductVariation
+
+from quote.forms import LineItemForm
 from quote.models import *
+from products.models import ProductVariation
 
 from eqsupply import helpers as h
 
@@ -25,16 +27,32 @@ def generate_quote_no():
     return quote_no
 
 @h.json_response
-def add_line_item(request, product_id, **kwargs):
+def add_line_item(request, product_id, form_class=LineItemForm, **kwargs):
+    if request.method == "POST":
+	form = form_class(request.POST)
+
+	if form.is_valid():
+	    line_item = form.save()
+	    return ("ok", "Item Added")
+
+	return h.dict_error(form.errors.items())
+    else:
+	form = form_class()
+	print "form", form
+
+	return render_to_response(template, {
+	    "form": form,
+	}, context_instance=RequestContext(request))
+
+    """
     user_id = request.POST.get("user")
     user = get_object_or_404(User, pk=user_id)
 
     try:
-	"""
-	All quotes are processed end-to-end such that a user cannot create
-	a new quote if he hasn't either closed or discarded the current one.
-	This is to ensure that we have at most 1 open quote per user. KISS!
-	"""
+	# All quotes are processed end-to-end such that a user cannot create
+	# a new quote if he hasn't either closed or discarded the current one.
+	# This is to ensure that we have at most 1 open quote per user. KISS!
+
 	quotation = get_object_or_404(Quotation, user=user, status=0)
     except Http404:
 	quotation = Quotation.objects.create(user=user, time_created=datetime.datetime.now(), \
@@ -46,3 +64,4 @@ def add_line_item(request, product_id, **kwargs):
     line_item = LineItem.objects.create(quotation=quotation, product=product, quantity=quantity, cost=product.cost)
 
     return ("ok", "Item Added")
+    """
