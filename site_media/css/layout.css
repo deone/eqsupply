@@ -150,10 +150,13 @@ h5  {
     border: solid 1px #ccc;
     padding: 0.2em;
 }
-#quote_form {
+.quote_form {
     display: none;
 }
-#quote_form input	{
+.quote_form p	{
+    display: inline;
+}
+.quote_form input	{
     width: 4em;
     font-size: 0.8em;
 }
