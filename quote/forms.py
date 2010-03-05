@@ -1,4 +1,9 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 
+class LineItemForm(forms.Form):
+    quantity = forms.IntegerField(widget=forms.TextInput())
+    user = forms.IntegerField(widget=forms.HiddenInput())
 
+    def clean(self):
+	if self._errors:
+	    return

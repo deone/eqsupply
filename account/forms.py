@@ -13,8 +13,8 @@ import re
 alnum_re = re.compile(r'^\w+$')
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label="Username:", max_length=30, widget=forms.TextInput())
-    password = forms.CharField(label="Password:", widget= forms.PasswordInput(render_value=False))
+    username = forms.CharField(max_length=30, widget=forms.TextInput())
+    password = forms.CharField(max_length=30, widget= forms.PasswordInput(render_value=False))
 
     user = None
 
@@ -40,12 +40,12 @@ class LoginForm(forms.Form):
         return True
 
 class SignupForm(forms.Form):
-    first_name = forms.CharField(label=_("First Name:"), max_length=30, widget=forms.TextInput())
-    last_name = forms.CharField(label=_("Last Name:"), max_length=30, widget=forms.TextInput())
-    username = forms.CharField(label=_("Username:"), max_length=30, widget=forms.TextInput())
-    password1 = forms.CharField(label=_("Password:"), widget=forms.PasswordInput(render_value=False))
-    password2 = forms.CharField(label=_("Password (again):"), widget=forms.PasswordInput(render_value=False))
-    email = forms.EmailField(label=_("Email:"), widget=forms.TextInput())
+    first_name = forms.CharField(max_length=30, widget=forms.TextInput())
+    last_name = forms.CharField(max_length=30, widget=forms.TextInput())
+    username = forms.CharField(max_length=30, widget=forms.TextInput())
+    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
+    password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
+    email = forms.EmailField(widget=forms.TextInput())
 
     def clean_username(self):
 	if not alnum_re.search(self.cleaned_data["username"]):

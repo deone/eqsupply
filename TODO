@@ -52,3 +52,11 @@ New stuffs
 ==========
 * Delete user record if mail is not sent. Then return error message to template.
 * Signup needs correct javascript error messages, unit tests and validation to be complete. All validation must happen at the backend, probably in clean(). Read more on this @ file:///home/zedd/Documents/Frameworks/Django/docs.djangoproject.com/en/1.0_/ref/forms/validation/index.html
+
+
+
+v2
+==
+* User should be redirected to the login page if his session expires and there should be a message to that effect on the login page.
+* On logging in, redirect him to the page he was before his session expired.
+* On mouseout, .quote_form should be hidden and .quote_btn should be displayed.
