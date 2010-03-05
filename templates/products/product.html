@@ -1,5 +1,14 @@
 {% extends "products/base.html" %}
 
+{% block page_js %}
+    <script>
+	$(function()	{
+	    $(".quote_form label").remove();
+	    $(".quote_form #id_user").attr("value", "{{ user.id }}");
+	});
+    </script>
+{% endblock %}
+
 {% block module %}
     <h2>{{ product.category }}</h2>
     <div id="product" class="viewport">
@@ -20,10 +29,9 @@
 			<td>{{ pv.part_number }}</td>
 			<td>{{ pv.description }}</td>
 			<td id="cell{{ pv.pk }}" class="activity">
-			    <a id="quote_btn" href="javascript:showQuoteForm('{{ pv.pk }}')"> + Quote</a>
-			    <form id="quote_form" action="javascript:quote('{{ pv.pk }}')">
-				<input type="hidden" id="user" value="{{ request.user.id }}"/>
-				<input type="text" id="qty{{ pv.pk }}"/>
+			    <a class="quote_btn" href="javascript:showQuoteForm('{{ pv.pk }}')"> + Quote</a>
+			    <form id="quote_{{ pv.pk }}_form" class="quote_form" action="javascript:quote('{{ pv.pk }}')">
+				{{ form.as_p }}
 				<input type="submit" value="Add"/>
 			    </form>
 			</td>
@@ -38,7 +46,13 @@
 		    <tr>
 			<td>{{ a.part_number }}</td>
 			<td>{{ a.description }}</td>
-			<td class="activity"><a href="#"> + Quote</a></td>
+			<td id="cell{{ a.pk }}" class="activity">
+			    <a class="quote_btn" href="javascript:showQuoteForm('{{ a.pk }}')"> + Quote</a>
+			    <form id="quote_{{ a.pk }}_form" class="quote_form" action="javascript:">
+				{{ form.as_p }}
+				<input type="submit" value="Add"/>
+			    </form>
+			</td>
 		    </tr>
 		{% endfor %}
 		</table>
