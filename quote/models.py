@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from products.models import ProductVariation
+from products.models import ProductVariant
 
 class Quotation(models.Model):
     user = models.ForeignKey(User)
@@ -9,12 +9,29 @@ class Quotation(models.Model):
     cost = models.DecimalField(max_digits=20, decimal_places=2)
     status = models.BooleanField(default=False)	# Remember to set this flag to True when the quote is sent to email
 
+    def to_dict(self):
+	return {
+	    "id": int(self.id),
+	    "user_id": int(self.user.id),
+	    "time_created": str(self.time_created),
+	    "quotation_no": self.quotation_no,
+	    "line_items": self.lineitem_set.all(),
+	    "cost": str(self.cost),
+	    "status": self.status
+	}
+
+    def line_item_qty(self):
+	return {
+	    "time_created": str(self.time_created),
+	    "line_items": self.lineitem_set.all().count()
+	}
+
     def __unicode__(self):
 	return u"%s, %s" % (self.quotation_no, self.cost)
 
 class LineItem(models.Model):
     quotation = models.ForeignKey(Quotation)
-    product = models.ForeignKey(ProductVariation)
+    product = models.ForeignKey(ProductVariant)
     quantity = models.IntegerField()
     cost = models.DecimalField(max_digits=20, decimal_places=2)
 

@@ -17,11 +17,11 @@ function showQuoteForm(id) {
 }
 
 function quote(pvId)  {
-    var user = $("#user").val();
-    var qty = $("#quote_" + pvId + "_form #quantity").val();
+    var quantity = $("#quote_" + pvId + "_form #id_quantity").val();
+    var user = $("#id_user").val();
 
     options["url"] = "/products/" + pvId + "/quote";
-    options["data"] = "user=" + user + "&quantity=" + qty;
+    options["data"] = "user=" + user + "&quantity=" + quantity;
     options["success"] = function(response)	{
 	alert(response);
     }
