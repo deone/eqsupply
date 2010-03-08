@@ -23,7 +23,12 @@
 	    </div>
 	    {% if product.productvariant_set.all %}
 		<h5>Variants</h5>
-		<table border=1>
+		<table>
+		    <tr>
+			<th>Part Number</th>
+			<th>Description</th>
+			<th></th>
+		    </tr>
 		{% for pv in product.productvariant_set.all %}
 		    <tr>
 			<td>{{ pv.part_number }}</td>
@@ -41,7 +46,12 @@
 	    {% endif %}
 	    {% if product.accessory_set.all %}
 		<h5>Accessories</h5>
-		<table border=1>
+		<table>
+		    <tr>
+			<th>Part Number</th>
+			<th>Description</th>
+			<th></th>
+		    </tr>
 		{% for a in product.accessory_set.all %}
 		    <tr>
 			<td>{{ a.part_number }}</td>

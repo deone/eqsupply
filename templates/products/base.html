@@ -12,7 +12,11 @@
 		data: null,
 		dataType: "json",
 		success: function(response)	{
-		    alert(response);
+		    if (response.data.type != "object")	{
+			alert("Error!");
+		    } else  {
+			showItemQtyAndDateLink(response.data.body);
+		    }
 		},
 		error: function(response)	{
 		    showMessage("Internal Server Error");
