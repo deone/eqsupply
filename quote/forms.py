@@ -15,6 +15,7 @@ class LineItemForm(forms.Form):
     def clean(self):
 	if self._errors:
 	    return
+	# Clean quantity for zero entry.
 	return self.cleaned_data
 
     def save(self, prod_var_id):
@@ -29,7 +30,12 @@ class LineItemForm(forms.Form):
 
 	product = get_object_or_404(ProductVariant, pk=prod_var_id)
 
-	line_item = LineItem(quotation=quotation, product=product, quantity=quantity, cost=product.cost)
+	try:
+	    line_item = get_object_or_404(LineItem, product=product, quotation=quotation)
+	    line_item.quantity += quantity
+	except Http404:
+	    line_item = LineItem(quotation=quotation, product=product, quantity=quantity, cost=product.cost)
+	    
 	line_item.save()
 
 	return line_item
