@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404, get_list_or_
 from django.core.mail import send_mail
 from django.template import RequestContext
 from django.conf import settings
+from django.http import Http404
 
 from account.models import Account
 from account.forms import SignupForm, LoginForm
@@ -90,6 +91,9 @@ def activate(request, form_class=LoginForm, template="account/login.html"):
 @h.json_response
 def count_line_items(request, user_id, **kwargs):
     user = get_object_or_404(User, pk=user_id)
-    quotation = get_object_or_404(Quotation, user=user, status=0)
 
-    return ("object", quotation.line_item_qty())
+    try:
+	quotation = get_object_or_404(Quotation, user=user, status=0)
+	return ("object", quotation.line_item_qty())
+    except Http404:
+	return ("object", {"line_item_qty": 0, "date_created": None})

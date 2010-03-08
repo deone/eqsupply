@@ -60,4 +60,6 @@ v2
 * User should be redirected to the login page if his session expires and there should be a message to that effect on the login page.
 * On logging in, redirect him to the page he was before his session expired.
 * On mouseout, .quote_form should be hidden and .quote_btn should be displayed.
-* Increment quote_link by 1.
+* On ajaxStart of quote(), replace form with indicator,
+* On ajaxSuccess, replace indicator with "Quoted".
+* There should be some subtle effect that directs the user's view to #quote_link after every quote transaction.
