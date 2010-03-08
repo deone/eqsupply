@@ -82,6 +82,9 @@ h5  {
     height: 77.5%;
     padding-top: 0.5%;
 }
+#quote_link {
+    font-weight: normal;
+}
 #menu a   {
     font-weight: normal;
     display: block;
@@ -349,7 +352,6 @@ ul.section li.current > a.active:hover {
 ----------------------------------------------- */
 table {
 	width:100%;
-	border:1px solid #bbb;
 	margin-bottom:10px;
 }
 col.colC {
