@@ -2,6 +2,27 @@
 
 {% block custom_js %}
     <script type="text/javascript" src="/site_media/js/quote.js"></script>
+    
+    <script type="text/javascript">
+	$(function()    {
+
+	    var options = {
+		url: "/user/{{ user.id }}/item_count",
+		type: "GET",
+		data: null,
+		dataType: "json",
+		success: function(response)	{
+		    alert(response);
+		},
+		error: function(response)	{
+		    showMessage("Internal Server Error");
+		}
+	    };
+
+	    $.ajax(options);
+
+	});
+    </script>
 {% endblock %}
 
 {% block body_id %}<body id="product">{% endblock %}

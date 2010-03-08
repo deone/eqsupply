@@ -21,10 +21,10 @@
 	    <div class="actions">
 		<a target="blank" href="{{ product.product_page }}">View Product Page</a>
 	    </div>
-	    {% if product.productvariation_set.all %}
+	    {% if product.productvariant_set.all %}
 		<h5>Variants</h5>
 		<table border=1>
-		{% for pv in product.productvariation_set.all %}
+		{% for pv in product.productvariant_set.all %}
 		    <tr>
 			<td>{{ pv.part_number }}</td>
 			<td>{{ pv.description }}</td>
