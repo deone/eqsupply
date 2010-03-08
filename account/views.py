@@ -9,6 +9,7 @@ from django.conf import settings
 
 from account.models import Account
 from account.forms import SignupForm, LoginForm
+from quote.models import Quotation
 
 from eqsupply import helpers as h
 
@@ -78,10 +79,17 @@ def activate(request, form_class=LoginForm, template="account/login.html"):
     user = get_object_or_404(User, id=user_id)
     user.is_active = 1
     user.save()
-    request.flash['feedback'] = "Your account is now active. Please log in to proceed."
+    request.flash['feedback'] = "Your account is now active. You may log in now."
 
     form = form_class()
 
     return render_to_response(template, {
 	"form": form,
     }, context_instance=RequestContext(request))
+
+@h.json_response
+def count_line_items(request, user_id, **kwargs):
+    user = get_object_or_404(User, pk=user_id)
+    quotation = get_object_or_404(Quotation, user=user, status=0)
+
+    return ("object", quotation.line_item_qty())
