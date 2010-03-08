@@ -22,8 +22,8 @@ class Quotation(models.Model):
 
     def line_item_qty(self):
 	return {
-	    "time_created": str(self.time_created),
-	    "line_items": self.lineitem_set.all().count()
+	    "date_created": str(self.time_created.date()),
+	    "line_item_qty": self.lineitem_set.all().count()
 	}
 
     def __unicode__(self):
