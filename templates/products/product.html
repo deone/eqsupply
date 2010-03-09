@@ -5,6 +5,15 @@
 	$(function()	{
 	    $(".quote_form label").remove();
 	    $(".quote_form #id_user").attr("value", "{{ user.id }}");
+
+	    $(".pv_detail").hover(
+		function()  {},
+		function()  {
+		    $(".quote_form").hide();
+		    $(".quote_btn").show();
+		}
+	    );
+
 	});
     </script>
 {% endblock %}
@@ -24,24 +33,28 @@
 	    {% if product.productvariant_set.all %}
 		<h5>Variants</h5>
 		<table>
-		    <tr>
-			<th>Part Number</th>
-			<th>Description</th>
-			<th></th>
-		    </tr>
-		{% for pv in product.productvariant_set.all %}
-		    <tr>
-			<td>{{ pv.part_number }}</td>
-			<td>{{ pv.description }}</td>
-			<td id="cell{{ pv.pk }}" class="activity">
-			    <a class="quote_btn" href="javascript:showQuoteForm('{{ pv.pk }}')"> + Quote</a>
-			    <form id="quote_{{ pv.pk }}_form" class="quote_form" action="javascript:quote('{{ pv.pk }}')">
-				{{ form.as_p }}
-				<input type="submit" value="Add"/>
-			    </form>
-			</td>
-		    </tr>
-		{% endfor %}
+		    <thead>
+			<tr>
+			    <th>Part Number</th>
+			    <th>Description</th>
+			    <th></th>
+			</tr>
+		    </thead>
+		    <tbody>
+		    {% for pv in product.productvariant_set.all %}
+			<tr class="pv_detail">
+			    <td>{{ pv.part_number }}</td>
+			    <td>{{ pv.description }}</td>
+			    <td id="cell{{ pv.pk }}" class="activity">
+				<a class="quote_btn" href="javascript:showQuoteForm('{{ pv.pk }}')"> + Quote</a>
+				<form id="quote_{{ pv.pk }}_form" class="quote_form" action="javascript:quote('{{ pv.pk }}')">
+				    {{ form.as_p }}
+				    <input type="submit" value="Add"/>
+				</form>
+			    </td>
+			</tr>
+		    {% endfor %}
+		    </tbody>
 		</table>
 	    {% endif %}
 	    {% if product.accessory_set.all %}

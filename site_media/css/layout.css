@@ -357,6 +357,9 @@ table {
 col.colC {
 	width:8em;
 }
+tr:hover td	{
+    background-color: #fff;
+}
 th, td {
 	padding:.5em 1em;
 	text-align:left;
