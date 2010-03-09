@@ -63,3 +63,12 @@ def dict_error(errors):
     error_dict["keys"] = keys
 
     return ("error", error_dict)
+
+def format_date(date_string):
+    """ Returns date_string in the form DD-MM-YYYY"""
+    split_date = date_string.split("-")
+    formatted_date = split_date[2] + "-"
+    formatted_date += split_date[1] + "-"
+    formatted_date += split_date[0]
+
+    return formatted_date

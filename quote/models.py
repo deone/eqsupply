@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from products.models import ProductVariant
 
+from eqsupply.helpers import format_date
+
 class Quotation(models.Model):
     user = models.ForeignKey(User)
     time_created = models.DateTimeField()
@@ -22,7 +24,7 @@ class Quotation(models.Model):
 
     def line_item_qty(self):
 	return {
-	    "date_created": str(self.time_created.date()),
+	    "date_created": format_date(str(self.time_created.date())),
 	    "line_item_qty": self.lineitem_set.all().count()
 	}
 
