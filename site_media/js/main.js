@@ -1,6 +1,6 @@
 $(function()	{
 
-    $(".ajax").ajaxStart(function() {
+    $("#ajax_msg").ajaxStart(function() {
 	$(this).show();
     }).ajaxStop(function()  {
 	$(this).hide();
@@ -27,8 +27,8 @@ function showErrors(errors)   {
     }
 }
 
-function showMessage(msg)	{
-    $("#msger").html("<p>" + msg + "</p>");
-    $("#msger").slideDown("fast");
-    setTimeout("$('#msger').slideUp('fast')", 7000);
+function showMessage(msg)   {
+    $("#error_msg").html("<p>" + msg + "</p>");
+    $("#error_msg").show();
+    setTimeout("$('#error_msg').fadeOut('fast')", 7000);
 }

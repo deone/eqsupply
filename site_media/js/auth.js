@@ -46,8 +46,8 @@ function signUp()   {
 }
 
 function displayErrorsOrRedirect(respObj, dLocation)	{
-    if (respObj.data.type != "ok")  {
-	showErrors(respObj.data.body);	/* main.js */
+    if (respObj.data.type != true) {
+	showErrors(respObj.data.body);
     } else  {
 	document.location = dLocation;
     }

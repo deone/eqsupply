@@ -25,8 +25,13 @@ function quote(pvId)  {
     options["url"] = "/products/" + pvId + "/quote";
     options["data"] = "user=" + user + "&quantity=" + quantity;
     options["success"] = function(response)	{
-	quoteForm.find("#id_quantity").val("");
-	showItemQtyAndDateLink(response.data.body);
+	if (response.data.type != "error")  {
+	    quoteForm.find("#id_quantity").val("");
+	    showItemQtyAndDateLink(response.data.body);
+	} else	{
+	    showErrors(response.data.body);
+	}
+	
     }
 
     $.ajax(options);
