@@ -15,7 +15,9 @@ class LineItemForm(forms.Form):
     def clean(self):
 	if self._errors:
 	    return
-	# Clean quantity for zero entry.
+	if self.cleaned_data["quantity"] < 1:
+	    raise forms.ValidationError("Invalid Quantity")
+
 	return self.cleaned_data
 
     def save(self, prod_var_id):

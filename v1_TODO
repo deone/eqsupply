@@ -1,0 +1,66 @@
+ENHANCEMENTS
+============
+Use the non-js lightbox to display products since our tabs now load content from the same page. Future refactoring.
+Refactor info divs on sign-up and product_groups template to use #msger. The difference between info and msg is that message will slide up but info will remain.
+When the user receives info that he has added items to his quote, he should be able to click the message and the names and quantity of the items should be displayed asynchronously.
+We can make #msger's background-color dark and fontcolor white.
+use generic views
+It won't be a bad idea to have eqsupply's exceptions e.g CannotBeZero - in the case of specifying 0 as quantity when adding quoteitem. 
+Would be on the lookout for more neccessities. For now, let's raise return an error json_response. We need to always fail immediately, noisily and helplessly.
+Product listing: products.html, quote_preview.html. Implement inheritance.
+Refactoring json_response: Will there ever be a time when we would need to use 500, Internal Server Error, It's needed for server exceptions e.g server issues, code error et al.
+
+
+PENDING
+=======
+Pricing.
+Quote formatting and sending as PDF document.
+
+
+BEST PRACTICES
+==============
+Use login_required decorator. Check for other useful decorators.
+Remember to always use todict() wherever necessary.
+Write all tests. Models, views and javascript.
+Always raise Http404 meaningfully.
+Use assertive programming wherever required.
+
+-Move all funny looking routes into their proper place, we need to create a products app.
+-Once we have an issue with email sending due to internet connection issues, we can either retry or give the user info to check his connection and a link to send the activation email only. This should not repeat the insertion process. We should also do a teardown. i.e if the user does not send the email, or if he clicks the link and its still unsuccessful, delete his record.
+-Why don't we display the activation feedback as a django flash object on the login page? Just like "Create quote", activation is too small an operation to occupy one page. Same with logout, it should be redirected to the login page with a django flash message.
+-We might also want to customize #msger's messages based on request.e.g When a user click "Process Quote", #msger should display "Processing Quote, Please Wait..." instead of "Loading...".
+-User should not be logged on when activating.
+
+Next to-dos: 
+* Fix all ajax feedback related bugs.
+* Make all should-be-button links buttons
+* Don't accept 0 as quantity in add-quote-item form. This should be a form validation thing.
+* Extensive form validation.
+* Menu.
+* UI: Remove scrollbar from signup.html
+* UI: Let's clear form fields as soon as request is successful.
+
+Products App
+============
+The products app handles product listing and related functionalities.
+
+
+
+
+
+New stuffs
+==========
+* Delete user record if mail is not sent. Then return error message to template.
+* Signup needs correct javascript error messages, unit tests and validation to be complete. All validation must happen at the backend, probably in clean(). Read more on this @ file:///home/zedd/Documents/Frameworks/Django/docs.djangoproject.com/en/1.0_/ref/forms/validation/index.html
+
+
+
+v2
+==
+* User should be redirected to the login page if his session expires and there should be a message to that effect on the login page.
+* On logging in, redirect him to the page he was before his session expired.
+* On mouseout, .quote_form should be hidden and .quote_btn should be displayed.
+* On ajaxStart of quote(), replace form with indicator,
+* There should be some subtle effect that directs the user's view to #quote_link after every quote transaction.
+* Fix Ajax indicators.
+* Write tests.

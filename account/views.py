@@ -25,7 +25,7 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 	    try:
 		user.email_user("Aerix Equipment Supply Account Activation", "Click this link to activate your account: %s" % create_activation_link(reg_id), settings.EMAIL_SENDER)
 		request.flash['feedback'] = "Thank you for registering. An activation link has been sent to your email."
-		return ("ok", "Signup Successful")
+		return (True, "Signup Successful")
 	    except Exception, e:
 		user.delete()
 		print_exc()
@@ -47,11 +47,10 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
 
         if form.is_valid():
             form.login(request)
-            return ("ok", "Login Successful")
+            return (True, "Login Successful")
 
-        errors = dict_error(form.errors.items())
+        return h.dict_error(form.errors.items())
 
-        return dict_error(form.errors.items())
     else:
         form = form_class()
 
