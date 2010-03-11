@@ -7,7 +7,7 @@ class ProductsTestCase(unittest.TestCase):
 	self.category = Category.objects.create(name="American Specs", description="Made in USA", division=self.division)
 	self.product = Product.objects.create(name="Car Wash Simulator", description="", code="555", small_image="site_media/products/tool1.jpg", large_image="site_media/products/tool1.jpg", category=self.category, product_page="http://www.elcometer.com/international index pages/international/product pages - English/product pages/main pages/1800.htm")
 	self.accessory = Accessory.objects.create(product=self.product, name="PC Interface Cable", description="PC Connection Wire", part_number="T2000567", image="", accessory_page="", cost="152.55")
-	self.product_variation = ProductVariation.objects.create(product=self.product, part_number="S499989", description="Car Wash Simulator", cost="122.34")
+	self.product_variant = ProductVariant.objects.create(product=self.product, part_number="S499989", description="Car Wash Simulator", cost="122.34")
 
     def test_division(self):
 	self.assertEquals(self.division.name, "Washing Machines")
@@ -36,15 +36,15 @@ class ProductsTestCase(unittest.TestCase):
 	self.assertEquals(self.accessory.accessory_page, "")
 	self.assertEquals(self.accessory.cost, "152.55")
 
-    def test_product_variation(self):
-	self.assertEquals(self.product_variation.product, self.product)
-	self.assertEquals(self.product_variation.part_number, "S499989")
-	self.assertEquals(self.product_variation.description, "Car Wash Simulator")
-	self.assertEquals(self.product_variation.cost, "122.34")
+    def test_product_variant(self):
+	self.assertEquals(self.product_variant.product, self.product)
+	self.assertEquals(self.product_variant.part_number, "S499989")
+	self.assertEquals(self.product_variant.description, "Car Wash Simulator")
+	self.assertEquals(self.product_variant.cost, "122.34")
 
     def tearDown(self):
 	self.division.delete()
 	self.category.delete()
 	self.product.delete()
 	self.accessory.delete()
-	self.product_variation.delete()
+	self.product_variant.delete()
