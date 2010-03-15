@@ -35,10 +35,9 @@ class LineItemForm(forms.Form):
 	try:
 	    line_item = get_object_or_404(LineItem, product=product, quotation=quotation)
 	    line_item.quantity += quantity
+	    line_item.save()
 	except Http404:
-	    line_item = LineItem(quotation=quotation, product=product, quantity=quantity, cost=product.cost)
-	    
-	line_item.save()
+	    line_item = LineItem.objects.create(quotation=quotation, product=product, quantity=quantity, cost=product.cost)
 
 	return line_item
 

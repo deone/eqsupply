@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 
 from products.models import *
 from quote.forms import LineItemForm
@@ -8,6 +9,7 @@ from eqsupply import helpers as h
 
 APP_MENU = Division.objects.all()
 
+@login_required
 def index(request, template="products/index.html"):
     categories = Category.objects.all()
     
@@ -16,6 +18,7 @@ def index(request, template="products/index.html"):
 	"categories": categories,
     }, context_instance=RequestContext(request))
 
+@login_required
 def display_product(request, product_id, form_class=LineItemForm, template="products/product.html"):
     product = get_object_or_404(Product, pk=product_id)
     form = form_class()
