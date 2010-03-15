@@ -5,3 +5,4 @@ v2
 * There should be some subtle effect that directs the user's view to #quote_link after every quote transaction.
 * Fix Ajax indicators.
 * Write tests.
+* Our products app test should test the actual existence of small_image and large_image.
