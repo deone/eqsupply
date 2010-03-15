@@ -37,7 +37,7 @@ class Accessory(models.Model):
     part_number = models.CharField(max_length=50, unique=True)
     image = models.ImageField(upload_to="site_media/products/accessories", blank=True)
     accessory_page = models.CharField(max_length=255, blank=True)
-    cost = models.CharField(max_length=10)
+    cost = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __unicode__(self):
 	return u"%s - %s" % (self.description, self.product)

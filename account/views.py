@@ -43,11 +43,18 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 @h.json_response
 def login(request, form_class=LoginForm, template="account/login.html", **kwargs):
     if request.method == "POST":
+    
+	default_redirect_to = "/products"
+	redirect_to = request.REQUEST.get("next")
+	print redirect_to
+
+	if not redirect_to or "://" in redirect_to or " " in redirect_to:
+            redirect_to = default_redirect_to
+
         form = form_class(request.POST)
 
-        if form.is_valid():
-            form.login(request)
-            return (True, "Login Successful")
+        if form.login(request):
+            return (True, redirect_to)
 
         return h.dict_error(form.errors.items())
 
