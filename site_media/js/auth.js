@@ -16,7 +16,7 @@ function logIn()    {
     options["url"] = "/";
     options["data"] = "username=" + username + "&password=" + password;
     options["success"] = function(response) {
-	displayErrorsOrRedirect(response, "/products");
+	displayErrorsOrRedirect(response);
     }
 
     $.ajax(options);
@@ -45,10 +45,10 @@ function signUp()   {
     $.ajax(options);
 }
 
-function displayErrorsOrRedirect(respObj, dLocation)	{
+function displayErrorsOrRedirect(respObj)	{
     if (respObj.data.type != true) {
 	showErrors(respObj.data.body);
     } else  {
-	document.location = dLocation;
+	document.location = respObj.data.body;
     }
 }

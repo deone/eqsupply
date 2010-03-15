@@ -119,3 +119,5 @@ TEST_DATABASE_COLLATION = "latin1_swedish_ci"
 
 ELCOMETER_PRODUCTS_INDEX = "http://www.elcometer.com/international index pages/international/product pages - English/product pages/main pages/"
 ELCOMETER_SPECS_INDEX = "http://www.elcometer.com/international index pages/international/product pages - English/product pages/technical specifications/"
+
+LOGIN_URL = "/"
