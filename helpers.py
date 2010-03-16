@@ -53,19 +53,13 @@ def create_response(code, type=None, value=None):#{{{
     return simplejson.dumps(response, cls=LazyEncoder)#}}}
 
 def dict_error(errors):
-    error_dict = {}
-    keys = []
-
-    for k, v in errors:
-	error_dict[k] = str(v)
-	keys.append(k)
-
-    error_dict["keys"] = keys
+    error_dict = dict([(k, str(v)) for k, v in errors])
+    error_dict["keys"] = error_dict.keys()
 
     return ("error", error_dict)
 
 def format_date(date_string):
-    """ Returns date_string in the form DD-MM-YYYY"""
+    """ Returns date_string in the form DD-MM-YYYY."""
     split_date = date_string.split("-")
     formatted_date = split_date[2] + "-"
     formatted_date += split_date[1] + "-"

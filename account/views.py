@@ -46,7 +46,6 @@ def login(request, form_class=LoginForm, template="account/login.html", **kwargs
     
 	default_redirect_to = "/products"
 	redirect_to = request.REQUEST.get("next")
-	print redirect_to
 
 	if not redirect_to or "://" in redirect_to or " " in redirect_to:
             redirect_to = default_redirect_to
@@ -95,11 +94,15 @@ def activate(request, form_class=LoginForm, template="account/login.html"):
     }, context_instance=RequestContext(request))
 
 @h.json_response
-def count_line_items(request, user_id, **kwargs):
+def line_item_quantity(request, user_id, **kwargs):
     user = get_object_or_404(User, pk=user_id)
 
     try:
 	quotation = get_object_or_404(Quotation, user=user, status=0)
-	return ("object", quotation.line_item_qty())
+	result = {
+	    "date_created": h.format_date(str(quotation.time_created.date())),
+	    "line_item_qty": quotation.lineitem_set.all().count()
+	}
+	return ("object", result)
     except Http404:
 	return ("object", {"line_item_qty": 0, "date_created": None})
