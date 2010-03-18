@@ -3,8 +3,4 @@ v2
 * User should be redirected to the login page if his session expires and there should be a message to that effect on the login page.
 * On logging in, redirect him to the page he was before his session expired.
 * There should be some subtle effect that directs the user's view to #quote_link after every quote transaction.
-* Fix Ajax indicators - for the line item indicator, show indicator while its loading.
 * Our products app test should test the actual existence of small_image and large_image.
-* Rename inner_base.html to base_inner.html
-* Move item_count js code in products/base.html to base_inner.html.
-* Refactor format_date helper, functional programming should be priority henceforth!

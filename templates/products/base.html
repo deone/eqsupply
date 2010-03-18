@@ -1,32 +1,7 @@
 {% extends "inner_base.html" %}
 
-{% block custom_js %}
+{% block page_js %}
     <script type="text/javascript" src="/site_media/js/quote.js"></script>
-    
-    <script type="text/javascript">
-	$(function()    {
-
-	    var options = {
-		url: "/user/{{ user.id }}/item_count",
-		type: "GET",
-		data: null,
-		dataType: "json",
-		success: function(response)	{
-		    if (response.data.type != "object")	{
-			alert("Error!");
-		    } else  {
-			showItemQtyAndDateLink(response.data.body);
-		    }
-		},
-		error: function(response)	{
-		    showMessage("Internal Server Error");
-		}
-	    };
-
-	    $.ajax(options);
-
-	});
-    </script>
 {% endblock %}
 
 {% block body_id %}<body id="product">{% endblock %}
