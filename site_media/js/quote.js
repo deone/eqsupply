@@ -36,19 +36,3 @@ function quote(pvId)  {
 
     $.ajax(options);
 }
-
-function showItemQtyAndDateLink(quoteDetail)	{
-    var detail = quoteDetail.line_item_qty;
-
-    if (quoteDetail.line_item_qty != 1)	{
-	detail += " lines ";
-    } else  {
-	detail += " line ";
-    }
-
-    if (quoteDetail.date_created != null)   {
-	detail += quoteDetail.date_created;
-    }
-
-    $("#quote_link").html(detail);
-}

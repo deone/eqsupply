@@ -32,3 +32,20 @@ function showMessage(msg)   {
     $("#error_msg").show();
     setTimeout("$('#error_msg').fadeOut('fast')", 7000);
 }
+
+function showItemQtyAndDateLink(quoteDetail)	{
+    var detail = quoteDetail.line_item_qty;
+
+    if (quoteDetail.line_item_qty != 1)	{
+	detail += " lines ";
+    } else  {
+	detail += " line ";
+    }
+
+    if (quoteDetail.date_created != null)   {
+	detail += quoteDetail.date_created;
+    }
+
+    $("#quote_link").attr("href", "quotation/" + quoteDetail.id);
+    $("#quote_link").html(detail);
+}

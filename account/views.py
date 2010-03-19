@@ -100,6 +100,7 @@ def line_item_quantity(request, user_id, **kwargs):
     try:
 	quotation = get_object_or_404(Quotation, user=user, status=0)
 	result = {
+	    "id": quotation.id,
 	    "date_created": h.format_date(str(quotation.time_created.date())),
 	    "line_item_qty": quotation.lineitem_set.all().count()
 	}
