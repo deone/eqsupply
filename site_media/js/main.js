@@ -46,6 +46,8 @@ function showItemQtyAndDateLink(quoteDetail)	{
 	detail += quoteDetail.date_created;
     }
 
-    $("#quote_link").attr("href", "quotation/" + quoteDetail.id);
+    if (quoteDetail.line_item_qty > 0)   {
+	$("#quote_link").attr("href", "/quotation/" + quoteDetail.id);
+    }
     $("#quote_link").html(detail);
 }
