@@ -18,9 +18,9 @@
 		</tr>
 	    </thead>
 	    <tbody>
-	    {% for ql in quotation.lineitem_set.all %}
+	    {% for ql in line_items %}
 		<tr class="pv_detail">
-		    <td>&nbsp;</td>
+		    <td>{{ ql.id }}</td>
 		    <td>{{ ql.product.part_number }}</td>
 		    <td>{{ ql.product.description }}</td>
 		    <td>{{ ql.quantity }}</td>
