@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     (r'^products$', include('products.urls')),
     (r'^products/', include('products.urls')),
 
+    (r'^quotation/', include('quote.urls')),
+
     (r'^admin/(.*)', admin.site.root),
 )
 
