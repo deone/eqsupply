@@ -37,7 +37,8 @@ class LineItemForm(forms.Form):
 	    line_item.quantity += quantity
 	    line_item.save()
 	except Http404:
-	    line_item = LineItem.objects.create(quotation=quotation, product=product, quantity=quantity, cost=product.cost)
+	    line_item = LineItem.objects.create(quotation=quotation, product=product, quantity=quantity, \
+		    cost_per_unit=product.cost, cost=str(float(product.cost) * int(quantity)))
 
 	return line_item
 

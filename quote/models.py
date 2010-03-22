@@ -20,6 +20,7 @@ class LineItem(models.Model):
     quotation = models.ForeignKey(Quotation)
     product = models.ForeignKey(ProductVariant)
     quantity = models.IntegerField()
+    cost_per_unit = models.DecimalField(max_digits=20, decimal_places=2)
     cost = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __unicode__(self):

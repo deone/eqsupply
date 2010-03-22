@@ -2,8 +2,8 @@ from django.shortcuts import render_to_response, get_object_or_404, get_list_or_
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
-from products.models import *
-from quote.forms import LineItemForm
+from eqsupply.products.models import *
+from eqsupply.quote.forms import LineItemForm
 
 from eqsupply import helpers as h
 

@@ -4,3 +4,5 @@ v2
 * On logging in, redirect him to the page he was before his session expired.
 * There should be some subtle effect that directs the user's view to #quote_link after every quote transaction.
 * Our products app test should test the actual existence of small_image and large_image.
+* For line_item serial number, we can change the ids we got from the db into serial no (this should be done in the view).
+* Validate line_item quantity field for alphabets.
