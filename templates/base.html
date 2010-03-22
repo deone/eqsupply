@@ -25,8 +25,9 @@
 	    });
 
 	</script>
-	{% block custom_js %}{% endblock %}
-	{% block page_js%}{% endblock %}
+	{% block inner_base_js %}{% endblock %} <!-- Strictly for js in inner_base.html -->
+	{% block custom_js %}{% endblock %} <!-- js in {app}/base.html -->
+	{% block page_js%}{% endblock %} <!-- page-specific js -->
     </head>
     {% block body_id %}<body>{% endblock %}
 	<div class="container_16">
