@@ -28,5 +28,5 @@ class LineItem(models.Model):
 
 class Cost(models.Model):
     """Includes, courier charges, custom charges (int'l & local) and insurance costs (if any)
-       Updated, based on a defined algorithm, at the same time with QuoteItem."""
+       Updated, based on a defined algorithm, at the same time with LineItem."""
     pass
