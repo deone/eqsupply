@@ -1,7 +1,7 @@
-Summary:	Web-based equipment quote generator.
+Summary:	Web-based equipment procurement system custom-made for Aerix Global Solutions Limited.
 Name:		eqsupply
-Version:	0.1
-Release:	25
+Version:	0.2
+Release:	1
 Group:		Business Solutions/Web-based
 License:	GPL
 Source0:	%{name}-%{version}.tar.gz

@@ -7,3 +7,16 @@ v2
 * Implement OpenID.
 * @login_required should redirect user to the page he was signed out from.
 * User should get a message like "Session expired. Sign In again." if he was signed out on session expiry.
+
+Completer!
+==========
+- Phase I
+* Update tests for LineItem.cost_per_unit
+* Additional costs; courier charges-international and local(based on location),
+		    custom charges-international and local,
+		    Insurance.
+* Collection of remaining user data: phone, company, position, company_street_address, city, state, country.
+* Outputting quote in pdf.
+
+- Phase II
+* Search.
