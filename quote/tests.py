@@ -18,5 +18,7 @@ class QuoteTests(EqsupplyTestCase):
     def test_line_item(self):
 	self.failUnless(self.line_item.quotation == self.quotation)
 	self.failUnless(self.line_item.product == self.product_variant)
-	self.failUnless(self.line_item.quantity == 20)
-	self.failIf(self.line_item.cost == "110")
+	self.failUnless(self.line_item.quantity == float(self.line_item.cost)/float(self.product_variant.cost))
+	self.failIf(self.line_item.cost_per_unit != str(float(self.line_item.cost)/self.line_item.quantity))
+	self.failIf(self.product_variant.cost != str(float(self.line_item.cost)/self.line_item.quantity))
+	self.failIf(self.line_item.cost != str(float(self.product_variant.cost) * self.quantity))

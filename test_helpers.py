@@ -19,8 +19,9 @@ class EqsupplyTestCase(unittest.TestCase):
 	self.product_variant = ProductVariant.objects.create(product=self.product, part_number="S499989", description="Car Wash Simulator", cost="122.34")
 
 	# Quote
+	self.quantity = 20
 	self.quotation = Quotation.objects.create(user=self.user, time_created=datetime.datetime.now(), quotation_no="AGS 03-01-01", cost="120.00", status=False)
-	self.line_item = LineItem.objects.create(quotation=self.quotation, product=self.product_variant, quantity=20, cost=self.product_variant.cost)
+	self.line_item = LineItem.objects.create(quotation=self.quotation, product=self.product_variant, quantity=self.quantity, cost_per_unit=self.product_variant.cost, cost=str(float(self.product_variant.cost) * self.quantity))
 
     def tearDown(self):
 	self.user.delete()
