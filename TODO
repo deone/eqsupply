@@ -11,10 +11,14 @@ v2
 Completer!
 ==========
 - Phase I
-* Update tests for LineItem.cost_per_unit
 * Additional costs; courier charges-international and local(based on location),
+		    courier insurance (UPS) (1% of the product cost)
 		    custom charges-international and local,
-		    Insurance.
+		    logistics; includes transport cost to and from courier office.
+
+		    bank charges
+		    VAT - 5%
+		    Markup: 
 * Collection of remaining user data: phone, company, position, company_street_address, city, state, country.
 * Outputting quote in pdf.
 
