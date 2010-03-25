@@ -1,5 +1,5 @@
 from django.contrib import admin
-from products.models import *
+from eqsupply.products.models import *
 
 admin.site.register(Division)
 admin.site.register(Category)

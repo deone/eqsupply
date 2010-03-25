@@ -7,6 +7,7 @@ v2
 * Implement OpenID.
 * @login_required should redirect user to the page he was signed out from.
 * User should get a message like "Session expired. Sign In again." if he was signed out on session expiry.
+* Include Weight field in product model to calculate courier cost.
 
 Completer!
 ==========
