@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'eqsupply.account',
     'eqsupply.products',
     'eqsupply.quote',
+    'eqsupply.cost',
 )
 
 EMAIL_HOST = "localhost"
