@@ -9,13 +9,13 @@ class CommonInfo(models.Model):
 
 class Division(CommonInfo):
     def __unicode__(self):
-	return u"%s" % self.name
+	return self.name
 
 class Category(CommonInfo):
     division = models.ForeignKey(Division)
 
     def __unicode__(self):
-	return u"%s" % self.name
+	return self.name
 
     class Meta:
 	verbose_name_plural = "categories"
@@ -28,7 +28,7 @@ class Product(CommonInfo):
     product_page = models.CharField(max_length=255)
 
     def __unicode__(self):
-	return u"%s" % self.name
+	return self.name
 
 class Accessory(models.Model):
     product = models.ForeignKey(Product)
@@ -40,7 +40,7 @@ class Accessory(models.Model):
     cost = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __unicode__(self):
-	return u"%s - %s" % (self.description, self.product)
+	return "%s - %s" % (self.description, self.product)
 
     class Meta:
 	verbose_name_plural = "accessories"
@@ -53,4 +53,4 @@ class ProductVariant(models.Model):
     cost = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __unicode__(self):
-	return u"%s - %s" % (self.product, self.part_number)
+	return "%s - %s" % (self.product, self.part_number)

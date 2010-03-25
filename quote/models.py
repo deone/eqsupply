@@ -10,7 +10,7 @@ class Quotation(models.Model):
     status = models.BooleanField(default=False)	# Remember to set this flag to True when the quote is sent to email
 
     def __unicode__(self):
-	return u"%s, %s" % (self.quotation_no, self.cost)
+	return "%s, %s" % (self.quotation_no, self.cost)
 
     def to_dict(self):
 	"""We have to return dict values in unicode to make them JSON serializable"""
@@ -24,7 +24,7 @@ class LineItem(models.Model):
     cost = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __unicode__(self):
-	return u"%s, %s, %s" % (self.product.part_number, self.quantity, self.cost)
+	return "%s, %s, %s" % (self.product.part_number, self.quantity, self.cost)
 
 class Cost(models.Model):
     """Includes, courier charges, custom charges (int'l & local) and insurance costs (if any)
