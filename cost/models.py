@@ -4,14 +4,14 @@ class Weight(models.Model):
     weight = models.DecimalField(max_digits=5, decimal_places=1)
 
     def __unicode__(self):
-	return self.weight
+	return str(self.weight)
 
 class Zone(models.Model):
     zone = models.IntegerField()
     weights = models.ManyToManyField(Weight, through="Cost")
 
     def __unicode__(self):
-	return self.zone
+	return str(self.zone)
 
 class Location(models.Model):
     zone = models.ForeignKey(Zone)
@@ -24,3 +24,6 @@ class Cost(models.Model):
     weight = models.ForeignKey(Weight)
     zone = models.ForeignKey(Zone)
     cost = models.IntegerField()
+
+    def __unicode__(self):
+	return "Weight: %s, Zone: %s, Cost: %s" % (str(self.weight.weight), str(self.zone.zone), str(self.cost))
