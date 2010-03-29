@@ -25,8 +25,3 @@ class LineItem(models.Model):
 
     def __unicode__(self):
 	return "%s, %s, %s" % (self.product.part_number, self.quantity, self.cost)
-
-class Cost(models.Model):
-    """Includes, courier charges, custom charges (int'l & local) and insurance costs (if any)
-       Updated, based on a defined algorithm, at the same time with LineItem."""
-    pass

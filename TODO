@@ -1,6 +1,5 @@
 v2
 ==
-* On logging in, redirect him to the page he was before his session expired.
 * There should be some subtle effect that directs the user's view to #quote_link after every quote transaction.
 * Our products app test should test the actual existence of small_image and large_image.
 * Validate line_item quantity field for alphabets.
@@ -9,23 +8,25 @@ v2
 * User should get a message like "Session expired. Sign In again." if he was signed out on session expiry.
 * Include Weight field in product model to calculate courier cost.
 
-Completer!
-==========
-* Collection of remaining user data: phone, company, position, company_street_address, city, state, country.
-* Outputting quote in pdf.
-
-Apps to be created
-==================
-* Costing
-* Search
+Broad categorization of what's left
+===================================
+* Collecting remaining user data
+    - phone, company, position, company_street_address, city, state, country.
+    - State field should be implemented as a dropdown to avoid user errors.
+* Computing costs.
+* Outputting quotation in pdf.
+* Search - New app.
 
 Logistics
 ---------
-- Courier charge (international - this should include sending country's VAT calculated at standard rate)
-- Courier charge (local - this should include VAT at 5%)
-- Courier Insurance (1% of product cost)
-- Custom charge (international)
-- Custom charge (local)
+- Courier charge (international) - We'll figure these out by comparing some invoices, these figures are already VAT and international custom charge inclusive.
+
+- Courier charge (local)
+    * Should include VAT at 5%
+    * Location is based on user's state field, with the exception of Abuja and Zaria.
+    * Add a 20% markup on the courier charge using the net actual weight - this includes local custom charge.
+
+- Courier Insurance (1% of actual product cost)
 - Bank transfer charges
 
 Taxes
