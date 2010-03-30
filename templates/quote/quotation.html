@@ -3,9 +3,6 @@
 {% block module %}
     <h2>Preview Your Quotation</h2>
     <div id="quotation" class="viewport">
-	<img src="/site_media/img/logo_small.jpg"/>
-	<p>{{ quotation.quotation_no }}</p>
-	<p>{{ quotation.time_created }}</p>
 	<table>
 	    <thead>
 		<tr>
@@ -13,6 +10,8 @@
 		    <th>Reference</th>
 		    <th>Description</th>
 		    <th>Quantity</th>
+		    <th>Cost Per Unit</th>
+		    <th>Total Cost</th>
 		</tr>
 	    </thead>
 	    <tbody>
@@ -22,9 +21,15 @@
 		    <td>{{ ql.product.part_number }}</td>
 		    <td>{{ ql.product.description }}</td>
 		    <td>{{ ql.quantity }}</td>
+		    <td>{{ ql.cost_per_unit }}</td>
+		    <td>{{ ql.cost }}</td>
 		</tr>
 	    {% endfor %}
 	    </tbody>
 	</table>
+	<form>
+	    <input type="hidden" value="{{ user.company }}"/>
+	    <input type="submit" value="Proceed"/>
+	</form>
     </div>
 {% endblock %}

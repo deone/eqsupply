@@ -33,12 +33,19 @@ class LineItemForm(forms.Form):
 	product = get_object_or_404(ProductVariant, pk=prod_var_id)
 
 	try:
+	    """ If line item already exists """
 	    line_item = get_object_or_404(LineItem, product=product, quotation=quotation)
-	    line_item.quantity += quantity
+	    line_item.quantity += quantity  # update quantity
+	    line_item.cost = str(float(line_item.cost) + float(product.cost) * int(quantity))	# update cost
 	    line_item.save()
+	    
 	except Http404:
+	    """ If line item doesn't exist, just create a new one """
 	    line_item = LineItem.objects.create(quotation=quotation, product=product, quantity=quantity, \
 		    cost_per_unit=product.cost, cost=str(float(product.cost) * int(quantity)))
+
+	quotation.cost = str(float(quotation.cost) + float(line_item.cost))
+	quotation.save()
 
 	return line_item
 
