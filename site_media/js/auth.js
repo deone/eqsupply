@@ -52,3 +52,13 @@ function displayErrorsOrRedirect(respObj)	{
 	document.location = respObj.data.body;
     }
 }
+
+function checkDetail()	{
+    company = $("#id_company").val();
+
+    if (company != "")	{
+	// Process, save and send quotation to user's email
+    } else  {
+	// Fill out user detail form
+    }
+}

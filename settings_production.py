@@ -1,4 +1,4 @@
-from settings import *
+from eqsupply.settings import *
 
 DEBUG = TEMPLATE_DEBUG = False
 
