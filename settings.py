@@ -122,3 +122,4 @@ ELCOMETER_PRODUCTS_INDEX = "http://www.elcometer.com/international index pages/i
 ELCOMETER_SPECS_INDEX = "http://www.elcometer.com/international index pages/international/product pages - English/product pages/technical specifications/"
 
 LOGIN_URL = "/"
+VAT = 5

@@ -49,6 +49,9 @@ class LineItemForm(forms.Form):
 
 	return line_item
 
+class UserDetailCheckForm(forms.Form):
+    company = forms.CharField(widget=forms.HiddenInput())
+
 def prefix_zero(number):
     if number < 10:
 	return "0" + str(number)
