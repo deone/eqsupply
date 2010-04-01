@@ -5,10 +5,11 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
 
-from eqsupply.quote.forms import LineItemForm
+from eqsupply.quote.forms import *
 from eqsupply.quote.models import *
 from eqsupply.products.models import Division
 from eqsupply import helpers as h
+from eqsupply import settings
 
 APP_MENU = Division.objects.all()
 
@@ -29,9 +30,12 @@ def add_line_item(request, prod_var_id, form_class=LineItemForm, **kwargs):
 
     return h.dict_error(form.errors.items())
 
-@login_required
-def fetch_quote(request, quotation_id, template="quote/quotation.html"):
+#@login_required
+def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template="quote/quotation.html", **kwargs):
     quotation = get_object_or_404(Quotation, pk=quotation_id)
+    quotation.VAT = settings.VAT/100.0 * int(quotation.cost)
+
+    form = form_class()
 
     line_item_list = list(quotation.lineitem_set.all())
 
@@ -45,4 +49,5 @@ def fetch_quote(request, quotation_id, template="quote/quotation.html"):
 	"menu": APP_MENU,
 	"quotation": quotation,
 	"line_items": line_item_list,
+	"user_detail_form": form,
     }, context_instance=RequestContext(request))

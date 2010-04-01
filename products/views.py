@@ -10,7 +10,7 @@ from eqsupply import helpers as h
 APP_MENU = Division.objects.all()
 
 @login_required
-def index(request, template="products/index.html"):
+def index(request, template="products/index.html", **kwargs):
     categories = Category.objects.all()
     
     return render_to_response(template, {
@@ -19,7 +19,7 @@ def index(request, template="products/index.html"):
     }, context_instance=RequestContext(request))
 
 @login_required
-def display_product(request, product_id, form_class=LineItemForm, template="products/product.html"):
+def display_product(request, product_id, form_class=LineItemForm, template="products/product.html", **kwargs):
     product = get_object_or_404(Product, pk=product_id)
     form = form_class()
 
