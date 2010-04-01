@@ -1,5 +1,13 @@
 {% extends "quote/base.html" %}
 
+{% block page_js %}
+    <script>
+	$(function()	{
+	    $(".detail_check #id_company").attr("value", "{{ user.company }}");
+	});
+    </script>
+{% endblock %}
+
 {% block module %}
     <h2>Preview Your Quotation</h2>
     <div id="quotation" class="viewport">
@@ -25,10 +33,18 @@
 		    <td>{{ ql.cost }}</td>
 		</tr>
 	    {% endfor %}
+	    <tr>
+		<td colspan=5>SUB TOTAL</td>
+		<td>{{ quotation.cost }}</td>
+	    </tr>
+	    <tr>
+		<td colspan=5>VAT @ 5%</td>
+		<td>{{ quotation.VAT }}</td>
+	    </tr>
 	    </tbody>
 	</table>
-	<form>
-	    <input type="hidden" value="{{ user.company }}"/>
+	<form class="detail_check" action="javascript:checkDetail();">
+	    {{ user_detail_form.as_p }}
 	    <input type="submit" value="Proceed"/>
 	</form>
     </div>
