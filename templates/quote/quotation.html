@@ -43,7 +43,7 @@
 	    </tr>
 	    </tbody>
 	</table>
-	<form class="detail_check" action="javascript:checkDetail();">
+	<form class="detail_check" action="javascript:checkDetail({{user.id}});">
 	    {{ user_detail_form.as_p }}
 	    <input type="submit" value="Proceed"/>
 	</form>

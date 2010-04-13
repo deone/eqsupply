@@ -53,12 +53,13 @@ function displayErrorsOrRedirect(respObj)	{
     }
 }
 
-function checkDetail()	{
+function checkDetail(userId)	{
     company = $("#id_company").val();
 
     if (company != "")	{
 	// Process, save and send quotation to user's email
     } else  {
 	// Fill out user detail form
+	document.location = "/user/" + userId + "/details";
     }
 }
