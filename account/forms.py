@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
+from eqsupply.cost.models import Location
+
 import hashlib
 import datetime
 import string
@@ -82,3 +84,15 @@ class SignupForm(forms.Form):
 	new_user.save()
 
 	return new_user
+
+def fetch_locations():
+    return [(location.id, location.name) for location in Location.objects.all()]
+
+class UserDetailForm(forms.Form):
+    phone = forms.CharField(max_length=11, widget=forms.TextInput())
+    company = forms.CharField()
+    position = forms.CharField()
+    company_street_address = forms.CharField()
+    country = forms.CharField()
+    city = forms.CharField()
+    location = forms.ChoiceField(choices=fetch_locations())
