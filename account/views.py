@@ -9,7 +9,7 @@ from django.conf import settings
 from django.http import Http404
 
 from account.models import Account
-from account.forms import SignupForm, LoginForm
+from account.forms import *
 from quote.models import Quotation
 
 from eqsupply import helpers as h
@@ -107,3 +107,8 @@ def line_item_quantity(request, user_id, **kwargs):
 	return ("object", result)
     except Http404:
 	return ("object", {"line_item_qty": 0, "date_created": None})
+
+def show_user_detail_form(request, user_id, form_class=UserDetailForm, template="account/user_detail.html"):
+    return render_to_response(template, {
+	"form": form_class(),
+    }, context_instance=RequestContext(request))

@@ -1,23 +1,5 @@
 {% extends "products/base.html" %}
 
-{% block page_js %}
-    <script>
-	$(function()	{
-	    $(".quote_form label").remove();
-	    $(".quote_form #id_user").attr("value", "{{ user.id }}");
-
-	    $(".pv_detail").hover(
-		function()  {},
-		function()  {
-		    $(".quote_form").hide();
-		    $(".quote_btn").show();
-		}
-	    );
-
-	});
-    </script>
-{% endblock %}
-
 {% block module %}
     <h2>{{ product.category }}</h2>
     <div id="product" class="viewport">
@@ -83,4 +65,22 @@
 	</div>
 	<div class="clear"></div>
     </div>
+{% endblock %}
+
+{% block page_js %}
+    <script>
+	$(function()	{
+	    $(".quote_form label").remove();
+	    $(".quote_form #id_user").attr("value", "{{ user.id }}");
+
+	    $(".pv_detail").hover(
+		function()  {},
+		function()  {
+		    $(".quote_form").hide();
+		    $(".quote_btn").show();
+		}
+	    );
+
+	});
+    </script>
 {% endblock %}

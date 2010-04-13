@@ -1,32 +1,5 @@
 {% extends "base.html" %}
 
-{% block inner_base_js %}
-    <script type="text/javascript">
-	$(function()    {
-
-	    var options = {
-		url: "/user/{{ user.id }}/item_count",
-		type: "GET",
-		data: null,
-		dataType: "json",
-		success: function(response)	{
-		    if (response.data.type != "object")	{
-			alert("Error!");
-		    } else  {
-			showItemQtyAndDateLink(response.data.body);
-		    }
-		},
-		error: function(response)	{
-		    showMessage("Internal Server Error");
-		}
-	    };
-
-	    $.ajax(options);
-
-	});
-    </script>
-{% endblock %}
-
 {% block nav %}
     <div class="grid_8">
 	<ul class="nav">
@@ -68,4 +41,37 @@
 	    {% block module %}{% endblock %}
 	</div>
     </div>
+{% endblock %}
+
+{% block inner_base_js %}
+    <script type="text/javascript">
+	$(function()    {
+
+	    $("#menu a.cat").click(function()  {
+		$(this).toggleClass("visible");
+		$(this).next().toggle();
+		return false;
+	    }).next().hide();
+
+	    var options = {
+		url: "/user/{{ user.id }}/item_count",
+		type: "GET",
+		data: null,
+		dataType: "json",
+		success: function(response)	{
+		    if (response.data.type != "object")	{
+			alert("Error!");
+		    } else  {
+			showItemQtyAndDateLink(response.data.body);
+		    }
+		},
+		error: function(response)	{
+		    showMessage("Internal Server Error");
+		}
+	    };
+
+	    $.ajax(options);
+
+	});
+    </script>
 {% endblock %}

@@ -7,27 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="/site_media/css/grid.css" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="/site_media/css/layout.css" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="/site_media/css/nav.css" media="screen"/>
-	<link rel="stylesheet" href="/site_media/css/tables.css"/>
+	<link rel="stylesheet" type="text/css" href="/site_media/css/tables.css"/>
+
 	{% block custom_css %}{% endblock %}
-	<script type="text/javascript" src="/site_media/js/jquery.js"></script>
-	<script type="text/javascript" src="/site_media/js/jquery.form.js"></script>
-	<script type="text/javascript" src="/site_media/js/main.js"></script>
-	<script type="text/javascript">
-	    
-	    $(function()    {
-
-		$("#menu a.cat").click(function()  {
-		    $(this).toggleClass("visible");
-		    $(this).next().toggle();
-		    return false;
-		}).next().hide();
-
-	    });
-
-	</script>
-	{% block inner_base_js %}{% endblock %} <!-- Strictly for js in inner_base.html -->
-	{% block custom_js %}{% endblock %} <!-- js in {app}/base.html -->
-	{% block page_js%}{% endblock %} <!-- page-specific js -->
     </head>
     {% block body_id %}<body>{% endblock %}
 	<div class="container_16">
@@ -53,6 +35,14 @@
 		</div>
 	    </div>
 	</div>
+
+	<script type="text/javascript" src="/site_media/js/jquery.js"></script>
+	<script type="text/javascript" src="/site_media/js/jquery.form.js"></script>
+	<script type="text/javascript" src="/site_media/js/main.js"></script>
+
+	{% block inner_base_js %}{% endblock %} <!-- Strictly for js in inner_base.html -->
+	{% block custom_js %}{% endblock %} <!-- js in {app}/base.html -->
+	{% block page_js%}{% endblock %} <!-- page-specific js -->
 
 	<script type="text/javascript">
 	    /*var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";

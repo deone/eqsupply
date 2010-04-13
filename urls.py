@@ -2,13 +2,12 @@ import os
 
 from django.conf.urls.defaults import *
 from django.conf import settings
-from django.views.generic.simple import direct_to_template
-
 from django.contrib import admin
-admin.autodiscover()
 
 import account.views
 import quote.views
+
+admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', account.views.login, name="acct_login"),
@@ -16,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^activate', account.views.activate, name="acct_activate"),
     url(r'^logout$', account.views.logout, name="acct_logout"),
     (r'^user/(?P<user_id>\d+)/item_count$', account.views.line_item_quantity),
-    (r'^user/(?P<user_id>\d+)/details$', direct_to_template, {"template": "account/user_detail.html"}),
+    (r'^user/(?P<user_id>\d+)/details$', account.views.show_user_detail_form),
 
     (r'^products$', include('products.urls')),
     (r'^products/', include('products.urls')),
