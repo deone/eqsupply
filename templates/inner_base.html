@@ -62,21 +62,7 @@
 {% endblock %}
 
 {% block body %}
-    <div id="menu" class="grid_3">
-	<div class="box">
-	    <h2>Choose a Category</h2> 
-	    <div class="viewport">
-	    {% for m in menu %}
-		<a class="cat" href="#">{{ m.name }}</a>
-		<ul id="subcat">
-		{% for c in m.category_set.all %}
-		    <li><a href="#">{{ c.name }}</a></li>
-		{% endfor %}
-		</ul>
-	    {% endfor %}
-	    </div>
-	</div>
-    </div>
+    {% block menu %}{% endblock %}
     <div class="module grid_13">
 	<div class="box">
 	    {% block module %}{% endblock %}
