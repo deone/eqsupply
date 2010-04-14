@@ -8,6 +8,7 @@ v2
 * User should get a message like "Session expired. Sign In again." if he was signed out on session expiry.
 * Include Weight field in product model to calculate courier cost.
 * Update Quotations model to hold pdf.
+* Fix 'default' bug in ProductVariant, weight field.
 
 Broad categorization of what's left
 ===================================
@@ -22,8 +23,8 @@ Logistics
 - Courier charge (local)
     * Should include VAT at 5%
     * Location is based on user's state field, with the exception of Abuja and Zaria.
-    * Add a 20% markup on the courier charge using the actual weight, to take care of local custom charge and any differences in courier charges.
-    * For each weight above 0.5
+    * Add a 20% markup on the courier charge using the actual weight, to take care of local custom charge and any differences in the event that total dimensional weight is used.
+    * For each weight above 0.5;
 	- If it matches table record, fine.
 	- If it doesn't, round-off to the nearest weight.
 

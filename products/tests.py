@@ -5,25 +5,20 @@ from eqsupply.test_helpers import EqsupplyTestCase
 
 class ProductsTests(EqsupplyTestCase):
     def test_division(self):
-	# content
 	self.failUnless(self.division.name == "Washing Machines")
 	self.failUnless(self.division.description != "Machines")
 
-	# type
 	self.failIf(isinstance(self.division.name, int))
 	self.failUnless(isinstance(self.division.description, str))
 
-	# constraints
 	self.failUnlessRaises(IntegrityError, Division.objects.create, name="Washing Machines", description="")	# unique
 
-    # Start here
     def test_category(self):
 	self.assert_(self.category.name == "American Specs")
 	self.assert_(self.category.description == "Made in USA")
 	self.failUnless(self.category.division == self.division)
 
     def test_product(self):
-	# content
 	self.assert_(self.product.name == "Car Wash Simulator")
 	self.assert_(self.product.description == "")
 	self.assert_(self.product.code == "555")
@@ -52,5 +47,6 @@ class ProductsTests(EqsupplyTestCase):
     def test_product_variant(self):
 	self.assert_(self.product_variant.product == self.product)
 	self.assert_(self.product_variant.part_number == "S499989")
+	self.failIf(self.product_variant.weight != "9.0")
 	self.assert_(self.product_variant.description == "Car Wash Simulator")
 	self.assert_(self.product_variant.cost == "122.34")
