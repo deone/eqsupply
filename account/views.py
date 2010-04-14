@@ -25,7 +25,7 @@ def signup(request, form_class=SignupForm, template="account/signup.html", **kwa
 	    try:
 		user.email_user("Aerix Equipment Supply Account Activation", "Click this link to activate your account: %s" % create_activation_link(reg_id), settings.EMAIL_SENDER)
 		request.flash['feedback'] = "Thank you for registering. An activation link has been sent to your email."
-		return (True, "Signup Successful")
+		return (True, "/signup")
 	    except Exception, e:
 		user.delete()
 		print_exc()

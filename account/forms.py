@@ -89,7 +89,7 @@ def fetch_locations():
     return [(location.id, location.name) for location in Location.objects.all()]
 
 class UserDetailForm(forms.Form):
-    phone = forms.CharField(max_length=11, widget=forms.TextInput())
+    phone = forms.CharField(max_length=15, widget=forms.TextInput())
     company = forms.CharField()
     position = forms.CharField()
     company_street_address = forms.CharField()

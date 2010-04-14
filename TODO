@@ -7,12 +7,10 @@ v2
 * @login_required should redirect user to the page he was signed out from.
 * User should get a message like "Session expired. Sign In again." if he was signed out on session expiry.
 * Include Weight field in product model to calculate courier cost.
+* Update Quotations model to hold pdf.
 
 Broad categorization of what's left
 ===================================
-* Collecting remaining user data
-    - phone, company, position, company_street_address, city, state, country.
-    - State field should be implemented as a dropdown to avoid user errors.
 * Computing costs.
 * Outputting quotation in pdf.
 * Search - New app.
@@ -24,7 +22,10 @@ Logistics
 - Courier charge (local)
     * Should include VAT at 5%
     * Location is based on user's state field, with the exception of Abuja and Zaria.
-    * Add a 20% markup on the courier charge using the net actual weight - this includes local custom charge.
+    * Add a 20% markup on the courier charge using the actual weight, to take care of local custom charge and any differences in courier charges.
+    * For each weight above 0.5
+	- If it matches table record, fine.
+	- If it doesn't, round-off to the nearest weight.
 
 - Courier Insurance (1% of actual product cost)
 - Bank transfer charges
