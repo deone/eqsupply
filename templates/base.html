@@ -13,8 +13,8 @@
     </head>
     {% block body_id %}<body>{% endblock %}
 	<div class="container_16">
-	    <div id="ajax_msg" class="grid_2"><p>Loading...</p></div>
-	    <div id="error_msg" class="grid_6"><p>Loading</p></div>
+	    <div id="ajax_msg" class="grid_2 ajax"><p>Loading...</p></div>
+	    <div id="error_msg" class="grid_6 ajax"><p>Loading</p></div>
 	    <div id="header">
 		<div id="logo" class="grid_3">
 		    <a href="http://www.aerixnigeria.com"><img id="logo" src="/site_media/img/logo_small.jpg"/></a>
@@ -37,7 +37,6 @@
 	</div>
 
 	<script type="text/javascript" src="/site_media/js/jquery.js"></script>
-	<script type="text/javascript" src="/site_media/js/jquery.form.js"></script>
 	<script type="text/javascript" src="/site_media/js/main.js"></script>
 
 	{% block inner_base_js %}{% endblock %} <!-- Strictly for js in inner_base.html -->

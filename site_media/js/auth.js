@@ -39,13 +39,13 @@ function signUp()   {
 			"&password2=" + password2;
 
     options["success"] = function(response) {
-	displayErrorsOrRedirect(response, "/signup");
+	displayErrorsOrRedirect(response);
     }
 
     $.ajax(options);
 }
 
-function displayErrorsOrRedirect(respObj)	{
+function displayErrorsOrRedirect(respObj)   {
     if (respObj.data.type != true) {
 	showErrors(respObj.data.body);
     } else  {
