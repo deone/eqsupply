@@ -530,7 +530,7 @@ input.search.button {
 
 /* Ajax Indicators and Messages
 ----------------------------------------------- */
-#ajax_msg, #error_msg  {
+.ajax	{
     display: none;
 }
 #ajax_msg, #error_msg  {

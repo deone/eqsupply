@@ -85,8 +85,8 @@ INSTALLED_APPS = (
     'eqsupply.cost',
 )
 
-EMAIL_HOST = "localhost"
-EMAIL_PORT = 1025
+EMAIL_HOST = "aerixnigeria.com"
+EMAIL_PORT = 25
 #EMAIL_HOST_USER = "erecruit"
 #EMAIL_HOST_PASSWORD = "3r3cru17"
 

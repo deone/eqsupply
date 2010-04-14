@@ -49,7 +49,7 @@ class ProductVariant(models.Model):
     """Holds all part numbers and description of product variants. Many-to-one relationship with Product"""
     product = models.ForeignKey(Product)
     part_number = models.CharField(max_length=50, unique=True)
-    #weight = models.DecimalField(max_digits=5, decimal_places=1)
+    #weight = models.DecimalField(max_digits=5, decimal_places=1, default=0.5)
     description = models.TextField()
     cost = models.DecimalField(max_digits=20, decimal_places=2)
 
