@@ -60,6 +60,33 @@ function checkDetail(userId)	{
 	// Process, save and send quotation to user's email
     } else  {
 	// Fill out user detail form
-	document.location = "/user/" + userId + "/details";
+	document.location = "/user/" + userId + "/add_details";
     }
+}
+
+// We should write a generic data gathering function
+// instead of repeating this process everywhere!
+function insertUserDetails(userId)	{
+    var phone = $("#id_phone").val();
+    var company = $("#id_company").val();
+    var position = $("#id_position").val();
+    var company_street_address = $("#id_company_street_address").val();
+    var country = $("#id_country").val();
+    var city = $("#id_city").val();
+    var dLocation = $("#id_location").val();
+
+    options["url"] = "/user/" + userId + "/add_details";
+    options["data"] = "phone=" + phone + 
+			"&company=" + company + 
+			"&position=" + position + 
+			"&company_street_address=" + company_street_address + 
+			"&country=" + country + 
+			"&city=" + city + 
+			"&location=" + dLocation;
+
+    options["success"] = function(response) {
+	alert(response);
+    }
+
+    $.ajax(options);
 }

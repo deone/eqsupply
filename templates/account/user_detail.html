@@ -1,10 +1,20 @@
 {% extends "quote/base.html" %}
 
+{% block page_js %}
+<script type="text/javascript">
+    $(function()    {
+	$("#submit_detail").click(function()	{
+	    $("#user_detail").attr("action", "javascript:insertUserDetails({{ user.id }});");
+	});
+    });
+</script>
+{% endblock %}
+
 {% block module %}
-<form id="user_detail" action="">
+<form id="user_detail">
     <fieldset>
 	{{ form.as_p }}
-	<input type="submit" value="Continue"/>
+	<input id="submit_detail" type="submit" value="Continue"/>
     </fieldset>
 </form>
 {% endblock %}
