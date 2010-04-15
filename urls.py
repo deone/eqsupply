@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^activate', account.views.activate, name="acct_activate"),
     url(r'^logout$', account.views.logout, name="acct_logout"),
     (r'^user/(?P<user_id>\d+)/item_count$', account.views.line_item_quantity),
-    (r'^user/(?P<user_id>\d+)/details$', account.views.show_user_detail_form),
+    (r'^user/(?P<user_id>\d+)/add_details$', account.views.add_details),
 
     (r'^products$', include('products.urls')),
     (r'^products/', include('products.urls')),

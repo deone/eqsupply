@@ -66,3 +66,12 @@ def format_date(date_string):
     formatted_date += split_date[0]
 
     return formatted_date
+
+def make_serializable(obj_dict):
+    date_keys = ['time_created', 'date_joined', 'last_login']
+
+    for i in obj_dict.iteritems():
+	if i[0] in date_keys:
+	    obj_dict[i[0]] = str(i[1])
+
+    return obj_dict
