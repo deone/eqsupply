@@ -57,7 +57,7 @@ function checkDetail(userId)	{
     company = $("#id_company").val();
 
     if (company != "")	{
-	// Process, save and send quotation to user's email
+	// Call quote-processing function here.
     } else  {
 	// Fill out user detail form
 	document.location = "/user/" + userId + "/add_details";
@@ -85,6 +85,7 @@ function insertUserDetails(userId)	{
 			"&location=" + dLocation;
 
     options["success"] = function(response) {
+	// Call quote-processing function here.
 	alert(response);
     }
 

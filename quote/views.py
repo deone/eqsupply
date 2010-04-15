@@ -4,7 +4,9 @@ from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
+from eqsupply.account.models import Account
 from eqsupply.quote.forms import *
 from eqsupply.quote.models import *
 from eqsupply.products.models import Division
@@ -30,6 +32,12 @@ def add_line_item(request, prod_var_id, form_class=LineItemForm, **kwargs):
 
     return h.dict_error(form.errors.items())
 
+def get_user_account(user_id):
+    user = get_object_or_404(User, pk=user_id)
+    user_account = get_object_or_404(Account, user=user)
+
+    return user_account
+
 #@login_required
 def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template="quote/quotation.html", **kwargs):
     quotation = get_object_or_404(Quotation, pk=quotation_id)
@@ -41,6 +49,8 @@ def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template=
 
     i = 0
 
+    user_account = get_user_account(quotation.user.id)
+
     while i < int(quotation.lineitem_set.count()):
 	line_item_list[i].id = i + 1
 	i = i + 1
@@ -49,5 +59,6 @@ def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template=
 	"menu": APP_MENU,
 	"quotation": quotation,
 	"line_items": line_item_list,
+	"user_account": user_account,
 	"user_detail_form": form,
     }, context_instance=RequestContext(request))
