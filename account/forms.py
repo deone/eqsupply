@@ -1,8 +1,11 @@
 from django import forms
 from django.contrib.auth import authenticate, login
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import get_object_or_404
+
 from django.contrib.auth.models import User
 
+from eqsupply.account.models import Account
 from eqsupply.cost.models import Location
 
 import hashlib
@@ -96,3 +99,26 @@ class UserDetailForm(forms.Form):
     country = forms.CharField()
     city = forms.CharField()
     location = forms.ChoiceField(choices=fetch_locations())
+
+    def save(self, user_id):
+	phone = self.cleaned_data['phone']
+	company = self.cleaned_data['company']
+	position = self.cleaned_data['position']
+	company_street_address = self.cleaned_data['company_street_address']
+	country = self.cleaned_data['country']
+	city = self.cleaned_data['city']
+	location = self.cleaned_data['location']
+
+	user = get_object_or_404(User, pk=user_id)
+	user_account = get_object_or_404(Account, user=user)
+
+	user_account.phone = phone
+	user_account.company = company
+	user_account.position = position
+	user_account.company_street_address = company_street_address
+	user_account.country = country
+	user_account.city = city
+	user_account.location = location
+	user_account.save()
+
+	return user, user_account

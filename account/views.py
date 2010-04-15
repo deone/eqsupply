@@ -87,10 +87,8 @@ def activate(request, form_class=LoginForm, template="account/login.html"):
     user.save()
     request.flash['feedback'] = "Your account is now active. You may log in now."
 
-    form = form_class()
-
     return render_to_response(template, {
-	"form": form,
+	"form": form_class(),
     }, context_instance=RequestContext(request))
 
 @h.json_response
@@ -108,7 +106,27 @@ def line_item_quantity(request, user_id, **kwargs):
     except Http404:
 	return ("object", {"line_item_qty": 0, "date_created": None})
 
-def show_user_detail_form(request, user_id, form_class=UserDetailForm, template="account/user_detail.html"):
-    return render_to_response(template, {
-	"form": form_class(),
-    }, context_instance=RequestContext(request))
+@h.json_response
+def add_details(request, user_id, form_class=UserDetailForm, template="account/user_detail.html", **kwargs):
+    if request.method == "POST":
+	form = form_class(request.POST)
+
+        if form.is_valid():
+	    user_details = form.save(user_id)
+
+	    user = h.make_serializable(user_details[0].__dict__)
+	    user_account = h.make_serializable(user_details[1].__dict__)
+
+	    details_dict = {
+		"user": user,
+		"user_account": user_account
+	    }
+
+	    return ("object", details_dict)
+
+        return h.dict_error(form.errors.items())
+
+    else:
+	return render_to_response(template, {
+	    "form": form_class(),
+	}, context_instance=RequestContext(request))
