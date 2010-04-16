@@ -53,11 +53,17 @@ function displayErrorsOrRedirect(respObj)   {
     }
 }
 
-function checkDetail(userId)	{
+function checkDetail(userId, quotationId)	{
     company = $("#id_company").val();
 
     if (company != "")	{
-	// Call quote-processing function here.
+	options["data"] = "quotation=" + quotationId;
+	options["url"] = "/quotation/" + quotationId + "/process";
+	options["success"] = function(response)	{
+	    alert(response);
+	}
+
+	$.ajax(options);
     } else  {
 	// Fill out user detail form
 	document.location = "/user/" + userId + "/add_details";

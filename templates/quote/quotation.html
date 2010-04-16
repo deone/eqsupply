@@ -35,7 +35,7 @@
 	    </tr>
 	    </tbody>
 	</table>
-	<form id="detail_check" action="javascript:checkDetail({{user.id}});">
+	<form id="detail_check" action="javascript:checkDetail({{ user.id }}, {{ quotation.id }});">
 	    {{ user_detail_form.as_p }}
 	    <input type="submit" value="Proceed"/>
 	</form>
