@@ -23,7 +23,7 @@ class Location(models.Model):
 class Cost(models.Model):
     weight = models.ForeignKey(Weight)
     zone = models.ForeignKey(Zone)
-    cost = models.IntegerField()
+    cost = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __unicode__(self):
 	return "Weight: %s, Zone: %s, Cost: %s" % (str(self.weight.weight), str(self.zone.zone), str(self.cost))

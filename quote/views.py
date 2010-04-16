@@ -10,6 +10,7 @@ from eqsupply.account.models import Account
 from eqsupply.quote.forms import *
 from eqsupply.quote.models import *
 from eqsupply.products.models import Division
+from eqsupply.cost.models import *
 from eqsupply import helpers as h
 from eqsupply import settings
 
@@ -62,3 +63,38 @@ def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template=
 	"user_account": user_account,
 	"user_detail_form": form,
     }, context_instance=RequestContext(request))
+
+def process_quote(request, quotation_id):
+    quotation = get_object_or_404(Quotation, pk=quotation_id)
+    sub_total = quotation.cost
+
+    vat = settings.VAT/100.0 * int(quotation.cost)
+
+    # Logistics
+    user = get_object_or_404(User, pk=quotation.user.id)
+    user_account = get_object_or_404(Account, user=user)
+
+    #Int'l courier charge
+    #...
+
+    #Local courier charge
+    local_courier_charge = compute_local_courier_charge(user_account.location, quotation.lineitem_set.all())
+
+    # Compute line_item courier charge with each line_item's weight and user location, add up all.
+    # Compute courier VAT & 20% markup to cater for custom charges et al.
+    # Compute courier insurance
+
+def compute_local_courier_charge(location_id, line_items):
+    courier_charge = 0
+    zone = get_object_or_404(Location, pk=location_id).zone
+
+    for l in line_items:
+	try:
+	    weight = get_object_or_404(Weight, weight=l.product.weight)
+	except Http404:
+	    weight = get_object_or_404(Weight, weight=round(l.product.weight))
+	
+	cost = get_object_or_404(Cost, weight=weight, zone=zone)
+	courier_charge = courier_charge + cost.cost
+
+    return courier_charge
