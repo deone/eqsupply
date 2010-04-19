@@ -31,9 +31,12 @@ Logistics
 - Courier Insurance (1% of actual product cost)
 - Bank transfer charges
 
+
 Taxes
 -----
 - VAT on product (at local rate; 5%)
 
 Markup
 ------
+
+- Rename Cost model to Courier_cost.
