@@ -65,6 +65,7 @@ def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template=
     }, context_instance=RequestContext(request))
 
 def process_quote(request, quotation_id):
+    """ All monetary values must be converted to GBP"""
     quotation = get_object_or_404(Quotation, pk=quotation_id)
     sub_total = quotation.cost
 
@@ -79,10 +80,10 @@ def process_quote(request, quotation_id):
 
     #Local courier charge
     local_courier_charge = compute_local_courier_charge(user_account.location, quotation.lineitem_set.all())
+    print local_courier_charge
 
-    # Compute line_item courier charge with each line_item's weight and user location, add up all.
-    # Compute courier VAT & 20% markup to cater for custom charges et al.
     # Compute courier insurance
+    # Compute 20% markup to cater for custom charges et al.
 
 def compute_local_courier_charge(location_id, line_items):
     courier_charge = 0
@@ -94,7 +95,16 @@ def compute_local_courier_charge(location_id, line_items):
 	except Http404:
 	    weight = get_object_or_404(Weight, weight=round(l.product.weight))
 	
-	cost = get_object_or_404(Cost, weight=weight, zone=zone)
-	courier_charge = courier_charge + cost.cost
+	courier_charge_per_unit = float(get_object_or_404(Cost, weight=weight, zone=zone).cost)
+
+	ccpu_plus_vat = round(((courier_charge_per_unit + (settings.VAT/100.0 * courier_charge_per_unit)) / settings.GBP_RATE), 2)
+	l.courier_charge_per_unit = str(ccpu_plus_vat)
+
+	courier_charge_per_lineitem = ccpu_plus_vat * float(l.quantity)
+	l.courier_charge = str(courier_charge_per_lineitem)
+
+	l.save()
+
+	courier_charge = courier_charge + courier_charge_per_lineitem
 
     return courier_charge
