@@ -124,3 +124,4 @@ ELCOMETER_SPECS_INDEX = "http://www.elcometer.com/international index pages/inte
 LOGIN_URL = "/"
 VAT = 5
 GBP_RATE = 250.0
+MARKUP = 20.0

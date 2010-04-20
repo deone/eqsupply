@@ -67,23 +67,30 @@ def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template=
 def process_quote(request, quotation_id):
     """ All monetary values must be converted to GBP"""
     quotation = get_object_or_404(Quotation, pk=quotation_id)
-    sub_total = quotation.cost
-
-    vat = settings.VAT/100.0 * int(quotation.cost)
-
-    # Logistics
     user = get_object_or_404(User, pk=quotation.user.id)
     user_account = get_object_or_404(Account, user=user)
+
+    sub_total = float(quotation.cost)
+
+    vat = settings.VAT/100.0 * sub_total
+
+    # Logistics
 
     #Int'l courier charge
     #...
 
     #Local courier charge
     local_courier_charge = compute_local_courier_charge(user_account.location, quotation.lineitem_set.all())
-    print local_courier_charge
 
-    # Compute courier insurance
-    # Compute 20% markup to cater for custom charges et al.
+    """ 20% markup (for now, based on local_courier_charge + subtotal) to cater for custom charges et al, courier insurance and
+    courier charge, in the event total dimensional weight is used instead of actual weight."""
+    markup = compute_markup(sub_total, local_courier_charge)
+
+    logistics = local_courier_charge + markup
+
+    print "Sub-total: ", sub_total
+    print "VAT: ", vat
+    print "Logistics: ", logistics
 
 def compute_local_courier_charge(location_id, line_items):
     courier_charge = 0
@@ -108,3 +115,7 @@ def compute_local_courier_charge(location_id, line_items):
 	courier_charge = courier_charge + courier_charge_per_lineitem
 
     return courier_charge
+
+def compute_markup(quote_cost, courier_charge):
+    markup_base = quote_cost + courier_charge
+    return round((settings.MARKUP / 100.0 * markup_base), 2)
