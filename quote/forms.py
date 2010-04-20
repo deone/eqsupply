@@ -28,7 +28,7 @@ class LineItemForm(forms.Form):
 	    quotation = get_object_or_404(Quotation, user=user, status=0)
 	except Http404:
 	    quotation = Quotation.objects.create(user=user, time_created=datetime.datetime.now(), \
-		    quotation_no=generate_quote_no(), cost=0, status=False)
+		    quotation_no=generate_quote_no(), cost=0, pdf=None, status=False)
 
 	product = get_object_or_404(ProductVariant, pk=prod_var_id)
 

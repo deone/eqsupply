@@ -6,9 +6,8 @@ v2
 * Implement OpenID.
 * @login_required should redirect user to the page he was signed out from.
 * User should get a message like "Session expired. Sign In again." if he was signed out on session expiry.
-* Include Weight field in product model to calculate courier cost.
-* Update Quotations model to hold pdf.
-* Fix 'default' bug in ProductVariant, weight field.
+* Update Quotations model to hold courier cost and pdf.
+* Rename Cost model to CourierCharge.
 
 Broad categorization of what's left
 ===================================
@@ -20,23 +19,23 @@ Logistics
 ---------
 - Courier charge (international) - We'll figure these out by comparing some invoices, these figures are already VAT and international custom charge inclusive.
 
-- Courier charge (local)
+- Courier charge (local): Should be calculated using the actual weight.
     * Should include VAT at 5%
     * Location is based on user's state field, with the exception of Abuja and Zaria.
-    * Add a 20% markup on the courier charge using the actual weight, to take care of local custom charge and any differences in the event that total dimensional weight is used.
+    * Add a 20% markup on the courier charge to take care of local custom charge and any differences in the event that total dimensional weight is used, bank transfer charges and courier insurance (1% of actual product cost.)
     * For each weight above 0.5;
 	- If it matches table record, fine.
 	- If it doesn't, round-off to the nearest weight.
 
-- Courier Insurance (1% of actual product cost)
-- Bank transfer charges
+- Objects needed to output quote in pdf:
+    * User,
+    * Account,
+    * Quotation.
 
-
-Taxes
------
-- VAT on product (at local rate; 5%)
-
-Markup
-------
-
-- Rename Cost model to Courier_cost.
+_ Quotation data:
+    * Sub-total - in db as quotation_cost.
+    * VAT is derived from sub-total.
+    * Logistics, consists of: 
+	- Transportation costs (both int'l and local) for all items in the quote - in db as quotation_courier_cost.
+	- 20% markup, based on sum of sub-total and transportation costs.
+    * Grand-total: total of sub, VAT and logistics.

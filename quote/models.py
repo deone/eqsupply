@@ -7,6 +7,8 @@ class Quotation(models.Model):
     time_created = models.DateTimeField()
     quotation_no = models.CharField(max_length=20)
     cost = models.DecimalField(max_digits=20, decimal_places=2)
+    courier_charge = models.DecimalField(max_digits=20, decimal_places=2, null=True)
+    pdf = models.FileField(upload_to="site_media/files", null=True)
     status = models.BooleanField(default=False)	# Remember to set this flag to True when the quote is sent to email
 
     def __unicode__(self):
