@@ -64,15 +64,12 @@ def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template=
 	"user_detail_form": form,
     }, context_instance=RequestContext(request))
 
+@h.json_response
 def process_quote(request, quotation_id):
     """ All monetary values must be converted to GBP"""
     quotation = get_object_or_404(Quotation, pk=quotation_id)
     user = get_object_or_404(User, pk=quotation.user.id)
     user_account = get_object_or_404(Account, user=user)
-
-    sub_total = float(quotation.cost)
-
-    vat = settings.VAT/100.0 * sub_total
 
     # Logistics
 
@@ -82,15 +79,22 @@ def process_quote(request, quotation_id):
     #Local courier charge
     local_courier_charge = compute_local_courier_charge(user_account.location, quotation.lineitem_set.all())
 
+    quotation.courier_charge = str(local_courier_charge)
+    quotation.status = True
+    quotation.save()
+
     """ 20% markup (for now, based on local_courier_charge + subtotal) to cater for custom charges et al, courier insurance and
     courier charge, in the event total dimensional weight is used instead of actual weight."""
-    markup = compute_markup(sub_total, local_courier_charge)
+    """markup = compute_markup(sub_total, local_courier_charge)
 
     logistics = local_courier_charge + markup
 
     print "Sub-total: ", sub_total
     print "VAT: ", vat
-    print "Logistics: ", logistics
+    print "Logistics: ", logistics"""
+
+def output_pdf(request, quotation_id):
+    pass
 
 def compute_local_courier_charge(location_id, line_items):
     courier_charge = 0
