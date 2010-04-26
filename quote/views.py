@@ -1,6 +1,8 @@
 from reportlab.pdfgen import canvas
-from django.http import HttpResponse, Http404
+from reportlab.lib.units import inch
+from reportlab.platypus import Image
 
+from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
@@ -64,12 +66,17 @@ def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template=
 	"user_detail_form": form,
     }, context_instance=RequestContext(request))
 
-@h.json_response
-def process_quote(request, quotation_id):
-    """ All monetary values must be converted to GBP"""
+def get_quote_details(quotation_id):
     quotation = get_object_or_404(Quotation, pk=quotation_id)
     user = get_object_or_404(User, pk=quotation.user.id)
     user_account = get_object_or_404(Account, user=user)
+
+    return (quotation, user, user_account)
+
+@h.json_response
+def process_quote(request, quotation_id):
+    """ All monetary values must be converted to GBP"""
+    quote_details = get_quote_details(quotation_id)
 
     # Logistics
 
@@ -77,11 +84,16 @@ def process_quote(request, quotation_id):
     #...
 
     #Local courier charge
+    quotation = quote_details[0]
+    user_account = quote_details[2]
+
     local_courier_charge = compute_local_courier_charge(user_account.location, quotation.lineitem_set.all())
 
     quotation.courier_charge = str(local_courier_charge)
     quotation.status = True
     quotation.save()
+
+    return (True, quotation.id)
 
     """ 20% markup (for now, based on local_courier_charge + subtotal) to cater for custom charges et al, courier insurance and
     courier charge, in the event total dimensional weight is used instead of actual weight."""
@@ -94,7 +106,38 @@ def process_quote(request, quotation_id):
     print "Logistics: ", logistics"""
 
 def output_pdf(request, quotation_id):
-    pass
+    quote_details = get_quote_details(quotation_id)
+    
+    quotation = quote_details[0]
+    user = quote_details[1]
+    user_account = quote_details[2]
+
+    response = HttpResponse(mimetype='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=quote.pdf'
+
+    p = canvas.Canvas(response)
+    p.setTitle("Aerix Equipment Supply, Quote " + quotation.quotation_no)
+
+    logo = Image("site_media/img/logo_small.gif")
+    logo.drawOn(p, 5.5*inch, inch)
+
+    text_object = p.beginText()
+    text_object.setTextOrigin(inch, 5*inch)
+
+    text_object.textLines(settings.AERIX_ADDRESS)
+
+    text_object.textLine("Attn: " + user.first_name + " " + user.last_name)
+    text_object.textLine("Company: " + user_account.company)
+    text_object.textLine("Quotation No: " + quotation.quotation_no)
+    text_object.textLine("Date: " + str(quotation.time_created.date()))
+    text_object.textLine("Email: " + user.email)
+
+    p.drawText(text_object)
+
+    p.showPage()
+    p.save()
+
+    return response
 
 def compute_local_courier_charge(location_id, line_items):
     courier_charge = 0

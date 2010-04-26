@@ -53,17 +53,32 @@ function displayErrorsOrRedirect(respObj)   {
     }
 }
 
+function pdfQuote(quotationId) {
+
+    document.location = "/quotation/" + quotationId + "/pdf";
+
+}
+
 function checkDetail(userId, quotationId)	{
     company = $("#id_company").val();
 
     if (company != "")	{
-	options["data"] = "quotation=" + quotationId;
+
+	pdfQuote(quotationId);
+	/* options["data"] = "quotation=" + quotationId;
 	options["url"] = "/quotation/" + quotationId + "/process";
 	options["success"] = function(response)	{
-	    alert(response);
+
+	    if (response.data.type != true) {
+		showErrors(response.data.body);
+	    } else  {
+		pdfQuote(response.data.body);
+	    }
+
 	}
 
-	$.ajax(options);
+	$.ajax(options); */
+
     } else  {
 	// Fill out user detail form
 	document.location = "/user/" + userId + "/add_details";
