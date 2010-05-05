@@ -64,8 +64,7 @@ function checkDetail(userId, quotationId)	{
 
     if (company != "")	{
 
-	pdfQuote(quotationId);
-	/* options["data"] = "quotation=" + quotationId;
+	options["data"] = "quotation=" + quotationId;
 	options["url"] = "/quotation/" + quotationId + "/process";
 	options["success"] = function(response)	{
 
@@ -77,7 +76,7 @@ function checkDetail(userId, quotationId)	{
 
 	}
 
-	$.ajax(options); */
+	$.ajax(options);
 
     } else  {
 	// Fill out user detail form
