@@ -7,6 +7,8 @@ from django.utils.encoding import force_unicode
 
 from traceback import print_exc
 
+from eqsupply import settings
+
 class LazyEncoder(simplejson.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Promise):
@@ -75,3 +77,15 @@ def make_serializable(obj_dict):
 	    obj_dict[i[0]] = str(i[1])
 
     return obj_dict
+
+def change_id_serialno(queryset_list):
+    i = 0
+    while i < len(queryset_list):
+	queryset_list[i].id = i + 1
+	i = i + 1
+
+    return queryset_list
+
+def compute_markup(quote_cost, courier_charge):
+    markup_base = quote_cost + courier_charge
+    return round((settings.MARKUP / 100.0 * markup_base), 2)

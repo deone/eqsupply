@@ -39,3 +39,9 @@ _ Quotation data:
 	- Transportation costs (both int'l and local) for all items in the quote - in db as quotation_courier_cost.
 	- 20% markup, based on sum of sub-total and transportation costs.
     * Grand-total: total of sub, VAT and logistics.
+
+PDF
+===
+* Set pdf document title.
+* Add user details.
+* Add Terms & Conditions, Banking details, e.t.c.
