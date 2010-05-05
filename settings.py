@@ -125,3 +125,9 @@ LOGIN_URL = "/"
 VAT = 5
 GBP_RATE = 250.0
 MARKUP = 20.0
+AERIX_ADDRESS = """19A Olosa Street
+Victoria Island, Lagos
+Tel: +234 1 732 6314, +234 805 904 2972
+Fax: +234 1 628 3730
+Email: info@aerixnigeria.com
+Web: www.aerixnigeria.com"""

@@ -1,7 +1,3 @@
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.platypus import Image
-
 from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
@@ -15,6 +11,7 @@ from eqsupply.products.models import Division
 from eqsupply.cost.models import *
 from eqsupply import helpers as h
 from eqsupply import settings
+from eqsupply import pdf
 
 APP_MENU = Division.objects.all()
 
@@ -46,17 +43,11 @@ def fetch_quote(request, quotation_id, form_class=UserDetailCheckForm, template=
     quotation = get_object_or_404(Quotation, pk=quotation_id)
     quotation.VAT = settings.VAT/100.0 * int(quotation.cost)
 
-    form = form_class()
-
-    line_item_list = list(quotation.lineitem_set.all())
-
-    i = 0
-
     user_account = get_user_account(quotation.user.id)
 
-    while i < int(quotation.lineitem_set.count()):
-	line_item_list[i].id = i + 1
-	i = i + 1
+    form = form_class()
+
+    line_item_list = h.change_id_serialno(list(quotation.lineitem_set.all()))
 
     return render_to_response(template, {
 	"menu": APP_MENU,
@@ -112,14 +103,14 @@ def output_pdf(request, quotation_id):
     user = quote_details[1]
     user_account = quote_details[2]
 
-    response = HttpResponse(mimetype='application/pdf')
+    """response = HttpResponse(mimetype='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=quote.pdf'
 
     p = canvas.Canvas(response)
     p.setTitle("Aerix Equipment Supply, Quote " + quotation.quotation_no)
 
     logo = Image("site_media/img/logo_small.gif")
-    logo.drawOn(p, 5.5*inch, inch)
+    logo.drawOn(p, 5.7*inch, 10*inch)
 
     text_object = p.beginText()
     text_object.setTextOrigin(inch, 5*inch)
@@ -135,9 +126,9 @@ def output_pdf(request, quotation_id):
     p.drawText(text_object)
 
     p.showPage()
-    p.save()
+    p.save()"""
 
-    return response
+    return pdf.go(quotation)
 
 def compute_local_courier_charge(location_id, line_items):
     courier_charge = 0
@@ -162,7 +153,3 @@ def compute_local_courier_charge(location_id, line_items):
 	courier_charge = courier_charge + courier_charge_per_lineitem
 
     return courier_charge
-
-def compute_markup(quote_cost, courier_charge):
-    markup_base = quote_cost + courier_charge
-    return round((settings.MARKUP / 100.0 * markup_base), 2)

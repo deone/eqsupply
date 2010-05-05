@@ -7,32 +7,36 @@
 	    <thead>
 		<tr>
 		    <th>S/No.</th>
+		    <th>Product ID</th>
 		    <th>Reference</th>
 		    <th>Description</th>
 		    <th>Quantity</th>
-		    <th>Cost Per Unit</th>
-		    <th>Total Cost</th>
+		    <!--<th>Cost Per Unit</th>
+		    <th>Total Cost</th>-->
 		</tr>
 	    </thead>
 	    <tbody>
 	    {% for ql in line_items %}
 		<tr class="pv_detail">
 		    <td>{{ ql.id }}</td>
+		    <td>{{ ql.product.product.code }}</td>
 		    <td>{{ ql.product.part_number }}</td>
 		    <td>{{ ql.product.description }}</td>
 		    <td>{{ ql.quantity }}</td>
-		    <td>{{ ql.cost_per_unit }}</td>
-		    <td>{{ ql.cost }}</td>
+		    <!--<td>{{ ql.cost_per_unit }}</td>
+		    <td>{{ ql.cost }}</td>-->
 		</tr>
 	    {% endfor %}
-	    <tr>
-		<td colspan=5>SUB TOTAL</td>
+	    <!--<tr>
+		<td colspan=5>&nbsp;</td>
+		<td>SUB TOTAL</td>
 		<td>{{ quotation.cost }}</td>
 	    </tr>
 	    <tr>
-		<td colspan=5>VAT @ 5%</td>
+		<td colspan=5>&nbsp;</td>
+		<td>VAT @ 5%</td>
 		<td>{{ quotation.VAT }}</td>
-	    </tr>
+	    </tr>-->
 	    </tbody>
 	</table>
 	<form id="detail_check" action="javascript:checkDetail({{ user.id }}, {{ quotation.id }});">
