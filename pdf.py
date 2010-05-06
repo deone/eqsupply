@@ -16,19 +16,6 @@ style = getSampleStyleSheet()
 
 page_info = "AERIX Global Solutions Nig Ltd. RC 683490. VAT - TIN: 02411144-0001/VIVIO. Thank you for your Business!"
 
-def first_page(canvas, doc):
-    canvas.saveState()
-    canvas.drawImage("site_media/img/logo_small.gif", PAGE_WIDTH/1.65, PAGE_HEIGHT-108)
-    canvas.setFont("Times-Roman", 7)
-    canvas.drawString(inch, 0.75*inch, "Page %d %s" % (doc.page, page_info))
-    canvas.restoreState()
-
-def other_pages(canvas, doc):
-    canvas.saveState()
-    canvas.setFont("Times-Roman", 9)
-    canvas.drawString(inch, 0.75*inch, "Page %d %s" % (doc.page, page_info))
-    canvas.restoreState()
-
 def para_user_detail(first_name, last_name, company, quotation_no, quotation_date, email):
     return "<para leftIndent=-33><b>Attn:</b> " + first_name + " " + last_name + \
 	    "<br/><b>Company:</b> " + company + \
@@ -67,7 +54,7 @@ def list_table_data(quotation):
     data.append(["", "", "", "", "", "Sub-Total", str(quotation_details[0])])
     data.append(["", "", "", "", "", "VAT @ 5%", str(quotation_details[1])])
     data.append(["", "", "", "", "", "Logistics", str(quotation_details[2])])
-    data.append(["", "", "", "", "", "Grand Total", str(quotation_details[3])])
+    data.append(["", "", "", "", "", Paragraph('<b>Grand Total</b>', style["BodyText"]), str(quotation_details[3])])
 
     return data
 
@@ -84,13 +71,35 @@ def return_quote_details(cost, courier_charge):
 
     return (quotation_cost, vat, logistics, total)
 
+def return_other_details():
+    return """<para leftIndent=-33><b>Terms and Conditions</b><br/><br/>
+    <seq/>. Full payment due at time of order.<br/>
+    <seq/>. Allow 2-4 weeks after receipt of payment for delivery of items.<br/>
+    <seq/>. Quotation is valid until 21 days after issue.<br/><br/>
+    <b>Banking Details</b><br/><br/>
+    <b>Company Name:</b> Aerix Global Solutions Nigeria Ltd.<br/>
+    <b>Banking Institution:</b> Diamond Bank Plc.<br/>
+    <b>Bank Branch:</b> King George V Branch, Onikan, Lagos.<br/>
+    <b>Account Name:</b> Aerix Global Solutions Nigeria Ltd.<br/>
+    <b>Account Number:</b> 1202350000543<br/><br/>
+    Feel free to contact us if you have any questions concerning this quote.
+    """
+
+def page_format(canvas, doc):
+    canvas.saveState()
+    canvas.drawImage("site_media/img/logo_small.gif", PAGE_WIDTH/1.65, PAGE_HEIGHT-108)
+    canvas.setFont("Times-Roman", 7)
+    canvas.drawString(inch, 0.75*inch, "Page %d %s" % (doc.page, page_info))
+    canvas.restoreState()
+
 def go(quotation, user, user_account):
     story = []
     story.append(Spacer(0.5, 0.3*inch))
     story.append(Paragraph(settings.AERIX_ADDRESS, style["BodyText"]))
     story.append(Spacer(0.5, 0.1*inch))
 
-    user_detail = para_user_detail(user.first_name, user.last_name, user_account.company, quotation.quotation_no, str(quotation.time_created.date()), user.email)
+    user_detail = para_user_detail(user.first_name, user.last_name, user_account.company, \
+	    quotation.quotation_no, str(quotation.time_created.date()), user.email)
     story.append(Paragraph(user_detail, style["BodyText"]))
 
     story.append(Spacer(0.5, 0.2*inch))
@@ -106,5 +115,10 @@ def go(quotation, user, user_account):
 
     story.append(t)
 
+    story.append(Spacer(0.5, 0.2*inch))
+
+    other_details = return_other_details()
+    story.append(Paragraph(other_details, style["BodyText"]))
+
     doc = SimpleDocTemplate("quote.pdf", title="%s %s" % ("Aerix Equipment Supply Quotation", quotation.quotation_no))
-    return doc.build(story, onFirstPage=first_page, onLaterPages=other_pages)
+    return doc.build(story, onFirstPage=page_format, onLaterPages=page_format)
