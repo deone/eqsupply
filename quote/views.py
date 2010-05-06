@@ -86,16 +86,6 @@ def process_quote(request, quotation_id):
 
     return (True, quotation.id)
 
-    """ 20% markup (for now, based on local_courier_charge + subtotal) to cater for custom charges et al, courier insurance and
-    courier charge, in the event total dimensional weight is used instead of actual weight."""
-    """markup = compute_markup(sub_total, local_courier_charge)
-
-    logistics = local_courier_charge + markup
-
-    print "Sub-total: ", sub_total
-    print "VAT: ", vat
-    print "Logistics: ", logistics"""
-
 def output_pdf(request, quotation_id):
     quote_details = get_quote_details(quotation_id)
     
@@ -103,32 +93,7 @@ def output_pdf(request, quotation_id):
     user = quote_details[1]
     user_account = quote_details[2]
 
-    """response = HttpResponse(mimetype='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=quote.pdf'
-
-    p = canvas.Canvas(response)
-    p.setTitle("Aerix Equipment Supply, Quote " + quotation.quotation_no)
-
-    logo = Image("site_media/img/logo_small.gif")
-    logo.drawOn(p, 5.7*inch, 10*inch)
-
-    text_object = p.beginText()
-    text_object.setTextOrigin(inch, 5*inch)
-
-    text_object.textLines(settings.AERIX_ADDRESS)
-
-    text_object.textLine("Attn: " + user.first_name + " " + user.last_name)
-    text_object.textLine("Company: " + user_account.company)
-    text_object.textLine("Quotation No: " + quotation.quotation_no)
-    text_object.textLine("Date: " + str(quotation.time_created.date()))
-    text_object.textLine("Email: " + user.email)
-
-    p.drawText(text_object)
-
-    p.showPage()
-    p.save()"""
-
-    return pdf.go(quotation)
+    return pdf.go(quotation, user, user_account)
 
 def compute_local_courier_charge(location_id, line_items):
     courier_charge = 0
