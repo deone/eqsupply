@@ -19,13 +19,6 @@ page_info = "AERIX Global Solutions Nig Ltd. RC 683490. VAT - TIN: 02411144-0001
 def first_page(canvas, doc):
     canvas.saveState()
     canvas.drawImage("site_media/img/logo_small.gif", PAGE_WIDTH/1.65, PAGE_HEIGHT-108)
-
-    canvas.setFont("Times-Roman", 10)
-    address = canvas.beginText()
-    address.setTextOrigin(5.2*inch, 10*inch)
-    address.textLines(settings.AERIX_ADDRESS)
-    canvas.drawText(address)
-
     canvas.setFont("Times-Roman", 7)
     canvas.drawString(inch, 0.75*inch, "Page %d %s" % (doc.page, page_info))
     canvas.restoreState()
@@ -36,13 +29,24 @@ def other_pages(canvas, doc):
     canvas.drawString(inch, 0.75*inch, "Page %d %s" % (doc.page, page_info))
     canvas.restoreState()
 
-def go(quotation):
-    doc = SimpleDocTemplate("quote.pdf")
-    story = []
-    story.append(Spacer(1, 2.5*inch))
+def para_user_detail(first_name, last_name, company, quotation_no, quotation_date, email):
+    return "<para leftIndent=-33><b>Attn:</b> " + first_name + " " + last_name + \
+	    "<br/><b>Company:</b> " + company + \
+	    "<br/><b>Quotation No:</b> " + quotation_no + \
+	    "<br/><b>Date:</b> " + str(h.format_date(quotation_date)) + \
+	    "<br/><b>Email:</b> " + email + "</para>"
 
-    data =  [
-	['S/N', 'Product ID', 'Reference', 'Description', 'Qty', 'Price/Unit (GBP)', 'Total (GBP)'],
+def list_table_data(quotation):
+    data = [
+	[
+	    Paragraph('<para fontSize=9><b>S/N</b></para>', style["BodyText"]), \
+	    Paragraph('<para fontSize=9><b>Product ID</b></para>', style["BodyText"]), \
+	    Paragraph('<para fontSize=9><b>Reference</b></para>', style["BodyText"]), \
+	    Paragraph('<para fontSize=9><b>Description</b></para>', style["BodyText"]), \
+	    Paragraph('<para fontSize=9><b>Qty</b></para>', style["BodyText"]), \
+	    Paragraph('<para fontSize=9><b>Price/Unit (GBP)</b></para>', style["BodyText"]), \
+	    Paragraph('<para fontSize=9><b>Total (GBP)</b></para>', style["BodyText"])
+	]
     ]
 
     line_item_list = h.change_id_serialno(list(quotation.lineitem_set.all()))
@@ -58,8 +62,18 @@ def go(quotation):
 	row.append(str(l.cost))
 	data.append(row)
 
-    quotation_cost = float(quotation.cost)
-    courier_charge = float(quotation.courier_charge)
+    quotation_details = return_quote_details(quotation.cost, quotation.courier_charge)
+
+    data.append(["", "", "", "", "", "Sub-Total", str(quotation_details[0])])
+    data.append(["", "", "", "", "", "VAT @ 5%", str(quotation_details[1])])
+    data.append(["", "", "", "", "", "Logistics", str(quotation_details[2])])
+    data.append(["", "", "", "", "", "Grand Total", str(quotation_details[3])])
+
+    return data
+
+def return_quote_details(cost, courier_charge):
+    quotation_cost = float(cost)
+    courier_charge = float(courier_charge)
 
     vat = settings.VAT/100.0 * quotation_cost
 
@@ -68,25 +82,29 @@ def go(quotation):
 
     total = quotation_cost + vat + logistics
 
-    data.append(["", "", "", "", "", "Sub-Total", str(quotation_cost)])
-    data.append(["", "", "", "", "", "VAT @ 5%", str(vat)])
-    data.append(["", "", "", "", "", "Logistics", str(logistics)])
-    data.append(["", "", "", "", "", "Grand Total", str(total)])
+    return (quotation_cost, vat, logistics, total)
 
-    t=Table(data)
+def go(quotation, user, user_account):
+    story = []
+    story.append(Spacer(0.5, 0.3*inch))
+    story.append(Paragraph(settings.AERIX_ADDRESS, style["BodyText"]))
+    story.append(Spacer(0.5, 0.1*inch))
+
+    user_detail = para_user_detail(user.first_name, user.last_name, user_account.company, quotation.quotation_no, str(quotation.time_created.date()), user.email)
+    story.append(Paragraph(user_detail, style["BodyText"]))
+
+    story.append(Spacer(0.5, 0.2*inch))
+
+    table_data = list_table_data(quotation)
+    t=Table(table_data)
     t.setStyle(TableStyle([
 			    ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
 			    ('BOX', (0,0), (-1,-1), 0.25, colors.black),
 			]))
 
-    t._argW[0] = 0.35*inch
-    t._argW[1] = 1.1*inch
-    t._argW[2] = 1.1*inch
-    t._argW[3] = 2*inch
-    t._argW[4] = 0.35*inch
-    t._argW[5] = 1.1*inch
-    t._argW[6] = 1.1*inch
+    t._argW = [0.35*inch, 1.1*inch, 1.1*inch, 2*inch, 0.35*inch, 1.1*inch, 1.1*inch]
 
     story.append(t)
 
+    doc = SimpleDocTemplate("quote.pdf", title="%s %s" % ("Aerix Equipment Supply Quotation", quotation.quotation_no))
     return doc.build(story, onFirstPage=first_page, onLaterPages=other_pages)

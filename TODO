@@ -42,8 +42,6 @@ _ Quotation data:
 
 PDF
 ===
-* Set pdf document title.
-* Add user details.
 * Add Terms & Conditions, Banking details, e.t.c.
 
 * Refactor site_media/js/auth.js (in fact, all js) extensively. Pay special attention to request methods in functions.
