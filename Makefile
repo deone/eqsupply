@@ -10,10 +10,10 @@ build:
 	@mkdir -p build/usr/local/www/eqsupply
 	@mkdir -p build/var/lib/eqsupply/sql
 	@mkdir -p build/usr/bin
-	@cp -r account/ apache/ products/ quote/ site_media/ templates/ build/usr/local/www/eqsupply/
-	@cp helpers.* __init__.* manage.py settings* urls.* build/usr/local/www/eqsupply/
+	@cp -r cost/ account/ apache/ products/ quote/ site_media/ templates/ build/usr/local/www/eqsupply/
+	@cp pdf.* helpers.* __init__.* manage.py settings* urls.* build/usr/local/www/eqsupply/
 	@cp conf/eqsupplymod_wsgi.conf build/etc/httpd/conf.d/
-	@cp sql/* build/var/lib/eqsupply/sql/
+	@cp -r sql/* build/var/lib/eqsupply/sql/
 	@cp bin/eqsupply-setup build/usr/bin/
 
 install: build
@@ -27,8 +27,8 @@ dist: distclean
 	@cp -r bin $(NAME)-$(VERSION)/
 	@cp -r conf $(NAME)-$(VERSION)/
 	@cp -r apache $(NAME)-$(VERSION)/
-	@cp -r account/ products/ quote/ templates/ site_media/ sql/ $(NAME)-$(VERSION)/
-	@cp helpers.* __init__.* manage.py settings* urls.* $(NAME)-$(VERSION)/
+	@cp -r cost/ account/ products/ quote/ templates/ site_media/ sql/ $(NAME)-$(VERSION)/
+	@cp pdf.* helpers.* __init__.* manage.py settings* urls.* $(NAME)-$(VERSION)/
 	@cp INSTALL MANIFEST.in Makefile README TODO $(NAME)-$(VERSION)/
 	@cp install.sh install.conf eqsupply.spec $(NAME)-$(VERSION)/
 	@tar -czvf $(NAME)-$(VERSION).tar.gz $(NAME)-$(VERSION)/*

@@ -42,6 +42,5 @@ _ Quotation data:
 
 PDF
 ===
-* Add Terms & Conditions, Banking details, e.t.c.
-
+* Create a space after the logo in page_format() to care of issues for other pages.
 * Refactor site_media/js/auth.js (in fact, all js) extensively. Pay special attention to request methods in functions.
