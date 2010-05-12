@@ -3,7 +3,9 @@ from django.db import IntegrityError
 from eqsupply.products.models import *
 from eqsupply.test_helpers import EqsupplyTestCase 
 
+
 class ProductsTests(EqsupplyTestCase):
+
     def test_division(self):
 	self.failUnless(self.division.name == "Washing Machines")
 	self.failUnless(self.division.description != "Machines")
@@ -11,7 +13,7 @@ class ProductsTests(EqsupplyTestCase):
 	self.failIf(isinstance(self.division.name, int))
 	self.failUnless(isinstance(self.division.description, str))
 
-	self.failUnlessRaises(IntegrityError, Division.objects.create, name="Washing Machines", description="")	# unique
+	self.failUnlessRaises(IntegrityError, Division.objects.create, name="Washing Machines", description="")
 
     def test_category(self):
 	self.assert_(self.category.name == "American Specs")
@@ -27,12 +29,7 @@ class ProductsTests(EqsupplyTestCase):
 	self.assert_(self.product.category == self.category)
 	self.assert_(self.product.product_page == "http://www.elcometer.com/international index pages/international/product pages - English/product pages/main pages/1800.htm")
 
-	# types
-	# constraints: unique code, 
-	# images
-
     def test_accessory(self):
-	# content
 	self.assert_(self.accessory.product == self.product)
 	self.assert_(self.accessory.name == "PC Interface Cable")
 	self.assert_(self.accessory.description == "PC Connection Wire")
@@ -40,9 +37,6 @@ class ProductsTests(EqsupplyTestCase):
 	self.assert_(self.accessory.image == "")
 	self.assert_(self.accessory.accessory_page == "")
 	self.assert_(self.accessory.cost == "152.55")
-
-	# type
-	# ...
 
     def test_product_variant(self):
 	self.assert_(self.product_variant.product == self.product)
