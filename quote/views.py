@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from eqsupply.account.models import Account
 from eqsupply.quote.forms import *
@@ -10,7 +11,6 @@ from eqsupply.quote.models import *
 from eqsupply.products.models import Division
 from eqsupply.cost.models import *
 from eqsupply import helpers as h
-from eqsupply import settings
 from eqsupply import pdf
 
 APP_MENU = Division.objects.all()

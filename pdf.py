@@ -4,9 +4,9 @@ from reportlab.rl_config import defaultPageSize
 from reportlab.lib.units import inch
 from reportlab.lib import colors
 
+from django.conf import settings
 from django.http import HttpResponse, Http404
 
-from eqsupply import settings
 from eqsupply import helpers as h
 
 PAGE_WIDTH = defaultPageSize[0]
