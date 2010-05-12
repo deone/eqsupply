@@ -1,5 +1,0 @@
-#!/bin/bash
-
-scp $1 root@aerixnigeria.com:
-
-echo "Copied to server!"

@@ -1,5 +1,7 @@
 # Django settings for eqsupply project.
 
+import os.path
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -36,12 +38,12 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "site_media")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/site_media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -67,8 +69,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'eqsupply.urls'
 
-import os.path
-
 TEMPLATE_DIRS = (
 	os.path.join(os.path.dirname(__file__), "templates"),
 )
@@ -86,9 +86,6 @@ INSTALLED_APPS = (
 )
 
 EMAIL_HOST = "aerixnigeria.com"
-EMAIL_PORT = 25
-#EMAIL_HOST_USER = "erecruit"
-#EMAIL_HOST_PASSWORD = "3r3cru17"
 
 CACHE_BACKEND = "locmem:///"
 
