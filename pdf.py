@@ -120,5 +120,5 @@ def go(quotation, user, user_account):
     other_details = return_other_details()
     story.append(Paragraph(other_details, style["BodyText"]))
 
-    doc = SimpleDocTemplate("quote.pdf", title="%s %s" % ("Aerix Equipment Supply Quotation", quotation.quotation_no))
+    doc = SimpleDocTemplate(quotation.quotation_no + ".pdf", title="%s %s" % ("Aerix Equipment Supply Quotation", quotation.quotation_no))
     return doc.build(story, onFirstPage=page_format, onLaterPages=page_format)

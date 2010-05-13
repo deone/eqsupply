@@ -3,34 +3,17 @@ v2
 * There should be some subtle effect that directs the user's view to #quote_link after every quote transaction.
 * Our products app test should test the actual existence of small_image and large_image.
 * Validate line_item quantity field for alphabets.
-* Implement OpenID.
 * @login_required should redirect user to the page he was signed out from.
 * User should get a message like "Session expired. Sign In again." if he was signed out on session expiry.
-* Update Quotations model to hold courier cost and pdf.
 * Rename Cost model to CourierCharge.
 
 Broad categorization of what's left
 ===================================
-* Computing costs.
-* Outputting quotation in pdf.
 * Search - New app.
 
 Logistics
 ---------
 - Courier charge (international) - We'll figure these out by comparing some invoices, these figures are already VAT and international custom charge inclusive.
-
-- Courier charge (local): Should be calculated using the actual weight.
-    * Should include VAT at 5%
-    * Location is based on user's state field, with the exception of Abuja and Zaria.
-    * Add a 20% markup on the courier charge to take care of local custom charge and any differences in the event that total dimensional weight is used, bank transfer charges and courier insurance (1% of actual product cost.)
-    * For each weight above 0.5;
-	- If it matches table record, fine.
-	- If it doesn't, round-off to the nearest weight.
-
-- Objects needed to output quote in pdf:
-    * User,
-    * Account,
-    * Quotation.
 
 _ Quotation data:
     * Sub-total - in db as quotation_cost.
@@ -43,9 +26,14 @@ _ Quotation data:
 PDF
 ===
 * Create a space after the logo in page_format() to care of issues for other pages.
-* Refactor site_media/js/auth.js (in fact, all js) extensively. Pay special attention to request methods in functions.
 
 Testing
 =======
 * account.models.Account
 * Images in products app.
+
+Others
+======
+* SMTPRecipientsRefused exception raised when dayo@dayo.me tried to register.
+* Refactor site_media/js/auth.js (in fact, all js) extensively. Pay special attention to request methods in functions.
+* We need to figure out the best way to use request.flash and ajax message displays.
