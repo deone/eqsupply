@@ -7,7 +7,7 @@
 	<h5>{{ c.name }}</h5>
 	<ul class="products">
 	{% for p in c.product_set.all %}
-	    <li><a href="products/{{ p.id }}"><span style="background-image: url('{{ p.small_image }}')"></span>{{ p.name }}</a></li>
+	    <li><a href="products/{{ p.id }}"><span style="background-image: url('/site_media/{{ p.small_image }}')"></span>{{ p.name }}</a></li>
 	{% endfor %}
 	    <div class="clear"></div>
 	</ul>

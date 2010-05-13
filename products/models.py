@@ -24,8 +24,8 @@ class Category(CommonInfo):
 class Product(CommonInfo):
     category = models.ForeignKey(Category)
     code = models.CharField(max_length=50, unique=True)
-    small_image = models.ImageField(upload_to="site_media/products/small")
-    large_image = models.ImageField(upload_to="site_media/products/large")
+    small_image = models.ImageField(upload_to="products/small")
+    large_image = models.ImageField(upload_to="products/large")
     product_page = models.CharField(max_length=255)
 
     def __unicode__(self):
